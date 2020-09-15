@@ -1,0 +1,5 @@
+@import "vars.css";
+
+.header {
+    background: var(--main-color);
+}

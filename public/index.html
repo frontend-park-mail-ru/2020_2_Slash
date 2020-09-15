@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Flicks Box</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div class="application">
+    <div class="header">
+        <img class="header__logo" src="img/logo.svg">
+        <div class="header__menu">
+            <nav>
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Сериалы</a></li>
+                    <li><a href="#">Кино</a></li>
+                    <li><a href="#">Последнее</a></li>
+                    <li><a href="#">Мои списки</a></li>
+                </ul>
+            </nav>
+            <img class="header__search" src="img/search.svg">
+            <div class="header__user">
+                <img class="header__avatar" src="img/avatar.svg">
+                <img class="header__arrow" src="img/arrow.svg">
+            </div>
+        </div>
+    </div>
+
+    <div class="preview">
+        <div class="preview__video">
+            <video></video>
+        </div>
+        <div class="preview__name">
+            <h2>Название сериала</h2>
+        </div>
+        <div class="preview__controller">
+            <button class="preview__play-btn">
+                <img src="img/play.svg">
+                <p>Воспроизвести</p>
+            </button>
+            <button class="preview__info-btn">
+                <img src="img/info.svg">
+                <p>Подробнее</p>
+            </button>
+            <div class="preview__sound-btn">
+                <img src="img/mute.svg">
+                <img class="sound-btn_hidden" src="img/sound-on.svg">
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="content__row">
+            <h3 class="content__title">Сериалы</h3>
+            <div class="content__slider">
+                <div class="content__slider-item">1</div>
+                <div class="content__slider-item">2</div>
+                <div class="content__slider-item">3</div>
+                <div class="content__slider-item">4</div>
+            </div>
+        </div>
+
+        <div class="content__row">
+            <h3 class="content__title">Фильмы</h3>
+            <div class="content__slider">
+                <div class="content__slider-item">1</div>
+                <div class="content__slider-item">2</div>
+                <div class="content__slider-item">3</div>
+                <div class="content__slider-item">4</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy 2020-2020 Flicks Box, Inc.</p>
+    </div>
+</div>
+</body>
+</html>
