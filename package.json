@@ -1,0 +1,22 @@
+{
+  "name": "2020_2_slash",
+  "version": "1.0.0",
+  "description": "Flicks Box",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/2020_2_Slash.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/2020_2_Slash/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/2020_2_Slash#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
