@@ -1,5 +1,249 @@
 @import "vars.css";
 
+body {
+    background-color: var(--main-color);
+    padding: 0;
+    margin: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 1vw;
+    font-weight: lighter;
+}
+
 .header {
-    background: var(--main-color);
+    height: 70px;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0));
+    padding: 0 60px;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+}
+
+.header__menu {
+    flex-grow: 1;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.header__nav li {
+    display: inline;
+    float: left;
+    padding: 0 15px;
+}
+
+.header__nav li:first-child {
+    margin-left: 40px;
+}
+
+.control__item {
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.header__control-bars {
+    display: flex;
+    align-items: center;
+}
+
+.header__burger {
+    display: none;
+}
+
+.header__avatar {
+    float: left;
+}
+
+.header__arrow {
+    margin: 15px 0 0 5px;
+}
+
+.footer p {
+    color: white;
+}
+
+/*.main-view {*/
+/*    position: relative;*/
+/*    min-height: 1000px;*/
+/*}*/
+
+/*.fullbleed {*/
+/*    margin-top: -70px;*/
+/*}*/
+
+.gradient {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(to top, rgba(20, 20, 20, 1) 0%, rgba(20, 20, 20, 0.5) 53%, rgba(20, 20, 20, 0) 100%);
+
+}
+
+.preview__video {
+    width: 100%;
+    background-position: center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.preview__video img {
+    width: 100%;
+}
+
+.preview__name {
+    color: white;
+    font-size: 3em;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0 60px;
+}
+
+.preview__controller {
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+}
+
+.preview__panel {
+    width: 100%;
+    position: absolute;
+    top: 25vw;
+    /*display: none ;*/
+}
+
+.preview__btn {
+    border-radius: 3px;
+    border: 0;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn {
+    width: 150px;
+    height: 50px;
+    background-color: #FFFFFF;
+}
+
+.play-btn:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.play-btn:active {
+    background-color: #FFFFFF;
+}
+
+.play-btn > img, .info-btn > img {
+    margin-right: 5px;
+}
+
+.info-btn {
+    color: #FFFFFF;
+    margin-left: 15px;
+    width: 130px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.info-btn:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.info-btn:active {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.sound-btn {
+    width: 46px;
+    height: 46px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid #FFFFFF;
+    border-radius: 30px;
+    outline: none;
+}
+
+.sound-btn:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+}
+
+.sound-btn:active {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.sound-btn_hidden {
+    display: none;
+}
+
+.preview__info {
+    flex-grow: 2;
+}
+
+.content {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    position: relative;
+    top: 40vw;
+}
+
+.content__row {
+    padding: 20px 0;
+}
+
+.content__title {
+    color: #FFFFFF;
+    font-size: 1.4vw;
+    letter-spacing: 0.1vw;
+    font-weight: lighter;
+    padding: 0 60px;
+}
+
+.content__slider {
+    padding: 0 60px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.content__slider-item {
+    padding: 0 10px;
+}
+
+.content__slider-item:first-child {
+    padding-left: 0;
+}
+
+/*.footer {*/
+/*    position: absolute;*/
+/*    bottom: 0;*/
+/*    width: 100%;*/
+/*    height: 50px;*/
+/*}*/
+
+@media (max-width: 850px) {
+    .header__menu {
+        display: none;
+    }
+
+    .header__logo {
+        flex-grow: 2;
+    }
+
+    .header__burger {
+        display: block;
+    }
 }
