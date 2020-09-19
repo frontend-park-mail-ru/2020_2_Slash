@@ -14,12 +14,12 @@
         </div>
         <div class="header__menu">
             <nav class="header__nav">
-                <ul>
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="#">Сериалы</a></li>
-                    <li><a href="#">Кино</a></li>
-                    <li><a href="#">Последнее</a></li>
-                    <li><a href="#">Мои списки</a></li>
+                <ul class="nav__list">
+                    <li><a class="list-item-text" href="#">Главная</a></li>
+                    <li><a class="list-item-text" href="#">Сериалы</a></li>
+                    <li><a class="list-item-text" href="#">Кино</a></li>
+                    <li><a class="list-item-text" href="#">Последнее</a></li>
+                    <li><a class="list-item-text" href="#">Мои списки</a></li>
                 </ul>
             </nav>
         </div>
@@ -29,17 +29,21 @@
             </div>
             <img class="header__search control__item" src="img/search.svg">
             <div class="header__user control__item">
-                <img class="header__avatar" src="img/avatar.svg">
-                <img class="header__arrow" src="img/arrow.svg">
+                <a href="profile.html">
+                    <img class="header__avatar" src="img/avatar.svg">
+                    <img class="header__arrow" src="img/arrow.svg">
+                </a>
             </div>
         </div>
     </div>
 
     <div class="main-view">
         <div class="preview">
-            <div class="preview__video">
-                <img src="img/movie.png">
-                <div class="gradient"></div>
+            <div class="preview__video-block">
+                <div class="preview__video">
+                    <div><img src="img/movie.png"></div>
+                    <div class="preview__shade"></div>
+                </div>
             </div>
             <div class="preview__panel">
                 <div class="preview__name">
@@ -48,13 +52,13 @@
                 <div class="preview__controller">
                     <div class="preview__play">
                         <button class="preview__btn play-btn">
-                            <img src="img/play.svg">
+                            <img class="play-btn__img" src="img/play.svg">
                             <p>Воспроизвести</p>
                         </button>
                     </div>
                     <div class="preview__info">
                         <button class="preview__btn info-btn">
-                            <img src="img/info.svg">
+                            <img class="info-btn__img" src="img/info.svg">
                             <p class="btn__title">Подробнее</p>
                         </button>
                     </div>
@@ -67,7 +71,6 @@
                 </div>
             </div>
         </div>
-
         <div class="content">
             <div class="content__row">
                 <h3 class="content__title">Сериалы</h3>
@@ -160,12 +163,44 @@
 
                 </div>
             </div>
+
+            <div class="content__row">
+                <h3 class="content__title">Топ</h3>
+                <div class="content__slider">
+                    <div class="content__slider-item">
+                        <a><img src="img/fword.png"></a>
+                    </div>
+                    <div class="content__slider-item">
+                        <a><img src="img/fword.png"></a>
+                    </div>
+                    <div class="content__slider-item">
+                        <a><img src="img/fword.png"></a>
+                    </div>
+                    <div class="content__slider-item">
+                        <a><img src="img/fword.png"></a>
+                    </div>
+                    <div class="content__slider-item">
+                        <a><img src="img/fword.png"></a>
+                    </div>
+                    <div class="content__slider-item">
+                        <a><img src="img/fword.png"></a>
+                    </div>
+                    <div class="content__slider-item">
+                        <a><img src="img/fword.png"></a>
+                    </div>
+                    <div class="content__slider-item">
+                        <a><img src="img/fword.png"></a>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 
-<!--    <div class="footer">-->
-<!--        <p>&copy 2020-2020 Flicks Box, Inc.</p>-->
-<!--    </div>-->
+    <div class="footer">
+        <p class="footer__title">&copy 2020-2020 Flicks Box, Inc.</p>
+        <button class="footer__btn">SLASH</button>
+    </div>
 </div>
 </body>
 </html>
