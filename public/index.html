@@ -8,14 +8,14 @@
 </head>
 <body>
 <div class="application">
-    <div class="header">
+    <div class="header pad-both">
         <div class="header__logo">
             <a href="#"><img src="img/logo.svg"></a>
         </div>
         <div class="header__menu">
             <nav class="header__nav">
                 <ul class="nav__list">
-                    <li><a class="list-item-text" href="#">Главная</a></li>
+                    <li><a class="list-item-text list-item-text-selected" href="#">Главная</a></li>
                     <li><a class="list-item-text" href="#">Сериалы</a></li>
                     <li><a class="list-item-text" href="#">Кино</a></li>
                     <li><a class="list-item-text" href="#">Последнее</a></li>
@@ -27,9 +27,9 @@
             <div class="header__burger control__item">
                 <img src="img/burger.svg">
             </div>
-            <img class="header__search control__item" src="img/search.svg">
-            <div class="header__user control__item">
-                <a href="profile.html">
+            <img class="header__search-img control__item" src="img/search.svg">
+            <div class="header__user-block control__item">
+                <a class="header__user" href="profile.html">
                     <img class="header__avatar" src="img/avatar.svg">
                     <img class="header__arrow" src="img/arrow.svg">
                 </a>
@@ -46,26 +46,26 @@
                 </div>
             </div>
             <div class="preview__panel">
-                <div class="preview__name">
+                <div class="preview__name pad-both">
                     <p>Название сериала</p>
                 </div>
-                <div class="preview__controller">
+                <div class="preview__controller pad-both">
                     <div class="preview__play">
                         <button class="preview__btn play-btn">
                             <img class="play-btn__img" src="img/play.svg">
-                            <p>Воспроизвести</p>
+                            <p class="play-btn__text">Воспроизвести</p>
                         </button>
                     </div>
                     <div class="preview__info">
                         <button class="preview__btn info-btn">
                             <img class="info-btn__img" src="img/info.svg">
-                            <p class="btn__title">Подробнее</p>
+                            <p class="info-btn__text" class="btn__title">Подробнее</p>
                         </button>
                     </div>
                     <div class="preview__sound">
                         <button class="sound-btn">
-                            <img src="img/mute.svg">
-                            <img class="sound-btn_hidden" src="img/sound-on.svg">
+                            <img class="sound-btn__img" src="img/mute.svg">
+                            <img class="sound-btn__img sound-btn_hidden" src="img/sound-on.svg">
                         </button>
                     </div>
                 </div>
@@ -73,8 +73,8 @@
         </div>
         <div class="content">
             <div class="content__row">
-                <h3 class="content__title">Сериалы</h3>
-                <div class="content__slider">
+                <h3 class="content__title pad-both">Сериалы</h3>
+                <div class="content__slider pad-both">
                     <div class="content__slider-item">
                         <a><img src="img/witcher.png"></a>
                     </div>
@@ -103,8 +103,8 @@
             </div>
 
             <div class="content__row">
-                <h3 class="content__title">Фильмы</h3>
-                <div class="content__slider">
+                <h3 class="content__title pad-both">Фильмы</h3>
+                <div class="content__slider pad-both">
                     <div class="content__slider-item">
                         <a><img src="img/cat.png"></a>
                     </div>
@@ -134,8 +134,8 @@
             </div>
 
             <div class="content__row">
-                <h3 class="content__title">Последнее</h3>
-                <div class="content__slider">
+                <h3 class="content__title pad-both">Последнее</h3>
+                <div class="content__slider pad-both">
                     <div class="content__slider-item">
                         <a><img src="img/woman.png"></a>
                     </div>
@@ -165,8 +165,8 @@
             </div>
 
             <div class="content__row">
-                <h3 class="content__title">Топ</h3>
-                <div class="content__slider">
+                <h3 class="content__title pad-both">Топ</h3>
+                <div class="content__slider pad-both">
                     <div class="content__slider-item">
                         <a><img src="img/fword.png"></a>
                     </div>
