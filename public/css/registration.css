@@ -1,18 +1,20 @@
 .popup-container {
     height: 100%;
     width: 100%;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
+    left: 0;
+    top: 0;
 
     font-family: "Helvetica Neue", Arial, sans-serif;
     font-weight: lighter;
 }
 
 .registration-popup {
-    position: fixed;
-    top: 20%;
-    width: 23%;
+    margin: auto;
+    width: 450px;
 }
 
 .registration-page__form {
@@ -58,34 +60,40 @@
     height: 35px;
     background: #FAFAFA;
     border-radius: 5px;
+    padding: 0 0;
+    border-width: 0;
 }
 
-.input-block__button {
-    width: 80%;
+.button-block {
+    padding: 10px 50px;
+}
+
+.button-block__button {
+    width: 100%;
     height: 40px;
     background: #434343;
     border: 1px solid #000000;
     border-radius: 5px;
     margin-top: 20px;
-    margin-left: 10%;
-    margin-right: 10%;
-
     letter-spacing: 0.05em;
-
     color: #FAFAFA;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
 }
 
 .signin {
     margin: 0 auto;
 }
 
-.signin__p {
-    color: #4f5048;
+.signin__text {
+    color: #B8B8B8;
     font-size: 18px;
     letter-spacing: 0.05em;
 }
 
-.signin__a {
+.signin__link {
     color: #FAFAFA;
     text-decoration: none;
     justify-content: center;
