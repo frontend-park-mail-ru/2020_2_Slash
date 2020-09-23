@@ -1,0 +1,100 @@
+.popup-container {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    top: 0;
+
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: lighter;
+}
+
+.authorization-popup {
+    margin: auto;
+    width: 450px;
+}
+
+.authorization-page__form {
+    display: flex;
+    flex-direction: column;
+    background: rgba(20, 20, 20, 0.90);
+    padding: 15px 5px;
+    border-radius: 10px;
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.authorization-page__title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+    padding-bottom: 7px;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.input-block {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 50px;
+    color: white;
+}
+
+.input-block__label {
+    font-weight: 300;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+}
+
+.input-block__input {
+    margin-top: 15px;
+    width: 100%;
+    height: 35px;
+    background: #FAFAFA;
+    border-radius: 5px;
+    border-width: 0;
+}
+
+.button-block {
+    padding: 10px 50px;
+}
+
+.button-block__button {
+    width: 100%;
+    height: 40px;
+    background: #434343;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    margin-top: 20px;
+    letter-spacing: 0.05em;
+    color: #FAFAFA;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+}
+
+.signup {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.signup__text {
+    color: #B8B8B8;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+}
+
+.signup__link {
+    color: #FAFAFA;
+    text-decoration: none;
+    justify-content: center;
+}
