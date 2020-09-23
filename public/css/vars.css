@@ -1,3 +1,10 @@
 :root {
     --main-color: #141414;
+    --popup-button-color: #434343;
+    --popup-background-color: rgba(20, 20, 20, 0.90);
+    --popup-text-color: #B8B8B8;
+    --popup-text-white: #ffffff;
+    --popup-input-color: #FAFAFA;
+    --popup-input-border-color: #000000;
+    --popup-shadow-color-title: rgba(0, 0, 0, 0.25);
 }
