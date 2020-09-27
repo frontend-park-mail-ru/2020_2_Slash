@@ -4,7 +4,9 @@
   "description": "Flicks Box",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "eslint-check": "eslint ./src",
+    "eslint-fix": "eslint --fix ./src",
+    "compile-hbs": "handlebars ./src/*/*/*.hbs -f ./src/hbs.precompiled.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,8 @@
   },
   "homepage": "https://github.com/frontend-park-mail-ru/2020_2_Slash#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "handlebars": "^4.7.6"
   },
   "devDependencies": {
     "eslint": "^7.10.0",

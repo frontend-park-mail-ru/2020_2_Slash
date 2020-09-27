@@ -3,6 +3,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=webstorm+all,macos,executable,linux
 
 node_modules/
+dist/
+*.precompiled.*
 
 ### Executable ###
 *.app
