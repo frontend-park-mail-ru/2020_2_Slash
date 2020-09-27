@@ -18,5 +18,9 @@
   "homepage": "https://github.com/frontend-park-mail-ru/2020_2_Slash#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.10.0",
+    "eslint-config-google": "^0.14.0"
   }
 }
