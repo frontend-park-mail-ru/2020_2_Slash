@@ -1,14 +1,4 @@
-const users = {
-    'catherin': {
-        'email': 'catherin@slash.com',
-        'avatar': 'img/avatar.svg',
-    },
-};
-
+//TODO: Реализовать работу с данными после появления работы с сетью
 class UserModel {
-    getUserInfo(name) {
-        return users[name];
-    }
-}
 
-export default new UserModel();
+}

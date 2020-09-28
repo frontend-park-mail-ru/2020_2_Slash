@@ -1,0 +1,61 @@
+@import "vars.css";
+@import "components/Header/Header.css";
+@import "components/Footer/Footer.css";
+@import "components/Preview/Preview.css";
+@import "components/Slider/Slider.css";
+
+body {
+    background-color: var(--main-color);
+    padding: 0;
+    margin: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 1vw;
+    font-weight: lighter;
+}
+
+.main-view {
+    min-height: calc(100vh - 2 * var(--header-height));
+}
+
+.pad-both {
+    padding: 0 60px;
+}
+
+.content {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    position: relative;
+    margin-top: 40vw;
+}
+
+@media (max-width: 850px) {
+    .content__slider-item {
+        width: 33.333%;
+    }
+
+    .info-btn, .play-btn {
+        width: 20vw;
+        height: 6vw;
+    }
+
+    .sound-btn {
+        width: 5vw;
+        height: 5vw;
+    }
+
+    .sound-btn__img, .info-btn__img, .play-btn__img {
+        width: 2.5vw;
+        height: 2.5vw;
+    }
+
+    .play-btn__text, .info-btn__text {
+        font-size: 1.8vw;
+    }
+
+    .pad-both {
+        padding: 0 20px;
+    }
+
+    .control__item {
+        margin-left: 10px;
+    }
+}

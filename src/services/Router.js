@@ -1,6 +1,6 @@
 'use strict';
 
-import Paths from '../consts/routes.js';
+import Routes from '../consts/routes.js';
 import EventBus from './EventBus.js';
 import Events from '../consts/events.js';
 
@@ -9,8 +9,7 @@ import Events from '../consts/events.js';
  * @class
  */
 class Router {
-    constructor(app) {
-        this.app = app;
+    constructor() {
         this.routes = {};
 
         EventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
@@ -38,8 +37,8 @@ class Router {
         this.currentController = this.routes[path];
 
         if (!this.currentController) {
-            path = Paths.MainPage;
-            this.currentController = this.routes[Paths.MainPage];
+            path = Routes.MainPage;
+            this.currentController = this.routes[Routes.MainPage];
         }
 
         if (window.location.pathname !== path) {

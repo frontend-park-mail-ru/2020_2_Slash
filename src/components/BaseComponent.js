@@ -1,11 +1,10 @@
 class BaseComponent {
-    constructor({parent, context = null} = {}) {
+    constructor({parent = null, context = {}} = {}) {
         this.parent = parent;
         this.context = context;
     }
 
     render() {}
-    onRender() {}
 }
 
 export default BaseComponent;

@@ -3,7 +3,7 @@ class BaseController {
         this.view = view;
     }
 
-    switchOn(data = null) {}
+    switchOn(data = {}) {}
 
     onSwitchOn() {}
 

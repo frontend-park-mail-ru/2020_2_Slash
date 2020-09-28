@@ -6,7 +6,7 @@ const path = require('path');
 const server = express();
 const port = process.env.PORT || 3000;
 
-const staticPath = path.resolve(__dirname, '../public');
+const staticPath = path.resolve(__dirname, '../src');
 
 server.use(express.static(staticPath));
 

@@ -1,3 +1,14 @@
-<div class="header pad-both"></div>
-<div class="main-view"></div>
-<div class="footer"></div>
+<div class="header pad-both">
+    {{{Header}}}
+</div>
+<div class="main-view">
+    {{{Preview}}}
+    <div class="content">
+        {{#each blocks}}
+            {{{this}}}
+        {{/each}}
+    </div>
+</div>
+<div class="footer">
+    {{{Footer}}}
+</div>
