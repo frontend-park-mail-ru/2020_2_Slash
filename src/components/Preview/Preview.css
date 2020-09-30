@@ -1,0 +1,146 @@
+.preview__video-block {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.preview__video {
+    position: relative;
+}
+
+.preview__video img {
+    width: 100%;
+}
+
+.preview__shade {
+    position: absolute;
+    background-image: linear-gradient(to top, rgba(20, 20, 20, 1) 10%, rgba(20, 20, 20, 0.5) 50%, rgba(20, 20, 20, 0));
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+}
+
+.preview__name {
+    color: white;
+    font-size: 3em;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.preview__controller {
+    display: flex;
+    align-items: center;
+}
+
+.preview__panel {
+    width: 100%;
+    position: absolute;
+    top: 25vw;
+}
+
+.preview__btn {
+    border-radius: 3px;
+    border: 0;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn {
+    width: 10vw;
+    height: 3vw;
+    background-color: white;
+}
+
+.play-btn:hover {
+    cursor: pointer;
+    background-color: var(--low-transparent-white);
+}
+
+.play-btn:active {
+    background-color: white;
+}
+
+.play-btn__img, .info-btn__img {
+    margin-right: 5px;
+    width: 1vw;
+    height: 1vw;
+}
+
+.play-btn__text, .info-btn__text {
+    font-size: 0.9vw;
+}
+
+.info-btn {
+    color: white;
+    margin-left: 15px;
+    width: 10vw;
+    height: 3vw;
+    background-color: var(--medium-transparent-white);
+}
+
+.info-btn:hover {
+    cursor: pointer;
+    background-color: var(--highly-transparent-white);
+}
+
+.info-btn:active {
+    background-color: var(--medium-transparent-white);
+}
+
+.sound-btn {
+    padding: 0;
+    width: 3vw;
+    height: 3vw;
+    background-position: center center;
+    background-color: var(--crystal-clear);
+    border: 1px solid white;
+    border-radius: 30px;
+    outline: none;
+}
+
+.sound-btn:hover {
+    background-color: var(--medium-transparent-white);
+    cursor: pointer;
+}
+
+.sound-btn:active {
+    background-color: var(--crystal-clear);
+}
+
+.sound-btn__img {
+    width: 2vw;
+    height: 2vw;
+}
+
+.sound-btn_hidden {
+    display: none;
+}
+
+.preview__info {
+    flex-grow: 2;
+}
+
+@media (max-width: 850px) {
+    .info-btn, .play-btn {
+        width: 20vw;
+        height: 6vw;
+    }
+
+    .sound-btn {
+        width: 5vw;
+        height: 5vw;
+    }
+
+    .sound-btn__img, .info-btn__img, .play-btn__img {
+        width: 2.5vw;
+        height: 2.5vw;
+    }
+
+    .play-btn__text, .info-btn__text {
+        font-size: 1.8vw;
+    }
+}

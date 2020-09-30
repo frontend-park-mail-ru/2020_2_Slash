@@ -1,0 +1,30 @@
+<div class="header__logo">
+    <a href="#"><img src="img/logo.svg"></a>
+</div>
+<div class="header__menu">
+    <nav class="header__nav">
+        <ul class="nav__list">
+            <li><a class="list-item-text list-item-text-selected" href="#">Главная</a></li>
+            <li><a class="list-item-text" href="#">Сериалы</a></li>
+            <li><a class="list-item-text" href="#">Кино</a></li>
+            <li><a class="list-item-text" href="#">Последнее</a></li>
+            <li><a class="list-item-text" href="#">Мои списки</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="header__control-bars">
+    <div class="header__burger control__item">
+        <img src="img/burger.svg">
+    </div>
+    <img class="header__search-img control__item" src="img/search.svg">
+    <div class="header__user-block control__item">
+        <a class="header__user" href="profile.html">
+        {{#if authorized}}
+            <img class="header__avatar" src="{{avatar}}">
+        {{else}}
+            <img class="header__avatar" src="img/user.svg">
+        {{/if}}
+            <img class="header__arrow" src="img/arrow.svg">
+        </a>
+    </div>
+</div>
