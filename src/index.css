@@ -6,6 +6,9 @@
 @import "views/ProfileView/ProfileView.css";
 @import "components/UserInfoBlock/UserInfoBlock.css";
 @import "components/ProfileMenuBar/ProfileMenuBar.css";
+@import "components/Popup/Popup.css";
+@import "components/Input/Input.css";
+@import "components/Button/Button.css";
 
 body {
     background-color: var(--main-color);

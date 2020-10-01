@@ -1,0 +1,22 @@
+.input-block {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 50px;
+    color: white;
+}
+
+.input-block__label {
+    font-weight: 300;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+}
+
+.input-block__input {
+    margin-top: 15px;
+    width: 100%;
+    height: 35px;
+    background: #FAFAFA;
+    border-radius: 5px;
+    padding: 0 0;
+    border-width: 0;
+}

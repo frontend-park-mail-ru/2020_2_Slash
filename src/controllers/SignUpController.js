@@ -1,0 +1,35 @@
+import BaseController from './BaseController.js';
+import EventBus from '../services/EventBus.js';
+import Events from '../consts/events.js';
+import Routes from '../consts/routes.js';
+import Modals from '../consts/modals.js';
+import MainView from '../views/MainVIew/MainView.js';
+
+class SignupController extends BaseController {
+    constructor() {
+        super(new MainView());
+    }
+
+    switchOn(data = {}) {
+        const sessionData = {
+            authorized: false,
+        };
+
+        if (sessionData.authorized) {
+            EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
+            return;
+        }
+
+        EventBus.emit(Events.PathChanged, {
+            path: Routes.MainPage,
+            misc: {
+                modalStatus: Modals.signup,
+            }});
+    }
+
+    switchOff() {
+        this.view.hide();
+    }
+}
+
+export default SignupController;

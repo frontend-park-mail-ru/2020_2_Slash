@@ -22,7 +22,7 @@ class Router {
             if (closest instanceof HTMLAnchorElement) {
                 e.preventDefault();
 
-                const data = Object.assign({}, closest.dataset)
+                const data = Object.assign({}, closest.dataset);
 
                 data.path = closest.getAttribute('href');
 
@@ -49,7 +49,7 @@ class Router {
         this.go(window.location.pathname);
     }
 
-    go(path) {
+    go(path, data = {}) {
         if (this.currentController) {
             this.currentController.switchOff();
         }
@@ -65,11 +65,11 @@ class Router {
             window.history.pushState(null, null, path);
         }
 
-        this.currentController.switchOn();
+        this.currentController.switchOn(data);
     }
 
     onPathChanged(data) {
-        this.go(data.path);
+        this.go(data.path, data.misc || {});
     }
 
     back() {

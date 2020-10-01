@@ -10,6 +10,43 @@
 <body>
 
 <div class="application">
+    <div class="popup-container">
+        <div class="registration-popup">
+            <form class="registration-page__form">
+                <h1 class="registration-page__heading">Регистрация</h1>
+                <div class="inputs-container">
+                    <div class="input-block" id="login">
+                        <label class="input-block__label" for="login"> Логин</label>
+                        <input class="input-block__input" type="text" name="login" required>
+                    </div>
+
+                    <div class="input-block" id="email">
+                        <label class="input-block__label" for="email">E-mail</label>
+                        <input class="input-block__input" type="email" name="email" required>
+                    </div>
+
+                    <div class="input-block" id="password">
+                        <label class="input-block__label" for="password">Пароль</label>
+                        <input class="input-block__input" type="password" name="password" required>
+                    </div>
+
+                    <div class="input-block" id="repeat_password">
+                        <label class="input-block__label" for="repeat_password">Повторите пароль</label>
+                        <input class="input-block__input" type="password" name="repeat_password" required>
+                    </div>
+
+                    <div class="button-block">
+                        <button type="submit" class="button-block__button">Зарегистрироваться</button>
+                    </div>
+                </div>
+
+                <div class="signin">
+                    <p class="signin__text">Уже зарегистрированы? <a class="signin__link" href="#">Войти.</a></p>
+                </div>
+
+            </form>
+        </div>
+    </div>
     <div class="header">
         <div class="header__logo">
             <a href="#"><img src="img/logo.svg"></a>
@@ -200,43 +237,7 @@
         </div>
     </div>
 
-    <div class="popup-container">
-        <div class="registration-popup">
-            <form class="registration-page__form">
-                <h1 class="registration-page__heading">Регистрация</h1>
-                <div class="inputs-container">
-                    <div class="input-block">
-                        <label class="input-block__label" for="login"> Логин</label>
-                        <input class="input-block__input" type="text" name="login" required>
-                    </div>
 
-                    <div class="input-block">
-                        <label class="input-block__label" for="email">E-mail</label>
-                        <input class="input-block__input" type="email" name="email" required>
-                    </div>
-
-                    <div class="input-block">
-                        <label class="input-block__label" for="password">Пароль</label>
-                        <input class="input-block__input" type="password" name="password" required>
-                    </div>
-
-                    <div class="input-block">
-                        <label class="input-block__label" for="repeat_password">Повторите пароль</label>
-                        <input class="input-block__input" type="password" name="repeat_password" required>
-                    </div>
-
-                    <div class="button-block">
-                    <button type="submit" class="button-block__button">Зарегистрироваться</button>
-                    </div>
-                </div>
-
-                <div class="signin">
-                    <p class="signin__text">Уже зарегистрированы? <a class="signin__link" href="#">Войти.</a></p>
-                </div>
-
-            </form>
-        </div>
-    </div>
 
     <div class="footer">
         <p class="footer__title">&copy 2020-2020 Flicks Box, Inc.</p>
