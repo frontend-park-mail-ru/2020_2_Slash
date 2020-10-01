@@ -6,7 +6,7 @@
   "scripts": {
     "eslint-check": "eslint ./src",
     "eslint-fix": "eslint --fix ./src",
-    "compile-hbs": "handlebars ./src/*/*/*.hbs -f ./src/hbs.precompiled.js",
+    "compile-hbs": "handlebars ./src/*/*/*.hbs -f ./src/hbs.precompiled.js"
     "start": "node server/server.js"
   },
   "repository": {
