@@ -1,0 +1,138 @@
+.profile-view__menu-bar {
+    margin-bottom: 0;
+}
+
+.profile-view__content {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-view__security-form , .profile-view__info-form, .profile-view__sub-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-bar__wrapper {
+    height: 4vw;
+    position: relative;
+    margin: 1vw 20vw 0 20vw;
+}
+
+.menu-bar__list {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    list-style: none;
+    padding: 0;
+    top: -10px;
+    width: 100%;
+}
+
+.menu-bar__list-item-text {
+    flex-grow: 1;
+    cursor: pointer;
+    line-height: 1em;
+    color: var(--white);
+    text-decoration: none;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    letter-spacing: 0.1em;
+}
+
+.list-item-text_selected {
+    pointer-events: none;
+    border-bottom: 5px solid var(--orangered);
+    transition: none;
+}
+
+.menu-bar__list-item-text:hover {
+    transition: all 0.02s ease-in;
+    cursor: pointer;
+    border-bottom: 5px solid var(--orangered);
+}
+
+.menu-bar__horizontal-line {
+    position: absolute;
+    top: 1.7vw;
+    width: 60vw;
+    height: 3px;
+    border: 1px solid var(--white);
+    background-color: var(--white);
+    z-index: 0;
+}
+
+.form__input-btn {
+    height: 2vw;
+    width: 10vw;
+    margin: 1vw 0;
+    border: none;
+    outline: none;
+    border-radius: 0.3vw;
+    background-color: var(--popup-button-color);
+    color: var(--white);
+    font-size: 0.9vw;
+}
+
+.form__input-btn:hover {
+    background-color: var(--medium-transparent-white);
+    cursor: pointer;
+}
+
+.form__input-btn:active {
+    background-color: var(--popup-button-color);
+}
+
+.form__input {
+    height: 1.8vw;
+    width: 20vw;
+    margin: 10px 0;
+    border:solid 1px var(--light-grey);
+    border-radius: 0.3vw;
+}
+
+.form__label {
+    letter-spacing: 0.1em;
+    align-self: flex-start;
+    margin-top: 1vw;
+}
+
+@media (max-width: 850px) {
+    .form__input-btn {
+        height: 4vw;
+        width: 20vw;
+        margin: 2vw 0;
+        border-radius: 0.6vw;
+        font-size: 1.8vw;
+    }
+
+    .form__input {
+        height: 3.6vw;
+        width: 40vw;
+        border-radius: 0.6vw;
+    }
+
+    .form__label {
+        margin-top: 1vw;
+        font-size: 2vw;
+    }
+
+    .menu-bar__list {
+        top: -5px;
+    }
+
+    .menu-bar__list-item-text {
+        border-bottom: 3px solid var(--white);
+        font-size: 2vw;
+        padding-bottom: 1vw;
+    }
+
+    .list-item-text_selected {
+        border-bottom: 3px solid var(--orangered);
+    }
+
+    .menu-bar__horizontal-line {
+        display: none;
+    }
+}

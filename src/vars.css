@@ -9,10 +9,13 @@
     --popup-shadow-color-title: rgba(0, 0, 0, 0.25);
     --header-height: 70px;
     --low-transparent-gray: rgba(20, 20, 20, 0.6);
+    --white: rgba(255, 255, 255, 255);
+    --light-grey: #CCCCCC;
     --low-transparent-white: rgba(255, 255, 255, 0.6);
     --medium-transparent-white: rgba(255, 255, 255, 0.4);
     --highly-transparent-white: rgba(255, 255, 255, 0.2);
     --crystal-clear: rgba(255, 255, 255, 0);
     --one-sixth-of-screen: 16.666%;
     --one-third-of-screen: 33.333%;
+    --orangered: rgb(255, 69, 0);
 }

@@ -3,12 +3,15 @@
 @import "components/Footer/Footer.css";
 @import "components/Preview/Preview.css";
 @import "components/Slider/Slider.css";
+@import "views/ProfileView/ProfileView.css";
+@import "components/UserInfoBlock/UserInfoBlock.css";
+@import "components/ProfileMenuBar/ProfileMenuBar.css";
 
 body {
     background-color: var(--main-color);
     padding: 0;
     margin: 0;
-    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-family: "Roboto", Arial, sans-serif;
     font-size: 1vw;
     font-weight: lighter;
 }
@@ -22,7 +25,6 @@ body {
 }
 
 .content {
-    font-family: "Helvetica Neue", Arial, sans-serif;
     position: relative;
     margin-top: 40vw;
 }

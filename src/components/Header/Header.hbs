@@ -1,10 +1,10 @@
 <div class="header__logo">
-    <a href="#"><img src="img/logo.svg"></a>
+    <a href="#" data-event="pathChanged" href="/browse"><img src="img/logo.svg"></a>
 </div>
 <div class="header__menu">
     <nav class="header__nav">
         <ul class="nav__list">
-            <li><a class="list-item-text list-item-text-selected" href="#">Главная</a></li>
+            <li><a class="list-item-text list-item-text-selected" href="#" data-event="pathChanged" href="/browse">Главная</a></li>
             <li><a class="list-item-text" href="#">Сериалы</a></li>
             <li><a class="list-item-text" href="#">Кино</a></li>
             <li><a class="list-item-text" href="#">Последнее</a></li>
@@ -18,7 +18,7 @@
     </div>
     <img class="header__search-img control__item" src="img/search.svg">
     <div class="header__user-block control__item">
-        <a class="header__user" href="profile.html">
+        <a class="header__user" data-event="pathChanged" href="/profile">
         {{#if authorized}}
             <img class="header__avatar" src="{{avatar}}">
         {{else}}
