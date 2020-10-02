@@ -42,7 +42,7 @@ class Router {
     }
 
     start() {
-        window.addEventListener('popstate', () => {
+        window.addEventListener('popstate', (event) => {
             this.go(window.location.pathname);
         });
 

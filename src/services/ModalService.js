@@ -46,7 +46,6 @@ class ModalService {
             ];
 
             const inputs = Array.from(inputsData, (input) => new Input({context: input}).render());
-            // console.log(inputs);
 
             const helper = {
                 text: 'Уже зарегистрированы?',
@@ -55,6 +54,7 @@ class ModalService {
             };
 
             const signupPopup = new Popup({
+                parent: this.app,
                 context: {
                     heading: 'Регистрация',
                     helper: helper,
@@ -64,8 +64,11 @@ class ModalService {
             });
 
             const popup = document.createElement('div');
+            popup.classList.add('popup');
             popup.innerHTML = signupPopup.render();
             this.app.appendChild(popup);
+
+            document.body.classList.add('scroll-off');
         }
     }
 }

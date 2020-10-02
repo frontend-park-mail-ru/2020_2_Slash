@@ -1,25 +1,29 @@
 import BaseComponent from '../BaseComponent.js';
-import EventBus from '../../services/EventBus.js';
 
 class Popup extends BaseComponent {
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
         this.template = Handlebars.templates['Popup.hbs'];
 
-        EventBus.on('click', this.onClick.bind(this));
+        this.parent.addEventListener('click', this.onClick.bind(this));
     }
 
     render() {
         return this.template(this.context);
     }
 
-    onClick() {
-        // отслеживать клики по пустому пространству
-        // вызывать onDestroy по клику в пустоту
+    onClick(event) {
+        const {target} = event;
+        if (target.classList.contains('popup-wrapper')) {
+            const popup = document.querySelector('.popup');
+            document.body.classList.remove('scroll-off');
+            this.parent.removeChild(popup);
+            this.onDestroy();
+        }
     }
 
     onDestroy() {
-        EventBus.off('click', this.onClick);
+        this.parent.removeEventListener('click', this.onClick);
     }
 }
 
