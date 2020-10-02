@@ -23,7 +23,7 @@ class BaseView {
     }
 
     insertIntoContext(...data) {
-        data.forEach((obj) => Object.entries(obj).forEach(([key, value]) => this.addToContext(key, value)))
+        data.forEach((obj) => Object.entries(obj).forEach(([key, value]) => this.addToContext(key, value)));
     }
 }
 

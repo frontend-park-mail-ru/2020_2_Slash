@@ -9,10 +9,30 @@ import Events from '../consts/events.js';
  * @class
  */
 class Router {
-    constructor() {
+    constructor(app) {
+        this.application = app;
         this.routes = {};
 
         EventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
+
+        this.application.addEventListener('click', function(e) {
+            const {target} = e;
+
+            const closest = target.closest('a');
+            if (closest instanceof HTMLAnchorElement) {
+                e.preventDefault();
+
+                const data = Object.assign({}, closest.dataset)
+
+                data.path = closest.getAttribute('href');
+
+                EventBus.emit(data.event, data);
+            }
+        });
+
+        this.application.addEventListener('submit', function(e)  {
+            e.preventDefault();
+        });
     }
 
     register(path, controller) {

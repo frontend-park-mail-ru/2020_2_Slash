@@ -71,18 +71,10 @@ class MainController extends BaseController {
         this.view.insertIntoContext(sessionData, contentData);
 
         this.view.show();
-        this.onSwitchOn();
-    }
-
-    onSwitchOn() {
     }
 
     switchOff() {
         this.view.hide();
-        this.onSwitchOff();
-    }
-
-    onSwitchOff() {
     }
 }
 

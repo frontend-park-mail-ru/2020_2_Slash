@@ -5,11 +5,7 @@ class BaseController {
 
     switchOn(data = {}) {}
 
-    onSwitchOn() {}
-
     switchOff() {}
-
-    onSwitchOff() {}
 }
 
 export default BaseController;
