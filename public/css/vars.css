@@ -1,0 +1,22 @@
+:root {
+    --main-color: #141414;
+    --popup-button-color: #434343;
+    --popup-background-color: rgba(20, 20, 20, 0.90);
+    --popup-text-color: #B8B8B8;
+    --popup-text-white: #ffffff;
+    --popup-input-color: #FAFAFA;
+    --popup-input-border-color: #000000;
+    --popup-shadow-color-title: rgba(0, 0, 0, 0.25);
+    --header-height: 70px;
+    --low-transparent-gray: rgba(20, 20, 20, 0.6);
+    --low-transparent-white: rgba(255, 255, 255, 0.6);
+    --medium-transparent-white: rgba(255, 255, 255, 0.4);
+    --highly-transparent-white: rgba(255, 255, 255, 0.2);
+    --crystal-clear: rgba(255, 255, 255, 0);
+    --one-sixth-of-screen: 16.666%;
+    --one-third-of-screen: 33.333%;
+    --rating-green: #65AD59;
+    --heading-grey: #BCBCBC;
+    --white: white;
+    --orangered: rgb(255, 69, 0);
+}
