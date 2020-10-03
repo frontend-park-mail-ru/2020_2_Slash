@@ -19,6 +19,10 @@ body {
     font-weight: lighter;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .main-view {
     min-height: calc(100vh - 2 * var(--header-height));
 }
@@ -33,10 +37,6 @@ body {
 }
 
 @media (max-width: 850px) {
-    .content__slider-item {
-        width: 33.333%;
-    }
-
     .info-btn, .play-btn {
         width: 20vw;
         height: 6vw;

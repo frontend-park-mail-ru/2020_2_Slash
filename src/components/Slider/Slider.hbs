@@ -1,10 +1,29 @@
-<div class="content__row">
+<div class="content__slider-container">
     <h3 class="content__title pad-both">{{title}}</h3>
     <div class="content__slider pad-both">
         {{#each content}}
-        <div class="content__slider-item">
-            <a><img class="slider-item__img" src="{{this.poster}}"></a>
-        </div>
+            <div class="content__slider-item">
+                <img class="slider-item__img" src="{{this.poster}}">
+                <div class="content__slider-item_hovered">
+                    <div class="slider-item__buttons">
+                        <button class="slider-item__play-btn slider__btn">
+                            <img class="slider__play-btn-img" src="img/play2.svg">
+                        </button>
+                        <button class="slider-item__add-btn slider__btn">
+                            <img class="add-btn__img slider__btn-img" src="img/add.svg">
+                        </button>
+                        <button class="slider-item__like-btn slider__btn">
+                            <img class="like-btn__img slider__btn-img" src="img/like.svg">
+                        </button>
+                        <button class="slider-item__dislike-btn slider__btn">
+                            <img class="dislike-btn__img slider__btn-img" src="img/dislike.svg">
+                        </button>
+                        <button class="slider-item__more-btn slider__btn">
+                            <img class="more-btn__img slider__btn-img" src="img/more.svg">
+                        </button>
+                    </div>
+                </div>
+            </div>
         {{/each}}
     </div>
 </div>
