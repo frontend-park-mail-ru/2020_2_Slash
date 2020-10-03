@@ -17,12 +17,12 @@ class SignupController extends BaseController {
 
         const callbackData = {
             path: Routes.MainPage,
-        }
+        };
 
         if (!sessionData.authorized) {
             callbackData.misc = {
                 modalStatus: Modals.signup,
-            }
+            };
         }
 
         EventBus.emit(Events.PathChanged, callbackData);

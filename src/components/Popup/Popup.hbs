@@ -2,16 +2,8 @@
 <div class="popup-wrapper">
     <div class="popup-container">
         <div class="popup-container__form">
-            <form>
-                <h1 class="popup-container__heading">{{heading}}</h1>
-                <div class="inputs-container">
-                    {{#each inputs}}
-                        {{{this}}}
-                    {{/each}}
-
-                    {{{Button}}}
-                </div>
-            </form>
+            <h1 class="popup-container__heading">{{heading}}</h1>
+            {{{Form}}}
             <div class="popup-helper">
                 <p class="popup-helper__text">{{helper.text}}
                     <a class="popup-helper__link" href="{{helper.link}}">{{helper.linkText}}</a>

@@ -1,6 +1,6 @@
 import Modals from '../consts/modals.js';
+import SignupBuilderForm from '../tools/builders/SignupFormBuilder.js';
 import Popup from '../components/Popup/Popup.js';
-import Signup from './popups/Signup.js';
 
 class ModalService {
     constructor() {
@@ -14,14 +14,12 @@ class ModalService {
 
     show(modalStatus) {
         if (modalStatus === Modals.signup) {
-
             const signupPopup = new Popup({
                 parent: this.app,
                 context: {
-                    heading: 'Регистрация',
-                    helper: Signup.helper,
-                    Button: Signup.button.render(),
-                    inputs: Signup.inputs,
+                    heading: SignupBuilderForm.getMeta().heading,
+                    Form: SignupBuilderForm.getForm().render(),
+                    helper: SignupBuilderForm.getMeta().helper,
                 },
             });
 

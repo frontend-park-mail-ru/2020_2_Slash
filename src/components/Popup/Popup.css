@@ -25,11 +25,6 @@
     border-radius: 10px;
 }
 
-.inputs-container {
-    display: flex;
-    flex-direction: column;
-}
-
 .popup-container__heading {
     font-style: normal;
     font-weight: normal;
