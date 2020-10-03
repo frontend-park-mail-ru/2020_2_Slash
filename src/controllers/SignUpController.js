@@ -15,16 +15,17 @@ class SignupController extends BaseController {
             authorized: false,
         };
 
-        if (sessionData.authorized) {
-            EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
-            return;
+        const callbackData = {
+            path: Routes.MainPage,
         }
 
-        EventBus.emit(Events.PathChanged, {
-            path: Routes.MainPage,
-            misc: {
+        if (!sessionData.authorized) {
+            callbackData.misc = {
                 modalStatus: Modals.signup,
-            }});
+            }
+        }
+
+        EventBus.emit(Events.PathChanged, callbackData);
     }
 
     switchOff() {

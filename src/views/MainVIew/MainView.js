@@ -5,7 +5,7 @@ import Preview from '../../components/Preview/Preview.js';
 import Slider from '../../components/Slider/Slider.js';
 
 class MainView extends BaseView {
-    constructor({title = '', context = {}} = {}) {
+    constructor({title = 'Flicks box', context = {}} = {}) {
         super({title: title, template: null, context: context});
         this.template = Handlebars.templates['MainView.hbs'];
     }

@@ -36,9 +36,9 @@
     font-size: 22px;
     text-align: center;
     letter-spacing: 0.1em;
-    color: #FFFFFF;
+    color: var(--popup-text-white);
     padding-bottom: 7px;
-    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 4px 4px var(--popup-shadow-color-title);
 }
 
 .popup-helper {
@@ -47,13 +47,13 @@
 }
 
 .popup-helper__text {
-    color: #B8B8B8;
+    color: var(--popup-text-color);
     font-size: 18px;
     letter-spacing: 0.05em;
 }
 
 .popup-helper__link {
-    color: #FAFAFA;
+    color: var(--popup-text-white);
     text-decoration: none;
 }
 
@@ -64,7 +64,7 @@
     bottom: 0;
     right: 0;
     content: ' ';
-    background: rgba(0,0,0,.5);
+    background: var(--blackout-for-popup);
 }
 
 .scroll-off {
