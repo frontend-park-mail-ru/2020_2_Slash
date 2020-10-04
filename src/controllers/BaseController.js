@@ -5,6 +5,8 @@ class BaseController {
 
     switchOn(data = {}) {}
 
+    onSwitchOn(data = {}) {}
+
     switchOff() {}
 }
 

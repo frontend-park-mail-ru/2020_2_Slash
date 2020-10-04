@@ -11,7 +11,7 @@ class ProfileView extends BaseView {
     }
 
     show() {
-        const {authorized, avatar, nickname, email} = this.context
+        const {authorized, avatar, nickname, email} = this.context;
 
         const header = new Header({
             context: {

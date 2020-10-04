@@ -18,7 +18,7 @@ class ProfileMenuBar extends BaseComponent {
         const selectedTab = 'list-item-text_selected';
         const activeForm = 'active-form';
         const hiddenForm = 'hidden';
-       const  tabType = data.info;
+        const  tabType = data.info;
 
         const [oldTab] = document.getElementsByClassName(selectedTab);
         oldTab.classList.remove(selectedTab);

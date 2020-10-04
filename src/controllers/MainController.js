@@ -1,5 +1,6 @@
 import BaseController from './BaseController.js';
 import MainView from '../views/MainVIew/MainView.js';
+import ModalService from '../services/ModalService.js';
 
 class MainController extends BaseController {
     constructor() {
@@ -8,7 +9,7 @@ class MainController extends BaseController {
 
     switchOn(data = {}) {
         const sessionData = { // запрос на валидность сессии
-            authorized: true,
+            authorized: false,
             avatar: 'img/avatar.svg',
         };
 
@@ -71,6 +72,14 @@ class MainController extends BaseController {
         this.view.insertIntoContext(sessionData, contentData);
 
         this.view.show();
+
+        this.onSwitchOn(data);
+    }
+
+    onSwitchOn(data = {}) {
+        if (data.modalStatus) {
+            ModalService.show(data.modalStatus);
+        }
     }
 
     switchOff() {
