@@ -1,0 +1,79 @@
+.info-block__page-main {
+    height: 100%;
+}
+
+.info-block__main-wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.info-block__description {
+    padding: 20px 0 0 60px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    left: 0;
+    z-index: 1;
+    width: 40%;
+    height: 90%;
+}
+
+.info-block__misc, .info-block__buttons {
+    display: flex;
+}
+
+.info-block__buttons {
+    width: 10vw;
+    justify-content: space-between;
+}
+
+.info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn {
+    padding: 0;
+    width: 2.5vw;
+    height: 2.5vw;
+    background-position: center center;
+    background-color: var(--crystal-clear);
+    outline: none;
+    border: 1px solid var(--white);
+    border-radius: 25px;
+}
+
+.info-block__add-btn:hover, .info-block__like-btn:hover, .info-block__dislike-btn:hover {
+    background-color: var(--medium-transparent-white);
+    cursor: pointer;
+}
+
+.info-block__add-btn:active, .info-block__like-btn:active, .info-block__dislike-btn:active {
+    background-color: var(--crystal-clear);
+}
+
+.add-btn__img, .like-btn__img, .dislike-btn__img {
+    width: 1.5vw;
+    height: 1.5vw;
+}
+
+.info-block__video-holder {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.info-block__video {
+    height: 100%;
+}
+
+.info-block__video img {
+    height: 100%;
+}
+
+.info-block__video-shade {
+    position: absolute;
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0));
+    height: 100%;
+    width: 15%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}

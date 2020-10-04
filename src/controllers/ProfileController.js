@@ -9,7 +9,7 @@ class ProfileController extends BaseController {
     switchOn(data = {}) {
         const sessionData = { // запрос на валидность сессии
             authorized: true,
-            avatar: 'img/avatar.svg',
+            avatar: '/static/img/avatar.svg',
             nickname: 'yletamitlu',
             email: 'yletamitlu@slash.com',
         };

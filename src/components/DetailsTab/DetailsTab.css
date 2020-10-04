@@ -1,0 +1,36 @@
+.info-block__details-wrapper {
+    height: 100%;
+    display: flex;
+    align-content: space-between;
+    padding: 0 1vw 0 5vw;
+    width: 100%;
+    backdrop-filter: blur(10px) brightness(70%);
+}
+
+.info-block__page-details {
+    height: 100%;
+    display: flex;
+    background-image: url("../../img/witcherInfo.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.info-block__left, .info-block__right {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 50%;
+    height: 80%;
+}
+
+.info-block__right {
+    padding-left: 5vw;
+    margin-top: 45px;
+}
+
+.info-block__full-about {
+    letter-spacing: 0.1em;
+    color: var(--white);
+}

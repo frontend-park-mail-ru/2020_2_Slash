@@ -9,6 +9,7 @@
 @import "components/Popup/Popup.css";
 @import "components/Input/Input.css";
 @import "components/Button/Button.css";
+@import "components/SliderItem/SliderItem.css";
 
 body {
     background-color: var(--main-color);
