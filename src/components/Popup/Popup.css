@@ -32,7 +32,7 @@
     text-align: center;
     letter-spacing: 0.1em;
     color: var(--popup-text-white);
-    padding-bottom: 7px;
+    margin: 0 0 15px 0;
     text-shadow: 0 4px 4px var(--popup-shadow-color-title);
 }
 
@@ -47,9 +47,19 @@
     letter-spacing: 0.05em;
 }
 
-.popup-helper__link {
+.popup-helper__modal {
     color: var(--popup-text-white);
     text-decoration: none;
+}
+
+.popup-container__btn-close {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5px;
+}
+
+.btn-close__img {
+    cursor: pointer;
 }
 
 .blocker {

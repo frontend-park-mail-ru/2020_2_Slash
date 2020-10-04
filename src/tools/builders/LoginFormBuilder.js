@@ -2,15 +2,15 @@ import FormBuilder from './FormBuilder.js';
 import Form from '../../components/Form/Form.js';
 import Button from '../../components/Button/Button.js';
 
-class SignupFormBuilder extends FormBuilder {
+class LoginFormBuilder extends FormBuilder {
     constructor() {
         super();
         this.prepareFormData();
-        this.heading = 'Регистрация';
+        this.heading = 'Авторизация';
         this.helper = {
-            text: 'Уже зарегистрированы?',
-            modal: 'signin',
-            modalText: 'Войти',
+            text: 'Еще не зарегистрированы?',
+            modal: 'signup',
+            modalText: 'Зарегистрироваться',
         };
     }
 
@@ -18,7 +18,7 @@ class SignupFormBuilder extends FormBuilder {
         this.buttonData = new Button({
             context: {
                 type: 'submit',
-                text: 'Зарегистрироваться',
+                text: 'Войти',
             },
         });
 
@@ -26,22 +26,12 @@ class SignupFormBuilder extends FormBuilder {
             {
                 id: 'login',
                 type: 'text',
-                label: 'Логин',
-            },
-            {
-                id: 'email',
-                type: 'email',
-                label: 'E-mail',
+                label: 'Логин или E-mail',
             },
             {
                 id: 'password',
                 type: 'password',
                 label: 'Пароль',
-            },
-            {
-                id: 'repeat_password',
-                type: 'password',
-                label: 'Повторите пароль',
             },
         ];
     }
@@ -67,7 +57,7 @@ class SignupFormBuilder extends FormBuilder {
 
         return new Form({
             context: {
-                heading: 'Регистрация',
+                heading: 'Авторизация',
                 Button: this.button.render(),
                 inputs: this.inputs,
             },
@@ -75,4 +65,4 @@ class SignupFormBuilder extends FormBuilder {
     }
 }
 
-export default new SignupFormBuilder();
+export default new LoginFormBuilder();

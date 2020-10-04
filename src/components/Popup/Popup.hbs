@@ -2,11 +2,14 @@
 <div class="popup-wrapper">
     <div class="popup-container">
         <div class="popup-container__form">
+            <div class="popup-container__btn-close">
+                <img class="btn-close__img" src="img/close.svg">
+            </div>
             <h1 class="popup-container__heading">{{heading}}</h1>
             {{{Form}}}
             <div class="popup-helper">
                 <p class="popup-helper__text">{{helper.text}}
-                    <a class="popup-helper__link" href="{{helper.link}}">{{helper.linkText}}</a>
+                    <a class="popup-helper__modal" data-event="revealPopup" data-modalstatus="{{helper.modal}}">{{helper.modalText}}</a>
                 </p>
             </div>
         </div>

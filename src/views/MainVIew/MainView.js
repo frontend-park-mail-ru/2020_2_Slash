@@ -8,10 +8,12 @@ class MainView extends BaseView {
     constructor({title = 'Flicks box', context = {}} = {}) {
         super({title: title, template: null, context: context});
         this.template = Handlebars.templates['MainView.hbs'];
+        this.parent = document.querySelector('.application');
     }
 
     show() {
         const header = new Header({
+            parent: this.parent,
             context: {
                 authorized: this.context.authorized,
                 avatar: this.context.avatar,
