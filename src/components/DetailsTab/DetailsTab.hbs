@@ -1,0 +1,54 @@
+<div class="info-block__page-details info-block_page"
+     style="background-image: url('{{poster}}');background-size: cover;">
+    <img class="details-background" src="" alt="">
+    <div class="info-block__details-wrapper">
+        <div class="info-block__left">
+            <div class="info-block__title-details">
+                <h3 class="info-block__title-text">{{{title}}}</h3>
+            </div>
+            <div class="info-block__origin-title origin-item">
+                <span class="origin-item__title item-title">Оригинальное название:</span>
+                <span class="origin-item__value item-value">{{{originTitle}}}</span>
+            </div>
+            <div class="info-block__misc misc-item">
+                <span class="misc-item_rating">{{rating}}</span>
+                <span class="misc-item_year item-value">{{year}}</span>
+                <span class="misc-item_season item-value">{{seasons}}</span>
+            </div>
+            <div class="info-block__full-about">
+                <span>{{{fullAbout}}}
+                </span>
+            </div>
+        </div>
+        <div class="info-block__right">
+            <div class="info-block__country country-item">
+                <span class="country-item__title item-title">Страна:</span>
+                <span class="country-item__value item-value">{{country}}</span>
+            </div>
+            <div class="info-block__genre genre-item">
+                <span class="genre-item__title item-title">Жанр:</span>
+                <span class="genre-item__value item-value">
+                    {{#each genre}}
+                        {{{this}}}
+                    {{/each}}
+                </span>
+            </div>
+            <div class="info-block__director director-item">
+                <span class="director-item__title item-title">Режиссеры:</span>
+                <span class="director-item__value item-value">
+                    {{#each directors}}
+                        {{{this}}}
+                    {{/each}}
+                </span>
+            </div>
+            <div class="info-block__cast cast-item">
+                <span class="cast-item__title item-title">Актеры:</span>
+                <span class="cast-item__value item-value">
+                    {{#each cast}}
+                        {{{this}}}
+                    {{/each}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

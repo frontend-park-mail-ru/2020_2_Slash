@@ -1,0 +1,55 @@
+<div class="info-block__page-main info-block_page"
+     style="background-image: url('{{poster}}');background-size: cover;">
+        <div class="info-block__main-wrapper">
+            <div class="info-block__description">
+                <div class="info-block__title">
+                    <h3 class="info-block__title-text">{{title}}</h3>
+                </div>
+                <div class="info-block__misc">
+                    <p class="misc-item_rating misc-item">{{rating}}</p>
+                    <p class="misc-item_year misc-item item-value">{{year}}</p>
+                    <p class="misc-item_season misc-item item-value">{{seasons}}</p>
+                </div>
+                <div class="info-block__about hidden-item">
+                    <span>{{about}}</span>
+                </div>
+                <div class="info-block__country country-item hidden-item">
+                    <span class="country-item__title item-title">Страна:</span>
+                    <span class="country-item__value item-value">{{country}}</span>
+                </div>
+                <div class="info-block__genre genre-item hidden-item">
+                    <span class="genre-item__title item-title">Жанр:</span>
+                    <span class="genre-item__value item-value">
+                        {{#each genre}}
+                            {{{this}}}
+                        {{/each}}
+                    </span>
+                </div>
+                <div class="info-block__cast cast-item hidden-item">
+                    <span class="cast-item__title item-title">Актеры:</span>
+                    <span class="cast-item__value item-value">
+                        {{#each slicedCast}}
+                            {{{this}}}
+                        {{/each}}
+                    </span>
+                </div>
+                <div class="info-block__buttons">
+                    <button class="info-block__add-btn">
+                        <img class="add-btn__img" src="/static/img/add.svg">
+                    </button>
+                    <button class="info-block__like-btn">
+                        <img class="like-btn__img" src="/static/img/like.svg">
+                    </button>
+                    <button class="info-block__dislike-btn">
+                        <img class="dislike-btn__img" src="/static/img/dislike.svg">
+                    </button>
+                </div>
+            </div>
+            <div class="info-block__video-holder">
+                <div class="info-block__video">
+                    <img src="{{poster}}">
+                    <div class="info-block__video-shade"></div>
+                </div>
+            </div>
+        </div>
+    </div>

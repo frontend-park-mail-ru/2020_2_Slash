@@ -9,6 +9,12 @@
 @import "components/Popup/Popup.css";
 @import "components/Input/Input.css";
 @import "components/Button/Button.css";
+@import "components/SliderItem/SliderItem.css";
+@import "components/InfoBlock/InfoBlock.css";
+@import "components/TabBar/TabBar.css";
+@import "components/MainTab/MainTab.css";
+@import "components/DetailsTab/DetailsTab.css";
+@import "components/ContentBlock/ContentBlock.css";
 
 body {
     background-color: var(--main-color);
@@ -19,6 +25,10 @@ body {
     font-weight: lighter;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .main-view {
     min-height: calc(100vh - 2 * var(--header-height));
 }
@@ -27,16 +37,11 @@ body {
     padding: 0 60px;
 }
 
-.content {
-    position: relative;
-    margin-top: 40vw;
+.hidden {
+    display: none;
 }
 
 @media (max-width: 850px) {
-    .content__slider-item {
-        width: 33.333%;
-    }
-
     .info-btn, .play-btn {
         width: 20vw;
         height: 6vw;

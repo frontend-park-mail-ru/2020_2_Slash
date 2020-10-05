@@ -1,0 +1,44 @@
+.tabs {
+    position: absolute;
+    bottom: 2.5%;
+    width: 100%;
+}
+
+.tabs__list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tabs__list-item-text {
+    color: var(--white);
+    text-decoration: none;
+    border-bottom: 5px solid var(--white);
+    letter-spacing: 0.1em;
+    line-height: 1em;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.list-item-text_selected {
+    pointer-events: none;
+    border-bottom: 5px solid var(--orangered);
+    transition: none;
+}
+
+.menu-bar__list-item-text:hover {
+    transition: all 0.02s ease-in;
+    cursor: pointer;
+    border-bottom: 5px solid var(--orangered);
+}
+
+.list-item-text_selected__line {
+    padding: 0;
+    border: solid 2px var(--orangered);
+    text-align: center;
+    margin: 0.5vw 0 0 0;
+}

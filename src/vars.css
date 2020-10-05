@@ -19,4 +19,7 @@
     --one-sixth-of-screen: 16.666%;
     --one-third-of-screen: 33.333%;
     --orangered: rgb(255, 69, 0);
+    --hover-gray: rgb(30, 30, 30);
+    --rating-green: #65AD59;
+    --heading-grey: #BCBCBC;
 }

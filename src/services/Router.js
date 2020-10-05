@@ -11,34 +11,63 @@ import Events from '../consts/events.js';
 class Router {
     constructor(app) {
         this.application = app;
-        this.routes = {};
+        this.routes = [];
 
         EventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
 
         this.application.addEventListener('click', function(e) {
             const {target} = e;
 
-            const closest = target.closest('a');
-            if (closest instanceof HTMLAnchorElement) {
+            const closestLink = target.closest('a');
+            const closestButton = target.closest('button');
+            if (closestLink instanceof HTMLAnchorElement) {
                 e.preventDefault();
 
-                const data = Object.assign({}, closest.dataset);
+                const data = Object.assign({}, closestLink.dataset);
 
-                data.path = closest.getAttribute('href');
+                data.path = closestLink.getAttribute('href');
 
                 EventBus.emit(data.event, data);
+            } else if (closestButton instanceof HTMLButtonElement) {
+                const data = Object.assign({}, closestButton.dataset);
+                EventBus.emit(data.event, data);
             }
-        });
-
-        this.application.addEventListener('submit', function(e)  {
-            e.preventDefault();
         });
     }
 
     register(path, controller) {
-        this.routes[path] = controller;
+        const reg = new RegExp('^' + path.replace(/(:\w+)\/?/, '(\\d+)') + '$');
+
+        this.routes.push({
+            reg: reg,
+            controller: controller,
+        });
 
         return this;
+    }
+
+    getRouteData(path) {
+        let targetController = null;
+        let query = {};
+
+        this.routes.forEach(({reg, controller}) => {
+            const res = path.match(reg);
+
+            if (res) {
+                const data = res.slice(1)[0];
+
+                if (data) {
+                    query.resourceId = +data;
+                }
+
+                targetController = controller;
+            }
+        });
+
+        return {
+            controller: targetController,
+            query: query,
+        }
     }
 
     start() {
@@ -50,21 +79,24 @@ class Router {
     }
 
     go(path, data = {}) {
-        if (this.currentController) {
+        const routeData = this.getRouteData(path);
+
+        if (this.currentController && !(routeData.controller.view instanceof DummyView)) {
             this.currentController.switchOff();
         }
 
-        this.currentController = this.routes[path];
+        this.currentController = routeData.controller;
 
         if (!this.currentController) {
             path = Routes.MainPage;
-            this.currentController = this.routes[Routes.MainPage];
+            this.currentController = this.getRouteData(path).controller;
         }
 
         if (window.location.pathname !== path) {
             window.history.pushState(null, null, path);
         }
 
+        data = routeData.query ? Object.assign(data, routeData.query) : data;
         this.currentController.switchOn(data);
     }
 

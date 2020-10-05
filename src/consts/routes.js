@@ -3,6 +3,7 @@ const Routes = {
     SignUpPage:  '/signup',
     LoginPage:   '/login',
     ProfilePage: '/profile',
+    ContentPage: '/content/:id'
 };
 
 export default Routes;

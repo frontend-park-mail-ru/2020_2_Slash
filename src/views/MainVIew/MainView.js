@@ -2,7 +2,8 @@ import BaseView from '../BaseView.js';
 import Header from '../../components/Header/Header.js';
 import Footer from '../../components/Footer/Footer.js';
 import Preview from '../../components/Preview/Preview.js';
-import Slider from '../../components/Slider/Slider.js';
+import ContentBlock from "../../components/ContentBlock/ContentBlock.js";
+import ContentService from "../../services/ContentService.js";
 
 class MainView extends BaseView {
     constructor({title = 'Flicks box', context = {}} = {}) {
@@ -28,13 +29,17 @@ class MainView extends BaseView {
             },
         });
 
-        const contentBlocks = Array.from(this.context.blocks, (block) => new Slider({context: block}).render());
+        const contentBlock = new ContentBlock({
+            context: {
+                blocks: this.context.blocks
+            },
+        });
 
         const data = {
             Header: header.render(),
             Preview: preview.render(),
             Footer: footer.render(),
-            blocks: contentBlocks,
+            ContentBlock: contentBlock.render(),
         };
 
         this.insertIntoContext(data);
