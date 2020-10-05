@@ -27,27 +27,27 @@ class MainController extends BaseController {
                             poster: '/static/img/witcher.png'
                         },
                         {
-                            id: 1,
+                            id: 2,
                             poster: '/static/img/witcher.png'
                         },
                         {
-                            id: 1,
+                            id: 3,
                             poster: '/static/img/witcher.png'
                         },
                         {
-                            id: 1,
+                            id: 58746,
                             poster: '/static/img/witcher.png'
                         },
                         {
-                            id: 1,
+                            id: 4,
                             poster: '/static/img/witcher.png'
                         },
                         {
-                            id: 1,
+                            id: 5,
                             poster: '/static/img/witcher.png'
                         },
                         {
-                            id: 1,
+                            id: 6,
                             poster: '/static/img/witcher.png'
                         },
                     ],
@@ -56,31 +56,31 @@ class MainController extends BaseController {
                     title: 'Последнее',
                     content: [
                         {
-                            id: 1,
+                            id: 7,
                             poster: '/static/img/fword.png'
                         },
                         {
-                            id: 1,
+                            id: 8,
                             poster: '/static/img/fword.png'
                         },
                         {
-                            id: 1,
+                            id: 9,
                             poster: '/static/img/fword.png'
                         },
                         {
-                            id: 1,
+                            id: 10,
                             poster: '/static/img/fword.png'
                         },
                         {
-                            id: 1,
+                            id: 11,
                             poster: '/static/img/fword.png'
                         },
                         {
-                            id: 1,
+                            id: 12,
                             poster: '/static/img/fword.png'
                         },
                         {
-                            id: 1,
+                            id: 13,
                             poster: '/static/img/fword.png'
                         },
                     ],
@@ -89,31 +89,31 @@ class MainController extends BaseController {
                     title: 'Фильмы',
                     content: [
                         {
-                            id: 1,
+                            id: 14,
                             poster: '/static/img/woman.png'
                         },
                         {
-                            id: 1,
+                            id: 15,
                             poster: '/static/img/woman.png'
                         },
                         {
-                            id: 1,
+                            id: 16,
                             poster: '/static/img/woman.png'
                         },
                         {
-                            id: 1,
+                            id: 17,
                             poster: '/static/img/woman.png'
                         },
                         {
-                            id: 1,
+                            id: 18,
                             poster: '/static/img/woman.png'
                         },
                         {
-                            id: 1,
+                            id: 19,
                             poster: '/static/img/woman.png'
                         },
                         {
-                            id: 1,
+                            id: 100,
                             poster: '/static/img/woman.png'
                         },
                     ],
@@ -122,31 +122,31 @@ class MainController extends BaseController {
                     title: 'Сериалы',
                     content: [
                         {
-                            id: 1,
+                            id: 111,
                             poster: '/static/img/cat.png'
                         },
                         {
-                            id: 1,
+                            id: 122,
                             poster: '/static/img/cat.png'
                         },
                         {
-                            id: 1,
+                            id: 133,
                             poster: '/static/img/cat.png'
                         },
                         {
-                            id: 1,
+                            id: 144,
                             poster: '/static/img/cat.png'
                         },
                         {
-                            id: 1,
+                            id: 155,
                             poster: '/static/img/cat.png'
                         },
                         {
-                            id: 1,
+                            id: 166,
                             poster: '/static/img/cat.png'
                         },
                         {
-                            id: 1,
+                            id: 177,
                             poster: '/static/img/cat.png'
                         },
                     ],

@@ -10,6 +10,11 @@
 @import "components/Input/Input.css";
 @import "components/Button/Button.css";
 @import "components/SliderItem/SliderItem.css";
+@import "components/InfoBlock/InfoBlock.css";
+@import "components/TabBar/TabBar.css";
+@import "components/MainTab/MainTab.css";
+@import "components/DetailsTab/DetailsTab.css";
+@import "components/ContentBlock/ContentBlock.css";
 
 body {
     background-color: var(--main-color);
@@ -32,9 +37,8 @@ body {
     padding: 0 60px;
 }
 
-.content {
-    position: relative;
-    margin-top: 40vw;
+.hidden {
+    display: none;
 }
 
 @media (max-width: 850px) {

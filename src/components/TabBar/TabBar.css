@@ -1,6 +1,6 @@
 .tabs {
     position: absolute;
-    bottom: 0;
+    bottom: 2.5%;
     width: 100%;
 }
 
@@ -21,6 +21,7 @@
     padding-bottom: 8px;
     padding-left: 10px;
     padding-right: 10px;
+    cursor: pointer;
 }
 
 .list-item-text_selected {

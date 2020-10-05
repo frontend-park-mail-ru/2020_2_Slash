@@ -1,6 +1,8 @@
 .content__info-block-wrapper {
+    transition: all 0.5s ease-in-out;
     font-size: 16px;
     position: relative;
+    bottom: 3.2vw;
 }
 
 .content__info-block {
@@ -11,13 +13,13 @@
     min-height: 20vw;
 }
 
+.info-block_tab {
+    height: 100%;
+}
+
 .misc-item_year, .misc-item_season, .misc-item_rating {
     padding: 0 1vw 0 0;
     margin: 0;
-}
-
-.misc-item_rating {
-    color: var(--rating-green);
 }
 
 .info-block__title-text {
@@ -73,23 +75,10 @@
 }
 
 @media (max-width: 1000px) {
-    .hidden-item {
-        display: none;
-    }
-
     .info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn {
         width: 5vw;
         height: 5vw;
         border-radius: 35px;
-    }
-
-    .info-block__description {
-        justify-content: flex-start;
-        width: 100%;
-    }
-
-    .info-block__title-text {
-        font-size: 30px;
     }
 
     .info-block__buttons {
@@ -101,45 +90,9 @@
         width: 3vw;
         height: 3vw;
     }
-
-    .tabs__list-item-text {
-        font-size: 1rem;
-        padding: 0 1vw 0 1vw;
-    }
-
-    .info-block__video-holder {
-        left: 0;
-    }
 }
 
 @media (max-width: 850px) {
-    .info-block__page-main {
-        background-image: url("../../img/witcherInfo.png");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    .info-block__main-wrapper {
-        backdrop-filter: blur(10px) brightness(70%);
-    }
-
-    .info-block__page-details{
-        font-size: 1.8vw;
-    }
-
-    .info-block__left, .info-block__right {
-        height: 65%;
-    }
-
-    .info-block__close-btn {
-        right: 3vw;
-    }
-
-    .content__slider-item_selected {
-        border: 3px solid var(--white);
-    }
-
     .info-block__buttons {
         width: 50vw;
         padding-top: 4vw;
@@ -155,44 +108,9 @@
         width: 5vw;
         height: 5vw;
     }
-
-    .info-block__video-holder {
-        top: 20%;
-    }
-
-    .info-block__video {
-        height: 60vw;
-    }
-
 }
 
 @media (max-width: 375px) {
-    .info-block__details-wrapper {
-        font-size: 10px;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .info-block__description {
-        padding-left: 20px;
-        width: 320px;
-        justify-content: flex-start;
-    }
-
-    .info-block__col1, .info-block__col2 {
-        padding: 0;
-        margin: 0;
-        width: 100%;
-    }
-
-    .info-block__col2 {
-        margin-bottom: 40px;
-    }
-
-    .info-block__misc {
-        font-size: 14px;
-    }
-
     .info-block__close-btn {
         top: 3vw;
         right: 6vw;
@@ -212,20 +130,5 @@
     .add-btn__img, .like-btn__img, .dislike-btn__img {
         width: 7vw;
         height: 7vw;
-    }
-
-    .info-block__video-holder {
-        top: 200px;
-        left: 0;
-        bottom: 0;
-    }
-
-    .info-block__video-shade {
-        display: none;
-    }
-
-    .info-block__video {
-        border: 2px solid var(--white);
-        height: 60%;
     }
 }

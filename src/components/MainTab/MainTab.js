@@ -7,6 +7,7 @@ class MainTab extends BaseComponent {
     }
 
     render() {
+        this.context.slicedCast = this.context.cast.slice(0, 3);
         return this.template(this.context);
     }
 }

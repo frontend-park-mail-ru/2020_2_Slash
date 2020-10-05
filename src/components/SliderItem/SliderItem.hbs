@@ -2,31 +2,22 @@
     <img class="slider-item__img" src="{{poster}}">
     <div class="content__slider-item_hovered">
         <div class="slider-item__buttons">
-            <a>
-                <button class="slider-item__play-btn slider__btn">
-                    <img class="slider__play-btn-img" src="/static/img/play2.svg">
-                </button>
-            </a>
-            <a>
-                <button class="slider-item__add-btn slider__btn">
-                    <img class="add-btn__img slider__btn-img" src="/static/img/add.svg">
-                </button>
-            </a>
-            <a>
-                <button class="slider-item__like-btn slider__btn">
-                    <img class="like-btn__img slider__btn-img" src="/static/img/like.svg">
-                </button>
-            </a>
-            <a>
-                <button class="slider-item__dislike-btn slider__btn">
-                    <img class="dislike-btn__img slider__btn-img" src="/static/img/dislike.svg">
-                </button>
-            </a>
-            <a href="/content/{{id}}" data-event="contentInfoRequested">
-                <button class="slider-item__more-btn slider__btn">
-                    <img class="more-btn__img slider__btn-img" src="/static/img/more.svg">
-                </button>
-            </a>
+            <button class="slider-item__play-btn slider__btn">
+                <img class="slider__play-btn-img" src="/static/img/play2.svg">
+            </button>
+            <button class="slider-item__add-btn slider__btn">
+                <img class="slider-add-btn__img slider__btn-img" src="/static/img/add.svg">
+            </button>
+            <button class="slider-item__like-btn slider__btn">
+                <img class="slider-like-btn__img slider__btn-img" src="/static/img/like.svg">
+            </button>
+            <button class="slider-item__dislike-btn slider__btn">
+                <img class="slider-dislike-btn__img slider__btn-img" src="/static/img/dislike.svg">
+            </button>
+            <button class="slider-item__more-btn slider__btn" data-event="contentInfoRequested" data-id="{{id}}">
+                <img class="more-btn__img slider__btn-img" src="/static/img/more.svg">
+            </button>
         </div>
     </div>
+    <div class="slider-item__arrow hidden"><img class="slider-item__arrow-img" src="/static/img/arrow.svg"></div>
 </div>

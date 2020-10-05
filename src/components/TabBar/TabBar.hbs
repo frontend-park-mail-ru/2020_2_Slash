@@ -1,7 +1,10 @@
 <div class="tabs">
     <ul class="tabs__list">
         {{#each tabs}}
-        <li><a class="tabs__list-item-text list-item-text_selected" href="#">{{{this}}}</a></li>
+        <li><a data-event="contentInfoTabChanged"
+               class="tabs__list-item-text {{class}}"
+               data-tab="{{{this.key}}}"
+               href="#">{{{this.value}}}</a></li>
         {{/each}}
     </ul>
 </div>

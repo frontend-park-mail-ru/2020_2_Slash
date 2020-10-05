@@ -18,20 +18,20 @@ class Router {
         this.application.addEventListener('click', function(e) {
             const {target} = e;
 
-            const closest = target.closest('a');
-            if (closest instanceof HTMLAnchorElement) {
+            const closestLink = target.closest('a');
+            const closestButton = target.closest('button');
+            if (closestLink instanceof HTMLAnchorElement) {
                 e.preventDefault();
 
-                const data = Object.assign({}, closest.dataset);
+                const data = Object.assign({}, closestLink.dataset);
 
-                data.path = closest.getAttribute('href');
+                data.path = closestLink.getAttribute('href');
 
                 EventBus.emit(data.event, data);
+            } else if (closestButton instanceof HTMLButtonElement) {
+                const data = Object.assign({}, closestButton.dataset);
+                EventBus.emit(data.event, data);
             }
-        });
-
-        this.application.addEventListener('submit', function(e)  {
-            e.preventDefault();
         });
     }
 
@@ -79,11 +79,12 @@ class Router {
     }
 
     go(path, data = {}) {
-        if (this.currentController) {
+        const routeData = this.getRouteData(path);
+
+        if (this.currentController && !(routeData.controller.view instanceof DummyView)) {
             this.currentController.switchOff();
         }
 
-        const routeData = this.getRouteData(path);
         this.currentController = routeData.controller;
 
         if (!this.currentController) {
@@ -96,7 +97,6 @@ class Router {
         }
 
         data = routeData.query ? Object.assign(data, routeData.query) : data;
-        console.log(data);
         this.currentController.switchOn(data);
     }
 

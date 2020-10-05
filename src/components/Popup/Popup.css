@@ -50,6 +50,7 @@
 .popup-helper__modal {
     color: var(--popup-text-white);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .popup-container__btn-close {
