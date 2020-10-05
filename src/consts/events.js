@@ -4,6 +4,7 @@ const Events = {
     ContentInfoRequested: 'contentInfoRequested',
     RevealPopup: 'revealPopup',
     ContentInfoTabChanged: 'contentInfoTabChanged',
+    InfoBlockClosed: 'infoBlockClosed',
 };
 
 export default Events;

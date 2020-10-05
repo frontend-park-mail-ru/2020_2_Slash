@@ -28,12 +28,13 @@ class InfoBlock extends BaseComponent {
             context: this.context.contentData,
         }).render();
 
-        EventBus.on(Events.ContentInfoTabChanged, this.tabChanged.bind(this));
+        EventBus.on(Events.ContentInfoTabChanged, this.onTabChanged.bind(this));
+        EventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
 
         this.context.TabBar = this.tabBar.render();
     }
 
-    tabChanged(data) {
+    onTabChanged(data) {
         if (data.tab === 'mainTab') {
             this.context.CurrentTab = new MainTab({
                 context: this.context.contentData,
@@ -47,6 +48,10 @@ class InfoBlock extends BaseComponent {
         const currentInfoBlock = document.querySelector(`.info-block_tab`);
 
         currentInfoBlock.innerHTML = this.context.CurrentTab;
+    }
+
+    onInfoBlockClosed(data) {
+        this.deleteOpenedInfoBlock();
     }
 
     deleteOpenedInfoBlock() {
