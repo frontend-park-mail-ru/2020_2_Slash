@@ -48,7 +48,7 @@ class Router {
 
     getRouteData(path) {
         let targetController = null;
-        let query = {};
+        const query = {};
 
         this.routes.forEach(({reg, controller}) => {
             const res = path.match(reg);
@@ -67,7 +67,7 @@ class Router {
         return {
             controller: targetController,
             query: query,
-        }
+        };
     }
 
     start() {
@@ -81,7 +81,7 @@ class Router {
     go(path, data = {}) {
         const routeData = this.getRouteData(path);
 
-        if (this.currentController && !(routeData.controller.view instanceof DummyView)) {
+        if (this.currentController) {
             this.currentController.switchOff();
         }
 

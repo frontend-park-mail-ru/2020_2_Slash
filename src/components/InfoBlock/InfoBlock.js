@@ -2,8 +2,8 @@ import BaseComponent from '../BaseComponent.js';
 import TabBar from '../TabBar/TabBar.js';
 import MainTab from '../MainTab/MainTab.js';
 import DetailsTab from '../DetailsTab/DetailsTab.js';
-import EventBus from "../../services/EventBus.js";
-import Events from "../../consts/events.js";
+import EventBus from '../../services/EventBus.js';
+import Events from '../../consts/events.js';
 
 class InfoBlock extends BaseComponent {
     constructor({parent = null, context = {}} = {}) {
@@ -15,13 +15,13 @@ class InfoBlock extends BaseComponent {
                 tabs: [
                     {
                         key: 'mainTab',
-                        value: 'О фильме'
+                        value: 'О фильме',
                     },
                     {
                         key: 'detailsTab',
-                        value: 'Детали'
+                        value: 'Детали',
                     }],
-            }
+            },
         });
 
         this.context.CurrentTab = new MainTab({
@@ -45,7 +45,7 @@ class InfoBlock extends BaseComponent {
             }).render();
         }
 
-        const currentInfoBlock = document.querySelector(`.info-block_tab`);
+        const currentInfoBlock = document.querySelector('.info-block_tab');
 
         currentInfoBlock.innerHTML = this.context.CurrentTab;
     }
@@ -55,13 +55,13 @@ class InfoBlock extends BaseComponent {
     }
 
     deleteOpenedInfoBlock() {
-        const openedInfoBlock = document.querySelector(`.content__info-block-wrapper`);
+        const openedInfoBlock = document.querySelector('.content__info-block-wrapper');
 
         if (openedInfoBlock) {
             const closestSlider = openedInfoBlock.closest('.content__slider-container');
             closestSlider.removeChild(openedInfoBlock);
-            const closestSliderItem = closestSlider.querySelector(`.slider-item_selected`);
-            closestSliderItem.querySelector(`.slider-item__arrow`).classList.add('hidden');
+            const closestSliderItem = closestSlider.querySelector('.slider-item_selected');
+            closestSliderItem.querySelector('.slider-item__arrow').classList.add('hidden');
             closestSliderItem.classList.remove('slider-item_selected');
             closestSliderItem.classList.add('content__slider-item');
             closestSliderItem.classList.remove('slider-item_selected_hover-off');
@@ -69,7 +69,7 @@ class InfoBlock extends BaseComponent {
     }
 
     render() {
-        this.deleteOpenedInfoBlock()
+        this.deleteOpenedInfoBlock();
 
         const currentButtonInfo = document.querySelector(`button.slider-item__more-btn[data-id='${this.context.contentId}']`);
 
@@ -77,7 +77,7 @@ class InfoBlock extends BaseComponent {
         currentSliderItem.classList.add('slider-item_selected');
         currentSliderItem.classList.remove('content__slider-item');
         currentSliderItem.classList.add('slider-item_selected_hover-off');
-        currentSliderItem.querySelector(`.slider-item__arrow`).classList.remove('hidden');
+        currentSliderItem.querySelector('.slider-item__arrow').classList.remove('hidden');
 
         const closestSlider = currentButtonInfo.closest('.content__slider-container');
 

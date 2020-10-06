@@ -15,6 +15,7 @@
 @import "components/MainTab/MainTab.css";
 @import "components/DetailsTab/DetailsTab.css";
 @import "components/ContentBlock/ContentBlock.css";
+@import "components/MiniModal/MiniModal.css";
 
 body {
     background-color: var(--main-color);

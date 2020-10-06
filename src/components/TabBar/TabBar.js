@@ -1,6 +1,6 @@
 import BaseComponent from '../BaseComponent.js';
-import EventBus from "../../services/EventBus.js";
-import Events from "../../consts/events.js";
+import EventBus from '../../services/EventBus.js';
+import Events from '../../consts/events.js';
 
 class TabBar extends BaseComponent {
     constructor({parent = null, context = {}} = {}) {
@@ -8,7 +8,7 @@ class TabBar extends BaseComponent {
         this.template = Handlebars.templates['TabBar.hbs'];
 
         context.tabs.forEach((tab) => {
-            if (tab.key === "mainTab") {
+            if (tab.key === 'mainTab') {
                 tab.class = 'list-item-text_selected';
             }
         });

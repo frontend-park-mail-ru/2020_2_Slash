@@ -1,0 +1,10 @@
+<div class="mini-modal__wrapper">
+    <img class="mini-modal__arrow" src="/static/img/arrow.svg">
+    <div class="mini-modal__buttons">
+        {{#each buttons}}
+        <a class="mini-modal__btn" href="{{this.path}}" data-event="{{this.event}}" data-modalstatus="{{this.modalStatus}}">
+            {{{this.title}}}
+        </a>
+        {{/each}}
+    </div>
+</div>
