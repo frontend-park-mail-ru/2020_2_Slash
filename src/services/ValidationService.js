@@ -86,6 +86,65 @@ class ValidationService {
         return isValidForm;
     }
 
+    ValidateProfileInfoForm(form) {
+        const inputs = form.getElementsByTagName('input');
+        const errors = form.getElementsByClassName('error');
+
+        const login = inputs['login'];
+        const email = inputs['email'];
+
+        this.clearErrors(inputs, errors);
+
+        let isValidForm = true;
+
+        let validationResult = this.isValidLogin(login.value);
+        if (!validationResult.isValid) {
+            isValidForm = false;
+            this.setError(login, validationResult);
+        }
+
+        validationResult = this.isValidEmail(email);
+        if (!validationResult.isValid) {
+            isValidForm = false;
+            this.setError(email, validationResult);
+        }
+
+        return isValidForm;
+    }
+
+    ValidateProfileSecurityForm(form) {
+        const inputs = form.getElementsByTagName('input');
+        const errors = form.getElementsByClassName('error');
+
+        const oldPassword = inputs['oldPassword'];
+        const newPassword = inputs['newPassword'];
+        const repeatedPassword = inputs['repeatedPassword'];
+
+        this.clearErrors(inputs, errors);
+
+        let isValidForm = true;
+
+        let validationResult = this.isTruePassword(oldPassword.value);
+        if (!validationResult.isValid) {
+            isValidForm = false;
+            this.setError(oldPassword, validationResult);
+        }
+
+        validationResult = this.isValidPassword(newPassword.value);
+        if (!validationResult.isValid) {
+            isValidForm = false;
+            this.setError(newPassword, validationResult);
+        }
+
+        validationResult = this.equalPasswords(newPassword.value, repeatedPassword.value);
+        if (!validationResult.isValid) {
+            isValidForm = false;
+            this.setError(repeatedPassword, validationResult);
+        }
+
+        return isValidForm;
+    }
+
     isValidLogin(login, data = null) {
         const result = {
             isValid: true,
@@ -121,6 +180,26 @@ class ValidationService {
             result.isValid = false;
             result.error = 'Введите E-mail';
         }
+
+        return result;
+    }
+
+    isTruePassword(password, data = null) {
+        const result = {
+            isValid: true,
+            error: ''
+        };
+
+        if (password === '') {
+            result.isValid = false;
+            result.error = 'Вы забыли ввести старый пароль';
+        }
+
+        if (data) {
+            result.isValid = !data.error;
+            result.error = 'Неверный пароль';
+        }
+
 
         return result;
     }

@@ -2,6 +2,11 @@
     margin-bottom: 0;
 }
 
+.inputs-container {
+    margin-top: 30px;
+    width: 400px;
+}
+
 .profile-view__content {
     display: flex;
     justify-content: center;
@@ -134,5 +139,11 @@
 
     .menu-bar__horizontal-line {
         display: none;
+    }
+}
+
+@media (max-width: 375px) {
+    .inputs-container {
+        width: 200px;
     }
 }
