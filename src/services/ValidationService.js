@@ -43,7 +43,13 @@ class ValidationService {
             this.setError(password, validationResult);
         }
 
-        return isValidForm;
+        return {
+            isValid: isValidForm,
+            data: {
+                login: login,
+                password: password,
+            }
+        };
     }
 
     ValidateSignupForm(form) {
@@ -59,13 +65,7 @@ class ValidationService {
 
         let isValidForm = true;
 
-        let validationResult = this.isValidLogin(login.value);
-        if (!validationResult.isValid) {
-            isValidForm = false;
-            this.setError(login, validationResult);
-        }
-
-        validationResult = this.isValidEmail(email);
+        let validationResult = this.isValidEmail(email);
         if (!validationResult.isValid) {
             isValidForm = false;
             this.setError(email, validationResult);
@@ -83,7 +83,15 @@ class ValidationService {
             this.setError(repeatPassword, validationResult);
         }
 
-        return isValidForm;
+        return {
+            isValid: isValidForm,
+            data: {
+                login: login.value,
+                email: email.value,
+                password: password.value,
+                repeatPassword: repeatPassword.value,
+            }
+        };
     }
 
     ValidateProfileInfoForm(form) {

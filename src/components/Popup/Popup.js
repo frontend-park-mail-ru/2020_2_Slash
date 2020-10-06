@@ -31,17 +31,23 @@ class Popup extends BaseComponent {
         const form = this.parent.getElementsByTagName('form')[0];
         const validator = new ValidationService(form);
 
-        let isValidForm = true;
+        let validationData = {};
 
         if (data.formtype === Modals.signup) {
-            isValidForm = validator.ValidateSignupForm(form);
+            validationData = validator.ValidateSignupForm(form);
         }
 
         if (data.formtype === Modals.signin) {
-            isValidForm = validator.ValidateLoginForm(form, data);
+            validationData = validator.ValidateLoginForm(form, data);
         }
 
-        if (isValidForm) {
+        if (validationData.isValid) {
+            if (data.formtype === Modals.signup) {
+                EventBus.emit(Events.SignupUser, validationData.data)
+            } else if (data.formtype === Modals.signin) {
+
+            }
+
             this.remove();
         }
     }
