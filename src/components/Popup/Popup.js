@@ -1,4 +1,8 @@
 import BaseComponent from '../BaseComponent.js';
+import Modals from "../../consts/modals.js";
+import EventBus from '../../services/EventBus.js';
+import Events from '../../consts/events.js';
+import ValidationService from '../../services/ValidationService.js';
 
 class Popup extends BaseComponent {
     constructor({parent = null, context = {}, addListener = true} = {}) {
@@ -9,17 +13,37 @@ class Popup extends BaseComponent {
             return Popup.__instance;
         }
 
-        Popup.__instance = this;
+        Popup.prototype._onSubmit = this.onSubmit.bind(this);
+        EventBus.on(Events.SubmitForm, this._onSubmit);
 
-        Popup.prototype.onClick = function(event) {
+        Popup.__instance = this;
+        Popup.prototype._onClick = function(event) {
             const {target} = event;
             if (target.classList.contains('popup-wrapper') || target.closest('.btn-close__img')) {
                 this.remove();
-                this.onDestroy();
             }
         }.bind(this);
 
-        this.parent.addEventListener('click', this.onClick);
+        this.parent.addEventListener('click', this._onClick);
+    }
+
+    onSubmit(data) {
+        const form = this.parent.getElementsByTagName('form')[0];
+        const validator = new ValidationService(form);
+
+        let isValidForm = true;
+
+        if (data.formtype === Modals.signup) {
+            isValidForm = validator.ValidateSignupForm(form);
+        }
+
+        if (data.formtype === Modals.signin) {
+            isValidForm = validator.ValidateLoginForm(form, data);
+        }
+
+        if (isValidForm) {
+            this.remove();
+        }
     }
 
     render() {
@@ -40,7 +64,8 @@ class Popup extends BaseComponent {
     }
 
     onDestroy() {
-        this.parent.removeEventListener('click', this.onClick);
+        this.parent.removeEventListener('click', this._onClick);
+        EventBus.off(Events.SubmitForm, this._onSubmit);
         Popup.__instance = null;
     }
 }

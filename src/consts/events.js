@@ -5,6 +5,7 @@ const Events = {
     RevealPopup: 'revealPopup',
     ContentInfoTabChanged: 'contentInfoTabChanged',
     InfoBlockClosed: 'infoBlockClosed',
+    SubmitForm: 'submitForm',
 };
 
 export default Events;

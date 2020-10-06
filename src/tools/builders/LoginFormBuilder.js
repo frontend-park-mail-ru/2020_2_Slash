@@ -19,6 +19,7 @@ class LoginFormBuilder extends FormBuilder {
             context: {
                 type: 'submit',
                 text: 'Войти',
+                formType: 'signin',
             },
         });
 

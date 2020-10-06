@@ -19,6 +19,7 @@ class SignupFormBuilder extends FormBuilder {
             context: {
                 type: 'submit',
                 text: 'Зарегистрироваться',
+                formType: 'signup',
             },
         });
 
