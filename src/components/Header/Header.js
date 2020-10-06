@@ -1,6 +1,7 @@
 import BaseComponent from '../BaseComponent.js';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
+import MiniModal from "../MiniModal/MiniModal.js";
 
 class Header extends BaseComponent {
     constructor({parent = null, context = {}} = {}) {
@@ -12,15 +13,6 @@ class Header extends BaseComponent {
         }
 
         Header.__instance = this;
-        this.parent.addEventListener('click', this.onClick.bind(this));
-    }
-
-    onClick(event) {
-        const {target} = event;
-        const closest = target.closest('.header__user');
-        if (closest) {
-            EventBus.emit(Events.RevealPopup, closest.dataset);
-        }
     }
 
     render() {

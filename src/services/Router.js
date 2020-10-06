@@ -81,7 +81,7 @@ class Router {
     go(path, data = {}) {
         const routeData = this.getRouteData(path);
 
-        if (this.currentController && !(routeData.controller.view instanceof DummyView)) {
+        if (this.currentController) {
             this.currentController.switchOff();
         }
 
