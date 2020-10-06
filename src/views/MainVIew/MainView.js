@@ -2,8 +2,8 @@ import BaseView from '../BaseView.js';
 import Header from '../../components/Header/Header.js';
 import Footer from '../../components/Footer/Footer.js';
 import Preview from '../../components/Preview/Preview.js';
-import ContentBlock from "../../components/ContentBlock/ContentBlock.js";
-import ContentService from "../../services/ContentService.js";
+import ContentBlock from '../../components/ContentBlock/ContentBlock.js';
+import ContentService from '../../services/ContentService.js';
 
 class MainView extends BaseView {
     constructor({title = 'Flicks box', context = {}} = {}) {
@@ -31,7 +31,7 @@ class MainView extends BaseView {
 
         const contentBlock = new ContentBlock({
             context: {
-                blocks: this.context.blocks
+                blocks: this.context.blocks,
             },
         });
 

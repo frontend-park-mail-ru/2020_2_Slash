@@ -26,7 +26,7 @@ class MiniModal extends BaseComponent {
         const modalDiv = document.createElement('div');
         modalDiv.innerHTML = this.template(this.context);
         modalDiv.classList.add('mini-modal');
-        const header = this.parent.querySelector('.header')
+        const header = this.parent.querySelector('.header');
         header.appendChild(modalDiv);
     }
 

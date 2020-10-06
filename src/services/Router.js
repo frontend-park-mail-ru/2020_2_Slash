@@ -48,7 +48,7 @@ class Router {
 
     getRouteData(path) {
         let targetController = null;
-        let query = {};
+        const query = {};
 
         this.routes.forEach(({reg, controller}) => {
             const res = path.match(reg);
@@ -67,7 +67,7 @@ class Router {
         return {
             controller: targetController,
             query: query,
-        }
+        };
     }
 
     start() {

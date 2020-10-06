@@ -4,7 +4,7 @@ import LoginFormBuilder from '../tools/builders/LoginFormBuilder.js';
 import Popup from '../components/Popup/Popup.js';
 import EventBus from './EventBus.js';
 import Events from '../consts/events.js';
-import ModalBuilder from "../tools/builders/ModalBuilder.js";
+import ModalBuilder from '../tools/builders/ModalBuilder.js';
 
 class ModalService {
     constructor() {
@@ -27,36 +27,36 @@ class ModalService {
         }
 
         switch (modalStatus) {
-            case Modals.signup: {
-                this.modal = new Popup({
-                    parent: this.app,
-                    context: {
-                        heading: SignupBuilderForm.getMeta().heading,
-                        Form: SignupBuilderForm.getForm().render(),
-                        helper: SignupBuilderForm.getMeta().helper,
-                    },
-                });
-                break;
-            }
-            case Modals.signin: {
-                this.modal = new Popup({
-                    parent: this.app,
-                    context: {
-                        heading: LoginFormBuilder.getMeta().heading,
-                        Form: LoginFormBuilder.getForm().render(),
-                        helper: LoginFormBuilder.getMeta().helper,
-                    },
-                });
-                break;
-            }
-            case Modals.authMini: {
-                this.modal = ModalBuilder.build(modalStatus);
-                break;
-            }
-            case Modals.unauthMini: {
-                this.modal = ModalBuilder.build(modalStatus);
-                break;
-            }
+        case Modals.signup: {
+            this.modal = new Popup({
+                parent: this.app,
+                context: {
+                    heading: SignupBuilderForm.getMeta().heading,
+                    Form: SignupBuilderForm.getForm().render(),
+                    helper: SignupBuilderForm.getMeta().helper,
+                },
+            });
+            break;
+        }
+        case Modals.signin: {
+            this.modal = new Popup({
+                parent: this.app,
+                context: {
+                    heading: LoginFormBuilder.getMeta().heading,
+                    Form: LoginFormBuilder.getForm().render(),
+                    helper: LoginFormBuilder.getMeta().helper,
+                },
+            });
+            break;
+        }
+        case Modals.authMini: {
+            this.modal = ModalBuilder.build(modalStatus);
+            break;
+        }
+        case Modals.unauthMini: {
+            this.modal = ModalBuilder.build(modalStatus);
+            break;
+        }
         }
 
         if (this.modal) {

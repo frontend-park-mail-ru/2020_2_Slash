@@ -1,5 +1,5 @@
 import BaseComponent from '../BaseComponent.js';
-import SliderItem from "../SliderItem/SliderItem.js";
+import SliderItem from '../SliderItem/SliderItem.js';
 
 class Slider extends BaseComponent {
     constructor({parent = null, context = {}} = {}) {

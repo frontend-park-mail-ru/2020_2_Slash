@@ -1,4 +1,5 @@
 .info-block__details-wrapper {
+    font-family: "Roboto", Arial, sans-serif;
     height: 100%;
     display: flex;
     align-content: space-between;

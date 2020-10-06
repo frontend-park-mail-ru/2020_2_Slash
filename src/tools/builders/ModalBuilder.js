@@ -1,5 +1,5 @@
-import Modals from "../../consts/modals.js";
-import MiniModal from "../../components/MiniModal/MiniModal.js";
+import Modals from '../../consts/modals.js';
+import MiniModal from '../../components/MiniModal/MiniModal.js';
 
 class ModalBuilder {
     constructor() {
@@ -23,16 +23,16 @@ class ModalBuilder {
                         title: 'Профиль',
                         event: 'pathChanged',
                         path: '/profile',
-                        modalStatus: ''
+                        modalStatus: '',
                     },
                     {
                         title: 'Выйти',
                         event: '',
                         path: '',
-                        modalStatus: ''
+                        modalStatus: '',
                     },
-                ]
-            }
+                ],
+            },
         });
     }
 
@@ -45,7 +45,7 @@ class ModalBuilder {
                         title: 'Вход',
                         event: 'revealPopup',
                         path: '',
-                        modalStatus: Modals.signin
+                        modalStatus: Modals.signin,
                     },
                     {
                         title: 'Регистрация',
@@ -53,8 +53,8 @@ class ModalBuilder {
                         path: '',
                         modalStatus: Modals.signup,
                     },
-                ]
-            }
+                ],
+            },
         });
     }
 }

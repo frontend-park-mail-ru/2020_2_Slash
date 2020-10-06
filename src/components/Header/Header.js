@@ -1,7 +1,7 @@
 import BaseComponent from '../BaseComponent.js';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
-import MiniModal from "../MiniModal/MiniModal.js";
+import MiniModal from '../MiniModal/MiniModal.js';
 
 class Header extends BaseComponent {
     constructor({parent = null, context = {}} = {}) {

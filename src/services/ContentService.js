@@ -1,6 +1,6 @@
-import EventBus from "./EventBus.js";
-import Events from "../consts/events.js";
-import InfoBlock from "../components/InfoBlock/InfoBlock.js";
+import EventBus from './EventBus.js';
+import Events from '../consts/events.js';
+import InfoBlock from '../components/InfoBlock/InfoBlock.js';
 
 class ContentService {
     constructor() {
@@ -45,8 +45,8 @@ class ContentService {
             context: {
                 contentId: data.id,
                 contentData: contentData,
-            }
-        })
+            },
+        });
 
         infoBlock.render();
     }
