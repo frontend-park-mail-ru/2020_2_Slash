@@ -17,6 +17,27 @@
     height: 35px;
     background: var(--popup-input-color);
     border-radius: 5px;
-    padding: 0 0;
     border-width: 0;
+    padding: 1px;
+}
+
+.input-block__input_invalid {
+    margin-top: 15px;
+    width: 100%;
+    height: 35px;
+    background: var(--popup-input-color);
+    border-radius: 5px;
+    padding: 0 0;
+    border: 1px solid #DF0808;
+}
+
+.input-block__error {
+    margin-top: 5px;
+    height: 10px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: #DF0808;
 }

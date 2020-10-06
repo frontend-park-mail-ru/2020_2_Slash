@@ -9,7 +9,7 @@ class MainController extends BaseController {
 
     switchOn(data = {}) {
         const sessionData = { // запрос на валидность сессии
-            authorized: true,
+            authorized: false,
             avatar: '/static/img/avatar.svg',
         };
 

@@ -29,6 +29,8 @@ class Router {
 
                 EventBus.emit(data.event, data);
             } else if (closestButton instanceof HTMLButtonElement) {
+                e.preventDefault();
+
                 const data = Object.assign({}, closestButton.dataset);
                 EventBus.emit(data.event, data);
             }
@@ -36,7 +38,7 @@ class Router {
     }
 
     register(path, controller) {
-        const reg = new RegExp('^' + path.replace(/(:\w+)\/?/, '(\\d+)') + '$');
+        const reg = new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)') + '\/?$');
 
         this.routes.push({
             reg: reg,
