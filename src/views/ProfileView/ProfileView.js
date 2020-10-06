@@ -3,6 +3,9 @@ import Header from '../../components/Header/Header.js';
 import UserInfoBlock from '../../components/UserInfoBlock/UserInfoBlock.js';
 import ProfileMenuBar from '../../components/ProfileMenuBar/ProfileMenuBar.js';
 import Footer from '../../components/Footer/Footer.js';
+import PInfoFormBuilder from "../../tools/builders/PInfoFormBuilder.js";
+import PSecurityFormBuilder from "../../tools/builders/PSecurityFormBuilder.js";
+
 
 class ProfileView extends BaseView {
     constructor(context = {}) {
@@ -28,7 +31,14 @@ class ProfileView extends BaseView {
             },
         });
 
-        const menuBar = new ProfileMenuBar();
+        const menuBar = new ProfileMenuBar(
+            {
+                context: {
+                    InfoForm: PInfoFormBuilder.getForm().render(),
+                    SecurityForm: PSecurityFormBuilder.getForm().render()
+                },
+            }
+        );
 
         const footer = new Footer();
 

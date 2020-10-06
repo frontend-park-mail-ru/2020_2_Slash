@@ -13,49 +13,13 @@
 </div>
 <div class="profile-view__content">
     <div class="profile-view__security hidden" name="SecurityTabForm">
-        <form class="profile-view__security-form">
-            <label for="security-form__old-password__input" class="security-form__old-password__label form__label">Старый
-                пароль
-            </label>
-            <input type="password" class="security-form__old-password__input form__input"
-                   id="security-form__old-password__input" autocomplete="off">
-
-            <label for="security-form__new-password__input" class="security-form__new-password__label form__label">Новый
-                пароль
-            </label>
-            <input type="password" class="security-form__new-password__input form__input"
-                   id="security-form__new-password__input" autocomplete="new-password">
-
-            <label for="security-form__repeat-password__input"
-                   class="security-form__repeat-password__label form__label">Повторите
-                новый пароль
-            </label>
-            <input type="password" class="security-form__repeat-password__input form__input"
-                   id="security-form__repeat-password__input" autocomplete="off">
-            <input class="form__input-btn" type="submit" value="Сохранить"/>
-        </form>
+        {{{SecurityForm}}}
     </div>
     <div class="profile-view__sub hidden" name="SubscribeTabForm">
         <form class="profile-view__sub-form">
         </form>
     </div>
     <div class="profile-view__info active-form" name="InfoTabForm">
-        <form class="profile-view__info-form">
-            <label for="info-form__nickname__input" class="info-form__nickname__label form__label">Никнейм
-            </label>
-            <input type="text" class="info-form__nickname__input form__input" id="info-form__nickname__input"
-                   autocomplete="username">
-
-            <label for="info-form__name__input" class="info-form__name__label form__label">Имя
-            </label>
-            <input type="text" class="info-form__name__input form__input" id="info-form__name__input"
-                   autocomplete="nickname">
-
-            <label for="info-form__email__input" class="info-form__email__label form__label">Почта
-            </label>
-            <input type="email" class="info-form__email__input form__input" id="info-form__email__input"
-                   autocomplete="email">
-            <input class="form__input-btn" type="submit" value="Сохранить"/>
-        </form>
+        {{{InfoForm}}}
     </div>
 </div>

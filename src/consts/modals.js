@@ -3,6 +3,8 @@ const Modals = {
     signin:     'signin',
     authMini:   'authmini',
     unauthMini: 'unauthmini',
+    profileInfo: 'profileInfo',
+    profileSecurity: 'profileSecurity'
 };
 
 export default Modals;
