@@ -13,11 +13,13 @@ class Popup extends BaseComponent {
             return Popup.__instance;
         }
 
+        this.validator = new ValidationService();
+
         Popup.prototype._onSubmit = this.onSubmit.bind(this);
         EventBus.on(Events.SubmitForm, this._onSubmit);
 
         Popup.__instance = this;
-        Popup.prototype._onClick = function(event) {
+        Popup.prototype._onClick = function (event) {
             const {target} = event;
             if (target.classList.contains('popup-wrapper') || target.closest('.btn-close__img')) {
                 this.remove();
@@ -29,26 +31,41 @@ class Popup extends BaseComponent {
 
     onSubmit(data) {
         const form = this.parent.getElementsByTagName('form')[0];
-        const validator = new ValidationService(form);
 
         let validationData = {};
 
         if (data.formtype === Modals.signup) {
-            validationData = validator.ValidateSignupForm(form);
+            validationData = this.validator.ValidateSignupForm(form);
         }
 
         if (data.formtype === Modals.signin) {
-            validationData = validator.ValidateLoginForm(form, data);
+            validationData = this.validator.ValidateLoginForm(form);
         }
 
         if (validationData.isValid) {
-            if (data.formtype === Modals.signup) {
-                EventBus.emit(Events.SignupUser, validationData.data)
-            } else if (data.formtype === Modals.signin) {
+            let targetEvent = data.formtype === Modals.signup ? Events.SignupUser : null;
+            targetEvent = data.formtype === Modals.signin ? Events.LoginUser : targetEvent;
 
+            if (targetEvent) {
+                // TODO: Popup.__instance не валиден внутри колбэка EventBus'a - нужно додумать, как удалить событие
+                EventBus.emit(targetEvent, {
+                    popup: Popup.__instance,
+                    params: validationData.data,
+                    formType: data.formtype,
+                });
             }
+        }
+    }
 
-            this.remove();
+    onError(error, formType) {
+        const form = this.parent.getElementsByTagName('form')[0];
+
+        if (formType === Modals.signup) {
+            this.validator.ValidateSignupForm(form, error);
+        }
+
+        if (formType === Modals.signin) {
+            this.validator.ValidateLoginForm(form, error);
         }
     }
 

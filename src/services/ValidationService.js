@@ -1,6 +1,8 @@
+import {Errors} from "../consts/errors.js";
+
 class ValidationService {
-    constructor(form) {
-        this.setError = (input, validationResult) => {
+    constructor() {
+        this.setError = (form, input, validationResult) => {
             input.classList.add('input-block__input_invalid');
             const error = form.getElementsByClassName('error')[input.name];
             error.innerHTML = validationResult.error || '';
@@ -14,45 +16,39 @@ class ValidationService {
         }
     }
 
-    ValidateLoginForm(form, data) {
-        this.setError = (input, validationResult) => {
-            input.classList.add('input-block__input_invalid');
-            const error = form.getElementsByClassName('error')[input.name];
-            error.innerHTML = validationResult.error || '';
-        };
-
+    ValidateLoginForm(form, error = '') {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
 
-        const login = inputs['login'];
+        const email = inputs['email'];
         const password = inputs['password'];
 
         this.clearErrors(inputs, errors);
 
         let isValidForm = true;
 
-        let validationResult = this.isValidLogin(login.value, data);
+        let validationResult = this.isValidEmail(email, error);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(login, validationResult);
+            this.setError(form, email, validationResult);
         }
 
-        validationResult = this.isValidLogin(password.value, data);
+        validationResult = this.isValidPassword(password.value, error);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(password, validationResult);
+            this.setError(form, password, validationResult);
         }
 
         return {
             isValid: isValidForm,
             data: {
-                login: login,
-                password: password,
+                email: email.value,
+                password: password.value,
             }
         };
     }
 
-    ValidateSignupForm(form) {
+    ValidateSignupForm(form, error = '') {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
 
@@ -65,22 +61,22 @@ class ValidationService {
 
         let isValidForm = true;
 
-        let validationResult = this.isValidEmail(email);
+        let validationResult = this.isValidEmail(email, error);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(email, validationResult);
+            this.setError(form, email, validationResult);
         }
 
-        validationResult = this.isValidPassword(password.value);
+        validationResult = this.isValidPassword(password.value, error);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(password, validationResult);
+            this.setError(form, password, validationResult);
         }
 
         validationResult = this.equalPasswords(password.value, repeatPassword.value);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(repeatPassword, validationResult);
+            this.setError(form, repeatPassword, validationResult);
         }
 
         return {
@@ -108,13 +104,13 @@ class ValidationService {
         let validationResult = this.isValidLogin(login.value);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(login, validationResult);
+            this.setError(form, login, validationResult);
         }
 
         validationResult = this.isValidEmail(email);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(email, validationResult);
+            this.setError(form, email, validationResult);
         }
 
         return isValidForm;
@@ -135,19 +131,19 @@ class ValidationService {
         let validationResult = this.isTruePassword(oldPassword.value);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(oldPassword, validationResult);
+            this.setError(form, oldPassword, validationResult);
         }
 
         validationResult = this.isValidPassword(newPassword.value);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(newPassword, validationResult);
+            this.setError(form, newPassword, validationResult);
         }
 
         validationResult = this.equalPasswords(newPassword.value, repeatedPassword.value);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(repeatedPassword, validationResult);
+            this.setError(form, repeatedPassword, validationResult);
         }
 
         return isValidForm;
@@ -172,7 +168,7 @@ class ValidationService {
         return result;
     }
 
-    isValidEmail(email) {
+    isValidEmail(email, error = '') {
         const result = {
             isValid: true,
             error: ''
@@ -189,10 +185,16 @@ class ValidationService {
             result.error = 'Введите E-mail';
         }
 
+        if (error) {
+            result.isValid = !(error === Errors.EmailAlreadyExists || error === Errors.EmailDoesntExist);
+            result.error = error === Errors.EmailAlreadyExists ? Errors.EmailAlreadyExists : '';
+            result.error = error === Errors.EmailDoesntExist ? Errors.EmailDoesntExist : result.error;
+        }
+
         return result;
     }
 
-    isTruePassword(password, data = null) {
+    isTruePassword(password, error = '') {
         const result = {
             isValid: true,
             error: ''
@@ -203,8 +205,8 @@ class ValidationService {
             result.error = 'Вы забыли ввести старый пароль';
         }
 
-        if (data) {
-            result.isValid = !data.error;
+        if (error) {
+            result.isValid = !error;
             result.error = 'Неверный пароль';
         }
 
@@ -212,7 +214,7 @@ class ValidationService {
         return result;
     }
 
-    isValidPassword(password, data = null) {
+    isValidPassword(password, error = '') {
         const result = {
             isValid: true,
             error: ''
@@ -223,11 +225,11 @@ class ValidationService {
             result.error = 'Пароль должен содержать не менее 6 символов';
         }
 
-        if (data) {
-            result.isValid = !data.error;
-            result.error = 'Неверный пароль';
+        if (error) {
+            result.isValid = !(error === Errors.WrongPassword || error === Errors.PasswordsDontMatch);
+            result.error = error === Errors.WrongPassword ? Errors.WrongPassword : '';
+            result.error = error === Errors.PasswordsDontMatch ? Errors.PasswordsDontMatch : result.error;
         }
-
 
         return result;
     }

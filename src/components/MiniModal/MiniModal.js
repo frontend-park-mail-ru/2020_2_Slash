@@ -11,7 +11,7 @@ class MiniModal extends BaseComponent {
 
         MiniModal.__instance = this;
 
-        MiniModal.prototype.onClick = function(event) {
+        MiniModal.prototype._onClick = function(event) {
             const {target} = event;
             if (!target.closest('.header__user')) {
                 this.remove();
@@ -19,7 +19,7 @@ class MiniModal extends BaseComponent {
             }
         }.bind(this);
 
-        this.parent.addEventListener('click', this.onClick);
+        this.parent.addEventListener('click', this._onClick);
     }
 
     render() {
@@ -38,7 +38,7 @@ class MiniModal extends BaseComponent {
     }
 
     onDestroy() {
-        this.parent.removeEventListener('click', this.onClick);
+        this.parent.removeEventListener('click', this._onClick);
         MiniModal.__instance = null;
     }
 }

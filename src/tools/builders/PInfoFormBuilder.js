@@ -14,6 +14,7 @@ class PInfoFormBuilder extends FormBuilder {
                 type: 'submit',
                 text: 'Сохранить',
                 formType: 'profileInfo',
+                eventType: 'submitProfileForm',
             },
         });
 

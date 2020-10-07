@@ -80,6 +80,12 @@
     margin: 2vw 0;
 }
 
+@media (max-width: 850px) {
+    .user-meta__nickname, .user-meta__email {
+        font-size: 1.7vw;
+    }
+}
+
 @media (max-width: 375px) {
     .user-meta__edit-btn {
         width: 5vw;
@@ -90,5 +96,9 @@
         left: 0;
         width: 4vw;
         height: 4vw;
+    }
+
+    .user-meta__nickname, .user-meta__email {
+        font-size: 1.7vw;
     }
 }

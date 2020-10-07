@@ -49,7 +49,7 @@ class Http {
                  }) {
         const options = {
             method: method,
-            mode: 'no-cors',
+            mode: 'cors',
             credentials: 'include'
         };
 

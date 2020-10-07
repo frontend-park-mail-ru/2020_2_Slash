@@ -20,6 +20,7 @@ class SignupFormBuilder extends FormBuilder {
                 type: 'submit',
                 text: 'Зарегистрироваться',
                 formType: 'signup',
+                eventType: 'submitForm',
             },
         });
 

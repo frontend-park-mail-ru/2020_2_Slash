@@ -20,14 +20,15 @@ class LoginFormBuilder extends FormBuilder {
                 type: 'submit',
                 text: 'Войти',
                 formType: 'signin',
+                eventType: 'submitForm',
             },
         });
 
         this.inputsData = [
             {
-                id: 'login',
-                type: 'text',
-                label: 'Логин или E-mail',
+                id: 'email',
+                type: 'email',
+                label: 'E-mail',
             },
             {
                 id: 'password',

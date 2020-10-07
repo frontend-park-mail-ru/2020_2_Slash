@@ -27,7 +27,7 @@ class SignupController extends BaseController {
             }
 
             EventBus.emit(Events.PathChanged, callbackData);
-        });
+        }).catch(error => console.log(error));
     }
 
     switchOff() {
@@ -35,18 +35,22 @@ class SignupController extends BaseController {
     }
 
     onSignupUser(data) {
-        console.log(data);
         UserModel.register({
-            nickname: data.login,
-            email: data.email,
-            password: data.password,
-            repeated_password: data.repeatPassword,
+            nickname: data.params.login,
+            email: data.params.email,
+            password: data.params.password,
+            repeated_password: data.params.repeatPassword,
         }).then(response => {
             if (!response.error) {
                 EventBus.emit(Events.PathChanged, {
                     path: Routes.MainPage
                 });
+
+                data.popup.remove();
+                return;
             }
+
+            data.popup.onError(response.error, data.formType);
         }).catch(error => console.log(error));
     }
 }

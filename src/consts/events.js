@@ -6,7 +6,10 @@ const Events = {
     ContentInfoTabChanged: 'contentInfoTabChanged',
     InfoBlockClosed: 'infoBlockClosed',
     SubmitForm: 'submitForm',
+    SubmitProfileForm: 'submitProfileForm',
     SignupUser: 'signupUser',
+    LoginUser: 'loginUser',
+    LogoutUser: 'logoutUser',
 };
 
 export default Events;

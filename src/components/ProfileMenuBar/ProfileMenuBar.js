@@ -10,7 +10,7 @@ class ProfileMenuBar extends BaseComponent {
         this.template = Handlebars.templates['ProfileMenuBar.hbs'];
 
         ProfileMenuBar.prototype._onSubmit = this.onSubmit.bind(this);
-        EventBus.on(Events.SubmitForm, this._onSubmit);
+        EventBus.on(Events.SubmitProfileForm, this._onSubmit); // TODO: Отписываться, а потом вернуть Events.SubmitForm
 
         EventBus.on(Events.ProfileTabChanged, this.onTabChanged);
     }
@@ -43,16 +43,16 @@ class ProfileMenuBar extends BaseComponent {
     onSubmit(data) {
         const [form] = document.querySelector('.active-form').getElementsByTagName('form');
         console.log(form)
-        const validator = new ValidationService(form);
+        const validator = new ValidationService();
 
-        let isValidForm = true;
+        let validationData = {};
 
         if (data.formtype === Modals.profileInfo) {
-            isValidForm = validator.ValidateProfileInfoForm(form);
+            validationData = validator.ValidateProfileInfoForm(form);
         }
 
         if (data.formtype === Modals.profileSecurity) {
-            isValidForm = validator.ValidateProfileSecurityForm(form, data);
+            validationData = validator.ValidateProfileSecurityForm(form, data);
         }
     }
 }
