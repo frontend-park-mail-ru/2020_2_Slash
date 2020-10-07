@@ -9,8 +9,9 @@ import InfoBlock from '../components/InfoBlock/InfoBlock.js';
 class ContentService {
     /**
      * Создает экземпляр ContentService или возвращает его
-     * @return {this}
+     *
      * @constructor
+     * @return {this}
      * @this  {ContentService}
      */
     constructor() {

@@ -1,36 +1,37 @@
 import Http from '../services/Http.js';
+import ApiMethods from '../consts/ApiMethods.js';
 import {SERVER_API_V1_PREFIX} from '../consts/settings.js';
 
 class UserModel {
     register(data) {
         return Http.fetchPost({
-            route: '/user/register',
+            route: ApiMethods.UserRegister,
             body: JSON.stringify({...data}),
         }).then((response) => response.json());
     }
 
     getProfile() {
         return Http.fetchGet({
-            route: '/user/profile',
+            route: ApiMethods.UserProfile,
         }).then((response) => response.json());
     }
 
     logout() {
         return Http.fetchDelete({
-            route: '/user/logout',
+            route: ApiMethods.UserLogout,
         }).then((response) => response.json());
     }
 
     login(data) {
         return Http.fetchPost({
-            route: '/user/login',
+            route: ApiMethods.UserLogin,
             body: JSON.stringify({...data}),
         }).then((response) => response.json());
     }
 
     updateProfile(data) {
         return Http.fetchPut({
-            route: '/user/profile',
+            route: ApiMethods.UserProfile,
             body: JSON.stringify({...data}),
         }).then((response) => response.json());
     }
@@ -39,7 +40,7 @@ class UserModel {
         const formData = new FormData();
         formData.append('avatar', data);
 
-        return fetch(`${SERVER_API_V1_PREFIX}/user/avatar`, {
+        return fetch(`${SERVER_API_V1_PREFIX}${ApiMethods.UserAvatar}`, {
             method: 'POST',
             credentials: 'include',
             mode: 'cors',

@@ -1,3 +1,5 @@
+import {Errors} from '../consts/errors.js';
+
 /**
  * @class
  * Класс, отвечающий за валидацию форм

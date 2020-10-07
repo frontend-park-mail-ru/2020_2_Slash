@@ -78,7 +78,7 @@ class Http {
 
     /**
      * @function
-     * Делает асинхронный delete запрос
+     * Метод, вызывающий fetch
      * @return  {Promise}
      * @param {{route: string, method: string, body: Object}}
      */
