@@ -4,8 +4,8 @@ import EventBus from '../services/EventBus.js';
 import Routes from '../consts/routes.js';
 import Modals from '../consts/modals.js';
 import Events from '../consts/events.js';
-import UserModel from "../models/UserModel.js";
-import SessionModel from "../models/SessionModel.js";
+import UserModel from '../models/UserModel.js';
+import SessionModel from '../models/SessionModel.js';
 
 class LoginController extends BaseController {
     constructor() {
@@ -16,7 +16,7 @@ class LoginController extends BaseController {
     }
 
     switchOn(data = {}) {
-        SessionModel.check().then(response => {
+        SessionModel.check().then((response) => {
             const callbackData = {
                 path: Routes.MainPage,
             };
@@ -28,7 +28,7 @@ class LoginController extends BaseController {
             }
 
             EventBus.emit(Events.PathChanged, callbackData);
-        }).catch(error => console.log(error));
+        }).catch((error) => console.log(error));
     }
 
     switchOff() {
@@ -36,21 +36,21 @@ class LoginController extends BaseController {
     }
 
     onLogout(data) {
-        UserModel.logout().then(response => {
-            if (response.result === "ok") {
+        UserModel.logout().then((response) => {
+            if (response.result === 'ok') {
                 EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
             }
-        }).catch(error => console.log(error));
+        }).catch((error) => console.log(error));
     }
 
     onLoginUser(data) {
         UserModel.login({
             email: data.params.email,
             password: data.params.password,
-        }).then(response => {
+        }).then((response) => {
             if (!response.error) {
                 EventBus.emit(Events.PathChanged, {
-                    path: Routes.MainPage
+                    path: Routes.MainPage,
                 });
 
                 data.popup.remove();
@@ -58,7 +58,7 @@ class LoginController extends BaseController {
             }
 
             data.popup.onError(response.error, data.formType);
-        }).catch(error => console.log(error));
+        }).catch((error) => console.log(error));
     }
 }
 

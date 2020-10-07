@@ -1,7 +1,7 @@
 import BaseController from './BaseController.js';
 import MainView from '../views/MainVIew/MainView.js';
 import ModalService from '../services/ModalService.js';
-import UserModel from "../models/UserModel.js";
+import UserModel from '../models/UserModel.js';
 
 class MainController extends BaseController {
     constructor() {
@@ -150,9 +150,9 @@ class MainController extends BaseController {
             ],
         };
 
-        UserModel.profile().then(response => {
+        UserModel.getProfile().then((response) => {
             const sessionData = {
-                authorized: false
+                authorized: false,
             };
 
             if (!response.error) {
@@ -165,7 +165,7 @@ class MainController extends BaseController {
             this.view.show();
 
             this.onSwitchOn(data);
-        })
+        });
     }
 
     onSwitchOn(data = {}) {

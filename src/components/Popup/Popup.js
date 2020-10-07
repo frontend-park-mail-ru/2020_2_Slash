@@ -1,5 +1,5 @@
 import BaseComponent from '../BaseComponent.js';
-import Modals from "../../consts/modals.js";
+import Modals from '../../consts/modals.js';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
 import ValidationService from '../../services/ValidationService.js';
@@ -19,7 +19,7 @@ class Popup extends BaseComponent {
         EventBus.on(Events.SubmitForm, this._onSubmit);
 
         Popup.__instance = this;
-        Popup.prototype._onClick = function (event) {
+        Popup.prototype._onClick = function(event) {
             const {target} = event;
             if (target.classList.contains('popup-wrapper') || target.closest('.btn-close__img')) {
                 this.remove();

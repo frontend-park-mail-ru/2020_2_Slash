@@ -4,8 +4,8 @@ import Events from '../consts/events.js';
 import Routes from '../consts/routes.js';
 import Modals from '../consts/modals.js';
 import MainView from '../views/MainVIew/MainView.js';
-import SessionModel from '../models/SessionModel.js'
-import UserModel from "../models/UserModel.js";
+import SessionModel from '../models/SessionModel.js';
+import UserModel from '../models/UserModel.js';
 
 class SignupController extends BaseController {
     constructor() {
@@ -15,7 +15,7 @@ class SignupController extends BaseController {
     }
 
     switchOn(data = {}) {
-        SessionModel.check().then(response => {
+        SessionModel.check().then((response) => {
             const callbackData = {
                 path: Routes.MainPage,
             };
@@ -27,7 +27,7 @@ class SignupController extends BaseController {
             }
 
             EventBus.emit(Events.PathChanged, callbackData);
-        }).catch(error => console.log(error));
+        }).catch((error) => console.log(error));
     }
 
     switchOff() {
@@ -40,10 +40,10 @@ class SignupController extends BaseController {
             email: data.params.email,
             password: data.params.password,
             repeated_password: data.params.repeatPassword,
-        }).then(response => {
+        }).then((response) => {
             if (!response.error) {
                 EventBus.emit(Events.PathChanged, {
-                    path: Routes.MainPage
+                    path: Routes.MainPage,
                 });
 
                 data.popup.remove();
@@ -51,7 +51,7 @@ class SignupController extends BaseController {
             }
 
             data.popup.onError(response.error, data.formType);
-        }).catch(error => console.log(error));
+        }).catch((error) => console.log(error));
     }
 }
 

@@ -1,10 +1,10 @@
-import Http from "../services/Http.js";
+import Http from '../services/Http.js';
 
 class SessionModel {
     check() {
         return Http.fetchGet({
             route: '/session',
-        }).then(response => response.json());
+        }).then((response) => response.json());
     }
 }
 

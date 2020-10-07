@@ -22,6 +22,7 @@
         "require-jsdoc": "off",
         "no-multi-spaces": "off",
         "key-spacing": ["error", { "beforeColon": false, "afterColon": true, "mode": "minimum" }],
-        "max-len": ["error", 120]
+        "max-len": ["error", 120],
+        "new-cap": ["error", {"capIsNew": false}]
     }
 }

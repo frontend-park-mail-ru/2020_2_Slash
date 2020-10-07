@@ -10,6 +10,7 @@ const Events = {
     SignupUser: 'signupUser',
     LoginUser: 'loginUser',
     LogoutUser: 'logoutUser',
+    UpdateProfile: 'updateProfile',
 };
 
 export default Events;

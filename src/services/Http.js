@@ -14,7 +14,7 @@ class Http {
     fetchGet({route}) {
         return this.fetchRequest({
             method: 'GET',
-            route: route
+            route: route,
         });
     }
 
@@ -22,7 +22,7 @@ class Http {
         return this.fetchRequest({
             method: 'POST',
             route: route,
-            body: body
+            body: body,
         });
     }
 
@@ -30,7 +30,7 @@ class Http {
         return this.fetchRequest({
             method: 'PUT',
             route: route,
-            body: body
+            body: body,
         });
     }
 
@@ -38,24 +38,24 @@ class Http {
         return this.fetchRequest({
             method: 'DELETE',
             route: route,
-            body: body
+            body: body,
         });
     }
 
     fetchRequest({
-                     route = '/',
-                     method = 'GET',
-                     body = null
-                 }) {
+        route = '/',
+        method = 'GET',
+        body = null,
+    }) {
         const options = {
             method: method,
             mode: 'cors',
-            credentials: 'include'
+            credentials: 'include',
         };
 
         if (body) {
             options.headers = {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             };
             options.body = body;
         }

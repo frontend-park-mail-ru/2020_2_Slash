@@ -1,13 +1,15 @@
 import BaseComponent from '../BaseComponent.js';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
-import ValidationService from "../../services/ValidationService.js";
-import Modals from "../../consts/modals.js";
+import ValidationService from '../../services/ValidationService.js';
+import Modals from '../../consts/modals.js';
 
 class ProfileMenuBar extends BaseComponent {
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
         this.template = Handlebars.templates['ProfileMenuBar.hbs'];
+
+        this.validator = new ValidationService();
 
         ProfileMenuBar.prototype._onSubmit = this.onSubmit.bind(this);
         EventBus.on(Events.SubmitProfileForm, this._onSubmit); // TODO: Отписываться, а потом вернуть Events.SubmitForm
@@ -23,7 +25,7 @@ class ProfileMenuBar extends BaseComponent {
         const selectedTab = 'list-item-text_selected';
         const activeForm = 'active-form';
         const hiddenForm = 'hidden';
-        const  tabType = data.info;
+        const tabType = data.info;
 
         const [oldTab] = document.getElementsByClassName(selectedTab);
         oldTab.classList.remove(selectedTab);
@@ -42,17 +44,39 @@ class ProfileMenuBar extends BaseComponent {
 
     onSubmit(data) {
         const [form] = document.querySelector('.active-form').getElementsByTagName('form');
-        console.log(form)
-        const validator = new ValidationService();
 
         let validationData = {};
 
         if (data.formtype === Modals.profileInfo) {
-            validationData = validator.ValidateProfileInfoForm(form);
+            validationData = this.validator.ValidateProfileInfoForm(form);
         }
 
         if (data.formtype === Modals.profileSecurity) {
-            validationData = validator.ValidateProfileSecurityForm(form, data);
+            validationData = this.validator.ValidateProfileSecurityForm(form, data);
+        }
+
+        if (validationData.isValid) {
+            const targetEvent = data.formtype === Modals.profileInfo ? Events.UpdateProfile : null;
+
+            if (targetEvent) {
+                EventBus.emit(targetEvent, {
+                    params: validationData.data,
+                    formType: data.formtype,
+                    form: this,
+                });
+            }
+        }
+    }
+
+    onError(error, formType) {
+        const [form] = document.querySelector('.active-form').getElementsByTagName('form');
+
+        if (formType === Modals.profileInfo) {
+            this.validator.ValidateProfileInfoForm(form, error);
+        }
+
+        if (formType === Modals.profileSecurity) {
+            this.validator.ValidateProfileSecurityForm(form, error);
         }
     }
 }

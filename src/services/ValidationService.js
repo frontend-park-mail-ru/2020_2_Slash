@@ -1,4 +1,4 @@
-import {Errors} from "../consts/errors.js";
+import {Errors} from '../consts/errors.js';
 
 class ValidationService {
     constructor() {
@@ -13,7 +13,7 @@ class ValidationService {
                 input.classList.remove('input-block__input_invalid');
                 errors[i].innerHTML = '';
             });
-        }
+        };
     }
 
     ValidateLoginForm(form, error = '') {
@@ -44,7 +44,7 @@ class ValidationService {
             data: {
                 email: email.value,
                 password: password.value,
-            }
+            },
         };
     }
 
@@ -86,34 +86,34 @@ class ValidationService {
                 email: email.value,
                 password: password.value,
                 repeatPassword: repeatPassword.value,
-            }
+            },
         };
     }
 
-    ValidateProfileInfoForm(form) {
+    ValidateProfileInfoForm(form, error) {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
 
-        const login = inputs['login'];
+        const name = inputs['name'];
         const email = inputs['email'];
 
         this.clearErrors(inputs, errors);
 
         let isValidForm = true;
 
-        let validationResult = this.isValidLogin(login.value);
-        if (!validationResult.isValid) {
-            isValidForm = false;
-            this.setError(form, login, validationResult);
-        }
-
-        validationResult = this.isValidEmail(email);
+        const validationResult = this.isValidEmail(email, error);
         if (!validationResult.isValid) {
             isValidForm = false;
             this.setError(form, email, validationResult);
         }
 
-        return isValidForm;
+        return {
+            isValid: isValidForm,
+            data: {
+                name: name.value,
+                email: email.value,
+            },
+        };
     }
 
     ValidateProfileSecurityForm(form) {
@@ -152,7 +152,7 @@ class ValidationService {
     isValidLogin(login, data = null) {
         const result = {
             isValid: true,
-            error: ''
+            error: '',
         };
 
         if (!login) {
@@ -171,7 +171,7 @@ class ValidationService {
     isValidEmail(email, error = '') {
         const result = {
             isValid: true,
-            error: ''
+            error: '',
         };
 
         // email is instance of HTMLInputElement
@@ -186,8 +186,12 @@ class ValidationService {
         }
 
         if (error) {
-            result.isValid = !(error === Errors.EmailAlreadyExists || error === Errors.EmailDoesntExist);
+            result.isValid = !(
+                error === Errors.EmailAlreadyExists ||
+                error === Errors.EmailDoesntExist ||
+                error === Errors.EmailAlreadyExistsProfile);
             result.error = error === Errors.EmailAlreadyExists ? Errors.EmailAlreadyExists : '';
+            result.error = error === Errors.EmailAlreadyExistsProfile ? Errors.EmailAlreadyExistsProfile : result.error;
             result.error = error === Errors.EmailDoesntExist ? Errors.EmailDoesntExist : result.error;
         }
 
@@ -197,7 +201,7 @@ class ValidationService {
     isTruePassword(password, error = '') {
         const result = {
             isValid: true,
-            error: ''
+            error: '',
         };
 
         if (password === '') {
@@ -217,7 +221,7 @@ class ValidationService {
     isValidPassword(password, error = '') {
         const result = {
             isValid: true,
-            error: ''
+            error: '',
         };
 
         if (password.length < 6) {
@@ -237,7 +241,7 @@ class ValidationService {
     equalPasswords(password, repeated) {
         const result = {
             isValid: true,
-            error: ''
+            error: '',
         };
 
         if (password !== repeated) {

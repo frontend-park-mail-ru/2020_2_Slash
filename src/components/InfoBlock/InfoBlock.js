@@ -71,7 +71,8 @@ class InfoBlock extends BaseComponent {
     render() {
         this.deleteOpenedInfoBlock();
 
-        const currentButtonInfo = document.querySelector(`button.slider-item__more-btn[data-id='${this.context.contentId}']`);
+        const currentButtonInfo = document.querySelector(
+            `button.slider-item__more-btn[data-id='${this.context.contentId}']`);
 
         const currentSliderItem = currentButtonInfo.closest('.content__slider-item');
         currentSliderItem.classList.add('slider-item_selected');
