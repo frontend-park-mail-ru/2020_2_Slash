@@ -13,9 +13,9 @@ class ContentService {
     }
 
     onContentInfoRequested(data) {
-        const sessionData = { // запрос на валидность сессии
-            authorized: true,
-        };
+        // const sessionData = { // запрос на валидность сессии
+        //     authorized: true,
+        // };
 
         const contentData = { // запрос за контентом по id
             poster: '/static/img/witcher2.jpg',

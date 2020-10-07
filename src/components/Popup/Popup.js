@@ -1,5 +1,5 @@
 import BaseComponent from '../BaseComponent.js';
-import Modals from "../../consts/modals.js";
+import Modals from '../../consts/modals.js';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
 import ValidationService from '../../services/ValidationService.js';
@@ -12,6 +12,8 @@ class Popup extends BaseComponent {
         if (Popup.__instance) {
             return Popup.__instance;
         }
+
+        this.validator = new ValidationService();
 
         Popup.prototype._onSubmit = this.onSubmit.bind(this);
         EventBus.on(Events.SubmitForm, this._onSubmit);
@@ -29,20 +31,41 @@ class Popup extends BaseComponent {
 
     onSubmit(data) {
         const form = this.parent.getElementsByTagName('form')[0];
-        const validator = new ValidationService(form);
 
-        let isValidForm = true;
+        let validationData = {};
 
         if (data.formtype === Modals.signup) {
-            isValidForm = validator.ValidateSignupForm(form);
+            validationData = this.validator.ValidateSignupForm(form);
         }
 
         if (data.formtype === Modals.signin) {
-            isValidForm = validator.ValidateLoginForm(form, data);
+            validationData = this.validator.ValidateLoginForm(form);
         }
 
-        if (isValidForm) {
-            this.remove();
+        if (validationData.isValid) {
+            let targetEvent = data.formtype === Modals.signup ? Events.SignupUser : null;
+            targetEvent = data.formtype === Modals.signin ? Events.LoginUser : targetEvent;
+
+            if (targetEvent) {
+                // TODO: Popup.__instance не валиден внутри колбэка EventBus'a - нужно додумать, как удалить событие
+                EventBus.emit(targetEvent, {
+                    popup: Popup.__instance,
+                    params: validationData.data,
+                    formType: data.formtype,
+                });
+            }
+        }
+    }
+
+    onError(error, formType) {
+        const form = this.parent.getElementsByTagName('form')[0];
+
+        if (formType === Modals.signup) {
+            this.validator.ValidateSignupForm(form, error);
+        }
+
+        if (formType === Modals.signin) {
+            this.validator.ValidateLoginForm(form, error);
         }
     }
 

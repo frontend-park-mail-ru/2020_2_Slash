@@ -14,15 +14,11 @@ class PInfoFormBuilder extends FormBuilder {
                 type: 'submit',
                 text: 'Сохранить',
                 formType: 'profileInfo',
+                eventType: 'submitProfileForm',
             },
         });
 
         this.inputsData = [
-            {
-                id: 'login',
-                type: 'text',
-                label: 'Никнейм',
-            },
             {
                 id: 'name',
                 type: 'text',
@@ -54,6 +50,18 @@ class PInfoFormBuilder extends FormBuilder {
                 inputs: this.inputs,
             },
         });
+    }
+
+    set(data) {
+        this.inputsData.forEach((input) => {
+            data.forEach((item) => {
+                if (input.id === item.id) {
+                    input.value = item.value;
+                }
+            });
+        });
+
+        return this;
     }
 }
 

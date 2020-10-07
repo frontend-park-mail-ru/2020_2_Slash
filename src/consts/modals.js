@@ -4,7 +4,7 @@ const Modals = {
     authMini:   'authmini',
     unauthMini: 'unauthmini',
     profileInfo: 'profileInfo',
-    profileSecurity: 'profileSecurity'
+    profileSecurity: 'profileSecurity',
 };
 
 export default Modals;

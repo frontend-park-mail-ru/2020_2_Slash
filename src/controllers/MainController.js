@@ -1,6 +1,7 @@
 import BaseController from './BaseController.js';
 import MainView from '../views/MainVIew/MainView.js';
 import ModalService from '../services/ModalService.js';
+import UserModel from '../models/UserModel.js';
 
 class MainController extends BaseController {
     constructor() {
@@ -8,12 +9,7 @@ class MainController extends BaseController {
     }
 
     switchOn(data = {}) {
-        const sessionData = { // запрос на валидность сессии
-            authorized: true,
-            avatar: '/static/img/avatar.svg',
-        };
-
-        const contentData = { // запрос за контентом для слайдеров и превью панелью
+        const contentData = { // фейковый контент, пока не реализовали
             preview: {
                 poster: '/static/img/movie.png',
                 title: 'Психопаспорт',
@@ -154,11 +150,22 @@ class MainController extends BaseController {
             ],
         };
 
-        this.view.insertIntoContext(sessionData, contentData);
+        UserModel.getProfile().then((response) => {
+            const sessionData = {
+                authorized: false,
+            };
 
-        this.view.show();
+            if (!response.error) {
+                sessionData.authorized = true;
+                sessionData.avatar = response.avatar || '/static/img/default.svg';
+            }
 
-        this.onSwitchOn(data);
+            this.view.insertIntoContext(sessionData, contentData);
+
+            this.view.show();
+
+            this.onSwitchOn(data);
+        });
     }
 
     onSwitchOn(data = {}) {

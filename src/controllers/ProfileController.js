@@ -1,26 +1,87 @@
 import BaseController from './BaseController.js';
 import ProfileView from '../views/ProfileView/ProfileView.js';
+import UserModel from '../models/UserModel.js';
+import EventBus from '../services/EventBus.js';
+import Events from '../consts/events.js';
+import Routes from '../consts/routes.js';
+import {SERVER_HOST} from "../consts/settings.js";
 
 class ProfileController extends BaseController {
     constructor() {
         super(new ProfileView());
+
+        EventBus.on(Events.UpdateProfile, this.onUpdateProfile.bind(this));
+        EventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
     switchOn(data = {}) {
-        const sessionData = { // запрос на валидность сессии
-            authorized: true,
-            avatar: '/static/img/avatar.svg',
-            nickname: 'yletamitlu',
-            email: 'yletamitlu@slash.com',
-        };
+        UserModel.getProfile().then((response) => {
+            let sessionData = {
+                authorized: false,
+            };
 
-        this.view.insertIntoContext(sessionData);
+            if (!response.error) {
+                sessionData.authorized = true;
+                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : '/static/img/default.svg';
+                sessionData = Object.assign(sessionData, {
+                    avatar: avatar,
+                    nickname: response.nickname,
+                    email: response.email,
+                });
 
-        this.view.show();
+                this.view.insertIntoContext(sessionData);
+
+                this.view.show();
+
+                return;
+            }
+
+            EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
+        });
     }
 
     switchOff() {
         this.view.hide();
+    }
+
+    // TODO: Протестировать - запросы иногда странно улетают, видимо колбэки копятся
+    onUpdateProfile(data) {
+        UserModel.updateProfile({
+            nickname: data.params.name,
+            email: data.params.email,
+        }).then((response) => {
+            if (!response.error) {
+                EventBus.emit(Events.PathChanged, {
+                    path: Routes.ProfilePage,
+                });
+
+                return;
+            }
+
+            data.form.onError(response.error, data.formType);
+        }).catch((error) => console.log(error));
+    }
+
+    onUploadAvatar(data) {
+        const fileUploader = document.getElementById('file-upload');
+
+        fileUploader.addEventListener('change', function() {
+            const input = this;
+
+            if (input.files && input.files[0]) {
+                UserModel.uploadAvatar(input.files[0]).then(response => {
+                    if (response.error) {
+                        alert(response.error);
+                        return;
+                    }
+
+                    // TODO: Перерисовать конкретные части страницы вместо обновления страницы
+                    EventBus.emit(Events.PathChanged, {path: Routes.ProfilePage});
+                }).catch(error => console.log(error));
+            }
+        });
+
+        fileUploader.click();
     }
 }
 

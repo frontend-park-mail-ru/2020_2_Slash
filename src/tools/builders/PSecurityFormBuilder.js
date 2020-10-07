@@ -14,6 +14,7 @@ class PSecurityFormBuilder extends FormBuilder {
                 type: 'submit',
                 text: 'Сохранить',
                 formType: 'profileSecurity',
+                eventType: 'submitProfileForm',
             },
         });
 

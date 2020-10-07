@@ -1,5 +1,3 @@
-import Events from "../consts/events.js";
-
 class EventBus {
     constructor() {
         if (EventBus.__instance) {

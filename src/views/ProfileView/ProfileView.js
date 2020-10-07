@@ -3,8 +3,8 @@ import Header from '../../components/Header/Header.js';
 import UserInfoBlock from '../../components/UserInfoBlock/UserInfoBlock.js';
 import ProfileMenuBar from '../../components/ProfileMenuBar/ProfileMenuBar.js';
 import Footer from '../../components/Footer/Footer.js';
-import PInfoFormBuilder from "../../tools/builders/PInfoFormBuilder.js";
-import PSecurityFormBuilder from "../../tools/builders/PSecurityFormBuilder.js";
+import PInfoFormBuilder from '../../tools/builders/PInfoFormBuilder.js';
+import PSecurityFormBuilder from '../../tools/builders/PSecurityFormBuilder.js';
 
 
 class ProfileView extends BaseView {
@@ -34,10 +34,18 @@ class ProfileView extends BaseView {
         const menuBar = new ProfileMenuBar(
             {
                 context: {
-                    InfoForm: PInfoFormBuilder.getForm().render(),
-                    SecurityForm: PSecurityFormBuilder.getForm().render()
+                    InfoForm: PInfoFormBuilder.set([
+                        {
+                            id: 'name',
+                            value: nickname,
+                        },
+                        {
+                            id: 'email',
+                            value: email,
+                        }]).getForm().render(),
+                    SecurityForm: PSecurityFormBuilder.getForm().render(),
                 },
-            }
+            },
         );
 
         const footer = new Footer();

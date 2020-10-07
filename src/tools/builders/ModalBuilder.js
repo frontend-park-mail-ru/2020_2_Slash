@@ -27,7 +27,7 @@ class ModalBuilder {
                     },
                     {
                         title: 'Выйти',
-                        event: '',
+                        event: 'logoutUser',
                         path: '',
                         modalStatus: '',
                     },
