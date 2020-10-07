@@ -5,17 +5,16 @@ import Events from '../../consts/events.js';
 import ValidationService from '../../services/ValidationService.js';
 
 /**
- * @class Компонента попапа
+ * @class
+ * Компонента попапа
  */
 class Popup extends BaseComponent {
     /**
-     * Создает экземпляр MainTab
+     * Создает экземпляр MiniModal
      *
      * @constructor
-     * @this  {MainTab}
-     * @param {Object} parent - Родительский элемент элемента
-     * @param {Object} context - Необходимые данные для этого класса, его hbs
-     * @param {boolean} addListener
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
+     * @this  {MiniModal}
      */
     constructor({parent = null, context = {}, addListener = true} = {}) {
         super({parent: parent, context: context});

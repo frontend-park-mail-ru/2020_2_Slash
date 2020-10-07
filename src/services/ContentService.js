@@ -7,13 +7,13 @@ import InfoBlock from '../components/InfoBlock/InfoBlock.js';
  * Класс, отвечающий за создание и наполнение содержимым инфоблока о фильме/сериале
  */
 class ContentService {
+    /**
+     * Создает экземпляр ContentService или возвращает его
+     * @return {this}
+     * @constructor
+     * @this  {ContentService}
+     */
     constructor() {
-        /**
-         * Создает экземпляр ContentService или возвращает его
-         * @return {this}
-         * @constructor
-         * @this  {ContentService}
-         */
         if (ContentService.__instance) {
             return ContentService.__instance;
         }

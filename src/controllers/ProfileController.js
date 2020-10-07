@@ -6,6 +6,10 @@ import Events from '../consts/events.js';
 import Routes from '../consts/routes.js';
 import {SERVER_HOST} from '../consts/settings.js';
 
+/**
+ * @class
+ * Контроллер для страницы профиля
+ */
 class ProfileController extends BaseController {
     constructor() {
         super(new ProfileView());
@@ -44,6 +48,11 @@ class ProfileController extends BaseController {
         this.view.hide();
     }
 
+    /**
+     * @function
+     * Коллбэк на обновление профиля
+     * @param {Object} data - Данные
+     */
     // TODO: Протестировать - запросы иногда странно улетают, видимо колбэки копятся
     onUpdateProfile(data) {
         UserModel.updateProfile({
@@ -62,6 +71,11 @@ class ProfileController extends BaseController {
         }).catch((error) => console.log(error));
     }
 
+    /**
+     * @function
+     * Коллбэк на загрузку аватарки
+     * @param {Object} data - Данные
+     */
     onUploadAvatar(data) {
         const fileUploader = document.getElementById('file-upload');
 

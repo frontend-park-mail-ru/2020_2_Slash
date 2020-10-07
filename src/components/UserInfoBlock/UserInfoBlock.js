@@ -1,16 +1,16 @@
 import BaseComponent from '../BaseComponent.js';
 
 /**
- * @class Компонента инфо пользователя для страницы профиля - ник, почта, автарка
+ * @class
+ * Компонента инфо пользователя для страницы профиля - ник, почта, автарка
  */
 class UserInfoBlock extends BaseComponent {
     /**
      * Создает экземпляр UserInfoBlock
      *
      * @constructor
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {UserInfoBlock}
-     * @param {Object} parent - Родительский элемент элемента
-     * @param {Object} context - Необходимые данные для этого класса, его hbs
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});

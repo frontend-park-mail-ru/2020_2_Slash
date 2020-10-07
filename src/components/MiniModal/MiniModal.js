@@ -1,16 +1,16 @@
 import BaseComponent from '../BaseComponent.js';
 
 /**
- * @class Компонента окошка для хэдера - войти/зарегаться // профиль/выйти
+ * @class
+ * Компонента окошка для хэдера - войти/зарегаться // профиль/выйти
  */
 class MiniModal extends BaseComponent {
     /**
-     * Создает экземпляр MiniModal или возвращает его (синглтон)
+     * Создает экземпляр MiniModal
      *
      * @constructor
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {MiniModal}
-     * @param {Object} parent - Родительский элемент элемента
-     * @param {Object} context - Необходимые данные для этого класса, его hbs
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});

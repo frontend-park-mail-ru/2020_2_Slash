@@ -4,6 +4,10 @@ import ModalService from '../services/ModalService.js';
 import UserModel from '../models/UserModel.js';
 import {SERVER_HOST} from '../consts/settings.js';
 
+/**
+ * @class
+ * Контроллер для главной страницы
+ */
 class MainController extends BaseController {
     constructor() {
         super(new MainView());

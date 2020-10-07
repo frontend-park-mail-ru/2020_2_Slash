@@ -1,6 +1,16 @@
 import {SERVER_API_V1_PREFIX} from '../consts/settings.js';
 
+/**
+ * @class
+ * Класс для работы с сетью - делает http запросы
+ */
 class Http {
+    /**
+     * Создает экземпляр Http или возвращает его
+     *
+     * @constructor
+     * @this  {Http}
+     */
     constructor() {
         if (Http.__instance) {
             return Http.__instance;
@@ -11,6 +21,12 @@ class Http {
         this.prefix = SERVER_API_V1_PREFIX;
     }
 
+    /**
+     * @function
+     * Делает асинхронный get запрос
+     * @return  {Promise}
+     * @param {Object} route - Путь, по которому нужно сделать запрос
+     */
     fetchGet({route}) {
         return this.fetchRequest({
             method: 'GET',
@@ -18,6 +34,12 @@ class Http {
         });
     }
 
+    /**
+     * @function
+     * Делает асинхронный post запрос
+     * @return  {Promise}
+     * @param {Object} route - Путь, по которому нужно сделать запрос
+     */
     fetchPost({route, body}) {
         return this.fetchRequest({
             method: 'POST',
@@ -26,6 +48,12 @@ class Http {
         });
     }
 
+    /**
+     * @function
+     * Делает асинхронный put запрос
+     * @return  {Promise}
+     * @param {Object} route - Путь, по которому нужно сделать запрос
+     */
     fetchPut({route, body}) {
         return this.fetchRequest({
             method: 'PUT',
@@ -34,6 +62,12 @@ class Http {
         });
     }
 
+    /**
+     * @function
+     * Делает асинхронный delete запрос
+     * @return  {Promise}
+     * @param {Object} route - Путь, по которому нужно сделать запрос
+     */
     fetchDelete({route, body}) {
         return this.fetchRequest({
             method: 'DELETE',
@@ -42,6 +76,12 @@ class Http {
         });
     }
 
+    /**
+     * @function
+     * Делает асинхронный delete запрос
+     * @return  {Promise}
+     * @param {{route: string, method: string, body: Object}}
+     */
     fetchRequest({
         route = '/',
         method = 'GET',

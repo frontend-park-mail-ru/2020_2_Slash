@@ -3,16 +3,16 @@ import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
 
 /**
- * @class Компонента таббара
+ * @class
+ * Компонента таббара
  */
 class TabBar extends BaseComponent {
     /**
      * Создает экземпляр TabBar
      *
      * @constructor
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {TabBar}
-     * @param {Object} parent - Родительский элемент элемента
-     * @param {Object} context - Необходимые данные для этого класса, его hbs
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});

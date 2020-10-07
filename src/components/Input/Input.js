@@ -1,16 +1,16 @@
 import BaseComponent from '../BaseComponent.js';
 
 /**
- * @class Компонента инпута
+ * @class
+ * Компонента инпута
  */
 class Input extends BaseComponent {
     /**
      * Создает экземпляр Input
      *
      * @constructor
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {Input}
-     * @param {Object} parent - Родительский элемент элемента
-     * @param {Object} context - Необходимые данные для этого класса, его hbs
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});

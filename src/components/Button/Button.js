@@ -1,16 +1,16 @@
 import BaseComponent from '../BaseComponent.js';
 
 /**
- * @class Компонента кнопки
+ * @class
+ * Компонента кнопки
  */
 class Button extends BaseComponent {
     /**
      * Создает экземпляр Button
      *
      * @constructor
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {Button}
-     * @param {Object} parent - Родительский элемент элемента
-     * @param {Object} context - Данные
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});

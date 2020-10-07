@@ -5,16 +5,16 @@ import ValidationService from '../../services/ValidationService.js';
 import Modals from '../../consts/modals.js';
 
 /**
- * @class Компонента для профиля - таббар и соответствущие формы
+ * @class
+ * Компонента для профиля - таббар и соответствущие формы
  */
 class ProfileMenuBar extends BaseComponent {
     /**
      * Создает экземпляр ProfileMenuBar
      *
      * @constructor
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {ProfileMenuBar}
-     * @param {Object} parent - Родительский элемент элемента
-     * @param {Object} context - Необходимые данные для этого класса, его hbs
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});

@@ -6,16 +6,16 @@ import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
 
 /**
- * @class Компонента инфоблока с фильмом
+ * @class
+ * Компонента инфоблока с фильмом
  */
 class InfoBlock extends BaseComponent {
     /**
      * Создает экземпляр InfoBlock
      *
      * @constructor
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {InfoBlock}
-     * @param {Object} parent - Родительский элемент элемента
-     * @param {Object} context - Необходимые данные для этого класса, его hbs
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});

@@ -1,16 +1,16 @@
 import BaseComponent from '../BaseComponent.js';
 
 /**
- * @class Компонента страницы с подробной информацией о фильме/сериале
+ * @class
+ * Компонента страницы с подробной информацией о фильме/сериале
  */
 class DetailsTab extends BaseComponent {
     /**
      * Создает экземпляр DetailsTab
      *
      * @constructor
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {DetailsTab}
-     * @param {Object} parent - Родительский элемент элемента
-     * @param {Object} context - Необходимые данные для этого класса, его hbs
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});

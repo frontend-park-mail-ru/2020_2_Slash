@@ -20,6 +20,7 @@
         "no-redeclare": "error",
         "no-unused-vars": "warn",
         "require-jsdoc": "off",
+        "valid-jsdoc": "off",
         "no-multi-spaces": "off",
         "key-spacing": ["error", { "beforeColon": false, "afterColon": true, "mode": "minimum" }],
         "max-len": ["error", 120],

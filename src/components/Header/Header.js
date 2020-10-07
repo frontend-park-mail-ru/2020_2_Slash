@@ -1,16 +1,16 @@
 import BaseComponent from '../BaseComponent.js';
 
 /**
- * @class Компонента хэдера
+ * @class
+ * Компонента хэдера
  */
 class Header extends BaseComponent {
     /**
-     * Создает экземпляр Header или возвращает его (Header - синглтон)
+     * Создает экземпляр Header
      *
      * @constructor
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {Header}
-     * @param {Object} parent - Родительский элемент элемента
-     * @param {Object} context - Необходимые данные для этого класса, его hbs
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
