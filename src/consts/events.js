@@ -11,6 +11,7 @@ const Events = {
     LoginUser: 'loginUser',
     LogoutUser: 'logoutUser',
     UpdateProfile: 'updateProfile',
+    UploadAvatar: 'uploadAvatar',
 };
 
 export default Events;

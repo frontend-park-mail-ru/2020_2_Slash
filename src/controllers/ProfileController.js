@@ -4,12 +4,14 @@ import UserModel from '../models/UserModel.js';
 import EventBus from '../services/EventBus.js';
 import Events from '../consts/events.js';
 import Routes from '../consts/routes.js';
+import {SERVER_HOST} from "../consts/settings.js";
 
 class ProfileController extends BaseController {
     constructor() {
         super(new ProfileView());
 
         EventBus.on(Events.UpdateProfile, this.onUpdateProfile.bind(this));
+        EventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
     switchOn(data = {}) {
@@ -20,16 +22,21 @@ class ProfileController extends BaseController {
 
             if (!response.error) {
                 sessionData.authorized = true;
+                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : '/static/img/default.svg';
                 sessionData = Object.assign(sessionData, {
-                    avatar: response.avatar || '/static/img/default.svg',
+                    avatar: avatar,
                     nickname: response.nickname,
                     email: response.email,
                 });
+
+                this.view.insertIntoContext(sessionData);
+
+                this.view.show();
+
+                return;
             }
 
-            this.view.insertIntoContext(sessionData);
-
-            this.view.show();
+            EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
         });
     }
 
@@ -53,6 +60,28 @@ class ProfileController extends BaseController {
 
             data.form.onError(response.error, data.formType);
         }).catch((error) => console.log(error));
+    }
+
+    onUploadAvatar(data) {
+        const fileUploader = document.getElementById('file-upload');
+
+        fileUploader.addEventListener('change', function() {
+            const input = this;
+
+            if (input.files && input.files[0]) {
+                UserModel.uploadAvatar(input.files[0]).then(response => {
+                    if (response.error) {
+                        alert(response.error);
+                        return;
+                    }
+
+                    // TODO: Перерисовать конкретные части страницы вместо обновления страницы
+                    EventBus.emit(Events.PathChanged, {path: Routes.ProfilePage});
+                }).catch(error => console.log(error));
+            }
+        });
+
+        fileUploader.click();
     }
 }
 
