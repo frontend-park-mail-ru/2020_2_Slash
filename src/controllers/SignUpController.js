@@ -7,6 +7,10 @@ import MainView from '../views/MainVIew/MainView.js';
 import SessionModel from '../models/SessionModel.js';
 import UserModel from '../models/UserModel.js';
 
+/**
+ * @class
+ * Контроллер для страницы регистрации
+ */
 class SignupController extends BaseController {
     constructor() {
         super(new MainView());

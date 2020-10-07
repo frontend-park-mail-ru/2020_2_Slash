@@ -4,7 +4,18 @@ import Events from '../../consts/events.js';
 import ValidationService from '../../services/ValidationService.js';
 import Modals from '../../consts/modals.js';
 
+/**
+ * @class
+ * Компонента для профиля - таббар и соответствущие формы
+ */
 class ProfileMenuBar extends BaseComponent {
+    /**
+     * Создает экземпляр ProfileMenuBar
+     *
+     * @constructor
+     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
+     * @this  {ProfileMenuBar}
+     */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
         this.template = Handlebars.templates['ProfileMenuBar.hbs'];
@@ -17,10 +28,10 @@ class ProfileMenuBar extends BaseComponent {
         EventBus.on(Events.ProfileTabChanged, this.onTabChanged);
     }
 
-    render() {
-        return this.template(this.context);
-    }
-
+    /**
+     * Колбэк на изменение вкладки на таб баре
+     * @param {Object} data - Данные для этого коллбэка
+     */
     onTabChanged(data) {
         const selectedTab = 'list-item-text_selected';
         const activeForm = 'active-form';
@@ -42,6 +53,10 @@ class ProfileMenuBar extends BaseComponent {
         currentForm.classList.remove(hiddenForm);
     }
 
+    /**
+     * Колбэк на отправку пользователем изменений - валидация данных в формах
+     * @param {Object} data - Данные для этого коллбэка
+     */
     onSubmit(data) {
         const [form] = document.querySelector('.active-form').getElementsByTagName('form');
 
@@ -78,6 +93,14 @@ class ProfileMenuBar extends BaseComponent {
         if (formType === Modals.profileSecurity) {
             this.validator.ValidateProfileSecurityForm(form, error);
         }
+    }
+
+    /**
+     * Возвращает отрисованный в HTML компонент
+     * @return {*|string}
+     */
+    render() {
+        return this.template(this.context);
     }
 }
 

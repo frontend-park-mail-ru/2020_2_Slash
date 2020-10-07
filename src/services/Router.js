@@ -1,5 +1,7 @@
 'use strict';
 
+// eslint-disable-next-line no-unused-vars
+import ContentService from './ContentService.js';
 import Routes from '../consts/routes.js';
 import EventBus from './EventBus.js';
 import Events from '../consts/events.js';
@@ -9,6 +11,13 @@ import Events from '../consts/events.js';
  * @class
  */
 class Router {
+    /**
+     * Создает экземпляр Router
+     *
+     * @constructor
+     * @this  {Router}
+     * @param {Node} app - Родительский элемент элемента
+     */
     constructor(app) {
         this.application = app;
         this.routes = [];
@@ -37,6 +46,13 @@ class Router {
         });
     }
 
+    /**
+     * @function
+     * Регистрирует путь - добавляет в массив класса роутера путь
+     * @return  {this}
+     * @param {string} path - Путь, который нужно добавить
+     * @param {Object} controller - Контроллер, которыц соответствует этому пути
+     */
     register(path, controller) {
         const reg = new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)') + '\/?$');
 
@@ -48,6 +64,12 @@ class Router {
         return this;
     }
 
+    /**
+     * @function
+     * Проверяет пришедший путь и достает из него данные запроса
+     * @return  {Object, string} controller, query
+     * @param {string} path - Путь, из которого нужно вытащить данные запроса
+     */
     getRouteData(path) {
         let targetController = null;
         const query = {};
@@ -80,6 +102,12 @@ class Router {
         this.go(window.location.pathname);
     }
 
+    /**
+     * @function
+     * Включает нужный контролер
+     * @param {string} path - Путь, из которого нужно вытащить данные запроса
+     * @param {Object} data
+     */
     go(path, data = {}) {
         const routeData = this.getRouteData(path);
 
@@ -102,6 +130,11 @@ class Router {
         this.currentController.switchOn(data);
     }
 
+    /**
+     * @function
+     * Колбэк на изменение пути
+     * @param {Object} data - Данные для этого коллбэка
+     */
     onPathChanged(data) {
         this.go(data.path, data.misc || {});
     }

@@ -7,6 +7,10 @@ import Events from '../consts/events.js';
 import UserModel from '../models/UserModel.js';
 import SessionModel from '../models/SessionModel.js';
 
+/**
+ * @class
+ * Контроллер для страницы авторизации
+ */
 class LoginController extends BaseController {
     constructor() {
         super(new MainView());

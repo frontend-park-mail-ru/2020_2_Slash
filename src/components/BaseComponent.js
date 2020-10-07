@@ -1,3 +1,4 @@
+
 class BaseComponent {
     constructor({parent = null, context = {}} = {}) {
         this.parent = parent;
