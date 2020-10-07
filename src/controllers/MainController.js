@@ -2,6 +2,7 @@ import BaseController from './BaseController.js';
 import MainView from '../views/MainVIew/MainView.js';
 import ModalService from '../services/ModalService.js';
 import UserModel from '../models/UserModel.js';
+import {SERVER_HOST} from '../consts/settings.js';
 
 class MainController extends BaseController {
     constructor() {
@@ -156,8 +157,9 @@ class MainController extends BaseController {
             };
 
             if (!response.error) {
+                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : '/static/img/default.svg';
                 sessionData.authorized = true;
-                sessionData.avatar = response.avatar || '/static/img/default.svg';
+                sessionData.avatar = avatar;
             }
 
             this.view.insertIntoContext(sessionData, contentData);

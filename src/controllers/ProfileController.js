@@ -4,7 +4,7 @@ import UserModel from '../models/UserModel.js';
 import EventBus from '../services/EventBus.js';
 import Events from '../consts/events.js';
 import Routes from '../consts/routes.js';
-import {SERVER_HOST} from "../consts/settings.js";
+import {SERVER_HOST} from '../consts/settings.js';
 
 class ProfileController extends BaseController {
     constructor() {
@@ -69,7 +69,7 @@ class ProfileController extends BaseController {
             const input = this;
 
             if (input.files && input.files[0]) {
-                UserModel.uploadAvatar(input.files[0]).then(response => {
+                UserModel.uploadAvatar(input.files[0]).then((response) => {
                     if (response.error) {
                         alert(response.error);
                         return;
@@ -77,7 +77,7 @@ class ProfileController extends BaseController {
 
                     // TODO: Перерисовать конкретные части страницы вместо обновления страницы
                     EventBus.emit(Events.PathChanged, {path: Routes.ProfilePage});
-                }).catch(error => console.log(error));
+                }).catch((error) => console.log(error));
             }
         });
 

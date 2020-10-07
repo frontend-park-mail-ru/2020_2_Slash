@@ -1,5 +1,5 @@
 import Http from '../services/Http.js';
-import {SERVER_API_V1_PREFIX} from '../consts/settings.js'
+import {SERVER_API_V1_PREFIX} from '../consts/settings.js';
 
 class UserModel {
     register(data) {
@@ -38,14 +38,13 @@ class UserModel {
     uploadAvatar(data) {
         const formData = new FormData();
         formData.append('avatar', data);
-        console.log(formData);
 
         return fetch(`${SERVER_API_V1_PREFIX}/user/avatar`, {
             method: 'POST',
             credentials: 'include',
             mode: 'cors',
-            body: formData
-        }).then(response => response.json());
+            body: formData,
+        }).then((response) => response.json());
     }
 }
 

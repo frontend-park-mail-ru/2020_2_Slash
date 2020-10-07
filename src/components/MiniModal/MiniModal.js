@@ -1,6 +1,17 @@
 import BaseComponent from '../BaseComponent.js';
 
+/**
+ * @class Компонента окошка для хэдера - войти/зарегаться // профиль/выйти
+ */
 class MiniModal extends BaseComponent {
+    /**
+     * Создает экземпляр MiniModal или возвращает его (синглтон)
+     *
+     * @constructor
+     * @this  {MiniModal}
+     * @param {Object} parent - Родительский элемент элемента
+     * @param {Object} context - Необходимые данные для этого класса, его hbs
+     */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
         this.template = Handlebars.templates['MiniModal.hbs'];
@@ -22,14 +33,9 @@ class MiniModal extends BaseComponent {
         this.parent.addEventListener('click', this._onClick);
     }
 
-    render() {
-        const modalDiv = document.createElement('div');
-        modalDiv.innerHTML = this.template(this.context);
-        modalDiv.classList.add('mini-modal');
-        const header = this.parent.querySelector('.header');
-        header.appendChild(modalDiv);
-    }
-
+    /**
+     * Удаляет элемент в document
+     */
     remove() {
         const modal = this.parent.querySelector('.mini-modal');
         if (modal) {
@@ -37,9 +43,24 @@ class MiniModal extends BaseComponent {
         }
     }
 
+    /**
+     * Коллбэк на удаление элемента MiniModal со страницы - делает текущей инстанс синглота nullом
+     */
     onDestroy() {
         this.parent.removeEventListener('click', this._onClick);
         MiniModal.__instance = null;
+    }
+
+    /**
+     * Возвращает отрисованный в HTML компонент
+     * @return {*|string}
+     */
+    render() {
+        const modalDiv = document.createElement('div');
+        modalDiv.innerHTML = this.template(this.context);
+        modalDiv.classList.add('mini-modal');
+        const header = this.parent.querySelector('.header');
+        header.appendChild(modalDiv);
     }
 }
 

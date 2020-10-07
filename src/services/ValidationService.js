@@ -1,6 +1,13 @@
-import {Errors} from '../consts/errors.js';
-
+/**
+ * @class Класс, отвечающий за валидацию форм
+ */
 class ValidationService {
+    /**
+     * Создает экземпляр ValidationService
+     *
+     * @constructor
+     * @this  {ValidationService}
+     */
     constructor() {
         this.setError = (form, input, validationResult) => {
             input.classList.add('input-block__input_invalid');
@@ -16,6 +23,13 @@ class ValidationService {
         };
     }
 
+    /**
+     * @function
+     * Проверяет форму авторизации
+     * @return  {boolean} isValidForm
+     * @param {Node} form - Форма для валидации
+     * @param {string} error - Пришедшая с сервера ошибка валидации
+     */
     ValidateLoginForm(form, error = '') {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
@@ -48,6 +62,13 @@ class ValidationService {
         };
     }
 
+    /**
+     * @function
+     * Проверяет форму регистрации
+     * @return {boolean} isValidForm
+     * @param {Node} form - Форма для валидации
+     * @param {string} error - Пришедшая с сервера ошибка валидации
+     */
     ValidateSignupForm(form, error = '') {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
@@ -90,7 +111,14 @@ class ValidationService {
         };
     }
 
-    ValidateProfileInfoForm(form, error) {
+    /**
+     * @function
+     * Проверяет форму информации аккаунта
+     * @return  {boolean} isValidForm
+     * @param {Node} form - Форма для валидации
+     * @param {string} error - Пришедшая с сервера ошибка валидации
+     */
+    ValidateProfileInfoForm(form, error = '') {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
 
@@ -116,6 +144,12 @@ class ValidationService {
         };
     }
 
+    /**
+     * @function
+     * Проверяет форму изменения пароля аккаунта
+     * @return  {boolean} isValidForm
+     * @param {Node} form - Форма для валидации
+     */
     ValidateProfileSecurityForm(form) {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
@@ -149,6 +183,13 @@ class ValidationService {
         return isValidForm;
     }
 
+    /**
+     * @function
+     * Проверяет логин
+     * @return  {Object} result
+     * @param {string} login - Логин
+     * @param {Object} data - Данные
+     */
     isValidLogin(login, data = null) {
         const result = {
             isValid: true,
@@ -168,6 +209,13 @@ class ValidationService {
         return result;
     }
 
+    /**
+     * @function
+     * Проверяет почту
+     * @return  {Object} result
+     * @param {string} email - Логин
+     * @param {string} error - Пришедшая с сервера ошибка валидации
+     */
     isValidEmail(email, error = '') {
         const result = {
             isValid: true,
@@ -198,6 +246,13 @@ class ValidationService {
         return result;
     }
 
+    /**
+     * @function
+     * Проверяет пароль
+     * @return  {Object} result
+     * @param {string} password - Пароль уже зарегистрированного польщовтеля
+     * @param {string} error - Пришедшая с сервера ошибка валидации
+     */
     isTruePassword(password, error = '') {
         const result = {
             isValid: true,
@@ -218,6 +273,13 @@ class ValidationService {
         return result;
     }
 
+    /**
+     * @function
+     * Проверяет пароль
+     * @return  {Object} result
+     * @param {string} password - Пароль
+     * @param {string} error - Пришедшая с сервера ошибка валидации
+     */
     isValidPassword(password, error = '') {
         const result = {
             isValid: true,
@@ -238,6 +300,13 @@ class ValidationService {
         return result;
     }
 
+    /**
+     * @function
+     * Проверяет пароль
+     * @return  {Object} result
+     * @param {string} password - Пароль
+     * @param {string} repeated - Пароль для сравнения
+     */
     equalPasswords(password, repeated) {
         const result = {
             isValid: true,

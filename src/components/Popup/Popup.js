@@ -4,7 +4,19 @@ import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
 import ValidationService from '../../services/ValidationService.js';
 
+/**
+ * @class Компонента попапа
+ */
 class Popup extends BaseComponent {
+    /**
+     * Создает экземпляр MainTab
+     *
+     * @constructor
+     * @this  {MainTab}
+     * @param {Object} parent - Родительский элемент элемента
+     * @param {Object} context - Необходимые данные для этого класса, его hbs
+     * @param {boolean} addListener
+     */
     constructor({parent = null, context = {}, addListener = true} = {}) {
         super({parent: parent, context: context});
         this.template = Handlebars.templates['Popup.hbs'];
@@ -69,14 +81,9 @@ class Popup extends BaseComponent {
         }
     }
 
-    render() {
-        const popupDiv = document.createElement('div');
-        popupDiv.classList.add('popup');
-        popupDiv.innerHTML = this.template(this.context);
-        this.parent.appendChild(popupDiv);
-        document.body.classList.add('scroll-off');
-    }
-
+    /**
+     * Удаляет попап в document
+     */
     remove() {
         const popup = document.querySelector('.popup');
         document.body.classList.remove('scroll-off');
@@ -86,10 +93,25 @@ class Popup extends BaseComponent {
         }
     }
 
+    /**
+     * Коллбэк на удаление элемента Popup со страницы
+     */
     onDestroy() {
         this.parent.removeEventListener('click', this._onClick);
         EventBus.off(Events.SubmitForm, this._onSubmit);
         Popup.__instance = null;
+    }
+
+    /**
+     * Возвращает отрисованный в HTML компонент
+     * @return {*|string}
+     */
+    render() {
+        const popupDiv = document.createElement('div');
+        popupDiv.classList.add('popup');
+        popupDiv.innerHTML = this.template(this.context);
+        this.parent.appendChild(popupDiv);
+        document.body.classList.add('scroll-off');
     }
 }
 

@@ -5,7 +5,18 @@ import DetailsTab from '../DetailsTab/DetailsTab.js';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
 
+/**
+ * @class Компонента инфоблока с фильмом
+ */
 class InfoBlock extends BaseComponent {
+    /**
+     * Создает экземпляр InfoBlock
+     *
+     * @constructor
+     * @this  {InfoBlock}
+     * @param {Object} parent - Родительский элемент элемента
+     * @param {Object} context - Необходимые данные для этого класса, его hbs
+     */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
         this.template = Handlebars.templates['InfoBlock.hbs'];
@@ -34,6 +45,10 @@ class InfoBlock extends BaseComponent {
         this.context.TabBar = this.tabBar.render();
     }
 
+    /**
+     * Колбэк на изменение вкладки на таб баре
+     * @param {Object} data - Данные для этого коллбэка
+     */
     onTabChanged(data) {
         if (data.tab === 'mainTab') {
             this.context.CurrentTab = new MainTab({
@@ -50,10 +65,17 @@ class InfoBlock extends BaseComponent {
         currentInfoBlock.innerHTML = this.context.CurrentTab;
     }
 
+    /**
+     * Коллбэк на закрытие инфоблока по крестику
+     * @param {Object} data - Данные для этого коллбэка
+     */
     onInfoBlockClosed(data) {
         this.deleteOpenedInfoBlock();
     }
 
+    /**
+     * Удаляет текущий открытый на странице инфоблок с фильмом
+     */
     deleteOpenedInfoBlock() {
         const openedInfoBlock = document.querySelector('.content__info-block-wrapper');
 
@@ -68,6 +90,10 @@ class InfoBlock extends BaseComponent {
         }
     }
 
+    /**
+     * Возвращает отрисованный в HTML компонент
+     * @return {*|string}
+     */
     render() {
         this.deleteOpenedInfoBlock();
 

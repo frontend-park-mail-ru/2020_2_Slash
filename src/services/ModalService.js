@@ -6,7 +6,17 @@ import EventBus from './EventBus.js';
 import Events from '../consts/events.js';
 import ModalBuilder from '../tools/builders/ModalBuilder.js';
 
+/**
+ * Класс, отвечающий за логику создания попапов
+ * @class
+ */
 class ModalService {
+    /**
+     * Создает экземпляр ModalService или возвращает его
+     * @return {this}
+     * @constructor
+     * @this  {ModalService}
+     */
     constructor() {
         if (ModalService.__instance) {
             return ModalService.__instance;
@@ -17,10 +27,20 @@ class ModalService {
         EventBus.on(Events.RevealPopup, this.onRevealPopup.bind(this));
     }
 
+    /**
+     * @function
+     * Колбэк на вызов попапа
+     * @param {Object} data - Данные для этого коллбэка
+     */
     onRevealPopup(data) {
         this.show(data.modalstatus);
     }
 
+    /**
+     * @function
+     * Создает и рендерит нужный попап
+     * @param {string} modalStatus - тип попапа
+     */
     show(modalStatus) {
         if (this.modal) {
             this.modal.remove();
