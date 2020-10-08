@@ -171,7 +171,7 @@ class MainController extends BaseController {
             this.view.show();
 
             this.onSwitchOn(data);
-        });
+        }).catch((error) => console.log(error));
     }
 
     onSwitchOn(data = {}) {

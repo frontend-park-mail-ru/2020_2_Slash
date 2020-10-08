@@ -6,6 +6,7 @@ import Modals from '../consts/modals.js';
 import MainView from '../views/MainVIew/MainView.js';
 import SessionModel from '../models/SessionModel.js';
 import UserModel from '../models/UserModel.js';
+import Statuses from '../consts/statuses.js';
 
 /**
  * @class
@@ -24,7 +25,7 @@ class SignupController extends BaseController {
                 path: Routes.MainPage,
             };
 
-            if (response.status === 'unauthorized') {
+            if (response.status === Statuses.UNAUTHORIZED) {
                 callbackData.misc = {
                     modalStatus: Modals.signup,
                 };

@@ -6,6 +6,7 @@ import Modals from '../consts/modals.js';
 import Events from '../consts/events.js';
 import UserModel from '../models/UserModel.js';
 import SessionModel from '../models/SessionModel.js';
+import Statuses from '../consts/statuses.js';
 
 /**
  * @class
@@ -25,7 +26,7 @@ class LoginController extends BaseController {
                 path: Routes.MainPage,
             };
 
-            if (response.status === 'unauthorized') {
+            if (response.status === Statuses.UNAUTHORIZED) {
                 callbackData.misc = {
                     modalStatus: Modals.signin,
                 };
@@ -41,7 +42,7 @@ class LoginController extends BaseController {
 
     onLogout(data) {
         UserModel.logout().then((response) => {
-            if (response.result === 'ok') {
+            if (response.result === Statuses.OK) {
                 EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
             }
         }).catch((error) => console.log(error));
