@@ -48,9 +48,11 @@ class LoginController extends BaseController {
     }
 
     onLoginUser(data) {
+        const {email, password} = data.params;
+
         UserModel.login({
-            email: data.params.email,
-            password: data.params.password,
+            email: email,
+            password: password,
         }).then((response) => {
             if (!response.error) {
                 EventBus.emit(Events.PathChanged, {

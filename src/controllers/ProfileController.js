@@ -55,9 +55,11 @@ class ProfileController extends BaseController {
      */
     // TODO: Протестировать - запросы иногда странно улетают, видимо колбэки копятся
     onUpdateProfile(data) {
+        const {nickname, email} = data.params;
+
         UserModel.updateProfile({
-            nickname: data.params.name,
-            email: data.params.email,
+            nickname: nickname,
+            email: email,
         }).then((response) => {
             if (!response.error) {
                 EventBus.emit(Events.PathChanged, {

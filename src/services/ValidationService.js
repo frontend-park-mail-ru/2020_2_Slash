@@ -35,30 +35,29 @@ class ValidationService {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
 
-        const email = inputs['email'];
-        const password = inputs['password'];
+        const {email: emailInput, password: passwordInput} = inputs;
 
         this.clearErrors(inputs, errors);
 
         let isValidForm = true;
 
-        let validationResult = this.isValidEmail(email, error);
+        let validationResult = this.isValidEmail(emailInput, error);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(form, email, validationResult);
+            this.setError(form, emailInput, validationResult);
         }
 
-        validationResult = this.isValidPassword(password.value, error);
+        validationResult = this.isValidPassword(passwordInput.value, error);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(form, password, validationResult);
+            this.setError(form, passwordInput, validationResult);
         }
 
         return {
             isValid: isValidForm,
             data: {
-                email: email.value,
-                password: password.value,
+                email: emailInput.value,
+                password: passwordInput.value,
             },
         };
     }
@@ -66,7 +65,7 @@ class ValidationService {
     /**
      * @function
      * Проверяет форму регистрации
-     * @return {boolean} isValidForm
+     * @return {{data: {password: *, nickname: *, email: *, repeated_password: *}, isValid: boolean}} isValidForm
      * @param {Node} form - Форма для валидации
      * @param {string} error - Пришедшая с сервера ошибка валидации
      */
@@ -74,40 +73,42 @@ class ValidationService {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
 
-        const login = inputs['login'];
-        const email = inputs['email'];
-        const password = inputs['password'];
-        const repeatPassword = inputs['repeat_password'];
+        const {
+            nickname: nicknameInput,
+            email: emailInput,
+            password: passwordInput,
+            repeat_password: repeatPasswordInput
+        } = inputs
 
         this.clearErrors(inputs, errors);
 
         let isValidForm = true;
 
-        let validationResult = this.isValidEmail(email, error);
+        let validationResult = this.isValidEmail(emailInput, error);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(form, email, validationResult);
+            this.setError(form, emailInput, validationResult);
         }
 
-        validationResult = this.isValidPassword(password.value, error);
+        validationResult = this.isValidPassword(passwordInput.value, error);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(form, password, validationResult);
+            this.setError(form, passwordInput, validationResult);
         }
 
-        validationResult = this.equalPasswords(password.value, repeatPassword.value);
+        validationResult = this.equalPasswords(passwordInput.value, repeatPasswordInput.value);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(form, repeatPassword, validationResult);
+            this.setError(form, repeatPasswordInput, validationResult);
         }
 
         return {
             isValid: isValidForm,
             data: {
-                login: login.value,
-                email: email.value,
-                password: password.value,
-                repeatPassword: repeatPassword.value,
+                nickname: nicknameInput.value,
+                email: emailInput.value,
+                password: passwordInput.value,
+                repeated_password: repeatPasswordInput.value,
             },
         };
     }
@@ -115,7 +116,7 @@ class ValidationService {
     /**
      * @function
      * Проверяет форму информации аккаунта
-     * @return  {boolean} isValidForm
+     * @return  {{data: {nickname: *, email: *}, isValid: boolean}} isValidForm
      * @param {Node} form - Форма для валидации
      * @param {string} error - Пришедшая с сервера ошибка валидации
      */
@@ -123,24 +124,23 @@ class ValidationService {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
 
-        const name = inputs['name'];
-        const email = inputs['email'];
+        const {nickname: nicknameInput, email: emailInput} = inputs
 
         this.clearErrors(inputs, errors);
 
         let isValidForm = true;
 
-        const validationResult = this.isValidEmail(email, error);
+        const validationResult = this.isValidEmail(emailInput, error);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(form, email, validationResult);
+            this.setError(form, emailInput, validationResult);
         }
 
         return {
             isValid: isValidForm,
             data: {
-                name: name.value,
-                email: email.value,
+                nickname: nicknameInput.value,
+                email: emailInput.value,
             },
         };
     }
@@ -155,30 +155,28 @@ class ValidationService {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
 
-        const oldPassword = inputs['oldPassword'];
-        const newPassword = inputs['newPassword'];
-        const repeatedPassword = inputs['repeatedPassword'];
+        const {oldPassword: oldPasswordInput, newPassword: newPasswordInput, repeatedPassword: repeatedPasswordInput} = inputs
 
         this.clearErrors(inputs, errors);
 
         let isValidForm = true;
 
-        let validationResult = this.isTruePassword(oldPassword.value);
+        let validationResult = this.isTruePassword(oldPasswordInput.value);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(form, oldPassword, validationResult);
+            this.setError(form, oldPasswordInput, validationResult);
         }
 
-        validationResult = this.isValidPassword(newPassword.value);
+        validationResult = this.isValidPassword(newPasswordInput.value);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(form, newPassword, validationResult);
+            this.setError(form, newPasswordInput, validationResult);
         }
 
-        validationResult = this.equalPasswords(newPassword.value, repeatedPassword.value);
+        validationResult = this.equalPasswords(newPasswordInput.value, repeatedPasswordInput.value);
         if (!validationResult.isValid) {
             isValidForm = false;
-            this.setError(form, repeatedPassword, validationResult);
+            this.setError(form, repeatedPasswordInput, validationResult);
         }
 
         return isValidForm;
@@ -188,16 +186,16 @@ class ValidationService {
      * @function
      * Проверяет логин
      * @return  {Object} result
-     * @param {string} login - Логин
+     * @param {string} nickname - Логин
      * @param {Object} data - Данные
      */
-    isValidLogin(login, data = null) {
+    isValidNickname(nickname, data = null) {
         const result = {
             isValid: true,
             error: '',
         };
 
-        if (!login) {
+        if (!nickname) {
             result.isValid = false;
             result.error = 'Введите логин';
         }

@@ -39,11 +39,13 @@ class SignupController extends BaseController {
     }
 
     onSignupUser(data) {
+        const {nickname, email, password, repeated_password} = data.params;
+
         UserModel.register({
-            nickname: data.params.login,
-            email: data.params.email,
-            password: data.params.password,
-            repeated_password: data.params.repeatPassword,
+            nickname: nickname,
+            email: email,
+            password: password,
+            repeated_password: repeated_password,
         }).then((response) => {
             if (!response.error) {
                 EventBus.emit(Events.PathChanged, {

@@ -20,7 +20,7 @@ class PInfoFormBuilder extends FormBuilder {
 
         this.inputsData = [
             {
-                id: 'name',
+                id: 'nickname',
                 type: 'text',
                 label: 'Имя',
             },
