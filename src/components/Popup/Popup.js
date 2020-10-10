@@ -10,11 +10,11 @@ import ValidationService from '../../services/ValidationService.js';
  */
 class Popup extends BaseComponent {
     /**
-     * Создает экземпляр MiniModal
+     * Создает экземпляр Popup
      *
      * @constructor
      * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
-     * @this  {MiniModal}
+     * @this  {Popup}
      */
     constructor({parent = null, context = {}, addListener = true} = {}) {
         super({parent: parent, context: context});
