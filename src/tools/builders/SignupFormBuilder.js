@@ -26,7 +26,7 @@ class SignupFormBuilder extends FormBuilder {
 
         this.inputsData = [
             {
-                id: 'login',
+                id: 'nickname',
                 type: 'text',
                 label: 'Логин',
             },
