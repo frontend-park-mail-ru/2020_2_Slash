@@ -4,6 +4,7 @@ import MainTab from '../MainTab/MainTab.js';
 import DetailsTab from '../DetailsTab/DetailsTab.js';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
+import template from './InfoBlock.hbs';
 
 /**
  * @class
@@ -19,7 +20,7 @@ class InfoBlock extends BaseComponent {
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['InfoBlock.hbs'];
+        this.template = template;
 
         this.tabBar = new TabBar({
             context: {

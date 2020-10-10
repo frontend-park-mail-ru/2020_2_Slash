@@ -3,6 +3,7 @@ import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
 import ValidationService from '../../services/ValidationService.js';
 import Modals from '../../consts/modals.js';
+import template from './ProfileMenuBar.hbs';
 
 /**
  * @class
@@ -18,7 +19,7 @@ class ProfileMenuBar extends BaseComponent {
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['ProfileMenuBar.hbs'];
+        this.template = template;
 
         this.validator = new ValidationService();
 

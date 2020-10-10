@@ -35,7 +35,7 @@ class ContentService {
         // };
 
         const contentData = { // запрос за контентом по id
-            poster: '/static/img/witcher2.jpg',
+            poster: 'img/witcher2.jpg',
             title: 'Ведьмак',
             originTitle: 'Witcher',
             rating: '100% понравилось',

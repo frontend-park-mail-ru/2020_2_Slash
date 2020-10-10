@@ -1,5 +1,5 @@
 <div class="header__logo">
-    <a href="/browse" data-event="pathChanged" ><img src="/static/img/logo.svg"></a>
+    <a href="/browse" data-event="pathChanged" ><img src="img/logo.svg"></a>
 </div>
 <div class="header__menu">
     <nav class="header__nav">
@@ -14,19 +14,19 @@
 </div>
 <div class="header__control-bars">
     <div class="header__burger control__item">
-        <img src="/static/img/burger.svg">
+        <img src="img/burger.svg">
     </div>
-    <img class="header__search-img control__item" src="/static/img/search.svg">
+    <img class="header__search-img control__item" src="img/search.svg">
     <div class="header__user-block control__item">
         {{#if authorized}}
             <a class="header__user" data-event="revealPopup" data-modalstatus="authmini">
                 <img class="header__avatar" src="{{avatar}}">
-                <img class="header__arrow" src="/static/img/arrow.svg">
+                <img class="header__arrow" src="img/arrow.svg">
             </a>
         {{else}}
             <a class="header__user" data-event="revealPopup" data-modalstatus="unauthmini">
-                <img class="header__avatar" src="/static/img/user.svg">
-                <img class="header__arrow" src="/static/img/arrow.svg">
+                <img class="header__avatar" src="img/user.svg">
+                <img class="header__arrow" src="img/arrow.svg">
             </a>
         {{/if}}
     </div>

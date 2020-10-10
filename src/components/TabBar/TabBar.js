@@ -1,6 +1,7 @@
 import BaseComponent from '../BaseComponent.js';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
+import template from './Tabbar.hbs';
 
 /**
  * @class
@@ -16,7 +17,7 @@ class TabBar extends BaseComponent {
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['TabBar.hbs'];
+        this.template = template;
 
         context.tabs.forEach((tab) => {
             if (tab.key === 'mainTab') {

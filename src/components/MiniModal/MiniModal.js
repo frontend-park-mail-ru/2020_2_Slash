@@ -1,4 +1,5 @@
 import BaseComponent from '../BaseComponent.js';
+import template from './MiniModal.hbs';
 
 /**
  * @class
@@ -14,7 +15,7 @@ class MiniModal extends BaseComponent {
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['MiniModal.hbs'];
+        this.template = template;
 
         if (MiniModal.__instance) {
             return MiniModal.__instance;

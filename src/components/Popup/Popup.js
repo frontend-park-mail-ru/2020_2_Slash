@@ -3,6 +3,7 @@ import Modals from '../../consts/modals.js';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.js';
 import ValidationService from '../../services/ValidationService.js';
+import template from './Popup.hbs';
 
 /**
  * @class
@@ -18,7 +19,7 @@ class Popup extends BaseComponent {
      */
     constructor({parent = null, context = {}, addListener = true} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['Popup.hbs'];
+        this.template = template;
 
         if (Popup.__instance) {
             return Popup.__instance;

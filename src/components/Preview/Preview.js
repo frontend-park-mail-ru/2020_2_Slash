@@ -1,4 +1,5 @@
 import BaseComponent from '../BaseComponent.js';
+import template from './Preview.hbs';
 
 /**
  * @class
@@ -14,7 +15,7 @@ class Preview extends BaseComponent {
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['Preview.hbs'];
+        this.template = template;
     }
 
     /**
