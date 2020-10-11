@@ -5,12 +5,12 @@ import ProfileMenuBar from '../../components/ProfileMenuBar/ProfileMenuBar.js';
 import Footer from '../../components/Footer/Footer.js';
 import PInfoFormBuilder from '../../tools/builders/PInfoFormBuilder.js';
 import PSecurityFormBuilder from '../../tools/builders/PSecurityFormBuilder.js';
-
+import template from './ProfileView.hbs';
 
 class ProfileView extends BaseView {
     constructor(context = {}) {
         super({title: 'Flicks Box', template: null, context});
-        this.template = Handlebars.templates['ProfileView.hbs'];
+        this.template = template;
     }
 
     show() {

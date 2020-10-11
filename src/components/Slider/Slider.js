@@ -1,5 +1,6 @@
 import BaseComponent from '../BaseComponent.js';
 import SliderItem from '../SliderItem/SliderItem.js';
+import template from './Slider.hbs';
 
 /**
  * @class
@@ -15,7 +16,7 @@ class Slider extends BaseComponent {
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['Slider.hbs'];
+        this.template = template;
     }
 
     /**

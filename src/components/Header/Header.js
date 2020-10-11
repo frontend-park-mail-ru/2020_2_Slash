@@ -1,4 +1,5 @@
 import BaseComponent from '../BaseComponent.js';
+import template from './Header.hbs';
 
 /**
  * @class
@@ -14,7 +15,7 @@ class Header extends BaseComponent {
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['Header.hbs'];
+        this.template = template;
     }
 
     /**

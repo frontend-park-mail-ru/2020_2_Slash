@@ -3,11 +3,12 @@ import Header from '../../components/Header/Header.js';
 import Footer from '../../components/Footer/Footer.js';
 import Preview from '../../components/Preview/Preview.js';
 import ContentBlock from '../../components/ContentBlock/ContentBlock.js';
+import template from './MainView.hbs';
 
 class MainView extends BaseView {
     constructor({title = 'Flicks box', context = {}} = {}) {
         super({title: title, template: null, context: context});
-        this.template = Handlebars.templates['MainView.hbs'];
+        this.template = template;
         this.parent = document.querySelector('.application');
     }
 

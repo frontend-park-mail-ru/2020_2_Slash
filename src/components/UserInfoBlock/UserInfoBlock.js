@@ -1,4 +1,5 @@
 import BaseComponent from '../BaseComponent.js';
+import template from './UserInfoBlock.hbs';
 
 /**
  * @class
@@ -14,7 +15,7 @@ class UserInfoBlock extends BaseComponent {
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['UserInfoBlock.hbs'];
+        this.template = template;
     }
 
     /**

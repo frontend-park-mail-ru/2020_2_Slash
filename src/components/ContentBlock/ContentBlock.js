@@ -1,5 +1,6 @@
 import BaseComponent from '../BaseComponent.js';
 import Slider from '../Slider/Slider.js';
+import template from './ContentBlock.hbs';
 
 /**
  * @class
@@ -15,7 +16,7 @@ class ContentBlock extends BaseComponent {
      */
     constructor({parent = null, context = {}} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['ContentBlock.hbs'];
+        this.template = template;
     }
 
     /**

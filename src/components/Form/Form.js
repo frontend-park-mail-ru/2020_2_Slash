@@ -1,4 +1,5 @@
 import BaseComponent from '../BaseComponent.js';
+import template from './Form.hbs';
 
 /**
  * @class
@@ -14,7 +15,7 @@ class Form extends BaseComponent {
      */
     constructor({parent= null, context = {}} = {}) {
         super({parent: parent, context: context});
-        this.template = Handlebars.templates['Form.hbs'];
+        this.template = template;
     }
 
     /**
