@@ -23,9 +23,11 @@
   "homepage": "https://github.com/frontend-park-mail-ru/2020_2_Slash#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "handlebars": "^4.7.6"
+    "handlebars": "^4.7.6",
+    "typescript": "^2.9.2"
   },
   "devDependencies": {
+    "@types/handlebars": "^4.1.0",
     "awesome-typescript-loader": "^5.2.1",
     "copy-webpack-plugin": "^6.2.1",
     "css-loader": "^4.3.0",
