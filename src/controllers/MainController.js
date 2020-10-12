@@ -16,7 +16,7 @@ class MainController extends BaseController {
     switchOn(data = {}) {
         const contentData = { // фейковый контент, пока не реализовали
             preview: {
-                poster: 'img/movie.png',
+                poster: '/static/img/movie.png',
                 title: 'Психопаспорт',
             },
             blocks: [
@@ -25,31 +25,31 @@ class MainController extends BaseController {
                     content: [
                         {
                             id: 1,
-                            poster: 'img/witcher.png',
+                            poster: '/static/img/witcher.png',
                         },
                         {
                             id: 2,
-                            poster: 'img/witcher.png',
+                            poster: '/static/img/witcher.png',
                         },
                         {
                             id: 3,
-                            poster: 'img/witcher.png',
+                            poster: '/static/img/witcher.png',
                         },
                         {
                             id: 58746,
-                            poster: 'img/witcher.png',
+                            poster: '/static/img/witcher.png',
                         },
                         {
                             id: 4,
-                            poster: 'img/witcher.png',
+                            poster: '/static/img/witcher.png',
                         },
                         {
                             id: 5,
-                            poster: 'img/witcher.png',
+                            poster: '/static/img/witcher.png',
                         },
                         {
                             id: 6,
-                            poster: 'img/witcher.png',
+                            poster: '/static/img/witcher.png',
                         },
                     ],
                 },
@@ -58,31 +58,31 @@ class MainController extends BaseController {
                     content: [
                         {
                             id: 7,
-                            poster: 'img/fword.png',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 8,
-                            poster: 'img/fword.png',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 9,
-                            poster: 'img/fword.png',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 10,
-                            poster: 'img/fword.png',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 11,
-                            poster: 'img/fword.png',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 12,
-                            poster: 'img/fword.png',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 13,
-                            poster: 'img/fword.png',
+                            poster: '/static/img/fword.png',
                         },
                     ],
                 },
@@ -91,31 +91,31 @@ class MainController extends BaseController {
                     content: [
                         {
                             id: 14,
-                            poster: 'img/woman.png',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 15,
-                            poster: 'img/woman.png',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 16,
-                            poster: 'img/woman.png',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 17,
-                            poster: 'img/woman.png',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 18,
-                            poster: 'img/woman.png',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 19,
-                            poster: 'img/woman.png',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 100,
-                            poster: 'img/woman.png',
+                            poster: '/static/img/woman.png',
                         },
                     ],
                 },
@@ -124,31 +124,31 @@ class MainController extends BaseController {
                     content: [
                         {
                             id: 111,
-                            poster: 'img/cat.png',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 122,
-                            poster: 'img/cat.png',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 133,
-                            poster: 'img/cat.png',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 144,
-                            poster: 'img/cat.png',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 155,
-                            poster: 'img/cat.png',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 166,
-                            poster: 'img/cat.png',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 177,
-                            poster: 'img/cat.png',
+                            poster: '/static/img/cat.png',
                         },
                     ],
                 },
@@ -161,7 +161,7 @@ class MainController extends BaseController {
             };
 
             if (!response.error) {
-                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : 'img/default.svg';
+                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : '/static/img/default.svg';
                 sessionData.authorized = true;
                 sessionData.avatar = avatar;
             }

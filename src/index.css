@@ -16,6 +16,7 @@
 @import "components/DetailsTab/DetailsTab.css";
 @import "components/ContentBlock/ContentBlock.css";
 @import "components/MiniModal/MiniModal.css";
+@import "views/PlayerView/PlayerView.css";
 
 body {
     background-color: var(--main-color);

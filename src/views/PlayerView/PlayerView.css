@@ -1,0 +1,39 @@
+.watch_page {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+}
+
+.player__back-btn {
+    position: absolute;
+    z-index: 2;
+    left: 1vw;
+    top: 1vw;
+    padding: 0;
+    width: 4vw;
+    height: 4vw;
+    background-position: center center;
+    background-color: var(--crystal-clear);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.player__back-btn:hover {
+    transition: all 0.1s ease-in-out;
+    transform: scale(1.3);
+}
+
+.player__back-btn__img {
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+.player__wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.player {
+    width: 100%;
+}
