@@ -1,5 +1,5 @@
 import EventBus from './EventBus.js';
-import Events from '../consts/events.js';
+import Events from '../consts/events.ts';
 import InfoBlock from '../components/InfoBlock/InfoBlock.js';
 
 /**

@@ -2,9 +2,9 @@ import BaseController from './BaseController.js';
 import ProfileView from '../views/ProfileView/ProfileView.js';
 import UserModel from '../models/UserModel.js';
 import EventBus from '../services/EventBus.js';
-import Events from '../consts/events.js';
-import Routes from '../consts/routes.js';
-import {SERVER_HOST} from '../consts/settings.js';
+import Events from '../consts/events.ts';
+import Routes from '../consts/routes.ts';
+import {SERVER_HOST} from '../consts/settings.ts';
 
 /**
  * @class

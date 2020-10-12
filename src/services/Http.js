@@ -1,4 +1,4 @@
-import {SERVER_API_V1_PREFIX} from '../consts/settings.js';
+import {SERVER_API_V1_PREFIX} from '../consts/settings.ts';
 
 /**
  * @class

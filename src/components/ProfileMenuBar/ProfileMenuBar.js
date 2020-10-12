@@ -1,8 +1,8 @@
 import BaseComponent from '../BaseComponent.js';
 import EventBus from '../../services/EventBus.js';
-import Events from '../../consts/events.js';
+import Events from '../../consts/events.ts';
 import ValidationService from '../../services/ValidationService.js';
-import Modals from '../../consts/modals.js';
+import Modals from '../../consts/modals.ts';
 import template from './ProfileMenuBar.hbs';
 
 /**

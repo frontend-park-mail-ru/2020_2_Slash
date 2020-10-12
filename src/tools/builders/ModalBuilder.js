@@ -1,4 +1,4 @@
-import Modals from '../../consts/modals.js';
+import Modals from '../../consts/modals.ts';
 import MiniModal from '../../components/MiniModal/MiniModal.js';
 
 class ModalBuilder {

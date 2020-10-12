@@ -1,4 +1,4 @@
-import {Errors} from '../consts/errors.js';
+import {Errors} from '../consts/errors.ts';
 
 /**
  * @class

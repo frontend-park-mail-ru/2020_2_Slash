@@ -1,6 +1,6 @@
 import Http from '../services/Http.js';
-import ApiMethods from '../consts/ApiMethods.js';
-import {SERVER_API_V1_PREFIX} from '../consts/settings.js';
+import ApiMethods from '../consts/ApiMethods.ts';
+import {SERVER_API_V1_PREFIX} from '../consts/settings.ts';
 
 class UserModel {
     register(data) {

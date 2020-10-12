@@ -1,7 +1,7 @@
 import BaseComponent from '../BaseComponent.js';
-import Modals from '../../consts/modals.js';
+import Modals from '../../consts/modals.ts';
 import EventBus from '../../services/EventBus.js';
-import Events from '../../consts/events.js';
+import Events from '../../consts/events.ts';
 import ValidationService from '../../services/ValidationService.js';
 import template from './Popup.hbs';
 

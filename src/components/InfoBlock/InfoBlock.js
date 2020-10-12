@@ -3,7 +3,7 @@ import TabBar from '../TabBar/TabBar.js';
 import MainTab from '../MainTab/MainTab.js';
 import DetailsTab from '../DetailsTab/DetailsTab.js';
 import EventBus from '../../services/EventBus.js';
-import Events from '../../consts/events.js';
+import Events from '../../consts/events.ts';
 import template from './InfoBlock.hbs';
 
 /**

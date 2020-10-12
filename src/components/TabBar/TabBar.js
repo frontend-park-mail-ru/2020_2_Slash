@@ -1,6 +1,6 @@
 import BaseComponent from '../BaseComponent.js';
 import EventBus from '../../services/EventBus.js';
-import Events from '../../consts/events.js';
+import Events from '../../consts/events.ts';
 import template from './Tabbar.hbs';
 
 /**
