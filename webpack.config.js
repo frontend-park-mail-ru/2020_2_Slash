@@ -12,7 +12,7 @@ module.exports = {
         filename: '[name].[chunkhash].js',
     },
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ],
+        extensions: [ '.ts', '.js' ],
     },
     module: {
         rules: [
@@ -25,7 +25,7 @@ module.exports = {
                 loader: 'handlebars-loader',
             },
             {
-                test: /\.tsx?$/,
+                test: /\.ts?$/,
                 loader: 'awesome-typescript-loader',
                 exclude: /node_modules/,
                 options : {
