@@ -1,9 +1,7 @@
-import CustomObject from '../customInterfaces/customObject'
+interface IController {
+    switchOn(data: any): void
 
-interface IController{
-    switchOn(data: CustomObject): void
-
-    onSwitchOn(data: CustomObject): void
+    onSwitchOn(data?: any): void
 
     switchOff(): void
 }

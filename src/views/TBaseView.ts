@@ -1,5 +1,5 @@
 import IView from './IView';
-import CustomObject from '../customInterfaces/customObject'
+import CustomObject from '../tools/customInterfaces/customObject'
 
 class TBaseView implements IView {
     root: Element;

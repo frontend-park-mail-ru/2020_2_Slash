@@ -1,6 +1,5 @@
 import IController from './IController';
 import IView from '../views/IView';
-import CustomObject from "../customInterfaces/customObject";
 
 class TBaseController implements IController {
     view: IView;
@@ -8,9 +7,9 @@ class TBaseController implements IController {
         this.view = view;
     }
 
-    switchOn(data: CustomObject) {}
+    switchOn(data: any = {}) {}
 
-    onSwitchOn(data: CustomObject) {}
+    onSwitchOn(data?: any) {}
 
     switchOff() {}
 }

@@ -42,6 +42,8 @@ class Router {
 
                 const data = Object.assign({}, closestButton.dataset);
                 EventBus.emit(data.event, data);
+            } else if (target instanceof HTMLMediaElement) {
+                EventBus.emit(target.dataset.event, {});
             }
         });
     }

@@ -5,7 +5,9 @@ class BaseComponent {
         this.context = context;
     }
 
-    render() {}
+    render() {
+        return this.template(this.context);
+    }
 }
 
 export default BaseComponent;

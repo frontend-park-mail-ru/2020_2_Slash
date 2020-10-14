@@ -1,15 +1,13 @@
-import CustomObject from '../customInterfaces/customObject'
-
 interface IView {
     root: Element;
-    context: CustomObject;
+    context: any;
     template: any;
 
     show(): void;
     hide(): void;
-    setContext(inputContext: CustomObject): void;
-    addToContext(obj: CustomObject): void;
-    insertIntoContext(...data: CustomObject[]): void;
+    setContext(inputContext: any): void;
+    addToContext(obj: any): void;
+    insertIntoContext(...data: any[]): void;
 }
 
 export default IView;

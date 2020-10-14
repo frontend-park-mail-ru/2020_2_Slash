@@ -30,7 +30,7 @@
     transition: none;
 }
 
-.menu-bar__list-item-text:hover {
+.tabs__list-item-text:hover {
     transition: all 0.02s ease-in;
     cursor: pointer;
     border-bottom: 5px solid var(--orangered);

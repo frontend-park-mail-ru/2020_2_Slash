@@ -1,7 +1,7 @@
 import BaseComponent from '../BaseComponent.js';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events.ts';
-import template from './Tabbar.hbs';
+import template from './TabBar.hbs';
 
 /**
  * @class
@@ -40,14 +40,6 @@ class TabBar extends BaseComponent {
 
         const currentTab = document.querySelector(`div.tabs a.tabs__list-item-text[data-tab='${data.tab}']`);
         currentTab.classList.add(selectedTab);
-    }
-
-    /**
-     * Возвращает отрисованный в HTML компонент
-     * @return {*|string}
-     */
-    render() {
-        return this.template(this.context);
     }
 }
 
