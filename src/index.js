@@ -1,6 +1,6 @@
 import './index.css';
 import Router from './services/Router.js';
-import Routes from './consts/routes.js';
+import Routes from './consts/routes.ts';
 import MainController from './controllers/MainController.js';
 import ProfileController from './controllers/ProfileController.js';
 import SignupController from './controllers/SignUpController.js';

@@ -2,7 +2,7 @@ import BaseController from './BaseController.js';
 import MainView from '../views/MainVIew/MainView.js';
 import ModalService from '../services/ModalService.js';
 import UserModel from '../models/UserModel.js';
-import {SERVER_HOST} from '../consts/settings.js';
+import {SERVER_HOST} from '../consts/settings.ts';
 
 /**
  * @class

@@ -26,6 +26,7 @@
     "handlebars": "^4.7.6"
   },
   "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
     "copy-webpack-plugin": "^6.2.1",
     "css-loader": "^4.3.0",
     "eslint": "^7.10.0",
@@ -34,6 +35,7 @@
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^1.0.0",
     "style-loader": "^2.0.0",
+    "typescript": "^2.9.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }

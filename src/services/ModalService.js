@@ -1,9 +1,9 @@
-import Modals from '../consts/modals.js';
+import Modals from '../consts/modals.ts';
 import SignupBuilderForm from '../tools/builders/SignupFormBuilder.js';
 import LoginFormBuilder from '../tools/builders/LoginFormBuilder.js';
 import Popup from '../components/Popup/Popup.js';
 import EventBus from './EventBus.js';
-import Events from '../consts/events.js';
+import Events from '../consts/events.ts';
 import ModalBuilder from '../tools/builders/ModalBuilder.js';
 
 /**

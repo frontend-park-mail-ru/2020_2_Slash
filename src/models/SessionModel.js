@@ -1,5 +1,5 @@
 import Http from '../services/Http.js';
-import ApiMethods from '../consts/ApiMethods.js';
+import ApiMethods from '../consts/ApiMethods.ts';
 
 class SessionModel {
     check() {

@@ -2,9 +2,9 @@
 
 // eslint-disable-next-line no-unused-vars
 import ContentService from './ContentService.js';
-import Routes from '../consts/routes.js';
+import Routes from '../consts/routes.ts';
 import EventBus from './EventBus.js';
-import Events from '../consts/events.js';
+import Events from '../consts/events.ts';
 
 /**
  * Занимается роутингом приложения и работает с History API

@@ -1,12 +1,12 @@
 import BaseController from './BaseController.js';
 import EventBus from '../services/EventBus.js';
-import Events from '../consts/events.js';
-import Routes from '../consts/routes.js';
-import Modals from '../consts/modals.js';
+import Events from '../consts/events.ts';
+import Routes from '../consts/routes.ts';
+import Modals from '../consts/modals.ts';
 import MainView from '../views/MainVIew/MainView.js';
 import SessionModel from '../models/SessionModel.js';
 import UserModel from '../models/UserModel.js';
-import Statuses from '../consts/statuses.js';
+import Statuses from '../consts/statuses.ts';
 
 /**
  * @class
