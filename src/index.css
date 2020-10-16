@@ -3,7 +3,6 @@
 @import "components/Footer/Footer.css";
 @import "components/Preview/Preview.css";
 @import "components/Slider/Slider.css";
-@import "views/ProfileView/ProfileView.css";
 @import "components/UserInfoBlock/UserInfoBlock.css";
 @import "components/ProfileMenuBar/ProfileMenuBar.css";
 @import "components/Popup/Popup.css";
@@ -16,6 +15,9 @@
 @import "components/DetailsTab/DetailsTab.css";
 @import "components/ContentBlock/ContentBlock.css";
 @import "components/MiniModal/MiniModal.css";
+@import "components/Player/Player.css";
+@import "views/ProfileView/ProfileView.css";
+@import "views/PlayerView/PlayerView.css";
 
 body {
     background-color: var(--main-color);

@@ -10,6 +10,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].[chunkhash].js',
+        publicPath: '/static/',
     },
     resolve: {
         extensions: [ '.ts', '.js' ],
@@ -25,7 +26,7 @@ module.exports = {
                 loader: 'handlebars-loader',
             },
             {
-                test: /\.ts?$/,
+                test: /\.ts$/,
                 loader: 'awesome-typescript-loader',
                 exclude: /node_modules/,
                 options : {

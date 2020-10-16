@@ -12,6 +12,14 @@ enum Events {
     LogoutUser = 'logoutUser',
     UpdateProfile = 'updateProfile',
     UploadAvatar = 'uploadAvatar',
+    RedirectBack = 'redirectBack',
+
+    VideoPlay = 'videoPlay',
+    VideoPause = 'videoPause',
+    Mute = 'mute',
+    VolumeOn = 'volumeOn',
+    FullscreenModeOn = 'fullscreenModeOn',
+    FullscreenModeOff = 'fullscreenModeOff',
 }
 
 export default Events;

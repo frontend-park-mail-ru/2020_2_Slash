@@ -26,7 +26,7 @@ class ProfileController extends BaseController {
 
             if (!response.error) {
                 sessionData.authorized = true;
-                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : 'img/default.svg';
+                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : '/static/img/default.svg';
                 sessionData = Object.assign(sessionData, {
                     avatar: avatar,
                     nickname: response.nickname,

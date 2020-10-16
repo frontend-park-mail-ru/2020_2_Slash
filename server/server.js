@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 
 const staticPath = path.resolve(__dirname, '../dist');
 
-server.use(express.static(staticPath));
+server.use('/static/', express.static(staticPath));
 
 server.get('*', (req, res) => {
     res.sendFile(path.join(staticPath, 'index.html'));

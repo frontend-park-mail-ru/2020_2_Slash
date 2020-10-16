@@ -1,0 +1,14 @@
+<div class="watch__page">
+    <a data-event="redirectBack">
+    <button class="watch__back-btn">
+        <img class="watch__back-btn__img" src="/static/img/back.svg">
+    </button>
+    </a>
+    <div class="watch__wrapper">
+        <div class="watch__video-wrapper">
+        <video class="video" src="{{video}}" poster="{{poster}}" data-event="videoPlay" preload="auto" autoplay="true" loop="true">
+        </video>
+        </div>
+    </div>
+    {{{PlayerBar}}}
+</div>

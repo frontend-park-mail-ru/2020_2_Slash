@@ -24,7 +24,7 @@
     height: 90%;
 }
 
-.misc-item_rating {
+.misc-item__rating {
     color: var(--rating-green);
 }
 

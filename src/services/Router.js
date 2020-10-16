@@ -1,6 +1,5 @@
 'use strict';
 
-// eslint-disable-next-line no-unused-vars
 import ContentService from './ContentService.js';
 import Routes from '../consts/routes.ts';
 import EventBus from './EventBus.js';
@@ -23,6 +22,7 @@ class Router {
         this.routes = [];
 
         EventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
+        EventBus.on(Events.RedirectBack, this.back.bind(this));
 
         this.application.addEventListener('click', function(e) {
             const {target} = e;
@@ -42,6 +42,8 @@ class Router {
 
                 const data = Object.assign({}, closestButton.dataset);
                 EventBus.emit(data.event, data);
+            } else if (target instanceof HTMLMediaElement) {
+                EventBus.emit(target.dataset.event, {});
             }
         });
     }

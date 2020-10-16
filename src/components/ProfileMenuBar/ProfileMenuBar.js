@@ -95,14 +95,6 @@ class ProfileMenuBar extends BaseComponent {
             this.validator.ValidateProfileSecurityForm(form, error);
         }
     }
-
-    /**
-     * Возвращает отрисованный в HTML компонент
-     * @return {*|string}
-     */
-    render() {
-        return this.template(this.context);
-    }
 }
 
 export default ProfileMenuBar;

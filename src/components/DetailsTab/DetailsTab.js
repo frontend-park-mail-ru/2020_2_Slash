@@ -17,14 +17,6 @@ class DetailsTab extends BaseComponent {
         super({parent: parent, context: context});
         this.template = template;
     }
-
-    /**
-     * Возвращает отрисованный в HTML компонент
-     * @return {*|string}
-     */
-    render() {
-        return this.template(this.context);
-    }
 }
 
 export default DetailsTab;

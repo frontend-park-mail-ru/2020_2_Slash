@@ -43,7 +43,6 @@ class MainView extends BaseView {
         };
 
         this.insertIntoContext(data);
-
         super.show();
     }
 }

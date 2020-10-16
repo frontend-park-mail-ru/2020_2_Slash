@@ -1,0 +1,52 @@
+.watch__page {
+    width: 100%;
+    height: 100vh;
+}
+
+.watch__video-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.watch__back-btn {
+    position: absolute;
+    z-index: 10;
+    left: 1vw;
+    top: 1vw;
+    padding: 0;
+    width: 4vw;
+    height: 4vw;
+    background-position: center center;
+    background-color: var(--crystal-clear);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.watch__back-btn:hover {
+    transform: scale(1.2);
+}
+
+.watch__back-btn__img {
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+.watch__wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.video {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
+}
+
+.video:fullscreen {
+    z-index: 1;
+}
