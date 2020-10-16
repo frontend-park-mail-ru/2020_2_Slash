@@ -140,13 +140,17 @@ class PlayerService {
         this.timelineFront.style.width = `${(100 * currentTime / duration)}%`;
         this.timelineSlider.style.left = `${(100 * currentTime / duration)}%`;
         const timelineSliderText: any = document.getElementsByClassName('timeline__time-text')[0];
-        timelineSliderText.innerText = `${setTime(currentTime)}`;
-        timelineSliderText.style.left = `${(100 * currentTime / duration)}%`;
+        if (timelineSliderText != undefined) {
+            timelineSliderText.innerText = `${setTime(currentTime)}`;
+            timelineSliderText.style.left = `${(100 * currentTime / duration)}%`;
+        }
 
         const timeLabel = document.querySelector('.player-bar__time');
-        timeLabel.textContent = ''
-        const text = document.createTextNode(setTime(currentTime) + ' / ' + setTime(duration));
-        timeLabel.appendChild(text);
+        if (timeLabel != null) {
+            timeLabel.textContent = '';
+            const text = document.createTextNode(setTime(currentTime) + ' / ' + setTime(duration));
+            timeLabel.appendChild(text);
+        }
     }
 
     onFullScreenOn(event: any) {

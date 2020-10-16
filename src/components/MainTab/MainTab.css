@@ -24,10 +24,6 @@
     height: 90%;
 }
 
-.misc-item__rating {
-    color: var(--rating-green);
-}
-
 .info-block__misc, .info-block__buttons {
     display: flex;
 }
