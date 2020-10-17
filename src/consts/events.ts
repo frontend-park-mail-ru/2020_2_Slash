@@ -1,5 +1,6 @@
 enum Events {
     PathChanged = 'pathChanged',
+    RedirectBack = 'redirectBack',
     ProfileTabChanged = 'profileTabChanged',
     ContentInfoRequested = 'contentInfoRequested',
     RevealPopup = 'revealPopup',
@@ -12,8 +13,6 @@ enum Events {
     LogoutUser = 'logoutUser',
     UpdateProfile = 'updateProfile',
     UploadAvatar = 'uploadAvatar',
-    RedirectBack = 'redirectBack',
-
     VideoPlay = 'videoPlay',
     VideoPause = 'videoPause',
     Mute = 'mute',

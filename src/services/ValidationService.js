@@ -1,4 +1,4 @@
-import {Errors} from '../consts/errors.ts';
+import Errors from '../consts/errors';
 
 /**
  * @class

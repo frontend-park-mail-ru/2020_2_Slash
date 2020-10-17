@@ -83,7 +83,7 @@ class PlayerService {
 
         this.timelineSlider.style.left = (100 * currentTime).toString();
 
-        const isPause = this.video.paused
+        const isPause = this.video.paused;
         this.video.pause();
         this.video.currentTime = this.video.duration * currentTime;
         if (!isPause) {
@@ -140,13 +140,13 @@ class PlayerService {
         this.timelineFront.style.width = `${(100 * currentTime / duration)}%`;
         this.timelineSlider.style.left = `${(100 * currentTime / duration)}%`;
         const timelineSliderText: any = document.getElementsByClassName('timeline__time-text')[0];
-        if (timelineSliderText != undefined) {
-            timelineSliderText.innerText = `${setTime(currentTime)}`;
+        if (timelineSliderText !== undefined) {
+            timelineSliderText.innerText = setTime(currentTime);
             timelineSliderText.style.left = `${(100 * currentTime / duration)}%`;
         }
 
         const timeLabel = document.querySelector('.player-bar__time');
-        if (timeLabel != null) {
+        if (timeLabel !== null) {
             timeLabel.textContent = '';
             const text = document.createTextNode(setTime(currentTime) + ' / ' + setTime(duration));
             timeLabel.appendChild(text);

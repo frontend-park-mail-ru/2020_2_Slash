@@ -1,19 +1,19 @@
-import BaseController from './BaseController.js';
+import TBaseController from './TBaseController';
 import MainView from '../views/MainVIew/MainView.js';
 import ModalService from '../services/ModalService.js';
 import UserModel from '../models/UserModel.js';
-import {SERVER_HOST} from '../consts/settings.ts';
+import {SERVER_HOST} from '../consts/settings';
 
 /**
  * @class
  * Контроллер для главной страницы
  */
-class MainController extends BaseController {
+class MainController extends TBaseController {
     constructor() {
         super(new MainView());
     }
 
-    switchOn(data = {}) {
+    switchOn(data: any = {}) {
         const contentData = { // фейковый контент, пока не реализовали
             preview: {
                 poster: '/static/img/movie.png',
@@ -156,7 +156,7 @@ class MainController extends BaseController {
         };
 
         UserModel.getProfile().then((response) => {
-            const sessionData = {
+            const sessionData: any = {
                 authorized: false,
             };
 
@@ -174,7 +174,7 @@ class MainController extends BaseController {
         }).catch((error) => console.log(error));
     }
 
-    onSwitchOn(data = {}) {
+    onSwitchOn(data: any = {}) {
         if (data.modalStatus) {
             ModalService.show(data.modalStatus);
         }

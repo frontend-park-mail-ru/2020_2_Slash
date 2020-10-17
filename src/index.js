@@ -1,10 +1,10 @@
 import './index.css';
 import Router from './services/Router.js';
 import Routes from './consts/routes.ts';
-import MainController from './controllers/MainController.js';
-import ProfileController from './controllers/ProfileController.js';
-import SignupController from './controllers/SignUpController.js';
-import LoginController from './controllers/LoginController.js';
+import MainController from './controllers/MainController';
+import ProfileController from './controllers/ProfileController';
+import SignupController from './controllers/SignUpController';
+import LoginController from './controllers/LoginController';
 import PlayerController from './controllers/PlayerController';
 
 const app = document.querySelector('.application');
