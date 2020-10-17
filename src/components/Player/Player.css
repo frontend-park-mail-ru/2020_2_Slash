@@ -123,8 +123,8 @@
     opacity: 0;
     cursor: pointer;
     position: absolute;
-    left: -30%;
-    bottom: 120px;
+    left: -50%;
+    bottom: 100px;
     transform: rotate(0.25turn) scale(-1, 1);
     width: 100px;
     height: 10px;

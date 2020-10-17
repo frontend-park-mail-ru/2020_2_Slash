@@ -74,6 +74,11 @@
     border: 5px solid var(--white);
 }
 
+.misc-item__rating {
+    color: var(--rating-green);
+}
+
+
 @media (max-width: 1000px) {
     .info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn {
         width: 5vw;

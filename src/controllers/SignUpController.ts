@@ -1,27 +1,27 @@
-import BaseController from './BaseController.js';
+import TBaseController from './TBaseController';
 import EventBus from '../services/EventBus.js';
-import Events from '../consts/events.ts';
-import Routes from '../consts/routes.ts';
-import Modals from '../consts/modals.ts';
+import Events from '../consts/events';
+import Routes from '../consts/routes';
+import Modals from '../consts/modals';
+import Statuses from '../consts/statuses';
 import MainView from '../views/MainVIew/MainView.js';
 import SessionModel from '../models/SessionModel.js';
 import UserModel from '../models/UserModel.js';
-import Statuses from '../consts/statuses.ts';
 
 /**
  * @class
  * Контроллер для страницы регистрации
  */
-class SignupController extends BaseController {
+class SignupController extends TBaseController {
     constructor() {
         super(new MainView());
 
         EventBus.on(Events.SignupUser, this.onSignupUser.bind(this));
     }
 
-    switchOn(data = {}) {
+    switchOn(data: any = {}) {
         SessionModel.check().then((response) => {
-            const callbackData = {
+            const callbackData: any = {
                 path: Routes.MainPage,
             };
 
@@ -39,7 +39,7 @@ class SignupController extends BaseController {
         this.view.hide();
     }
 
-    onSignupUser(data) {
+    onSignupUser(data: any = {}) {
         const {nickname, email, password, repeated_password} = data.params;
 
         UserModel.register({

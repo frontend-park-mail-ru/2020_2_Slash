@@ -36,7 +36,7 @@ class ProfileView extends BaseView {
                 context: {
                     InfoForm: PInfoFormBuilder.set([
                         {
-                            id: 'name',
+                            id: 'nickname',
                             value: nickname,
                         },
                         {

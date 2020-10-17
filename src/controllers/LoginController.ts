@@ -1,18 +1,18 @@
-import BaseController from './BaseController.js';
+import TBaseController from './TBaseController';
 import MainView from '../views/MainVIew/MainView.js';
 import EventBus from '../services/EventBus.js';
-import Routes from '../consts/routes.ts';
-import Modals from '../consts/modals.ts';
-import Events from '../consts/events.ts';
+import Routes from '../consts/routes';
+import Modals from '../consts/modals';
+import Events from '../consts/events';
+import Statuses from '../consts/statuses';
 import UserModel from '../models/UserModel.js';
 import SessionModel from '../models/SessionModel.js';
-import Statuses from '../consts/statuses.ts';
 
 /**
  * @class
  * Контроллер для страницы авторизации
  */
-class LoginController extends BaseController {
+class LoginController extends TBaseController {
     constructor() {
         super(new MainView());
 
@@ -20,9 +20,9 @@ class LoginController extends BaseController {
         EventBus.on(Events.LogoutUser, this.onLogout.bind(this));
     }
 
-    switchOn(data = {}) {
+    switchOn(data: any = {}) {
         SessionModel.check().then((response) => {
-            const callbackData = {
+            const callbackData: any = {
                 path: Routes.MainPage,
             };
 
@@ -40,7 +40,7 @@ class LoginController extends BaseController {
         this.view.hide();
     }
 
-    onLogout(data) {
+    onLogout(data: any = {}) {
         UserModel.logout().then((response) => {
             if (response.result === Statuses.OK) {
                 EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
@@ -48,7 +48,7 @@ class LoginController extends BaseController {
         }).catch((error) => console.log(error));
     }
 
-    onLoginUser(data) {
+    onLoginUser(data: any = {}) {
         const {email, password} = data.params;
 
         UserModel.login({

@@ -1,16 +1,16 @@
-import BaseController from './BaseController.js';
+import TBaseController from './TBaseController';
 import ProfileView from '../views/ProfileView/ProfileView.js';
 import UserModel from '../models/UserModel.js';
 import EventBus from '../services/EventBus.js';
-import Events from '../consts/events.ts';
-import Routes from '../consts/routes.ts';
-import {SERVER_HOST} from '../consts/settings.ts';
+import Events from '../consts/events';
+import Routes from '../consts/routes';
+import {SERVER_HOST} from '../consts/settings';
 
 /**
  * @class
  * Контроллер для страницы профиля
  */
-class ProfileController extends BaseController {
+class ProfileController extends TBaseController {
     constructor() {
         super(new ProfileView());
 
@@ -18,20 +18,17 @@ class ProfileController extends BaseController {
         EventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
-    switchOn(data = {}) {
+    switchOn(data: any = {}) {
         UserModel.getProfile().then((response) => {
-            let sessionData = {
+            let sessionData: any = {
                 authorized: false,
             };
 
             if (!response.error) {
                 sessionData.authorized = true;
                 const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : '/static/img/default.svg';
-                sessionData = Object.assign(sessionData, {
-                    avatar: avatar,
-                    nickname: response.nickname,
-                    email: response.email,
-                });
+                const {nickname, email} = response;
+                sessionData = {...sessionData, avatar, nickname, email};
 
                 this.view.insertIntoContext(sessionData);
 
@@ -54,7 +51,7 @@ class ProfileController extends BaseController {
      * @param {Object} data - Данные
      */
     // TODO: Протестировать - запросы иногда странно улетают, видимо колбэки копятся
-    onUpdateProfile(data) {
+    onUpdateProfile(data: any = {}) {
         const {nickname, email} = data.params;
 
         UserModel.updateProfile({
@@ -78,11 +75,11 @@ class ProfileController extends BaseController {
      * Коллбэк на загрузку аватарки
      * @param {Object} data - Данные
      */
-    onUploadAvatar(data) {
+    onUploadAvatar(data: any = {}) {
         const fileUploader = document.getElementById('file-upload');
 
         fileUploader.addEventListener('change', function() {
-            const input = this;
+            const input: any = this;
 
             if (input.files && input.files[0]) {
                 UserModel.uploadAvatar(input.files[0]).then((response) => {
