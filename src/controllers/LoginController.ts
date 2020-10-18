@@ -1,5 +1,5 @@
 import TBaseController from './TBaseController';
-import MainView from '../views/MainVIew/MainView.js';
+import MainView from '../views/MainVIew/MainView';
 import EventBus from '../services/EventBus.js';
 import Routes from '../consts/routes';
 import Modals from '../consts/modals';

@@ -1,12 +1,12 @@
 import IView from './IView';
-import CustomObject from '../tools/customInterfaces/customObject'
+import Context from '../tools/Context';
 
 class TBaseView implements IView {
     root: Element;
-    context: CustomObject;
+    context: any;
     template: any
 
-    constructor(title?: string, template?: any, context?: CustomObject) {
+    constructor(title?: string, template?: any, context?: Context) {
         document.title = title;
         this.root = document.querySelector('.application');
         this.template = template;
@@ -21,15 +21,15 @@ class TBaseView implements IView {
         this.root.innerHTML = '';
     }
 
-    setContext(inputContext: CustomObject) {
+    setContext(inputContext: Context) {
         this.context = inputContext;
     }
 
-    addToContext(obj: CustomObject) {
+    addToContext(obj: Context) {
         this.context = (<any>Object).assign(this.context, obj)
     }
 
-    insertIntoContext(...data: CustomObject[]) {
+    insertIntoContext(...data: Context[]) {
         data.forEach((obj) => {
             this.addToContext(obj)
         });

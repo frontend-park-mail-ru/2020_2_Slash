@@ -1,5 +1,5 @@
 import TBaseController from './TBaseController';
-import ProfileView from '../views/ProfileView/ProfileView.js';
+import ProfileView from '../views/ProfileView/ProfileView';
 import UserModel from '../models/UserModel.js';
 import EventBus from '../services/EventBus.js';
 import Events from '../consts/events';

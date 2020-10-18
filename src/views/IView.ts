@@ -1,13 +1,15 @@
+import Context from '../tools/Context';
+
 interface IView {
     root: Element;
-    context: any;
+    context: Context;
     template: any;
 
     show(): void;
     hide(): void;
-    setContext(inputContext: any): void;
-    addToContext(obj: any): void;
-    insertIntoContext(...data: any[]): void;
+    setContext(inputContext: Context): void;
+    addToContext(obj: Context): void;
+    insertIntoContext(...data: Context[]): void;
 }
 
 export default IView;

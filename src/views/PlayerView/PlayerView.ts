@@ -1,9 +1,10 @@
 import template from './PlayerView.hbs';
+import Context from '../../tools/Context';
 import TBaseView from '../TBaseView';
 import Player from '../../components/Player/Player';
 
 class PlayerView extends TBaseView {
-    constructor(title: string = 'Flicks box', context: object = {}) {
+    constructor(title: string = 'Flicks box', context = {}) {
         super(title, null, context);
         this.template = template;
     }
@@ -15,7 +16,7 @@ class PlayerView extends TBaseView {
             context: {title},
         });
 
-        const data: any = {
+        const data: Context = {
             PlayerBar: PlayerBar.render(),
         }
 
