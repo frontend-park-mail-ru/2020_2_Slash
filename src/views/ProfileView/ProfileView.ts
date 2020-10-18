@@ -1,4 +1,5 @@
-import BaseView from '../BaseView.js';
+import TBaseView from '../TBaseView';
+import Context from '../../tools/Context';
 import Header from '../../components/Header/Header.js';
 import UserInfoBlock from '../../components/UserInfoBlock/UserInfoBlock.js';
 import ProfileMenuBar from '../../components/ProfileMenuBar/ProfileMenuBar.js';
@@ -7,9 +8,9 @@ import PInfoFormBuilder from '../../tools/builders/PInfoFormBuilder.js';
 import PSecurityFormBuilder from '../../tools/builders/PSecurityFormBuilder.js';
 import template from './ProfileView.hbs';
 
-class ProfileView extends BaseView {
+class ProfileView extends TBaseView {
     constructor(context = {}) {
-        super({title: 'Flicks Box', template: null, context});
+        super('Flicks Box', null, context);
         this.template = template;
     }
 
@@ -17,6 +18,7 @@ class ProfileView extends BaseView {
         const {authorized, avatar, nickname, email} = this.context;
 
         const header = new Header({
+            parent: null,
             context: {
                 authorized: authorized,
                 avatar: avatar,
@@ -24,6 +26,7 @@ class ProfileView extends BaseView {
         });
 
         const usrInfoBlock = new UserInfoBlock({
+            parent: null,
             context: {
                 avatar: avatar,
                 nickname: nickname,
@@ -33,6 +36,7 @@ class ProfileView extends BaseView {
 
         const menuBar = new ProfileMenuBar(
             {
+                parent: null,
                 context: {
                     InfoForm: PInfoFormBuilder.set([
                         {
@@ -50,7 +54,7 @@ class ProfileView extends BaseView {
 
         const footer = new Footer();
 
-        const data = {
+        const data: Context = {
             Header: header.render(),
             UserInfoBlock: usrInfoBlock.render(),
             ProfileMenuBar: menuBar.render(),

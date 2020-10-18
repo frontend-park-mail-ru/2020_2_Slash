@@ -1,5 +1,5 @@
 import TBaseController from './TBaseController';
-import MainView from '../views/MainVIew/MainView.js';
+import MainView from '../views/MainVIew/MainView';
 import ModalService from '../services/ModalService.js';
 import UserModel from '../models/UserModel.js';
 import {SERVER_HOST} from '../consts/settings';
