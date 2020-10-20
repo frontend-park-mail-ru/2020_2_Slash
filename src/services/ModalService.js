@@ -1,7 +1,7 @@
 import Modals from '../consts/modals.ts';
 import SignupBuilderForm from '../tools/builders/SignupFormBuilder.js';
 import LoginFormBuilder from '../tools/builders/LoginFormBuilder.js';
-import Popup from '../components/Popup/Popup.js';
+import Popup from '../components/Popup/Popup.ts';
 import EventBus from './EventBus.js';
 import Events from '../consts/events.ts';
 import ModalBuilder from '../tools/builders/ModalBuilder.js';
@@ -49,24 +49,22 @@ class ModalService {
         switch (modalStatus) {
         case Modals.signup: {
             this.modal = new Popup({
-                parent: this.app,
-                context: {
                     heading: SignupBuilderForm.getMeta().heading,
                     Form: SignupBuilderForm.getForm().render(),
                     helper: SignupBuilderForm.getMeta().helper,
                 },
-            });
+                this.app,
+            );
             break;
         }
         case Modals.signin: {
             this.modal = new Popup({
-                parent: this.app,
-                context: {
                     heading: LoginFormBuilder.getMeta().heading,
                     Form: LoginFormBuilder.getForm().render(),
                     helper: LoginFormBuilder.getMeta().helper,
                 },
-            });
+                this.app,
+            );
             break;
         }
         case Modals.authMini: {

@@ -11,10 +11,7 @@ class PlayerView extends TBaseView {
 
     show() {
         const {title} = this.context;
-        const PlayerBar = new Player({
-            parent: this,
-            context: {title},
-        });
+        const PlayerBar = new Player({title}, this);
 
         const data: Context = {
             PlayerBar: PlayerBar.render(),

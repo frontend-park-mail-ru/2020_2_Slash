@@ -3,7 +3,7 @@ import Context from '../tools/Context';
 
 class TBaseView implements IView {
     root: Element;
-    context: any;
+    context: Context;
     template: any
 
     constructor(title?: string, template?: any, context?: Context) {

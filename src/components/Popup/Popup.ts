@@ -1,7 +1,8 @@
-import BaseComponent from '../BaseComponent.js';
-import Modals from '../../consts/modals.ts';
+import TBaseComponent from '../TBaseComponent';
+import Context from "../../tools/Context";
+import Modals from '../../consts/modals';
 import EventBus from '../../services/EventBus.js';
-import Events from '../../consts/events.ts';
+import Events from '../../consts/events';
 import ValidationService from '../../services/ValidationService.js';
 import template from './Popup.hbs';
 
@@ -9,29 +10,29 @@ import template from './Popup.hbs';
  * @class
  * Компонента попапа
  */
-class Popup extends BaseComponent {
+class Popup extends TBaseComponent {
+    private _onSubmit: any;
+    private _onClick: any;
+    private validator: ValidationService;
     /**
      * Создает экземпляр Popup
      *
      * @constructor
-     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {Popup}
+     * @param context
+     * @param parent
      */
-    constructor({parent = null, context = {}, addListener = true} = {}) {
-        super({parent: parent, context: context});
+    constructor(context?: Context, parent?: any) {
+        super(context, parent);
         this.template = template;
-
-        if (Popup.__instance) {
-            return Popup.__instance;
-        }
 
         this.validator = new ValidationService();
 
-        Popup.prototype._onSubmit = this.onSubmit.bind(this);
+        this._onSubmit = this.onSubmit.bind(this);
         EventBus.on(Events.SubmitForm, this._onSubmit);
 
-        Popup.__instance = this;
-        Popup.prototype._onClick = function(event) {
+        // Popup.__instance = this;
+        this._onClick = function(event: any) {
             const {target} = event;
             if (target.classList.contains('popup-wrapper') || target.closest('.btn-close__img')) {
                 this.remove();
@@ -39,12 +40,14 @@ class Popup extends BaseComponent {
         }.bind(this);
 
         this.parent.addEventListener('click', this._onClick);
+
+        console.log(EventBus.listeners)
     }
 
-    onSubmit(data) {
+    onSubmit(data: any) {
         const form = this.parent.getElementsByTagName('form')[0];
 
-        let validationData = {};
+        let validationData: any = {};
 
         if (data.formtype === Modals.signup) {
             validationData = this.validator.ValidateSignupForm(form);
@@ -61,7 +64,7 @@ class Popup extends BaseComponent {
             if (targetEvent) {
                 // TODO: Popup.__instance не валиден внутри колбэка EventBus'a - нужно додумать, как удалить событие
                 EventBus.emit(targetEvent, {
-                    popup: Popup.__instance,
+                    popup: this,
                     params: validationData.data,
                     formType: data.formtype,
                 });
@@ -69,7 +72,7 @@ class Popup extends BaseComponent {
         }
     }
 
-    onError(error, formType) {
+    onError(error: string, formType: string) {
         const form = this.parent.getElementsByTagName('form')[0];
 
         if (formType === Modals.signup) {
@@ -89,8 +92,8 @@ class Popup extends BaseComponent {
         document.body.classList.remove('scroll-off');
         if (popup) {
             this.parent.removeChild(popup);
-            this.onDestroy();
         }
+        this.onDestroy();
     }
 
     /**
@@ -99,7 +102,6 @@ class Popup extends BaseComponent {
     onDestroy() {
         this.parent.removeEventListener('click', this._onClick);
         EventBus.off(Events.SubmitForm, this._onSubmit);
-        Popup.__instance = null;
     }
 
     /**

@@ -1,20 +1,22 @@
-import BaseComponent from '../BaseComponent.js';
+import TBaseComponent from '../TBaseComponent';
+import Context from "../../tools/Context";
 import template from './UserInfoBlock.hbs';
 
 /**
  * @class
  * Компонента инфо пользователя для страницы профиля - ник, почта, автарка
  */
-class UserInfoBlock extends BaseComponent {
+class UserInfoBlock extends TBaseComponent {
     /**
      * Создает экземпляр UserInfoBlock
      *
      * @constructor
-     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {UserInfoBlock}
+     * @param context
+     * @param parent
      */
-    constructor({parent = null, context = {}} = {}) {
-        super({parent: parent, context: context});
+    constructor(context?: Context, parent?: any) {
+        super(context, parent);
         this.template = template;
     }
 }

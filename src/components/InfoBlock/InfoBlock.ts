@@ -1,30 +1,32 @@
-import BaseComponent from '../BaseComponent.js';
-import TabBar from '../TabBar/TabBar.js';
-import MainTab from '../MainTab/MainTab.js';
-import DetailsTab from '../DetailsTab/DetailsTab.js';
+import TBaseComponent from '../TBaseComponent';
+import Context from "../../tools/Context";
+import TabBar from '../TabBar/TabBar';
+import MainTab from '../MainTab/MainTab';
+import DetailsTab from '../DetailsTab/DetailsTab';
 import EventBus from '../../services/EventBus.js';
-import Events from '../../consts/events.ts';
+import Events from '../../consts/events';
 import template from './InfoBlock.hbs';
 
 /**
  * @class
  * Компонента инфоблока с фильмом
  */
-class InfoBlock extends BaseComponent {
+class InfoBlock extends TBaseComponent {
+    private tabBar: TabBar;
     /**
      * Создает экземпляр InfoBlock
      *
      * @constructor
-     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {InfoBlock}
+     * @param context
+     * @param parent
      */
-    constructor({parent = null, context = {}} = {}) {
-        super({parent: parent, context: context});
+    constructor(context: Context, parent?: any) {
+        super(context, parent);
         this.template = template;
 
         this.tabBar = new TabBar({
-            context: {
-                tabs: [
+            tabs: [
                     {
                         key: 'mainTab',
                         value: 'О фильме',
@@ -32,13 +34,10 @@ class InfoBlock extends BaseComponent {
                     {
                         key: 'detailsTab',
                         value: 'Детали',
-                    }],
-            },
+                    }]
         });
 
-        this.context.CurrentTab = new MainTab({
-            context: this.context.contentData,
-        }).render();
+        this.context.CurrentTab = new MainTab(this.context.contentData).render();
 
         EventBus.on(Events.ContentInfoTabChanged, this.onTabChanged.bind(this));
         EventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
@@ -50,15 +49,11 @@ class InfoBlock extends BaseComponent {
      * Колбэк на изменение вкладки на таб баре
      * @param {Object} data - Данные для этого коллбэка
      */
-    onTabChanged(data) {
+    onTabChanged(data: any) {
         if (data.tab === 'mainTab') {
-            this.context.CurrentTab = new MainTab({
-                context: this.context.contentData,
-            }).render();
+            this.context.CurrentTab = new MainTab(this.context.contentData).render();
         } else {
-            this.context.CurrentTab = new DetailsTab({
-                context: this.context.contentData,
-            }).render();
+            this.context.CurrentTab = new DetailsTab(this.context.contentData).render();
         }
 
         const currentInfoBlock = document.querySelector('.info-block_tab');
@@ -70,7 +65,7 @@ class InfoBlock extends BaseComponent {
      * Коллбэк на закрытие инфоблока по крестику
      * @param {Object} data - Данные для этого коллбэка
      */
-    onInfoBlockClosed(data) {
+    onInfoBlockClosed(data: any) {
         this.deleteOpenedInfoBlock();
     }
 

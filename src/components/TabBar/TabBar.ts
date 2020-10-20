@@ -1,25 +1,27 @@
-import BaseComponent from '../BaseComponent.js';
+import TBaseComponent from '../TBaseComponent';
+import Context from "../../tools/Context";
 import EventBus from '../../services/EventBus.js';
-import Events from '../../consts/events.ts';
+import Events from '../../consts/events';
 import template from './TabBar.hbs';
 
 /**
  * @class
  * Компонента таббара
  */
-class TabBar extends BaseComponent {
+class TabBar extends TBaseComponent {
     /**
      * Создает экземпляр TabBar
      *
      * @constructor
-     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {TabBar}
+     * @param context
+     * @param parent
      */
-    constructor({parent = null, context = {}} = {}) {
-        super({parent: parent, context: context});
+    constructor(context: Context, parent?: any) {
+        super(context, parent);
         this.template = template;
 
-        context.tabs.forEach((tab) => {
+        context.tabs.forEach((tab: any) => {
             if (tab.key === 'mainTab') {
                 tab.class = 'list-item-text_selected';
             }
@@ -32,7 +34,7 @@ class TabBar extends BaseComponent {
      * Колбэк на изменение вкладки на таб баре
      * @param {Object} data - Данные для этого коллбэка
      */
-    onTabChanged(data) {
+    onTabChanged(data: any) {
         const selectedTab = 'list-item-text_selected';
 
         const oldTab = document.querySelector('div.tabs a.list-item-text_selected');

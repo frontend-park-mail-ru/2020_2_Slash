@@ -1,9 +1,9 @@
 import TBaseView from '../TBaseView';
 import Context from '../../tools/Context';
-import Header from '../../components/Header/Header.js';
-import Footer from '../../components/Footer/Footer.js';
-import Preview from '../../components/Preview/Preview.js';
-import ContentBlock from '../../components/ContentBlock/ContentBlock.js';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import Preview from '../../components/Preview/Preview';
+import ContentBlock from '../../components/ContentBlock/ContentBlock';
 import template from './MainView.hbs';
 
 class MainView extends TBaseView {
@@ -17,27 +17,20 @@ class MainView extends TBaseView {
 
     show() {
         const header = new Header({
-            parent: this.parent,
-            context: {
-                authorized: this.context.authorized,
-                avatar: this.context.avatar,
-            },
-        });
+            authorized: this.context.authorized,
+            avatar: this.context.avatar,
+        },
+            this.parent
+        );
         const footer = new Footer();
 
         const preview = new Preview({
-            parent: null,
-            context: {
                 preview: this.context.preview,
-            },
-        });
+            });
 
         const contentBlock = new ContentBlock({
-            parent: null,
-            context: {
                 blocks: this.context.blocks,
-            },
-        });
+            });
 
         const data: Context = {
             Header: header.render(),

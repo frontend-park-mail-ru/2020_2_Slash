@@ -1,7 +1,7 @@
 enum Modals {
     signup = 'signup',
-    signin =     'signin',
-    authMini =   'authmini',
+    signin = 'signin',
+    authMini = 'authmini',
     unauthMini = 'unauthmini',
     profileInfo = 'profileInfo',
     profileSecurity = 'profileSecurity',
