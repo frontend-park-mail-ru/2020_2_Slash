@@ -1,12 +1,12 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './Player.hbs';
 
 /**
  * @class
  * Компонента плеера
  */
-class Player extends TBaseComponent {
+class Player extends Component {
     /**
      * Создает экземпляр Player
      *

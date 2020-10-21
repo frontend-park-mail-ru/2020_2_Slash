@@ -1,4 +1,4 @@
-import TBaseComponent from '../TBaseComponent';
+import Component from '../Component';
 import Context from "../../tools/Context";
 import template from './Button.hbs';
 
@@ -6,7 +6,7 @@ import template from './Button.hbs';
  * @class
  * Компонента кнопки
  */
-class Button extends TBaseComponent {
+class Button extends Component {
     /**
      * Создает экземпляр Button
      *

@@ -1,12 +1,12 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './Input.hbs';
 
 /**
  * @class
  * Компонента инпута
  */
-class Input extends TBaseComponent {
+class Input extends Component {
     /**
      * Создает экземпляр Input
      *

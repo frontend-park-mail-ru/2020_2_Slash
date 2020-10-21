@@ -1,11 +1,11 @@
 import Context from '../tools/Context';
 
-class BaseComponent {
+abstract class Component {
     context: Context;
-    parent: any;
+    parent: HTMLElement;
     template: any;
 
-    constructor(context?: Context, parent?: any) {
+    protected constructor(context?: Context, parent?: any) {
         this.parent = parent;
         this.context = context;
     }
@@ -15,4 +15,4 @@ class BaseComponent {
     }
 }
 
-export default BaseComponent;
+export default Component;

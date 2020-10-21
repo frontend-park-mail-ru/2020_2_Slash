@@ -1,12 +1,12 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './Form.hbs';
 
 /**
  * @class
  * Компонента формы
  */
-class Form extends TBaseComponent {
+class Form extends Component {
     /**
      * Создает экземпляр Form
      *

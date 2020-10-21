@@ -56,10 +56,10 @@ class LoginFormBuilder extends FormBuilder {
         this.setInputs(this.inputsData);
 
         return new Form({
-                heading: 'Авторизация',
-                Button: this.button.render(),
-                inputs: this.inputs,
-            });
+            heading: 'Авторизация',
+            Button: this.button.render(),
+            inputs: this.inputs,
+        });
     }
 }
 

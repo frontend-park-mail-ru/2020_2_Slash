@@ -1,5 +1,5 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import Slider from '../Slider/Slider';
 import template from './ContentBlock.hbs';
 
@@ -7,7 +7,7 @@ import template from './ContentBlock.hbs';
  * @class
  * Компонента блока контента - содержит в себе ряди слайдеров с фильмами
  */
-class ContentBlock extends TBaseComponent {
+class ContentBlock extends Component {
     /**
      * Создает экземпляр ContentBlock
      *
@@ -26,7 +26,7 @@ class ContentBlock extends TBaseComponent {
      * @return {*|string}
      */
     render() {
-        let sliders: Array<string> = [];
+        const sliders: Array<string> = [];
 
         this.context.blocks.forEach((block: any) => {
             sliders.push(new Slider(block).render());

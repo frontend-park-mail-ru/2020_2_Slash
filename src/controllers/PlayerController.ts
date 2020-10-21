@@ -1,4 +1,4 @@
-import TBaseController from './TBaseController';
+import Controller from './Controller';
 import PlayerView from '../views/PlayerView/PlayerView';
 import PlayerService from '../services/PlayerService'
 
@@ -6,7 +6,7 @@ import PlayerService from '../services/PlayerService'
  * @class
  * Контроллер для страницы профиля
  */
-class PlayerController extends TBaseController {
+class PlayerController extends Controller {
     private playerService: PlayerService;
 
     constructor() {
@@ -26,6 +26,7 @@ class PlayerController extends TBaseController {
     }
 
     switchOff() {
+        super.switchOff();
         this.view.hide();
         this.onSwitchOff();
     }

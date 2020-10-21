@@ -1,5 +1,5 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events';
 import template from './TabBar.hbs';
@@ -8,7 +8,7 @@ import template from './TabBar.hbs';
  * @class
  * Компонента таббара
  */
-class TabBar extends TBaseComponent {
+class TabBar extends Component {
     /**
      * Создает экземпляр TabBar
      *

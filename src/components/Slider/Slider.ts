@@ -1,5 +1,5 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import SliderItem from '../SliderItem/SliderItem';
 import template from './Slider.hbs';
 
@@ -7,7 +7,7 @@ import template from './Slider.hbs';
  * @class
  * Компонента слайдера с фильмами/сериалами
  */
-class Slider extends TBaseComponent {
+class Slider extends Component {
     /**
      * Создает экземпляр Slider
      *

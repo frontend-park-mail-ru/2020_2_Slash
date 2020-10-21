@@ -1,12 +1,12 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './DetailsTab.hbs';
 
 /**
  * @class
  * Компонента страницы с подробной информацией о фильме/сериале
  */
-class DetailsTab extends TBaseComponent {
+class DetailsTab extends Component {
     /**
      * Создает экземпляр DetailsTab
      *

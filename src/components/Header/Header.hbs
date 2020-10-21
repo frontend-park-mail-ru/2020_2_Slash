@@ -18,16 +18,6 @@
     </div>
     <img class="header__search-img control__item" src="/static/img/search.svg">
     <div class="header__user-block control__item">
-        {{#if authorized}}
-            <a class="header__user" data-event="revealPopup" data-modalstatus="authmini">
-                <img class="header__avatar" src="{{avatar}}">
-                <img class="header__arrow" src="/static/img/arrow.svg">
-            </a>
-        {{else}}
-            <a class="header__user" data-event="revealPopup" data-modalstatus="unauthmini">
-                <img class="header__avatar" src="/static/img/user.svg">
-                <img class="header__arrow" src="/static/img/arrow.svg">
-            </a>
-        {{/if}}
+    {{{UserBlock}}}
     </div>
 </div>

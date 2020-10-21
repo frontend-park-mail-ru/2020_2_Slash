@@ -1,0 +1,43 @@
+.control__item {
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.header__control-bars {
+    display: flex;
+    align-items: center;
+}
+
+.header__search-img {
+    width: 32px;
+    height: 32px;
+}
+
+.header__burger {
+    display: none;
+}
+
+.header__avatar {
+    width: 32px;
+    height: 32px;
+}
+
+.header__user {
+    display: flex;
+    align-items: center;
+}
+
+.header__arrow {
+    margin-left: 5px;
+}
+
+@media (max-width: 850px) {
+    .header__menu {
+        display: none;
+    }
+
+    .header__avatar {
+        width: 24px;
+        height: 24px;
+    }
+}

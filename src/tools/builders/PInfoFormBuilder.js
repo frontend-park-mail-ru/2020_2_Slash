@@ -42,9 +42,9 @@ class PInfoFormBuilder extends FormBuilder {
         this.setInputs(this.inputsData);
 
         return new Form({
-                Button: this.button.render(),
-                inputs: this.inputs,
-            });
+            Button: this.button.render(),
+            inputs: this.inputs,
+        });
     }
 
     set(data) {

@@ -1,5 +1,5 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import Modals from '../../consts/modals';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events';
@@ -10,7 +10,7 @@ import template from './Popup.hbs';
  * @class
  * Компонента попапа
  */
-class Popup extends TBaseComponent {
+class Popup extends Component {
     private _onSubmit: any;
     private _onClick: any;
     private validator: ValidationService;
@@ -31,7 +31,6 @@ class Popup extends TBaseComponent {
         this._onSubmit = this.onSubmit.bind(this);
         EventBus.on(Events.SubmitForm, this._onSubmit);
 
-        // Popup.__instance = this;
         this._onClick = function(event: any) {
             const {target} = event;
             if (target.classList.contains('popup-wrapper') || target.closest('.btn-close__img')) {
@@ -40,8 +39,6 @@ class Popup extends TBaseComponent {
         }.bind(this);
 
         this.parent.addEventListener('click', this._onClick);
-
-        console.log(EventBus.listeners)
     }
 
     onSubmit(data: any) {
@@ -92,8 +89,8 @@ class Popup extends TBaseComponent {
         document.body.classList.remove('scroll-off');
         if (popup) {
             this.parent.removeChild(popup);
+            this.onDestroy();
         }
-        this.onDestroy();
     }
 
     /**

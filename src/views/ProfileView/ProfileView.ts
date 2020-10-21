@@ -1,4 +1,4 @@
-import TBaseView from '../TBaseView';
+import View from '../View';
 import Context from '../../tools/Context';
 import Header from '../../components/Header/Header';
 import UserInfoBlock from '../../components/UserInfoBlock/UserInfoBlock';
@@ -8,7 +8,7 @@ import PInfoFormBuilder from '../../tools/builders/PInfoFormBuilder.js';
 import PSecurityFormBuilder from '../../tools/builders/PSecurityFormBuilder.js';
 import template from './ProfileView.hbs';
 
-class ProfileView extends TBaseView {
+class ProfileView extends View {
     constructor(context = {}) {
         super('Flicks Box', null, context);
         this.template = template;

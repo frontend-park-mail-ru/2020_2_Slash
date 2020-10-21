@@ -1,12 +1,12 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './Preview.hbs';
 
 /**
  * @class
  * Компонента фильма/сериала на главной странице
  */
-class Preview extends TBaseComponent {
+class Preview extends Component {
     /**
      * Создает экземпляр Preview
      *

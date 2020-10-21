@@ -64,8 +64,8 @@ class ContentService {
         };
 
         const infoBlock = new InfoBlock({
-                contentId: data.id,
-                contentData: contentData,
+            contentId: data.id,
+            contentData: contentData,
         });
 
         infoBlock.render();

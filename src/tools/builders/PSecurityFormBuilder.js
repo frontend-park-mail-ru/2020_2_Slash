@@ -9,11 +9,11 @@ class PSecurityFormBuilder extends FormBuilder {
 
     prepareFormData() {
         this.buttonData = {
-                type: 'submit',
-                text: 'Сохранить',
-                formType: 'profileSecurity',
-                eventType: 'submitProfileForm',
-            };
+            type: 'submit',
+            text: 'Сохранить',
+            formType: 'profileSecurity',
+            eventType: 'submitProfileForm',
+        };
 
         this.inputsData = [
             {
@@ -47,9 +47,9 @@ class PSecurityFormBuilder extends FormBuilder {
         this.setInputs(this.inputsData);
 
         return new Form({
-                Button: this.button.render(),
-                inputs: this.inputs,
-            });
+            Button: this.button.render(),
+            inputs: this.inputs,
+        });
     }
 }
 

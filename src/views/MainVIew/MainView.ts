@@ -1,4 +1,4 @@
-import TBaseView from '../TBaseView';
+import View from '../View';
 import Context from '../../tools/Context';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -6,7 +6,7 @@ import Preview from '../../components/Preview/Preview';
 import ContentBlock from '../../components/ContentBlock/ContentBlock';
 import template from './MainView.hbs';
 
-class MainView extends TBaseView {
+class MainView extends View {
     private parent: any;
 
     constructor(title = 'Flicks box', context = {}) {

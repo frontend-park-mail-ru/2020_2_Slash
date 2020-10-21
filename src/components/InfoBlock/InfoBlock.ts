@@ -1,5 +1,5 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import TabBar from '../TabBar/TabBar';
 import MainTab from '../MainTab/MainTab';
 import DetailsTab from '../DetailsTab/DetailsTab';
@@ -11,7 +11,7 @@ import template from './InfoBlock.hbs';
  * @class
  * Компонента инфоблока с фильмом
  */
-class InfoBlock extends TBaseComponent {
+class InfoBlock extends Component {
     private tabBar: TabBar;
     /**
      * Создает экземпляр InfoBlock
@@ -63,9 +63,8 @@ class InfoBlock extends TBaseComponent {
 
     /**
      * Коллбэк на закрытие инфоблока по крестику
-     * @param {Object} data - Данные для этого коллбэка
      */
-    onInfoBlockClosed(data: any) {
+    onInfoBlockClosed() {
         this.deleteOpenedInfoBlock();
     }
 

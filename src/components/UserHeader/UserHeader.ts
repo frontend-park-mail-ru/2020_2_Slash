@@ -1,17 +1,17 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
-import template from './Footer.hbs';
+import template from './UserHeader.hbs';
 
 /**
  * @class
- * Компонента футера
+ * Компонента профиля в хэдере (аватар + выпадающее меню)
  */
-class Footer extends Component {
+class UserHeaderHeader extends Component {
     /**
-     * Создает экземпляр Footer
+     * Создает экземпляр UserHeaderHeader
      *
      * @constructor
-     * @this  {Footer}
+     * @this  {UserHeaderHeader}
      * @param context
      * @param parent
      */
@@ -21,4 +21,4 @@ class Footer extends Component {
     }
 }
 
-export default Footer;
+export default UserHeaderHeader;

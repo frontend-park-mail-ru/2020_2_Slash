@@ -1,12 +1,12 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './MiniModal.hbs';
 
 /**
  * @class
  * Компонента окошка для хэдера - войти/зарегаться // профиль/выйти
  */
-class MiniModal extends TBaseComponent {
+class MiniModal extends Component {
     private _onClick: any;
     /**
      * Создает экземпляр MiniModal
@@ -37,8 +37,8 @@ class MiniModal extends TBaseComponent {
         const modal = this.parent.querySelector('.mini-modal');
         if (modal) {
             modal.remove();
+            this.onDestroy();
         }
-        this.onDestroy();
     }
 
     /**

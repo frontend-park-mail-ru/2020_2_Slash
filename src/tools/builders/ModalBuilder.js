@@ -31,7 +31,7 @@ class ModalBuilder {
                 },
             ],
         },
-            this.app,
+        this.app,
         );
     }
 
@@ -52,7 +52,7 @@ class ModalBuilder {
                 },
             ],
         },
-            this.app,
+        this.app,
         );
     }
 }

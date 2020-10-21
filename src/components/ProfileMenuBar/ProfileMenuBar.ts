@@ -1,5 +1,5 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events';
 import ValidationService from '../../services/ValidationService.js';
@@ -10,7 +10,7 @@ import template from './ProfileMenuBar.hbs';
  * @class
  * Компонента для профиля - таббар и соответствущие формы
  */
-class ProfileMenuBar extends TBaseComponent {
+class ProfileMenuBar extends Component {
     private validator: any;
     /**
      * Создает экземпляр ProfileMenuBar
@@ -75,7 +75,7 @@ class ProfileMenuBar extends TBaseComponent {
         }
 
         if (validationData.isValid) {
-            const targetEvent = data.formtype === Modals.profileInfo ? Events.UpdateProfile : null;
+            const targetEvent = data.formtype === Modals.profileInfo ? Events.UpdateProfileInfo : null;
 
             if (targetEvent) {
                 EventBus.emit(targetEvent, {

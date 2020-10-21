@@ -1,12 +1,15 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './UserInfoBlock.hbs';
+import EventBus from '../../services/EventBus';
+import Events from '../../consts/events';
+import events from '../../consts/events';
 
 /**
  * @class
  * Компонента инфо пользователя для страницы профиля - ник, почта, автарка
  */
-class UserInfoBlock extends TBaseComponent {
+class UserInfoBlock extends Component {
     /**
      * Создает экземпляр UserInfoBlock
      *
@@ -18,6 +21,35 @@ class UserInfoBlock extends TBaseComponent {
     constructor(context?: Context, parent?: any) {
         super(context, parent);
         this.template = template;
+
+        const onUpdateProfile = (data: any = {}) => {
+            this.context.nickname = data.nickname;
+            this.context.email = data.email;
+
+            const nicknameLabel = document.querySelector('.user-meta__nickname');
+            const emailLabel = document.querySelector('.user-meta__email');
+
+            nicknameLabel.innerHTML = data.nickname;
+            emailLabel.innerHTML = data.email;
+        }
+
+        const onUploadAvatar = (data: any = {}) => {
+            this.context.avatar = data.avatar;
+
+            const avatarBackground = document.querySelector('.profile-view__user-info');
+            avatarBackground.setAttribute('style', `background-image: url('${data.avatar}');`);
+            const avatar = document.querySelector('.user-meta__avatar');
+            avatar.setAttribute('src', `${data.avatar}`);
+
+            const headerData = {
+                avatar: data.avatar,
+                authorized: true,
+            }
+            EventBus.emit(events.UpdateHeader, headerData);
+        }
+
+        EventBus.on(Events.UpdateUserProfile, onUpdateProfile)
+            .on(Events.UpdateProfileAvatar, onUploadAvatar);
     }
 }
 

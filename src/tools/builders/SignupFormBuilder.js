@@ -19,7 +19,7 @@ class SignupFormBuilder extends FormBuilder {
             text: 'Зарегистрироваться',
             formType: 'signup',
             eventType: 'submitForm',
-        }
+        };
 
         this.inputsData = [
             {
@@ -65,10 +65,10 @@ class SignupFormBuilder extends FormBuilder {
         this.setInputs(this.inputsData);
 
         return new Form({
-                heading: 'Регистрация',
-                Button: this.button.render(),
-                inputs: this.inputs,
-            });
+            heading: 'Регистрация',
+            Button: this.button.render(),
+            inputs: this.inputs,
+        });
     }
 }
 

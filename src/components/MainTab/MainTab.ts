@@ -1,12 +1,12 @@
-import TBaseComponent from '../TBaseComponent';
-import Context from "../../tools/Context";
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './MainTab.hbs';
 
 /**
  * @class
  * Компонента страницы с кратким инфо о фильме/сериале и плеером
  */
-class MainTab extends TBaseComponent {
+class MainTab extends Component {
     /**
      * Создает экземпляр MainTab
      *
@@ -25,7 +25,7 @@ class MainTab extends TBaseComponent {
      * @return {*|string}
      */
     render() {
-        // this.context.slicedCast = this.context.cast.slice(0, 3);
+        this.context.slicedCast = this.context.cast.slice(0, 3);
         return this.template(this.context);
     }
 }

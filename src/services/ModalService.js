@@ -49,21 +49,21 @@ class ModalService {
         switch (modalStatus) {
         case Modals.signup: {
             this.modal = new Popup({
-                    heading: SignupBuilderForm.getMeta().heading,
-                    Form: SignupBuilderForm.getForm().render(),
-                    helper: SignupBuilderForm.getMeta().helper,
-                },
-                this.app,
+                heading: SignupBuilderForm.getMeta().heading,
+                Form: SignupBuilderForm.getForm().render(),
+                helper: SignupBuilderForm.getMeta().helper,
+            },
+            this.app,
             );
             break;
         }
         case Modals.signin: {
             this.modal = new Popup({
-                    heading: LoginFormBuilder.getMeta().heading,
-                    Form: LoginFormBuilder.getForm().render(),
-                    helper: LoginFormBuilder.getMeta().helper,
-                },
-                this.app,
+                heading: LoginFormBuilder.getMeta().heading,
+                Form: LoginFormBuilder.getForm().render(),
+                helper: LoginFormBuilder.getMeta().helper,
+            },
+            this.app,
             );
             break;
         }
