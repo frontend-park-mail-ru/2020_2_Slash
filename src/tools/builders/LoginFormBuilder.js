@@ -1,6 +1,5 @@
 import FormBuilder from './FormBuilder.js';
-import Form from '../../components/Form/Form.js';
-import Button from '../../components/Button/Button.js';
+import Form from '../../components/Form/Form';
 
 class LoginFormBuilder extends FormBuilder {
     constructor() {
@@ -15,14 +14,13 @@ class LoginFormBuilder extends FormBuilder {
     }
 
     prepareFormData() {
-        this.buttonData = new Button({
-            context: {
-                type: 'submit',
-                text: 'Войти',
-                formType: 'signin',
-                eventType: 'submitForm',
-            },
-        });
+        this.buttonData = {
+            type: 'submit',
+            text: 'Войти',
+            formType: 'signin',
+            eventType: 'submitForm',
+        };
+
 
         this.inputsData = [
             {
@@ -58,11 +56,9 @@ class LoginFormBuilder extends FormBuilder {
         this.setInputs(this.inputsData);
 
         return new Form({
-            context: {
-                heading: 'Авторизация',
-                Button: this.button.render(),
-                inputs: this.inputs,
-            },
+            heading: 'Авторизация',
+            Button: this.button.render(),
+            inputs: this.inputs,
         });
     }
 }

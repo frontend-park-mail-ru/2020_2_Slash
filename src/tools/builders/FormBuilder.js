@@ -1,11 +1,11 @@
-import Button from '../../components/Button/Button.js';
-import Input from '../../components/Input/Input.js';
+import Button from '../../components/Button/Button';
+import Input from '../../components/Input/Input';
 
 class FormBuilder {
     constructor() {}
 
     setInputs(inputsData) {
-        this.inputs = Array.from(inputsData, (input) => new Input({context: input}).render());
+        this.inputs = Array.from(inputsData, (input) => new Input(input).render());
     }
 
     setButton(buttonData) {

@@ -1,33 +1,29 @@
-import BaseComponent from '../BaseComponent.js';
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './MiniModal.hbs';
 
 /**
  * @class
  * Компонента окошка для хэдера - войти/зарегаться // профиль/выйти
  */
-class MiniModal extends BaseComponent {
+class MiniModal extends Component {
+    private _onClick: any;
     /**
      * Создает экземпляр MiniModal
      *
      * @constructor
-     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {MiniModal}
+     * @param context
+     * @param parent
      */
-    constructor({parent = null, context = {}} = {}) {
-        super({parent: parent, context: context});
+    constructor(context?: Context, parent?: any) {
+        super(context, parent);
         this.template = template;
 
-        if (MiniModal.__instance) {
-            return MiniModal.__instance;
-        }
-
-        MiniModal.__instance = this;
-
-        MiniModal.prototype._onClick = function(event) {
+        this._onClick = function(event: any) {
             const {target} = event;
             if (!target.closest('.header__user')) {
                 this.remove();
-                this.onDestroy();
             }
         }.bind(this);
 
@@ -41,15 +37,15 @@ class MiniModal extends BaseComponent {
         const modal = this.parent.querySelector('.mini-modal');
         if (modal) {
             modal.remove();
+            this.onDestroy();
         }
     }
 
     /**
-     * Коллбэк на удаление элемента MiniModal со страницы - делает текущей инстанс синглота nullом
+     * Коллбэк на удаление элемента MiniModal со страницы
      */
     onDestroy() {
         this.parent.removeEventListener('click', this._onClick);
-        MiniModal.__instance = null;
     }
 
     /**

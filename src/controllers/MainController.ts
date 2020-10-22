@@ -1,4 +1,4 @@
-import TBaseController from './TBaseController';
+import Controller from './Controller';
 import MainView from '../views/MainVIew/MainView';
 import ModalService from '../services/ModalService.js';
 import UserModel from '../models/UserModel.js';
@@ -8,7 +8,7 @@ import {SERVER_HOST} from '../consts/settings';
  * @class
  * Контроллер для главной страницы
  */
-class MainController extends TBaseController {
+class MainController extends Controller {
     constructor() {
         super(new MainView());
     }
@@ -181,6 +181,7 @@ class MainController extends TBaseController {
     }
 
     switchOff() {
+        super.switchOff();
         this.view.hide();
     }
 }

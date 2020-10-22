@@ -1,21 +1,23 @@
-import BaseComponent from '../BaseComponent.js';
-import Slider from '../Slider/Slider.js';
+import Component from '../Component';
+import Context from '../../tools/Context';
+import Slider from '../Slider/Slider';
 import template from './ContentBlock.hbs';
 
 /**
  * @class
  * Компонента блока контента - содержит в себе ряди слайдеров с фильмами
  */
-class ContentBlock extends BaseComponent {
+class ContentBlock extends Component {
     /**
      * Создает экземпляр ContentBlock
      *
      * @constructor
-     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {ContentBlock}
+     * @param context
+     * @param parent
      */
-    constructor({parent = null, context = {}} = {}) {
-        super({parent: parent, context: context});
+    constructor(context: Context, parent?: any) {
+        super(context, parent);
         this.template = template;
     }
 
@@ -24,7 +26,12 @@ class ContentBlock extends BaseComponent {
      * @return {*|string}
      */
     render() {
-        this.context.blocks = Array.from(this.context.blocks, (block) => new Slider({context: block}).render());
+        const sliders: Array<string> = [];
+
+        this.context.blocks.forEach((block: any) => {
+            sliders.push(new Slider(block).render());
+        });
+        this.context.blocks = sliders;
         return this.template(this.context);
     }
 }

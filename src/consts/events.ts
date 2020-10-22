@@ -11,7 +11,10 @@ enum Events {
     SignupUser = 'signupUser',
     LoginUser = 'loginUser',
     LogoutUser = 'logoutUser',
-    UpdateProfile = 'updateProfile',
+    UpdateProfileInfo = 'updateProfileInfo',
+    UpdateProfileAvatar = 'updateProfileAvatar',
+    UpdateUserProfile = 'updateUserProfile',
+    UpdateUserInfo = 'updateUserInfo',
     UploadAvatar = 'uploadAvatar',
     VideoPlay = 'videoPlay',
     VideoPause = 'videoPause',
@@ -19,6 +22,7 @@ enum Events {
     VolumeOn = 'volumeOn',
     FullscreenModeOn = 'fullscreenModeOn',
     FullscreenModeOff = 'fullscreenModeOff',
+    UpdateHeader = 'updateHeader',
 }
 
 export default Events;

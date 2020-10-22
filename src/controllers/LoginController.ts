@@ -1,4 +1,4 @@
-import TBaseController from './TBaseController';
+import Controller from './Controller';
 import MainView from '../views/MainVIew/MainView';
 import EventBus from '../services/EventBus.js';
 import Routes from '../consts/routes';
@@ -12,7 +12,7 @@ import SessionModel from '../models/SessionModel.js';
  * @class
  * Контроллер для страницы авторизации
  */
-class LoginController extends TBaseController {
+class LoginController extends Controller {
     constructor() {
         super(new MainView());
 
@@ -37,6 +37,7 @@ class LoginController extends TBaseController {
     }
 
     switchOff() {
+        super.switchOff();
         this.view.hide();
     }
 

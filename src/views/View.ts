@@ -1,12 +1,11 @@
-import IView from './IView';
 import Context from '../tools/Context';
 
-class TBaseView implements IView {
+abstract class View {
     root: Element;
-    context: any;
+    context: Context;
     template: any
 
-    constructor(title?: string, template?: any, context?: Context) {
+    protected constructor(title?: string, template?: any, context?: Context) {
         document.title = title;
         this.root = document.querySelector('.application');
         this.template = template;
@@ -36,4 +35,4 @@ class TBaseView implements IView {
     }
 }
 
-export default TBaseView;
+export default View;

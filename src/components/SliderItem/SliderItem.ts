@@ -1,20 +1,22 @@
-import BaseComponent from '../BaseComponent.js';
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './SliderItem.hbs';
 
 /**
  * @class
  * Компонента элемента слайдера - фильм/сериал миниатюра
  */
-class SliderItem extends BaseComponent {
+class SliderItem extends Component {
     /**
      * Создает экземпляр SliderItem
      *
      * @constructor
-     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {SliderItem}
+     * @param context
+     * @param parent
      */
-    constructor({parent = null, context = {}} = {}) {
-        super({parent: parent, context: context});
+    constructor(context: Context, parent?: any) {
+        super(context, parent);
         this.template = template;
     }
 }

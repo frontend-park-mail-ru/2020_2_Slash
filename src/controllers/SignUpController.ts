@@ -1,4 +1,4 @@
-import TBaseController from './TBaseController';
+import Controller from './Controller';
 import EventBus from '../services/EventBus.js';
 import Events from '../consts/events';
 import Routes from '../consts/routes';
@@ -12,7 +12,7 @@ import UserModel from '../models/UserModel.js';
  * @class
  * Контроллер для страницы регистрации
  */
-class SignupController extends TBaseController {
+class SignupController extends Controller {
     constructor() {
         super(new MainView());
 
@@ -36,6 +36,7 @@ class SignupController extends TBaseController {
     }
 
     switchOff() {
+        super.switchOff();
         this.view.hide();
     }
 

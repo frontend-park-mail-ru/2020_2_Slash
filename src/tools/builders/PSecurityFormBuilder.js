@@ -1,6 +1,5 @@
 import FormBuilder from './FormBuilder.js';
-import Form from '../../components/Form/Form.js';
-import Button from '../../components/Button/Button.js';
+import Form from '../../components/Form/Form';
 
 class PSecurityFormBuilder extends FormBuilder {
     constructor() {
@@ -9,14 +8,12 @@ class PSecurityFormBuilder extends FormBuilder {
     }
 
     prepareFormData() {
-        this.buttonData = new Button({
-            context: {
-                type: 'submit',
-                text: 'Сохранить',
-                formType: 'profileSecurity',
-                eventType: 'submitProfileForm',
-            },
-        });
+        this.buttonData = {
+            type: 'submit',
+            text: 'Сохранить',
+            formType: 'profileSecurity',
+            eventType: 'submitProfileForm',
+        };
 
         this.inputsData = [
             {
@@ -50,10 +47,8 @@ class PSecurityFormBuilder extends FormBuilder {
         this.setInputs(this.inputsData);
 
         return new Form({
-            context: {
-                Button: this.button.render(),
-                inputs: this.inputs,
-            },
+            Button: this.button.render(),
+            inputs: this.inputs,
         });
     }
 }

@@ -1,5 +1,5 @@
 import Modals from '../../consts/modals.ts';
-import MiniModal from '../../components/MiniModal/MiniModal.js';
+import MiniModal from '../../components/MiniModal/MiniModal.ts';
 
 class ModalBuilder {
     constructor() {
@@ -16,46 +16,44 @@ class ModalBuilder {
 
     buildAuthModal() {
         return new MiniModal({
-            parent: this.app,
-            context: {
-                buttons: [
-                    {
-                        title: 'Профиль',
-                        event: 'pathChanged',
-                        path: '/profile',
-                        modalStatus: '',
-                    },
-                    {
-                        title: 'Выйти',
-                        event: 'logoutUser',
-                        path: '',
-                        modalStatus: '',
-                    },
-                ],
-            },
-        });
+            buttons: [
+                {
+                    title: 'Профиль',
+                    event: 'pathChanged',
+                    path: '/profile',
+                    modalStatus: '',
+                },
+                {
+                    title: 'Выйти',
+                    event: 'logoutUser',
+                    path: '',
+                    modalStatus: '',
+                },
+            ],
+        },
+        this.app,
+        );
     }
 
     buildUnauthModal() {
         return new MiniModal({
-            parent: this.app,
-            context: {
-                buttons: [
-                    {
-                        title: 'Вход',
-                        event: 'revealPopup',
-                        path: '',
-                        modalStatus: Modals.signin,
-                    },
-                    {
-                        title: 'Регистрация',
-                        event: 'revealPopup',
-                        path: '',
-                        modalStatus: Modals.signup,
-                    },
-                ],
-            },
-        });
+            buttons: [
+                {
+                    title: 'Вход',
+                    event: 'revealPopup',
+                    path: '',
+                    modalStatus: Modals.signin,
+                },
+                {
+                    title: 'Регистрация',
+                    event: 'revealPopup',
+                    path: '',
+                    modalStatus: Modals.signup,
+                },
+            ],
+        },
+        this.app,
+        );
     }
 }
 

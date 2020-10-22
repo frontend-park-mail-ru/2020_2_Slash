@@ -1,20 +1,22 @@
-import BaseComponent from '../BaseComponent.js';
+import Component from '../Component';
+import Context from '../../tools/Context';
 import template from './MainTab.hbs';
 
 /**
  * @class
  * Компонента страницы с кратким инфо о фильме/сериале и плеером
  */
-class MainTab extends BaseComponent {
+class MainTab extends Component {
     /**
      * Создает экземпляр MainTab
      *
      * @constructor
-     * @param {{parent: Object, context: Object}} - Родительский элемент компоненты, данные для этого класса.
      * @this  {MainTab}
+     * @param context
+     * @param parent
      */
-    constructor({parent = null, context = {}} = {}) {
-        super({parent: parent, context: context});
+    constructor(context: Context, parent?: any) {
+        super(context, parent);
         this.template = template;
     }
 

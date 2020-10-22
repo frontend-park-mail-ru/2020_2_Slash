@@ -1,4 +1,4 @@
-import TBaseController from './TBaseController';
+import Controller from './Controller';
 import ProfileView from '../views/ProfileView/ProfileView';
 import UserModel from '../models/UserModel.js';
 import EventBus from '../services/EventBus.js';
@@ -10,12 +10,12 @@ import {SERVER_HOST} from '../consts/settings';
  * @class
  * Контроллер для страницы профиля
  */
-class ProfileController extends TBaseController {
+class ProfileController extends Controller {
     constructor() {
         super(new ProfileView());
 
-        EventBus.on(Events.UpdateProfile, this.onUpdateProfile.bind(this));
-        EventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
+        EventBus.on(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this))
+            .on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
     switchOn(data: any = {}) {
@@ -42,7 +42,10 @@ class ProfileController extends TBaseController {
     }
 
     switchOff() {
+        super.switchOff();
         this.view.hide();
+        EventBus.off(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this))
+            .off(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
     /**
@@ -50,7 +53,6 @@ class ProfileController extends TBaseController {
      * Коллбэк на обновление профиля
      * @param {Object} data - Данные
      */
-    // TODO: Протестировать - запросы иногда странно улетают, видимо колбэки копятся
     onUpdateProfile(data: any = {}) {
         const {nickname, email} = data.params;
 
@@ -59,10 +61,10 @@ class ProfileController extends TBaseController {
             email: email,
         }).then((response) => {
             if (!response.error) {
-                EventBus.emit(Events.PathChanged, {
-                    path: Routes.ProfilePage,
+                EventBus.emit(Events.UpdateUserProfile, {
+                    nickname: nickname,
+                    email: email,
                 });
-
                 return;
             }
 
@@ -88,8 +90,11 @@ class ProfileController extends TBaseController {
                         return;
                     }
 
-                    // TODO: Перерисовать конкретные части страницы вместо обновления страницы
-                    EventBus.emit(Events.PathChanged, {path: Routes.ProfilePage});
+                    const data = {
+                        avatar: `${SERVER_HOST}/avatars/${response.avatar}`,
+                    };
+
+                    EventBus.emit(Events.UpdateProfileAvatar, data);
                 }).catch((error) => console.log(error));
             }
         });
@@ -99,3 +104,5 @@ class ProfileController extends TBaseController {
 }
 
 export default ProfileController;
+
+

@@ -79,8 +79,8 @@ class ValidationService {
             nickname: nicknameInput,
             email: emailInput,
             password: passwordInput,
-            repeat_password: repeatPasswordInput
-        } = inputs
+            repeat_password: repeatPasswordInput,
+        } = inputs;
 
         this.clearErrors(inputs, errors);
 
@@ -126,7 +126,7 @@ class ValidationService {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
 
-        const {nickname: nicknameInput, email: emailInput} = inputs
+        const {nickname: nicknameInput, email: emailInput} = inputs;
 
         this.clearErrors(inputs, errors);
 
@@ -157,7 +157,8 @@ class ValidationService {
         const inputs = form.getElementsByTagName('input');
         const errors = form.getElementsByClassName('error');
 
-        const {oldPassword: oldPasswordInput, newPassword: newPasswordInput, repeatedPassword: repeatedPasswordInput} = inputs
+        const {oldPassword: oldPasswordInput, newPassword: newPasswordInput,
+            repeatedPassword: repeatedPasswordInput} = inputs;
 
         this.clearErrors(inputs, errors);
 
@@ -223,7 +224,6 @@ class ValidationService {
             error: '',
         };
 
-        // email is instance of HTMLInputElement
         if (!email.validity.valid) {
             result.isValid = false;
             result.error = 'Неправильный формат E-mail';
