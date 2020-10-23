@@ -1,11 +1,12 @@
-import Http from '../services/Http.js';
 import ApiMethods from '../consts/ApiMethods';
+import {http} from '../services/Http';
 
 class SessionModel {
+
     check() {
-        return Http.fetchGet({
+        return http.fetchGet({
             route: ApiMethods.CheckSession,
-        }).then((response) => response.json());
+        }).then((response: Response) => response.json());
     }
 }
 

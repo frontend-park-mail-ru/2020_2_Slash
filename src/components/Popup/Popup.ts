@@ -1,9 +1,9 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import Modals from '../../consts/modals';
-import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events';
-import ValidationService from '../../services/ValidationService.js';
+import EventBus from '../../services/EventBus';
+import ValidationService from '../../services/ValidationService';
 import template from './Popup.hbs';
 
 /**
@@ -14,6 +14,7 @@ class Popup extends Component {
     private _onSubmit: any;
     private _onClick: any;
     private validator: ValidationService;
+
     /**
      * Создает экземпляр Popup
      *
@@ -28,8 +29,10 @@ class Popup extends Component {
 
         this.validator = new ValidationService();
 
-        this._onSubmit = this.onSubmit.bind(this);
-        EventBus.on(Events.SubmitForm, this._onSubmit);
+        Popup.prototype._onSubmit = this.onSubmit.bind(this);
+
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.SubmitForm, this._onSubmit);
 
         this._onClick = function(event: any) {
             const {target} = event;
@@ -60,7 +63,8 @@ class Popup extends Component {
 
             if (targetEvent) {
                 // TODO: Popup.__instance не валиден внутри колбэка EventBus'a - нужно додумать, как удалить событие
-                EventBus.emit(targetEvent, {
+                const eventBus = EventBus.getInstance();
+                eventBus.emit(targetEvent, {
                     popup: this,
                     params: validationData.data,
                     formType: data.formtype,
@@ -98,7 +102,8 @@ class Popup extends Component {
      */
     onDestroy() {
         this.parent.removeEventListener('click', this._onClick);
-        EventBus.off(Events.SubmitForm, this._onSubmit);
+        const eventBus = EventBus.getInstance();
+        eventBus.off(Events.SubmitForm, this._onSubmit);
     }
 
     /**

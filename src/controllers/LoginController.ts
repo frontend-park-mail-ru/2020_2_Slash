@@ -1,12 +1,12 @@
-import Controller from './Controller';
+import Controller, {ResponseUserType} from './Controller';
 import MainView from '../views/MainVIew/MainView';
-import EventBus from '../services/EventBus.js';
 import Routes from '../consts/routes';
 import Modals from '../consts/modals';
 import Events from '../consts/events';
 import Statuses from '../consts/statuses';
 import UserModel from '../models/UserModel';
 import SessionModel from '../models/SessionModel';
+import EventBus from '../services/EventBus';
 
 /**
  * @class
@@ -16,12 +16,13 @@ class LoginController extends Controller {
     constructor() {
         super(new MainView());
 
-        EventBus.on(Events.LoginUser, this.onLoginUser.bind(this));
-        EventBus.on(Events.LogoutUser, this.onLogout.bind(this));
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.LoginUser, this.onLoginUser.bind(this));
+        eventBus.on(Events.LogoutUser, this.onLogout.bind(this));
     }
 
     switchOn(data: any = {}) {
-        SessionModel.check().then((response) => {
+        SessionModel.check().then((response: ResponseUserType) => {
             const callbackData: any = {
                 path: Routes.MainPage,
             };
@@ -31,9 +32,9 @@ class LoginController extends Controller {
                     modalStatus: Modals.signin,
                 };
             }
-
-            EventBus.emit(Events.PathChanged, callbackData);
-        }).catch((error) => console.log(error));
+            const eventBus = EventBus.getInstance();
+            eventBus.emit(Events.PathChanged, callbackData);
+        }).catch((error: Error) => console.log(error));
     }
 
     switchOff() {
@@ -42,12 +43,13 @@ class LoginController extends Controller {
     }
 
     onLogout(data: any = {}) {
-        UserModel.logout().then((response) => {
+        UserModel.logout().then((response: ResponseUserType) => {
             if (response.result === Statuses.OK) {
-                EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
-                EventBus.emit(Events.UpdateHeader, {authorized: false});
+                const eventBus = EventBus.getInstance();
+                eventBus.emit(Events.PathChanged, {path: Routes.MainPage});
+                eventBus.emit(Events.UpdateHeader, {authorized: false});
             }
-        }).catch((error) => console.log(error));
+        }).catch((error: Error) => console.log(error));
     }
 
     onLoginUser(data: any = {}) {
@@ -56,9 +58,10 @@ class LoginController extends Controller {
         UserModel.login({
             email: email,
             password: password,
-        }).then((response) => {
+        }).then((response: ResponseUserType) => {
             if (!response.error) {
-                EventBus.emit(Events.PathChanged, {
+                const eventBus = EventBus.getInstance();
+                eventBus.emit(Events.PathChanged, {
                     path: Routes.MainPage,
                 });
 
@@ -67,7 +70,7 @@ class LoginController extends Controller {
             }
 
             data.popup.onError(response.error, data.formType);
-        }).catch((error) => console.log(error));
+        }).catch((error: Error) => console.log(error));
     }
 }
 

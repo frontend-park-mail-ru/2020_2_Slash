@@ -1,40 +1,42 @@
-import Http from '../services/Http.js';
+import {http} from '../services/Http';
 import ApiMethods from '../consts/ApiMethods';
 import {SignUpRequest, LoginRequest, UpdateProfileRequest} from './Requests';
 import {SERVER_API_V1_PREFIX} from '../consts/settings';
 
 class UserModel {
+    constructor() {}
+
     register(data: SignUpRequest) {
-        return Http.fetchPost({
+        return http.fetchPost({
             route: ApiMethods.UserRegister,
             body: JSON.stringify({...data}),
-        }).then((response) => response.json());
+        }).then((response: Response) => response.json());
     }
 
     getProfile() {
-        return Http.fetchGet({
+        return http.fetchGet({
             route: ApiMethods.UserProfile,
-        }).then((response) => response.json());
+        }).then((response: Response) => response.json());
     }
 
     logout() {
-        return Http.fetchDelete({
+        return http.fetchDelete({
             route: ApiMethods.UserLogout,
-        }).then((response) => response.json());
+        }).then((response: Response) => response.json());
     }
 
     login(data: LoginRequest) {
-        return Http.fetchPost({
+        return http.fetchPost({
             route: ApiMethods.UserLogin,
             body: JSON.stringify({...data}),
-        }).then((response) => response.json());
+        }).then((response: Response) => response.json());
     }
 
     updateProfile(data: UpdateProfileRequest) {
-        return Http.fetchPut({
+        return http.fetchPut({
             route: ApiMethods.UserProfile,
             body: JSON.stringify({...data}),
-        }).then((response) => response.json());
+        }).then((response: Response) => response.json());
     }
 
     uploadAvatar(data: File) {
@@ -46,7 +48,7 @@ class UserModel {
             credentials: 'include',
             mode: 'cors',
             body: formData,
-        }).then((response) => response.json());
+        }).then((response: Response) => response.json());
     }
 }
 

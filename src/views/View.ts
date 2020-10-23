@@ -46,7 +46,7 @@ abstract class View {
     hide() {
         if (this.typeView === 'player') {
             this.root.innerHTML = '';
-        } else {
+        } else if (this.main) {
             this.main.innerHTML = '';
         }
     }

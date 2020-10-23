@@ -1,36 +1,35 @@
-import {SERVER_API_V1_PREFIX} from '../consts/settings.ts';
+import {SERVER_API_V1_PREFIX} from '../consts/settings';
+
+interface Options {
+    method: string,
+    mode: RequestMode,
+    credentials: RequestCredentials,
+    headers: HeadersInit,
+    body: BodyInit,
+}
+
+interface Api {
+    route : string,
+    body?: string,
+}
 
 /**
  * @class
  * Класс для работы с сетью - делает http запросы
  */
 class Http {
-    /**
-     * Создает экземпляр Http или возвращает его
-     *
-     * @constructor
-     * @this  {Http}
-     */
-    constructor() {
-        if (Http.__instance) {
-            return Http.__instance;
-        }
-
-        Http.__instance = this;
-
-        this.prefix = SERVER_API_V1_PREFIX;
-    }
+    private prefix : string = SERVER_API_V1_PREFIX;
 
     /**
      * @function
      * Делает асинхронный get запрос
      * @return  {Promise}
-     * @param {Object} route - Путь, по которому нужно сделать запрос
+     * @param api
      */
-    fetchGet({route}) {
+    fetchGet(api: Api) {
         return this.fetchRequest({
             method: 'GET',
-            route: route,
+            route: api.route,
         });
     }
 
@@ -38,13 +37,13 @@ class Http {
      * @function
      * Делает асинхронный post запрос
      * @return  {Promise}
-     * @param {Object} route - Путь, по которому нужно сделать запрос
+     * @param api
      */
-    fetchPost({route, body}) {
+    fetchPost(api: Api) {
         return this.fetchRequest({
             method: 'POST',
-            route: route,
-            body: body,
+            route: api.route,
+            body: api.body,
         });
     }
 
@@ -52,13 +51,13 @@ class Http {
      * @function
      * Делает асинхронный put запрос
      * @return  {Promise}
-     * @param {Object} route - Путь, по которому нужно сделать запрос
+     * @param api
      */
-    fetchPut({route, body}) {
+    fetchPut(api: Api) {
         return this.fetchRequest({
             method: 'PUT',
-            route: route,
-            body: body,
+            route: api.route,
+            body: api.body,
         });
     }
 
@@ -66,13 +65,12 @@ class Http {
      * @function
      * Делает асинхронный delete запрос
      * @return  {Promise}
-     * @param {Object} route - Путь, по которому нужно сделать запрос
+     * @param api
      */
-    fetchDelete({route, body}) {
+fetchDelete(api: Api) {
         return this.fetchRequest({
             method: 'DELETE',
-            route: route,
-            body: body,
+            route: api.route,
         });
     }
 
@@ -87,10 +85,12 @@ class Http {
         method = 'GET',
         body = null,
     }) {
-        const options = {
+        const options: Options = {
             method: method,
             mode: 'cors',
             credentials: 'include',
+            headers: {},
+            body: null,
         };
 
         if (body) {
@@ -104,4 +104,4 @@ class Http {
     }
 }
 
-export default new Http();
+export const http = new Http();

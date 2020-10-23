@@ -1,28 +1,38 @@
 import Errors from '../consts/errors';
 
+interface ResultType {
+    isValid: boolean,
+    error: string,
+}
+
 /**
  * @class
  * Класс, отвечающий за валидацию форм
  */
 class ValidationService {
+    private readonly setError: (form: HTMLFormElement, input: any, validationResult: ResultType) => void;
+    private readonly clearErrors: (inputs: HTMLInputElement[], errors: Element[]) => void;
     /**
      * Создает экземпляр ValidationService
      *
      * @constructor
      * @this  {ValidationService}
      */
+
     constructor() {
-        this.setError = (form, input, validationResult) => {
+        this.setError = (form, input, validationResult: ResultType) => {
             input.classList.add('input-block__input_invalid');
+
             const error = form.getElementsByClassName('error')[input.name];
+
             error.innerHTML = validationResult.error || '';
         };
 
-        this.clearErrors = (inputs, errors) => {
-            Array.from(inputs).forEach((input, i) => {
-                input.classList.remove('input-block__input_invalid');
+        this.clearErrors = (inputs: HTMLInputElement[], errors: Element[]) => {
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].classList.remove('input-block__input_invalid');
                 errors[i].innerHTML = '';
-            });
+            }
         };
     }
 
@@ -33,17 +43,18 @@ class ValidationService {
      * @param {Node} form - Форма для валидации
      * @param {string} error - Пришедшая с сервера ошибка валидации
      */
-    ValidateLoginForm(form, error = '') {
-        const inputs = form.getElementsByTagName('input');
-        const errors = form.getElementsByClassName('error');
+    ValidateLoginForm(form: HTMLFormElement, error = '') {
 
-        const {email: emailInput, password: passwordInput} = inputs;
+        const inputs: HTMLInputElement[] = Array.from(form.getElementsByTagName('input'));
+        const errors: Element[] = Array.from(form.getElementsByClassName('error'));
+
+        const [emailInput, passwordInput] = inputs
 
         this.clearErrors(inputs, errors);
 
         let isValidForm = true;
 
-        let validationResult = this.isValidEmail(emailInput, error);
+        let validationResult: ResultType = this.isValidEmail(emailInput, error);
         if (!validationResult.isValid) {
             isValidForm = false;
             this.setError(form, emailInput, validationResult);
@@ -71,22 +82,17 @@ class ValidationService {
      * @param {Node} form - Форма для валидации
      * @param {string} error - Пришедшая с сервера ошибка валидации
      */
-    ValidateSignupForm(form, error = '') {
-        const inputs = form.getElementsByTagName('input');
-        const errors = form.getElementsByClassName('error');
+    ValidateSignupForm(form: HTMLFormElement, error = '') {
+        const inputs: HTMLInputElement[] = Array.from(form.getElementsByTagName('input'));
+        const errors: Element[] = Array.from(form.getElementsByClassName('error'));
 
-        const {
-            nickname: nicknameInput,
-            email: emailInput,
-            password: passwordInput,
-            repeat_password: repeatPasswordInput,
-        } = inputs;
+        const [nicknameInput, emailInput, passwordInput, repeatPasswordInput] = inputs;
 
         this.clearErrors(inputs, errors);
 
         let isValidForm = true;
 
-        let validationResult = this.isValidEmail(emailInput, error);
+        let validationResult: ResultType = this.isValidEmail(emailInput, error);
         if (!validationResult.isValid) {
             isValidForm = false;
             this.setError(form, emailInput, validationResult);
@@ -122,17 +128,17 @@ class ValidationService {
      * @param {Node} form - Форма для валидации
      * @param {string} error - Пришедшая с сервера ошибка валидации
      */
-    ValidateProfileInfoForm(form, error = '') {
-        const inputs = form.getElementsByTagName('input');
-        const errors = form.getElementsByClassName('error');
+    ValidateProfileInfoForm(form: HTMLFormElement, error = '') {
+        const inputs: HTMLInputElement[] = Array.from(form.getElementsByTagName('input'));
+        const errors: Element[] = Array.from(form.getElementsByClassName('error'));
 
-        const {nickname: nicknameInput, email: emailInput} = inputs;
+        const [nicknameInput, emailInput] = inputs;
 
         this.clearErrors(inputs, errors);
 
         let isValidForm = true;
 
-        const validationResult = this.isValidEmail(emailInput, error);
+        const validationResult: ResultType = this.isValidEmail(emailInput, error);
         if (!validationResult.isValid) {
             isValidForm = false;
             this.setError(form, emailInput, validationResult);
@@ -153,18 +159,17 @@ class ValidationService {
      * @return  {boolean} isValidForm
      * @param {Node} form - Форма для валидации
      */
-    ValidateProfileSecurityForm(form) {
-        const inputs = form.getElementsByTagName('input');
-        const errors = form.getElementsByClassName('error');
+    ValidateProfileSecurityForm(form: HTMLFormElement) {
+        const inputs: HTMLInputElement[] = Array.from(form.getElementsByTagName('input'));
+        const errors: Element[] = Array.from(form.getElementsByClassName('error'));
 
-        const {oldPassword: oldPasswordInput, newPassword: newPasswordInput,
-            repeatedPassword: repeatedPasswordInput} = inputs;
+        const [oldPasswordInput, newPasswordInput, repeatedPasswordInput] = inputs;
 
         this.clearErrors(inputs, errors);
 
         let isValidForm = true;
 
-        let validationResult = this.isTruePassword(oldPasswordInput.value);
+        let validationResult: ResultType = this.isTruePassword(oldPasswordInput.value);
         if (!validationResult.isValid) {
             isValidForm = false;
             this.setError(form, oldPasswordInput, validationResult);
@@ -192,7 +197,7 @@ class ValidationService {
      * @param {string} nickname - Логин
      * @param {Object} data - Данные
      */
-    isValidNickname(nickname, data = null) {
+    isValidNickname(nickname: string, data: any = null) {
         const result = {
             isValid: true,
             error: '',
@@ -218,7 +223,7 @@ class ValidationService {
      * @param {string} email - Логин
      * @param {string} error - Пришедшая с сервера ошибка валидации
      */
-    isValidEmail(email, error = '') {
+    isValidEmail(email: HTMLInputElement, error = '') {
         const result = {
             isValid: true,
             error: '',
@@ -254,7 +259,7 @@ class ValidationService {
      * @param {string} password - Пароль уже зарегистрированного польщовтеля
      * @param {string} error - Пришедшая с сервера ошибка валидации
      */
-    isTruePassword(password, error = '') {
+    isTruePassword(password: string, error = '') {
         const result = {
             isValid: true,
             error: '',
@@ -270,7 +275,6 @@ class ValidationService {
             result.error = 'Неверный пароль';
         }
 
-
         return result;
     }
 
@@ -281,7 +285,7 @@ class ValidationService {
      * @param {string} password - Пароль
      * @param {string} error - Пришедшая с сервера ошибка валидации
      */
-    isValidPassword(password, error = '') {
+    isValidPassword(password: string, error = '') {
         const result = {
             isValid: true,
             error: '',
@@ -308,7 +312,7 @@ class ValidationService {
      * @param {string} password - Пароль
      * @param {string} repeated - Пароль для сравнения
      */
-    equalPasswords(password, repeated) {
+    equalPasswords(password: string, repeated: string) {
         const result = {
             isValid: true,
             error: '',

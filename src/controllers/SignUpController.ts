@@ -1,5 +1,4 @@
-import Controller from './Controller';
-import EventBus from '../services/EventBus.js';
+import Controller, {ResponseUserType} from './Controller';
 import Events from '../consts/events';
 import Routes from '../consts/routes';
 import Modals from '../consts/modals';
@@ -7,20 +6,23 @@ import Statuses from '../consts/statuses';
 import MainView from '../views/MainVIew/MainView';
 import SessionModel from '../models/SessionModel';
 import UserModel from '../models/UserModel';
+import EventBus from '../services/EventBus';
 
 /**
  * @class
  * Контроллер для страницы регистрации
  */
 class SignupController extends Controller {
+
     constructor() {
         super(new MainView());
 
-        EventBus.on(Events.SignupUser, this.onSignupUser.bind(this));
+        this.eventBus = EventBus.getInstance();
+        this.eventBus.on(Events.SignupUser, this.onSignupUser.bind(this));
     }
 
     switchOn(data: any = {}) {
-        SessionModel.check().then((response) => {
+        SessionModel.check().then((response: ResponseUserType) => {
             const callbackData: any = {
                 path: Routes.MainPage,
             };
@@ -31,8 +33,8 @@ class SignupController extends Controller {
                 };
             }
 
-            EventBus.emit(Events.PathChanged, callbackData);
-        }).catch((error) => console.log(error));
+            this.eventBus.emit(Events.PathChanged, callbackData);
+        }).catch((error: Error) => console.log(error));
     }
 
     switchOff() {
@@ -48,9 +50,9 @@ class SignupController extends Controller {
             email: email,
             password: password,
             repeated_password: repeatedPassword,
-        }).then((response) => {
+        }).then((response: ResponseUserType) => {
             if (!response.error) {
-                EventBus.emit(Events.PathChanged, {
+                this.eventBus.emit(Events.PathChanged, {
                     path: Routes.MainPage,
                 });
 
@@ -59,7 +61,7 @@ class SignupController extends Controller {
             }
 
             data.popup.onError(response.error, data.formType);
-        }).catch((error) => console.log(error));
+        }).catch((error: Error) => console.log(error));
     }
 }
 

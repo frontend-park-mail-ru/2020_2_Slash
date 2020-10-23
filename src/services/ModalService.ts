@@ -1,9 +1,9 @@
-import Modals from '../consts/modals.ts';
+import Modals from '../consts/modals';
 import SignupBuilderForm from '../tools/builders/SignupFormBuilder.js';
 import LoginFormBuilder from '../tools/builders/LoginFormBuilder.js';
-import Popup from '../components/Popup/Popup.ts';
-import EventBus from './EventBus.js';
-import Events from '../consts/events.ts';
+import Popup from '../components/Popup/Popup';
+import EventBus from './EventBus';
+import Events from '../consts/events';
 import ModalBuilder from '../tools/builders/ModalBuilder.js';
 
 /**
@@ -11,6 +11,11 @@ import ModalBuilder from '../tools/builders/ModalBuilder.js';
  * @class
  */
 class ModalService {
+
+    private static instance: ModalService;
+    private readonly app: HTMLElement;
+    private modal: Popup;
+
     /**
      * Создает экземпляр ModalService или возвращает его
      * @return {this}
@@ -18,13 +23,18 @@ class ModalService {
      * @this  {ModalService}
      */
     constructor() {
-        if (ModalService.__instance) {
-            return ModalService.__instance;
+        this.app = document.querySelector('.application');
+
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.RevealPopup, this.onRevealPopup.bind(this));
+    }
+
+    public static getInstance(): ModalService {
+        if (!ModalService.instance) {
+            ModalService.instance = new ModalService();
         }
 
-        ModalService.__instance = this;
-        this.app = document.querySelector('.application');
-        EventBus.on(Events.RevealPopup, this.onRevealPopup.bind(this));
+        return ModalService.instance;
     }
 
     /**
@@ -32,7 +42,7 @@ class ModalService {
      * Колбэк на вызов попапа
      * @param {Object} data - Данные для этого коллбэка
      */
-    onRevealPopup(data) {
+    onRevealPopup(data: any) {
         this.show(data.modalstatus);
     }
 
@@ -41,7 +51,7 @@ class ModalService {
      * Создает и рендерит нужный попап
      * @param {string} modalStatus - тип попапа
      */
-    show(modalStatus) {
+    show(modalStatus: string) {
         if (this.modal) {
             this.modal.remove();
         }
