@@ -9,7 +9,7 @@
 }
 
 .footer__title {
-    color: white;
+    color: var(--white);
 }
 
 .footer__btn {

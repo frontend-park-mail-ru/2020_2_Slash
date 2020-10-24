@@ -10,7 +10,7 @@ import template from './ProfileView.hbs';
 
 class ProfileView extends View {
     constructor(context = {}) {
-        super('Flicks Box', null, context);
+        super('Flicks Box', context);
         this.template = template;
     }
 
@@ -44,15 +44,13 @@ class ProfileView extends View {
         const footer = new Footer();
 
         const data: Context = {
-            Header: header.render(),
             UserInfoBlock: usrInfoBlock.render(),
             ProfileMenuBar: menuBar.render(),
-            Footer: footer.render(),
         };
 
         this.insertIntoContext(data);
 
-        super.show();
+        super.show(this.template(data));
     }
 }
 

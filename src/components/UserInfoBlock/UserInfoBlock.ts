@@ -22,34 +22,34 @@ class UserInfoBlock extends Component {
         super(context, parent);
         this.template = template;
 
-        const onUpdateProfile = (data: any = {}) => {
-            this.context.nickname = data.nickname;
-            this.context.email = data.email;
+        EventBus.on(Events.UpdateUserProfile, this.onUpdateProfile)
+            .on(Events.UpdateProfileAvatar, this.onUploadAvatar);
+    }
 
-            const nicknameLabel = document.querySelector('.user-meta__nickname');
-            const emailLabel = document.querySelector('.user-meta__email');
+    onUpdateProfile = (data: any = {}) => {
+        this.context.nickname = data.nickname;
+        this.context.email = data.email;
 
-            nicknameLabel.innerHTML = data.nickname;
-            emailLabel.innerHTML = data.email;
+        const nicknameLabel = document.querySelector('.user-meta__nickname');
+        const emailLabel = document.querySelector('.user-meta__email');
+
+        nicknameLabel.innerHTML = data.nickname;
+        emailLabel.innerHTML = data.email;
+    }
+
+    onUploadAvatar = (data: any = {}) => {
+        this.context.avatar = data.avatar;
+
+        const avatarBackground = document.querySelector('.profile-view__user-info');
+        avatarBackground.setAttribute('style', `background-image: url('${data.avatar}');`);
+        const avatar = document.querySelector('.user-meta__avatar');
+        avatar.setAttribute('src', `${data.avatar}`);
+
+        const headerData = {
+            avatar: data.avatar,
+            authorized: true,
         }
-
-        const onUploadAvatar = (data: any = {}) => {
-            this.context.avatar = data.avatar;
-
-            const avatarBackground = document.querySelector('.profile-view__user-info');
-            avatarBackground.setAttribute('style', `background-image: url('${data.avatar}');`);
-            const avatar = document.querySelector('.user-meta__avatar');
-            avatar.setAttribute('src', `${data.avatar}`);
-
-            const headerData = {
-                avatar: data.avatar,
-                authorized: true,
-            }
-            EventBus.emit(events.UpdateHeader, headerData);
-        }
-
-        EventBus.on(Events.UpdateUserProfile, onUpdateProfile)
-            .on(Events.UpdateProfileAvatar, onUploadAvatar);
+        EventBus.emit(events.UpdateHeader, headerData);
     }
 }
 

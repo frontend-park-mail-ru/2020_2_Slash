@@ -3,12 +3,15 @@ import MainView from '../views/MainVIew/MainView';
 import ModalService from '../services/ModalService.js';
 import UserModel from '../models/UserModel.js';
 import {SERVER_HOST} from '../consts/settings';
+import View from '../views/View';
 
 /**
  * @class
  * Контроллер для главной страницы
  */
 class MainController extends Controller {
+    view: MainView;
+
     constructor() {
         super(new MainView());
     }

@@ -6,7 +6,6 @@
 }
 
 .content__info-block {
-    font-family: "Roboto", Arial, sans-serif;
     font-weight: lighter;
     height: 550px;
     background-color: black;
@@ -61,7 +60,9 @@
 }
 
 .close-btn:hover {
-    background-color: var(--highly-transparent-white);
+    transition: all 0.1s ease-in-out;
+    transform: scale(1.05);
+    filter: drop-shadow(0px 0px 1px var(--white));
     cursor: pointer;
 }
 
@@ -78,22 +79,21 @@
     color: var(--rating-green);
 }
 
-
 @media (max-width: 1000px) {
+    .info-block__buttons {
+        width: 30vw;
+        padding-top: 4vw;
+    }
+
     .info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn {
         width: 5vw;
         height: 5vw;
         border-radius: 35px;
     }
 
-    .info-block__buttons {
-        width: 30vw;
-        padding-top: 4vw;
-    }
-
     .add-btn__img, .like-btn__img, .dislike-btn__img {
-        width: 3vw;
-        height: 3vw;
+        width: 5vw;
+        height: 5vw;
     }
 }
 
@@ -110,8 +110,8 @@
     }
 
     .add-btn__img, .like-btn__img, .dislike-btn__img {
-        width: 5vw;
-        height: 5vw;
+        width: 7vw;
+        height: 7vw;
     }
 }
 
@@ -124,16 +124,5 @@
     .info-block__buttons {
         width: 50vw;
         padding-top: 4vw;
-    }
-
-    .info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn {
-        width: 9vw;
-        height: 9vw;
-        border-radius:70px;
-    }
-
-    .add-btn__img, .like-btn__img, .dislike-btn__img {
-        width: 7vw;
-        height: 7vw;
     }
 }

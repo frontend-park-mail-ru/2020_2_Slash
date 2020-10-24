@@ -4,7 +4,7 @@
 }
 
 .content__title {
-    color: white;
+    color: var(--white);
     font-size: 1.4vw;
     letter-spacing: 0.1vw;
     font-weight: lighter;
@@ -16,17 +16,17 @@
 .content__slider {
     overflow-x: scroll;
     overflow-y: hidden;
-    height: 16vw;
+    height: 18vw;
     white-space: nowrap;
 }
 
 @media (max-width: 850px) {
     .content__title {
-        font-size: 2vw;
+        font-size: 3vw;
         letter-spacing: 0.1vw;
     }
 
     .content__slider {
-        height: 30vw;
+        height: 40vw;
     }
 }

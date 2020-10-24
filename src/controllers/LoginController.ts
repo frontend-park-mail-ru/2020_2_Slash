@@ -45,6 +45,7 @@ class LoginController extends Controller {
         UserModel.logout().then((response) => {
             if (response.result === Statuses.OK) {
                 EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
+                EventBus.emit(Events.UpdateHeader, {authorized: false});
             }
         }).catch((error) => console.log(error));
     }

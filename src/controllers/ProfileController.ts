@@ -11,6 +11,8 @@ import {SERVER_HOST} from '../consts/settings';
  * Контроллер для страницы профиля
  */
 class ProfileController extends Controller {
+    view: ProfileView;
+
     constructor() {
         super(new ProfileView());
 
