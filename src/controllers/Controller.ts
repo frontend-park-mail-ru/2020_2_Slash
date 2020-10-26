@@ -1,8 +1,8 @@
-import UserModel from "../models/UserModel";
-import {SERVER_HOST} from "../consts/settings";
-import EventBus from "../services/EventBus";
-import Events from "../consts/events";
-import View from "../views/View";
+import UserModel from '../models/UserModel';
+import {SERVER_HOST} from '../consts/settings';
+import EventBus from '../services/EventBus';
+import Events from '../consts/events';
+import View from '../views/View';
 
 abstract class Controller {
     view: View;

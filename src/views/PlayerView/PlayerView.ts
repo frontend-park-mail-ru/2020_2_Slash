@@ -17,7 +17,7 @@ class PlayerView extends View {
             PlayerBar: PlayerBar.render(),
         }
 
-        this.context = {...this.context, data}
+        this.context = {...this.context, data};
 
         this.insertIntoContext(data);
         super.show(this.template(this.context));

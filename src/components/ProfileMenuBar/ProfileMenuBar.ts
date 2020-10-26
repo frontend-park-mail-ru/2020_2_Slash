@@ -27,7 +27,7 @@ class ProfileMenuBar extends Component {
         this.validator = new ValidationService();
 
         ProfileMenuBar.prototype.onSubmit = this.onSubmit.bind(this);
-        EventBus.on(Events.SubmitProfileForm, this.onSubmit); // TODO: Отписываться, а потом вернуть Events.SubmitForm
+        EventBus.on(Events.SubmitProfileForm, this.onSubmit);
 
         EventBus.on(Events.ProfileTabChanged, this.onTabChanged);
     }

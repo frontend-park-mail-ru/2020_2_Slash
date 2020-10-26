@@ -7,8 +7,13 @@ import Footer from '../../components/Footer/Footer';
 import PInfoFormBuilder from '../../tools/builders/PInfoFormBuilder.js';
 import PSecurityFormBuilder from '../../tools/builders/PSecurityFormBuilder.js';
 import template from './ProfileView.hbs';
+import EventBus from "../../services/EventBus";
+import Events from "../../consts/events";
 
 class ProfileView extends View {
+    usrInfoBlock: UserInfoBlock;
+    menuBar: ProfileMenuBar;
+
     constructor(context = {}) {
         super('Flicks Box', context);
         this.template = template;
@@ -17,18 +22,13 @@ class ProfileView extends View {
     show() {
         const {authorized, avatar, nickname, email} = this.context;
 
-        const header = new Header({
-                authorized: authorized,
-                avatar: avatar,
-            });
-
-        const usrInfoBlock = new UserInfoBlock({
+        this.usrInfoBlock = new UserInfoBlock({
                 avatar: avatar,
                 nickname: nickname,
                 email: email,
             });
 
-        const menuBar = new ProfileMenuBar({
+        this.menuBar = new ProfileMenuBar({
                     InfoForm: PInfoFormBuilder.set([
                         {
                             id: 'nickname',
@@ -41,16 +41,22 @@ class ProfileView extends View {
                     SecurityForm: PSecurityFormBuilder.getForm().render(),
                 });
 
-        const footer = new Footer();
-
         const data: Context = {
-            UserInfoBlock: usrInfoBlock.render(),
-            ProfileMenuBar: menuBar.render(),
+            UserInfoBlock: this.usrInfoBlock.render(),
+            ProfileMenuBar: this.menuBar.render(),
         };
 
         this.insertIntoContext(data);
 
         super.show(this.template(data));
+    }
+
+    hide() {
+        EventBus.off(Events.ProfileTabChanged, this.menuBar.onTabChanged)
+            .off(Events.SubmitProfileForm, this.menuBar.onSubmit)
+            .off(Events.UpdateUserProfile, this.usrInfoBlock.onUpdateProfile)
+            .off(Events.UpdateProfileAvatar, this.usrInfoBlock.onUploadAvatar);
+        super.hide();
     }
 }
 

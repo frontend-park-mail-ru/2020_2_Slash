@@ -1,6 +1,6 @@
 import Controller from './Controller';
 import ProfileView from '../views/ProfileView/ProfileView';
-import UserModel from '../models/UserModel.js';
+import UserModel from '../models/UserModel';
 import EventBus from '../services/EventBus.js';
 import Events from '../consts/events';
 import Routes from '../consts/routes';
@@ -106,5 +106,3 @@ class ProfileController extends Controller {
 }
 
 export default ProfileController;
-
-
