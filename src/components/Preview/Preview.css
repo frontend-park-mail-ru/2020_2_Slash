@@ -23,7 +23,7 @@
 }
 
 .preview__name {
-    color: white;
+    color: var(--white);
     font-size: 3em;
     letter-spacing: 0.3em;
     text-transform: uppercase;
@@ -52,7 +52,7 @@
 .play-btn {
     width: 10vw;
     height: 3vw;
-    background-color: white;
+    background-color: var(--white);
 }
 
 .play-btn:hover {
@@ -61,7 +61,7 @@
 }
 
 .play-btn:active {
-    background-color: white;
+    background-color: var(--white);
 }
 
 .play-btn__img, .info-btn__img {
@@ -75,7 +75,7 @@
 }
 
 .info-btn {
-    color: white;
+    color: var(--white);
     margin-left: 15px;
     width: 10vw;
     height: 3vw;
@@ -97,7 +97,7 @@
     height: 3vw;
     background-position: center center;
     background-color: var(--crystal-clear);
-    border: 1px solid white;
+    border: none;
     border-radius: 30px;
     outline: none;
 }
@@ -112,8 +112,8 @@
 }
 
 .sound-btn__img {
-    width: 2vw;
-    height: 2vw;
+    width: 3vw;
+    height: 3vw;
 }
 
 .sound-btn_hidden {
@@ -130,12 +130,12 @@
         height: 6vw;
     }
 
-    .sound-btn {
+    .sound-btn__img, .sound-btn {
         width: 5vw;
         height: 5vw;
     }
 
-    .sound-btn__img, .info-btn__img, .play-btn__img {
+    .info-btn__img, .play-btn__img {
         width: 2.5vw;
         height: 2.5vw;
     }

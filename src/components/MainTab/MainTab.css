@@ -1,5 +1,4 @@
 .info-block__page-main {
-    font-family: "Roboto", Arial, sans-serif;
     height: 100%;
     background-position: center center;
     background-repeat: no-repeat;
@@ -40,7 +39,7 @@
     background-position: center center;
     background-color: var(--crystal-clear);
     outline: none;
-    border: 1px solid var(--white);
+    border: none;
     border-radius: 25px;
 }
 
@@ -54,8 +53,8 @@
 }
 
 .add-btn__img, .like-btn__img, .dislike-btn__img {
-    width: 1.5vw;
-    height: 1.5vw;
+    width: 2.5vw;
+    height: 2.5vw;
 }
 
 .info-block__video-holder {
@@ -106,8 +105,8 @@
     }
 
     .add-btn__img, .like-btn__img, .dislike-btn__img {
-        width: 3vw;
-        height: 3vw;
+        width: 5vw;
+        height: 5vw;
     }
 
     .tabs__list-item-text {
@@ -189,5 +188,16 @@
     .info-block__video {
         border: 2px solid var(--white);
         height: 60%;
+    }
+
+    .info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn {
+        width: 9vw;
+        height: 9vw;
+        border-radius:70px;
+    }
+
+    .add-btn__img, .like-btn__img, .dislike-btn__img {
+        width: 9vw;
+        height: 9vw;
     }
 }

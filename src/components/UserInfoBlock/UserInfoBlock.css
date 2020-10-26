@@ -1,5 +1,4 @@
 .profile-view__user {
-    font-family: "Roboto", Arial, sans-serif;
     min-width: 200px;
     width: 60vw;
     height: 20vw;
@@ -49,6 +48,7 @@
 }
 
 .user-meta__edit-btn {
+    transition: all 0.1s ease-in-out;
     margin: 0 0 3vw 0;
     padding: 0;
     background-position: center center;
@@ -66,7 +66,9 @@
 }
 
 .user-meta__edit-btn:hover {
-    background-color: var(--medium-transparent-white);
+    transition: all 0.1s ease-in-out;
+    transform: scale(1.05);
+    filter: drop-shadow(0px 0px 1px var(--white));
     cursor: pointer;
 }
 

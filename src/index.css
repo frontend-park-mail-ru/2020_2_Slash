@@ -20,12 +20,17 @@
 @import "views/PlayerView/PlayerView.css";
 
 body {
+    font-family: "Inter", Arial, sans-serif;
     background-color: var(--main-color);
     padding: 0;
     margin: 0;
-    font-family: "Roboto", Arial, sans-serif;
     font-size: 1vw;
     font-weight: lighter;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("../public/fonts/Inter.ttf");
 }
 
 ::-webkit-scrollbar {

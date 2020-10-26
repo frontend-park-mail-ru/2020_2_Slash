@@ -6,13 +6,13 @@ import View from "../views/View";
 
 abstract class Controller {
     view: View;
-    private readonly _onUpdateUserInfo: any;
 
     protected constructor(view: View) {
         this.view = view;
 
-        this._onUpdateUserInfo = this.onUpdateUserInfo.bind(this)
-        EventBus.on(Events.UpdateUserInfo, this._onUpdateUserInfo);
+        if (!EventBus.listeners.updateUserInfo) {
+            EventBus.on(Events.UpdateUserInfo, this.onUpdateUserInfo);
+        }
     }
 
     switchOn(data: any = {}) {}
@@ -20,10 +20,10 @@ abstract class Controller {
     onSwitchOn(data?: any) {}
 
     switchOff() {
-        EventBus.off(Events.UpdateUserInfo, this._onUpdateUserInfo);
+        EventBus.off(Events.UpdateUserInfo, this.onUpdateUserInfo);
     }
 
-    onUpdateUserInfo() {
+    onUpdateUserInfo = () => {
         UserModel.getProfile().then((response) => {
             const sessionData: any = {
                 authorized: false,

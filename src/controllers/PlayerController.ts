@@ -7,6 +7,8 @@ import PlayerService from '../services/PlayerService'
  * Контроллер для страницы профиля
  */
 class PlayerController extends Controller {
+    view: PlayerView;
+
     private playerService: PlayerService;
 
     constructor() {

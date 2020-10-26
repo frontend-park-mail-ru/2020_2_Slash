@@ -5,7 +5,7 @@ import Player from '../../components/Player/Player';
 
 class PlayerView extends View {
     constructor(title: string = 'Flicks box', context = {}) {
-        super(title, null, context);
+        super(title, context, 'player');
         this.template = template;
     }
 
@@ -17,8 +17,10 @@ class PlayerView extends View {
             PlayerBar: PlayerBar.render(),
         }
 
-        this.insertIntoContext(data)
-        super.show();
+        this.context = {...this.context, data}
+
+        this.insertIntoContext(data);
+        super.show(this.template(this.context));
     }
 }
 

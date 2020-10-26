@@ -1,5 +1,5 @@
 .profile-view {
-    color: white;
+    color: var(--white);
     min-height: calc(100vh - 2 * var(--header-height));
 }
 

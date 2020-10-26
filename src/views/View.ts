@@ -1,23 +1,53 @@
 import Context from '../tools/Context';
+import Header from '../components/Header/Header';
+import Footer from '..//components/Footer/Footer';
+import template from './View.hbs';
 
 abstract class View {
     root: Element;
+    main: Element;
     context: Context;
-    template: any
+    template: any;
+    baseTemplate: any;
+    typeView: string;
 
-    protected constructor(title?: string, template?: any, context?: Context) {
+    protected constructor(title?: string, context?: Context, type?: string) {
         document.title = title;
         this.root = document.querySelector('.application');
-        this.template = template;
         this.context = context;
+        this.baseTemplate = template;
+        this.typeView = type;
     }
 
-    show() {
-        this.root.innerHTML = this.template(this.context);
+    show(contentTemplate: any) {
+        if (!document.querySelector('.header__logo') && (this.typeView != 'player')) {
+            const header = new Header({
+                    authorized: this.context.authorized,
+                    avatar: this.context.avatar,
+                },
+                this.root
+            );
+
+            const footer = new Footer();
+
+            this.context.Header = header.render();
+            this.context.Footer = footer.render();
+            this.root.innerHTML = this.baseTemplate(this.context);
+        } else if (this.typeView === 'player') {
+            this.root.innerHTML = contentTemplate;
+        }
+        this.main = this.root.querySelector('.main');
+        if (this.main) {
+            this.main.innerHTML = contentTemplate;
+        }
     }
 
     hide() {
-        this.root.innerHTML = '';
+        if (this.typeView === 'player') {
+            this.root.innerHTML = '';
+        } else {
+            this.main.innerHTML = '';
+        }
     }
 
     setContext(inputContext: Context) {
