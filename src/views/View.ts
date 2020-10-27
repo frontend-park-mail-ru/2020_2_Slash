@@ -22,10 +22,10 @@ abstract class View {
     show(contentTemplate: any) {
         if (!document.querySelector('.header__logo') && this.typeView !== 'player') {
             const header = new Header({
-                    authorized: this.context.authorized,
-                    avatar: this.context.avatar,
-                },
-                this.root
+                authorized: this.context.authorized,
+                avatar: this.context.avatar,
+            },
+            this.root,
             );
 
             const footer = new Footer();
@@ -56,12 +56,12 @@ abstract class View {
     }
 
     addToContext(obj: Context) {
-        this.context = {...this.context, ...obj}
+        this.context = {...this.context, ...obj};
     }
 
     insertIntoContext(...data: Context[]) {
         data.forEach((obj) => {
-            this.addToContext(obj)
+            this.addToContext(obj);
         });
     }
 }

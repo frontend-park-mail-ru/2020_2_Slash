@@ -26,7 +26,7 @@ class Slider extends Component {
      * @return {*|string}
      */
     render() {
-        let items: Array<string> = [];
+        const items: Array<string> = [];
         this.context.content.forEach((item: any) => {
             items.push(new SliderItem(item).render());
         });

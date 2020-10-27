@@ -41,13 +41,13 @@ class SignupController extends Controller {
     }
 
     onSignupUser(data: any = {}) {
-        const {nickname, email, password, repeated_password} = data.params;
+        const {nickname, email, password, repeatedPassword} = data.params;
 
         UserModel.register({
             nickname: nickname,
             email: email,
             password: password,
-            repeated_password: repeated_password,
+            repeated_password: repeatedPassword,
         }).then((response) => {
             if (!response.error) {
                 EventBus.emit(Events.PathChanged, {

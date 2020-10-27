@@ -1,5 +1,5 @@
 const setTime = (inputSeconds: number): string => {
-    let hours: any = Math.floor(inputSeconds / 3600);
+    const hours: any = Math.floor(inputSeconds / 3600);
     let minutes: any = Math.floor(inputSeconds / 60 - hours * 60);
     let seconds: any = Math.floor(inputSeconds - minutes * 60 - hours * 3600);
 
@@ -16,10 +16,10 @@ const setTime = (inputSeconds: number): string => {
     }
 
     return `${toStr(hours)}:${toStr(minutes)}:${toStr(seconds)}`;
-}
+};
 
 const toStr = (input: any) => {
     return input.toFixed(0).toString().padStart(2, '0');
-}
+};
 
 export default setTime;

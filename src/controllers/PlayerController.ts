@@ -1,6 +1,6 @@
 import Controller from './Controller';
 import PlayerView from '../views/PlayerView/PlayerView';
-import PlayerService from '../services/PlayerService'
+import PlayerService from '../services/PlayerService';
 
 /**
  * @class
@@ -20,7 +20,7 @@ class PlayerController extends Controller {
         this.view.insertIntoContext( {
             title: 'Witcher',
             poster: '/static/img/witcher2.jpg',
-            video: '/static/img/witcher.mp4'
+            video: '/static/img/witcher.mp4',
         });
         this.view.show();
 

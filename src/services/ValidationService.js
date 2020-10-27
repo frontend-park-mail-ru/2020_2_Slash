@@ -67,7 +67,7 @@ class ValidationService {
     /**
      * @function
      * Проверяет форму регистрации
-     * @return {{data: {password: *, nickname: *, email: *, repeated_password: *}, isValid: boolean}} isValidForm
+     * @return {{data: {password: *, nickname: *, email: *, repeatedPassword: *}, isValid: boolean}} isValidForm
      * @param {Node} form - Форма для валидации
      * @param {string} error - Пришедшая с сервера ошибка валидации
      */
@@ -110,7 +110,7 @@ class ValidationService {
                 nickname: nicknameInput.value,
                 email: emailInput.value,
                 password: passwordInput.value,
-                repeated_password: repeatPasswordInput.value,
+                repeatedPassword: repeatPasswordInput.value,
             },
         };
     }

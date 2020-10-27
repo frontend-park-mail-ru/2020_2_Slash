@@ -15,12 +15,12 @@ class MainView extends View {
 
     show() {
         const preview = new Preview({
-                preview: this.context.preview,
-            });
+            preview: this.context.preview,
+        });
 
         const contentBlock = new ContentBlock({
-                blocks: this.context.blocks,
-            });
+            blocks: this.context.blocks,
+        });
 
         const data: Context = {
             Preview: preview.render(),

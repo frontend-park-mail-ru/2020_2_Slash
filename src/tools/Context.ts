@@ -1,3 +1,5 @@
-export default interface Context {
-    [key: string]: any
+interface Context {
+    [key: string]: any,
 }
+
+export default Context;

@@ -3,7 +3,6 @@ import Context from '../../tools/Context';
 import template from './UserInfoBlock.hbs';
 import EventBus from '../../services/EventBus';
 import Events from '../../consts/events';
-import events from '../../consts/events';
 
 /**
  * @class
@@ -48,8 +47,8 @@ class UserInfoBlock extends Component {
         const headerData = {
             avatar: data.avatar,
             authorized: true,
-        }
-        EventBus.emit(events.UpdateHeader, headerData);
+        };
+        EventBus.emit(Events.UpdateHeader, headerData);
     }
 }
 
