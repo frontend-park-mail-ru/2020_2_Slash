@@ -27,14 +27,14 @@ class InfoBlock extends Component {
 
         this.tabBar = new TabBar({
             tabs: [
-                    {
-                        key: 'mainTab',
-                        value: 'О фильме',
-                    },
-                    {
-                        key: 'detailsTab',
-                        value: 'Детали',
-                    }]
+                {
+                    key: 'mainTab',
+                    value: 'О фильме',
+                },
+                {
+                    key: 'detailsTab',
+                    value: 'Детали',
+                }],
         });
 
         this.context.CurrentTab = new MainTab(this.context.contentData).render();

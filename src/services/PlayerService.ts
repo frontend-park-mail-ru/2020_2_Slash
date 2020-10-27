@@ -18,7 +18,7 @@ class PlayerService {
     constructor() {
         this._onVideoPlay = this.onVideoPlay.bind(this);
         this._onVideoPause = this.onVideoPause.bind(this);
-        this._onMuteVolume = this.onMuteVolume.bind(this)
+        this._onMuteVolume = this.onMuteVolume.bind(this);
         this._onVolumeOn = this.onVolumeOn.bind(this);
         this._onFullScreenOn = this.onFullScreenOn.bind(this);
         this._onFullScreenOff = this.onFullScreenOff.bind(this);
@@ -50,7 +50,7 @@ class PlayerService {
         volumeBar.addEventListener('pointermove', this.hideProgressBar.bind(this));
         volumeBar.addEventListener('pointerout', this.showProgressBar.bind(this));
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const button = document.querySelector('.player-bar__play-btn');
             const buttonImg = document.querySelector('.player-play-btn__img');
             buttonImg.setAttribute('src', '/static/img/player-play.svg');
@@ -97,19 +97,18 @@ class PlayerService {
         const timelineMiddle: any = document.getElementsByClassName('timeline__middle')[0];
 
         timelineMiddle.style.width = `${100 * currentPosition / width}%`;
-
     }
 
     onHoverOffTimeline(event: any) {
         const timelineMiddle: any = document.getElementsByClassName('timeline__middle')[0];
 
-        timelineMiddle.style.width = `0%`;
+        timelineMiddle.style.width = '0%';
     }
 
     onVolumeUpdate(event: any) {
         this.video.volume = event.target.value;
         this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
-            '/static/img/player-sound.svg', 'mute')
+            '/static/img/player-sound.svg', 'mute');
     }
 
     setVolumeValue(value: number) {
@@ -123,14 +122,14 @@ class PlayerService {
         this.setVolumeValue(0);
 
         this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
-            '/static/img/player-mute.svg', 'volumeOn')
+            '/static/img/player-mute.svg', 'volumeOn');
     }
 
     onVolumeOn(event: any) {
         this.setVolumeValue(0.5);
 
         this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
-            '/static/img/player-sound.svg', 'mute')
+            '/static/img/player-sound.svg', 'mute');
     }
 
     onUpdateTime(event: any) {

@@ -1,8 +1,6 @@
 import Http from '../services/Http.js';
 import ApiMethods from '../consts/ApiMethods';
-import {SignUpRequest} from './Requests';
-import {LoginRequest} from './Requests';
-import {UpdateProfileRequest} from './Requests';
+import {SignUpRequest, LoginRequest, UpdateProfileRequest} from './Requests';
 import {SERVER_API_V1_PREFIX} from '../consts/settings';
 
 class UserModel {

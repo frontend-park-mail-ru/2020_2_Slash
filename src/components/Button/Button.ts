@@ -1,5 +1,5 @@
 import Component from '../Component';
-import Context from "../../tools/Context";
+import Context from '../../tools/Context';
 import template from './Button.hbs';
 
 /**
