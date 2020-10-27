@@ -5,8 +5,8 @@ import Routes from '../consts/routes';
 import Modals from '../consts/modals';
 import Statuses from '../consts/statuses';
 import MainView from '../views/MainVIew/MainView';
-import SessionModel from '../models/SessionModel.js';
-import UserModel from '../models/UserModel.js';
+import SessionModel from '../models/SessionModel';
+import UserModel from '../models/UserModel';
 
 /**
  * @class

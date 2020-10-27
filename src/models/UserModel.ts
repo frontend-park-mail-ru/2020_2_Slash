@@ -1,9 +1,12 @@
 import Http from '../services/Http.js';
-import ApiMethods from '../consts/ApiMethods.ts';
-import {SERVER_API_V1_PREFIX} from '../consts/settings.ts';
+import ApiMethods from '../consts/ApiMethods';
+import {SignUpRequest} from './Requests';
+import {LoginRequest} from './Requests';
+import {UpdateProfileRequest} from './Requests';
+import {SERVER_API_V1_PREFIX} from '../consts/settings';
 
 class UserModel {
-    register(data) {
+    register(data: SignUpRequest) {
         return Http.fetchPost({
             route: ApiMethods.UserRegister,
             body: JSON.stringify({...data}),
@@ -22,21 +25,21 @@ class UserModel {
         }).then((response) => response.json());
     }
 
-    login(data) {
+    login(data: LoginRequest) {
         return Http.fetchPost({
             route: ApiMethods.UserLogin,
             body: JSON.stringify({...data}),
         }).then((response) => response.json());
     }
 
-    updateProfile(data) {
+    updateProfile(data: UpdateProfileRequest) {
         return Http.fetchPut({
             route: ApiMethods.UserProfile,
             body: JSON.stringify({...data}),
         }).then((response) => response.json());
     }
 
-    uploadAvatar(data) {
+    uploadAvatar(data: File) {
         const formData = new FormData();
         formData.append('avatar', data);
 

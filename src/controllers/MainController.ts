@@ -1,7 +1,7 @@
 import Controller from './Controller';
 import MainView from '../views/MainVIew/MainView';
 import ModalService from '../services/ModalService.js';
-import UserModel from '../models/UserModel.js';
+import UserModel from '../models/UserModel';
 import {SERVER_HOST} from '../consts/settings';
 import View from '../views/View';
 
