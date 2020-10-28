@@ -1,7 +1,11 @@
-import FormBuilder from './FormBuilder.js';
+import FormBuilder from './FormBuilder';
 import Form from '../../components/Form/Form';
+import {ButtonDataType, InputsDataType} from "../type";
 
 class PSecurityFormBuilder extends FormBuilder {
+    private buttonData: ButtonDataType;
+    private inputsData: InputsDataType[];
+
     constructor() {
         super();
         this.prepareFormData();
@@ -43,8 +47,8 @@ class PSecurityFormBuilder extends FormBuilder {
     }
 
     getForm() {
-        this.setButton(this.button);
-        this.setInputs(this.inputsData);
+        this.setButton();
+        this.setInputs();
 
         return new Form({
             Button: this.button.render(),

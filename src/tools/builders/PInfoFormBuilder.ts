@@ -1,7 +1,17 @@
-import FormBuilder from './FormBuilder.js';
+import FormBuilder from './FormBuilder';
 import Form from '../../components/Form/Form';
+import {ButtonDataType, InputsDataType} from "../type";
+
+interface UserInfoBlock {
+    id: string;
+    value: string;
+}
 
 class PInfoFormBuilder extends FormBuilder {
+    private buttonData: ButtonDataType;
+    private inputsData: InputsDataType[];
+
+
     constructor() {
         super();
         this.prepareFormData();
@@ -38,8 +48,8 @@ class PInfoFormBuilder extends FormBuilder {
     }
 
     getForm() {
-        this.setButton(this.button);
-        this.setInputs(this.inputsData);
+        this.setButton();
+        this.setInputs();
 
         return new Form({
             Button: this.button.render(),
@@ -47,9 +57,9 @@ class PInfoFormBuilder extends FormBuilder {
         });
     }
 
-    set(data) {
-        this.inputsData.forEach((input) => {
-            data.forEach((item) => {
+    set(data: UserInfoBlock[]) {
+        this.inputsData.forEach((input: InputsDataType) => {
+            data.forEach((item: UserInfoBlock) => {
                 if (input.id === item.id) {
                     input.value = item.value;
                 }

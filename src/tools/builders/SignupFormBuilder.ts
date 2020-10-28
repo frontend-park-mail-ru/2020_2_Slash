@@ -1,7 +1,13 @@
-import FormBuilder from './FormBuilder.js';
+import FormBuilder from './FormBuilder';
 import Form from '../../components/Form/Form';
+import {ButtonDataType, HelperDataType, InputsDataType} from "../type";
 
 class SignupFormBuilder extends FormBuilder {
+    private heading: string;
+    private helper: HelperDataType;
+    private buttonData: ButtonDataType;
+    private inputsData: InputsDataType[];
+
     constructor() {
         super();
         this.prepareFormData();
@@ -61,8 +67,8 @@ class SignupFormBuilder extends FormBuilder {
     }
 
     getForm() {
-        this.setButton(this.button);
-        this.setInputs(this.inputsData);
+        this.setButton();
+        this.setInputs();
 
         return new Form({
             heading: 'Регистрация',

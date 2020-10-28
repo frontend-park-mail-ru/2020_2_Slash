@@ -1,12 +1,14 @@
-import Modals from '../../consts/modals.ts';
-import MiniModal from '../../components/MiniModal/MiniModal.ts';
+import Modals from '../../consts/modals';
+import MiniModal from '../../components/MiniModal/MiniModal';
 
 class ModalBuilder {
+    private readonly app: Element;
+
     constructor() {
         this.app = document.querySelector('.application');
     }
 
-    build(modalStatus) {
+    build(modalStatus: string) {
         if (modalStatus === Modals.authMini) {
             return this.buildAuthModal();
         }
