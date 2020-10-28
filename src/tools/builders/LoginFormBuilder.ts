@@ -1,7 +1,14 @@
-import FormBuilder from './FormBuilder.js';
+import FormBuilder from './FormBuilder';
 import Form from '../../components/Form/Form';
+import {ButtonDataType, HelperDataType, InputsDataType} from "../type";
+
 
 class LoginFormBuilder extends FormBuilder {
+    private readonly heading: string;
+    private readonly helper: HelperDataType;
+    private buttonData: ButtonDataType;
+    private inputsData: InputsDataType[];
+
     constructor() {
         super();
         this.prepareFormData();
@@ -52,8 +59,8 @@ class LoginFormBuilder extends FormBuilder {
     }
 
     getForm() {
-        this.setButton(this.button);
-        this.setInputs(this.inputsData);
+        this.setButton();
+        this.setInputs();
 
         return new Form({
             heading: 'Авторизация',

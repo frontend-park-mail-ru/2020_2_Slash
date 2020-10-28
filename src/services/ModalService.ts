@@ -1,10 +1,13 @@
 import Modals from '../consts/modals';
-import SignupBuilderForm from '../tools/builders/SignupFormBuilder.js';
-import LoginFormBuilder from '../tools/builders/LoginFormBuilder.js';
+import SignupBuilderForm from '../tools/builders/SignupFormBuilder';
+import LoginFormBuilder from '../tools/builders/LoginFormBuilder';
 import Popup from '../components/Popup/Popup';
 import EventBus from './EventBus';
 import Events from '../consts/events';
-import ModalBuilder from '../tools/builders/ModalBuilder.js';
+import ModalBuilder from '../tools/builders/ModalBuilder';
+import MiniModal from "../components/MiniModal/MiniModal";
+
+type Modal = MiniModal | Popup;
 
 /**
  * Класс, отвечающий за логику создания попапов
@@ -14,7 +17,7 @@ class ModalService {
 
     private static instance: ModalService;
     private readonly app: HTMLElement;
-    private modal: Popup;
+    private modal: Modal;
 
     /**
      * Создает экземпляр ModalService или возвращает его
