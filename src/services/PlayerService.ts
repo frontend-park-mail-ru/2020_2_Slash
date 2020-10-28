@@ -30,7 +30,8 @@ class PlayerService {
     }
 
     start() {
-        EventBus.on(Events.VideoPlay, this._onVideoPlay)
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.VideoPlay, this._onVideoPlay)
             .on(Events.VideoPause, this._onVideoPause)
             .on(Events.Mute, this._onMuteVolume)
             .on(Events.VolumeOn, this._onVolumeOn)
@@ -155,7 +156,7 @@ class PlayerService {
     onFullScreenOn(event: any) {
         document.querySelector('.watch__page').requestFullscreen();
 
-        const btnBack = document.querySelector('.watch__back-btn');
+        const btnBack: HTMLButtonElement = document.querySelector('.watch__back-btn');
         btnBack.style.display = 'none';
 
         this.changeButton('.player-bar__fullscreen-btn', '.fullscreen-btn__img',
@@ -189,7 +190,8 @@ class PlayerService {
     }
 
     stop() {
-        EventBus.off(Events.VideoPlay, this._onVideoPlay)
+        const eventBus = EventBus.getInstance();
+        eventBus.off(Events.VideoPlay, this._onVideoPlay)
             .off(Events.VideoPause, this._onVideoPause)
             .off(Events.Mute, this._onMuteVolume)
             .off(Events.VolumeOn, this._onVolumeOn)

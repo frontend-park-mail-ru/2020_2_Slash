@@ -1,26 +1,42 @@
-import EventBus from './EventBus.js';
-import Events from '../consts/events.ts';
-import InfoBlock from '../components/InfoBlock/InfoBlock.ts';
+import EventBus from './EventBus';
+import Events from '../consts/events';
+import InfoBlock from '../components/InfoBlock/InfoBlock';
+
+interface InfoBlockType {
+    contentId: number,
+    contentData: object,
+}
 
 /**
  * @class
  * Класс, отвечающий за создание и наполнение содержимым инфоблока о фильме/сериале
  */
 class ContentService {
+    private static instance: ContentService;
+
     /**
-     * Создает экземпляр ContentService или возвращает его
+     * Создает экземпляр ContentService
      *
      * @constructor
-     * @return {this}
      * @this  {ContentService}
      */
-    constructor() {
-        if (ContentService.__instance) {
-            return ContentService.__instance;
+    private constructor() {
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this));
+    }
+
+    /**
+     * Возвращает экземпляр ContentService
+     *
+     * @function
+     * @this  {ContentService}
+     */
+    public static getInstance(): ContentService {
+        if (!ContentService.instance) {
+            ContentService.instance = new ContentService();
         }
 
-        ContentService.__instance = this;
-        EventBus.on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this));
+        return ContentService.instance;
     }
 
     /**
@@ -29,7 +45,7 @@ class ContentService {
      * Наполняет данными и отрисовывает инфоблок
      * @param {Object} data - Данные для этого коллбэка
      */
-    onContentInfoRequested(data) {
+    onContentInfoRequested(data: {event: string, id: number}) {
         const contentData = { // запрос за контентом по id
             poster: '/static/img/witcher2.jpg',
             video: '/static/img/witcher.mp4',
@@ -59,13 +75,15 @@ class ContentService {
             isAdded: false,
         };
 
-        const infoBlock = new InfoBlock({
+        const infoBlockData: InfoBlockType = {
             contentId: data.id,
             contentData: contentData,
-        });
+        }
+
+        const infoBlock = new InfoBlock(infoBlockData);
 
         infoBlock.render();
     }
 }
 
-export default new ContentService();
+export default ContentService;

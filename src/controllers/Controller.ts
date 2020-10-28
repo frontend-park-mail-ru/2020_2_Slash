@@ -4,14 +4,26 @@ import EventBus from '../services/EventBus';
 import Events from '../consts/events';
 import View from '../views/View';
 
+export interface ResponseUserType {
+    id: number,
+    nickname: string,
+    avatar: string,
+    email: string,
+    status: string,
+    result: string,
+    error: boolean,
+}
+
 abstract class Controller {
     view: View;
+    private readonly _onUpdateUserInfo: any;
 
     protected constructor(view: View) {
         this.view = view;
 
-        if (!EventBus.listeners.updateUserInfo) {
-            EventBus.on(Events.UpdateUserInfo, this.onUpdateUserInfo);
+        const eventBus = EventBus.getInstance();
+        if (!eventBus.getListeners().updateUserInfo) {
+            eventBus.on(Events.UpdateUserInfo, this.onUpdateUserInfo);
         }
     }
 
@@ -20,11 +32,12 @@ abstract class Controller {
     onSwitchOn(data?: any) {}
 
     switchOff() {
-        EventBus.off(Events.UpdateUserInfo, this.onUpdateUserInfo);
+        const eventBus = EventBus.getInstance();
+        eventBus.off(Events.UpdateUserInfo, this._onUpdateUserInfo);
     }
 
     onUpdateUserInfo = () => {
-        UserModel.getProfile().then((response) => {
+        UserModel.getProfile().then((response: ResponseUserType) => {
             const sessionData: any = {
                 authorized: false,
             };
@@ -35,8 +48,9 @@ abstract class Controller {
                 sessionData.avatar = avatar;
             }
 
-            EventBus.emit(Events.UpdateHeader, sessionData);
-        }).catch((error) => console.log(error));
+            const eventBus = EventBus.getInstance();
+            eventBus.emit(Events.UpdateHeader, sessionData);
+        }).catch((error: Error) => console.log(error));
     }
 }
 

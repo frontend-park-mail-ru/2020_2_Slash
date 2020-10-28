@@ -26,7 +26,8 @@ class Header extends Component {
         this.UserBlock = new UserHeader(this.context);
         this.context.UserBlock = this.UserBlock.render();
 
-        EventBus.on(Events.UpdateHeader, this.onUpdate.bind(this));
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.UpdateHeader, this.onUpdate.bind(this));
     }
 
     onUpdate(data: any = {}) {

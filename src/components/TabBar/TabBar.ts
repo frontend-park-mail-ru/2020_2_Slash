@@ -1,7 +1,8 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
-import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events';
+import EventBus from '../../services/EventBus';
+
 import template from './TabBar.hbs';
 
 /**
@@ -27,7 +28,8 @@ class TabBar extends Component {
             }
         });
 
-        EventBus.on(Events.ContentInfoTabChanged, this.onTabChanged);
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.ContentInfoTabChanged, this.onTabChanged);
     }
 
     /**

@@ -1,9 +1,26 @@
 'use strict';
 
-import ContentService from './ContentService.js';
-import Routes from '../consts/routes.ts';
-import EventBus from './EventBus.js';
-import Events from '../consts/events.ts';
+import ContentService from './ContentService';
+import Routes from '../consts/routes';
+import EventBus from './EventBus';
+import Events from '../consts/events';
+import Modals from "../consts/modals";
+import CustomObject from "../tools/type";
+
+interface RoutObjectType {
+    reg: RegExp,
+    controller: object,
+}
+
+interface QueryType {
+    resourceId: number,
+}
+
+interface onPathChangeDataType {
+    event: string,
+    path: string,
+    misc: CustomObject,
+}
 
 /**
  * Занимается роутингом приложения и работает с History API
@@ -17,33 +34,42 @@ class Router {
      * @this  {Router}
      * @param {Node} app - Родительский элемент элемента
      */
-    constructor(app) {
+
+    private application: HTMLElement;
+    private routes: RoutObjectType[];
+    private currentController: any;
+    private contentService: ContentService;
+
+    constructor(app: HTMLElement) {
         this.application = app;
         this.routes = [];
 
-        EventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
-        EventBus.on(Events.RedirectBack, this.back.bind(this));
+        this.contentService = ContentService.getInstance();
 
-        this.application.addEventListener('click', function(e) {
-            const {target} = e;
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
+        eventBus.on(Events.RedirectBack, this.back.bind(this));
+        eventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
 
-            const closestLink = target.closest('a');
-            const closestButton = target.closest('button');
+        this.application.addEventListener('click', (e: Event) => {
+            const target = <HTMLInputElement>e.target;
+
+            const closestLink: HTMLElement = target.closest('a');
+            const closestButton: HTMLElement = target.closest('button');
             if (closestLink instanceof HTMLAnchorElement) {
                 e.preventDefault();
 
-                const data = Object.assign({}, closestLink.dataset);
+                const data = {...closestLink.dataset};
 
                 data.path = closestLink.getAttribute('href');
-
-                EventBus.emit(data.event, data);
+                eventBus.emit(data.event, data);
             } else if (closestButton instanceof HTMLButtonElement) {
                 e.preventDefault();
 
-                const data = Object.assign({}, closestButton.dataset);
-                EventBus.emit(data.event, data);
+                const data = {...closestButton.dataset};
+                eventBus.emit(data.event, data);
             } else if (target instanceof HTMLMediaElement) {
-                EventBus.emit(target.dataset.event, {});
+                eventBus.emit(target.dataset.event);
             }
         });
     }
@@ -53,15 +79,16 @@ class Router {
      * Регистрирует путь - добавляет в массив класса роутера путь
      * @return  {this}
      * @param {string} path - Путь, который нужно добавить
-     * @param {Object} controller - Контроллер, которыц соответствует этому пути
+     * @param {Object} controller - Контроллер, который соответствует этому пути
      */
-    register(path, controller) {
+    register(path: string, controller: object) {
         const reg = new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)') + '\/?$');
 
-        this.routes.push({
+        const obj: RoutObjectType = {
             reg: reg,
             controller: controller,
-        });
+        }
+        this.routes.push(obj);
 
         return this;
     }
@@ -72,15 +99,15 @@ class Router {
      * @return  {Object, string} controller, query
      * @param {string} path - Путь, из которого нужно вытащить данные запроса
      */
-    getRouteData(path) {
-        let targetController = null;
-        const query = {};
+    getRouteData(path: string) {
+        let targetController: object = null;
+        let query: QueryType = {resourceId: 0};
 
         this.routes.forEach(({reg, controller}) => {
             const res = path.match(reg);
 
             if (res) {
-                const data = res.slice(1)[0];
+                const data: string = res.slice(1)[0];
 
                 if (data) {
                     query.resourceId = +data;
@@ -110,11 +137,12 @@ class Router {
      * @param {string} path - Путь, из которого нужно вытащить данные запроса
      * @param {Object} data
      */
-    go(path, data = {}) {
+    go(path: string, data = {}) {
         const routeData = this.getRouteData(path);
 
         if (this.currentController === routeData.controller) {
-            EventBus.emit(Events.UpdateUserInfo, data);
+            const eventBus = EventBus.getInstance();
+            eventBus.emit(Events.UpdateUserInfo, data);
             return;
         }
 
@@ -133,7 +161,7 @@ class Router {
             window.history.pushState(null, null, path);
         }
 
-        data = routeData.query ? Object.assign(data, routeData.query) : data;
+        data = {...data, ...routeData};
         this.currentController.switchOn(data);
     }
 
@@ -142,7 +170,7 @@ class Router {
      * Колбэк на изменение пути
      * @param {Object} data - Данные для этого коллбэка
      */
-    onPathChanged(data) {
+    onPathChanged(data: onPathChangeDataType) {
         this.go(data.path, data.misc || {});
     }
 

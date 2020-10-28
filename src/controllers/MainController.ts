@@ -1,9 +1,8 @@
 import Controller from './Controller';
 import MainView from '../views/MainVIew/MainView';
-import ModalService from '../services/ModalService.js';
 import UserModel from '../models/UserModel';
+import ModalService from '../services/ModalService';
 import {SERVER_HOST} from '../consts/settings';
-import View from '../views/View';
 
 /**
  * @class
@@ -174,7 +173,7 @@ class MainController extends Controller {
             this.view.show();
 
             this.onSwitchOn(data);
-        }).catch((error) => console.log(error));
+        }).catch((error: Error) => console.log(error));
     }
 
     onSwitchOn(data: any = {}) {

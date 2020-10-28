@@ -3,8 +3,8 @@ import Context from '../../tools/Context';
 import TabBar from '../TabBar/TabBar';
 import MainTab from '../MainTab/MainTab';
 import DetailsTab from '../DetailsTab/DetailsTab';
-import EventBus from '../../services/EventBus.js';
 import Events from '../../consts/events';
+import EventBus from '../../services/EventBus';
 import template from './InfoBlock.hbs';
 
 /**
@@ -39,8 +39,9 @@ class InfoBlock extends Component {
 
         this.context.CurrentTab = new MainTab(this.context.contentData).render();
 
-        EventBus.on(Events.ContentInfoTabChanged, this.onTabChanged.bind(this));
-        EventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.ContentInfoTabChanged, this.onTabChanged.bind(this));
+        eventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
 
         this.context.TabBar = this.tabBar.render();
     }

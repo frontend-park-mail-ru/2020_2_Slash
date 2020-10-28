@@ -50,7 +50,8 @@ class ProfileView extends View {
     }
 
     hide() {
-        EventBus.off(Events.ProfileTabChanged, this.menuBar.onTabChanged)
+        const eventBus = EventBus.getInstance();
+        eventBus.off(Events.ProfileTabChanged, this.menuBar.onTabChanged)
             .off(Events.SubmitProfileForm, this.menuBar.onSubmit)
             .off(Events.UpdateUserProfile, this.usrInfoBlock.onUpdateProfile)
             .off(Events.UpdateProfileAvatar, this.usrInfoBlock.onUploadAvatar);

@@ -1,5 +1,5 @@
 import './index.css';
-import Router from './services/Router.js';
+import Router from './services/Router.ts';
 import Routes from './consts/routes.ts';
 import MainController from './controllers/MainController';
 import ProfileController from './controllers/ProfileController';

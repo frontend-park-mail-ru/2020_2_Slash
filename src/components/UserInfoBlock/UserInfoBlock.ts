@@ -9,6 +9,7 @@ import Events from '../../consts/events';
  * Компонента инфо пользователя для страницы профиля - ник, почта, автарка
  */
 class UserInfoBlock extends Component {
+
     /**
      * Создает экземпляр UserInfoBlock
      *
@@ -21,7 +22,9 @@ class UserInfoBlock extends Component {
         super(context, parent);
         this.template = template;
 
-        EventBus.on(Events.UpdateUserProfile, this.onUpdateProfile)
+
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.UpdateUserProfile, this.onUpdateProfile)
             .on(Events.UpdateProfileAvatar, this.onUploadAvatar);
     }
 
@@ -38,7 +41,6 @@ class UserInfoBlock extends Component {
 
     onUploadAvatar = (data: any = {}) => {
         this.context.avatar = data.avatar;
-
         const avatarBackground = document.querySelector('.profile-view__user-info');
         avatarBackground.setAttribute('style', `background-image: url('${data.avatar}');`);
         const avatar = document.querySelector('.user-meta__avatar');
@@ -48,7 +50,8 @@ class UserInfoBlock extends Component {
             avatar: data.avatar,
             authorized: true,
         };
-        EventBus.emit(Events.UpdateHeader, headerData);
+        const eventBus = EventBus.getInstance();
+        eventBus.emit(Events.UpdateHeader, headerData);
     }
 }
 

@@ -1,27 +1,30 @@
-import Controller from './Controller';
+import Controller, {ResponseUserType} from './Controller';
 import ProfileView from '../views/ProfileView/ProfileView';
 import UserModel from '../models/UserModel';
-import EventBus from '../services/EventBus.js';
+import EventBus from '../services/EventBus';
 import Events from '../consts/events';
 import Routes from '../consts/routes';
 import {SERVER_HOST} from '../consts/settings';
+
 
 /**
  * @class
  * Контроллер для страницы профиля
  */
 class ProfileController extends Controller {
+
     view: ProfileView;
 
     constructor() {
         super(new ProfileView());
 
-        EventBus.on(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this))
-            .on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
+        const eventBus = EventBus.getInstance();
+        eventBus.on(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this));
+        eventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
     switchOn(data: any = {}) {
-        UserModel.getProfile().then((response) => {
+        UserModel.getProfile().then((response: ResponseUserType) => {
             let sessionData: any = {
                 authorized: false,
             };
@@ -39,14 +42,16 @@ class ProfileController extends Controller {
                 return;
             }
 
-            EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
+            const eventBus = EventBus.getInstance();
+            eventBus.emit(Events.PathChanged, {path: Routes.MainPage});
         });
     }
 
     switchOff() {
         super.switchOff();
         this.view.hide();
-        EventBus.off(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this))
+        const eventBus = EventBus.getInstance();
+        eventBus.off(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this))
             .off(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
@@ -61,9 +66,10 @@ class ProfileController extends Controller {
         UserModel.updateProfile({
             nickname: nickname,
             email: email,
-        }).then((response) => {
+        }).then((response: ResponseUserType) => {
             if (!response.error) {
-                EventBus.emit(Events.UpdateUserProfile, {
+                const eventBus = EventBus.getInstance();
+                eventBus.emit(Events.UpdateUserProfile, {
                     nickname: nickname,
                     email: email,
                 });
@@ -71,7 +77,7 @@ class ProfileController extends Controller {
             }
 
             data.form.onError(response.error, data.formType);
-        }).catch((error) => console.log(error));
+        }).catch((error: Error) => console.log(error));
     }
 
     /**
@@ -91,13 +97,13 @@ class ProfileController extends Controller {
                         alert(response.error);
                         return;
                     }
-
                     const data = {
                         avatar: `${SERVER_HOST}/avatars/${response.avatar}`,
                     };
 
-                    EventBus.emit(Events.UpdateProfileAvatar, data);
-                }).catch((error) => console.log(error));
+                    const eventBus = EventBus.getInstance();
+                    eventBus.emit(Events.UpdateProfileAvatar, data);
+                }).catch((error: Error) => console.log(error));
             }
         });
 
