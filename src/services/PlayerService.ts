@@ -1,5 +1,5 @@
 import setTime from '../tools/time';
-import EventBus from './EventBus';
+import eventBus from './EventBus';
 import Events from '../consts/events';
 
 class PlayerService {
@@ -30,7 +30,6 @@ class PlayerService {
     }
 
     start() {
-        const eventBus = EventBus.getInstance();
         eventBus.on(Events.VideoPlay, this._onVideoPlay)
             .on(Events.VideoPause, this._onVideoPause)
             .on(Events.Mute, this._onMuteVolume)
@@ -190,7 +189,6 @@ class PlayerService {
     }
 
     stop() {
-        const eventBus = EventBus.getInstance();
         eventBus.off(Events.VideoPlay, this._onVideoPlay)
             .off(Events.VideoPause, this._onVideoPause)
             .off(Events.Mute, this._onMuteVolume)

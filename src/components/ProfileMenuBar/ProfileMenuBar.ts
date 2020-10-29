@@ -2,7 +2,7 @@ import Component from '../Component';
 import Context from '../../tools/Context';
 import Events from '../../consts/events';
 import Modals from '../../consts/modals';
-import EventBus from '../../services/EventBus';
+import eventBus from '../../services/EventBus';
 import ValidationService from '../../services/ValidationService';
 import template from './ProfileMenuBar.hbs';
 
@@ -25,7 +25,6 @@ class ProfileMenuBar extends Component {
         this.template = template;
 
         this.validator = new ValidationService();
-        const eventBus = EventBus.getInstance();
 
         ProfileMenuBar.prototype.onSubmit = this.onSubmit.bind(this);
 
@@ -79,7 +78,6 @@ class ProfileMenuBar extends Component {
             const targetEvent = data.formtype === Modals.profileInfo ? Events.UpdateProfileInfo : null;
 
             if (targetEvent) {
-                const eventBus = EventBus.getInstance();
                 eventBus.emit(targetEvent, {
                     params: validationData.data,
                     formType: data.formtype,

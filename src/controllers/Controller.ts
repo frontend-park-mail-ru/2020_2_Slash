@@ -1,6 +1,6 @@
 import UserModel from '../models/UserModel';
 import {SERVER_HOST} from '../consts/settings';
-import EventBus from '../services/EventBus';
+import eventBus from '../services/EventBus';
 import Events from '../consts/events';
 import View from '../views/View';
 
@@ -21,7 +21,6 @@ abstract class Controller {
     protected constructor(view: View) {
         this.view = view;
 
-        const eventBus = EventBus.getInstance();
         if (!eventBus.getListeners().updateUserInfo) {
             eventBus.on(Events.UpdateUserInfo, this.onUpdateUserInfo);
         }
@@ -32,7 +31,6 @@ abstract class Controller {
     onSwitchOn(data?: any) {}
 
     switchOff() {
-        const eventBus = EventBus.getInstance();
         eventBus.off(Events.UpdateUserInfo, this._onUpdateUserInfo);
     }
 
@@ -48,7 +46,6 @@ abstract class Controller {
                 sessionData.avatar = avatar;
             }
 
-            const eventBus = EventBus.getInstance();
             eventBus.emit(Events.UpdateHeader, sessionData);
         }).catch((error: Error) => console.log(error));
     }

@@ -6,7 +6,7 @@ import Statuses from '../consts/statuses';
 import MainView from '../views/MainVIew/MainView';
 import SessionModel from '../models/SessionModel';
 import UserModel from '../models/UserModel';
-import EventBus from '../services/EventBus';
+import eventBus from '../services/EventBus';
 
 /**
  * @class
@@ -17,8 +17,7 @@ class SignupController extends Controller {
     constructor() {
         super(new MainView());
 
-        this.eventBus = EventBus.getInstance();
-        this.eventBus.on(Events.SignupUser, this.onSignupUser.bind(this));
+        eventBus.on(Events.SignupUser, this.onSignupUser.bind(this));
     }
 
     switchOn(data: any = {}) {
@@ -33,7 +32,7 @@ class SignupController extends Controller {
                 };
             }
 
-            this.eventBus.emit(Events.PathChanged, callbackData);
+            eventBus.emit(Events.PathChanged, callbackData);
         }).catch((error: Error) => console.log(error));
     }
 
@@ -52,7 +51,7 @@ class SignupController extends Controller {
             repeated_password: repeatedPassword,
         }).then((response: ResponseUserType) => {
             if (!response.error) {
-                this.eventBus.emit(Events.PathChanged, {
+                eventBus.emit(Events.PathChanged, {
                     path: Routes.MainPage,
                 });
 

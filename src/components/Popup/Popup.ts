@@ -2,7 +2,7 @@ import Component from '../Component';
 import Context from '../../tools/Context';
 import Modals from '../../consts/modals';
 import Events from '../../consts/events';
-import EventBus from '../../services/EventBus';
+import eventBus from '../../services/EventBus';
 import ValidationService from '../../services/ValidationService';
 import template from './Popup.hbs';
 
@@ -31,7 +31,6 @@ class Popup extends Component {
 
         Popup.prototype._onSubmit = this.onSubmit.bind(this);
 
-        const eventBus = EventBus.getInstance();
         eventBus.on(Events.SubmitForm, this._onSubmit);
 
         this._onClick = function(event: any) {
@@ -63,7 +62,6 @@ class Popup extends Component {
 
             if (targetEvent) {
                 // TODO: Popup.__instance не валиден внутри колбэка EventBus'a - нужно додумать, как удалить событие
-                const eventBus = EventBus.getInstance();
                 eventBus.emit(targetEvent, {
                     popup: this,
                     params: validationData.data,
@@ -102,7 +100,6 @@ class Popup extends Component {
      */
     onDestroy() {
         this.parent.removeEventListener('click', this._onClick);
-        const eventBus = EventBus.getInstance();
         eventBus.off(Events.SubmitForm, this._onSubmit);
     }
 

@@ -1,7 +1,7 @@
 import Controller, {ResponseUserType} from './Controller';
 import ProfileView from '../views/ProfileView/ProfileView';
 import UserModel from '../models/UserModel';
-import EventBus from '../services/EventBus';
+import eventBus from '../services/EventBus';
 import Events from '../consts/events';
 import Routes from '../consts/routes';
 import {SERVER_HOST} from '../consts/settings';
@@ -18,7 +18,6 @@ class ProfileController extends Controller {
     constructor() {
         super(new ProfileView());
 
-        const eventBus = EventBus.getInstance();
         eventBus.on(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this));
         eventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
@@ -42,7 +41,6 @@ class ProfileController extends Controller {
                 return;
             }
 
-            const eventBus = EventBus.getInstance();
             eventBus.emit(Events.PathChanged, {path: Routes.MainPage});
         });
     }
@@ -50,7 +48,6 @@ class ProfileController extends Controller {
     switchOff() {
         super.switchOff();
         this.view.hide();
-        const eventBus = EventBus.getInstance();
         eventBus.off(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this))
             .off(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
@@ -68,7 +65,6 @@ class ProfileController extends Controller {
             email: email,
         }).then((response: ResponseUserType) => {
             if (!response.error) {
-                const eventBus = EventBus.getInstance();
                 eventBus.emit(Events.UpdateUserProfile, {
                     nickname: nickname,
                     email: email,
@@ -101,7 +97,6 @@ class ProfileController extends Controller {
                         avatar: `${SERVER_HOST}/avatars/${response.avatar}`,
                     };
 
-                    const eventBus = EventBus.getInstance();
                     eventBus.emit(Events.UpdateProfileAvatar, data);
                 }).catch((error: Error) => console.log(error));
             }

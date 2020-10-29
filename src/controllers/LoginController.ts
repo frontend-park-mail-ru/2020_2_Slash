@@ -6,7 +6,7 @@ import Events from '../consts/events';
 import Statuses from '../consts/statuses';
 import UserModel from '../models/UserModel';
 import SessionModel from '../models/SessionModel';
-import EventBus from '../services/EventBus';
+import eventBus from '../services/EventBus';
 
 /**
  * @class
@@ -16,7 +16,6 @@ class LoginController extends Controller {
     constructor() {
         super(new MainView());
 
-        const eventBus = EventBus.getInstance();
         eventBus.on(Events.LoginUser, this.onLoginUser.bind(this));
         eventBus.on(Events.LogoutUser, this.onLogout.bind(this));
     }
@@ -32,7 +31,6 @@ class LoginController extends Controller {
                     modalStatus: Modals.signin,
                 };
             }
-            const eventBus = EventBus.getInstance();
             eventBus.emit(Events.PathChanged, callbackData);
         }).catch((error: Error) => console.log(error));
     }
@@ -45,7 +43,6 @@ class LoginController extends Controller {
     onLogout(data: any = {}) {
         UserModel.logout().then((response: ResponseUserType) => {
             if (response.result === Statuses.OK) {
-                const eventBus = EventBus.getInstance();
                 eventBus.emit(Events.PathChanged, {path: Routes.MainPage});
                 eventBus.emit(Events.UpdateHeader, {authorized: false});
             }
@@ -60,7 +57,6 @@ class LoginController extends Controller {
             password: password,
         }).then((response: ResponseUserType) => {
             if (!response.error) {
-                const eventBus = EventBus.getInstance();
                 eventBus.emit(Events.PathChanged, {
                     path: Routes.MainPage,
                 });

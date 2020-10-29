@@ -2,7 +2,7 @@ import Modals from '../consts/modals';
 import SignupBuilderForm from '../tools/builders/SignupFormBuilder';
 import LoginFormBuilder from '../tools/builders/LoginFormBuilder';
 import Popup from '../components/Popup/Popup';
-import EventBus from './EventBus';
+import eventBus from './EventBus';
 import Events from '../consts/events';
 import ModalBuilder from '../tools/builders/ModalBuilder';
 import MiniModal from "../components/MiniModal/MiniModal";
@@ -28,7 +28,6 @@ class ModalService {
     constructor() {
         this.app = document.querySelector('.application');
 
-        const eventBus = EventBus.getInstance();
         eventBus.on(Events.RevealPopup, this.onRevealPopup.bind(this));
     }
 
