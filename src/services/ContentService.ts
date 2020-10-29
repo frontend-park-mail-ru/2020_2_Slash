@@ -1,4 +1,4 @@
-import EventBus from './EventBus';
+import eventBus from './EventBus';
 import Events from '../consts/events';
 import InfoBlock from '../components/InfoBlock/InfoBlock';
 
@@ -21,7 +21,6 @@ class ContentService {
      * @this  {ContentService}
      */
     private constructor() {
-        const eventBus = EventBus.getInstance();
         eventBus.on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this));
     }
 

@@ -2,10 +2,10 @@
 
 import ContentService from './ContentService';
 import Routes from '../consts/routes';
-import EventBus from './EventBus';
+import eventBus from './EventBus';
 import Events from '../consts/events';
 import Modals from "../consts/modals";
-import CustomObject from "../tools/type";
+import {CustomObject} from "../tools/type";
 
 interface RoutObjectType {
     reg: RegExp,
@@ -46,7 +46,6 @@ class Router {
 
         this.contentService = ContentService.getInstance();
 
-        const eventBus = EventBus.getInstance();
         eventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
         eventBus.on(Events.RedirectBack, this.back.bind(this));
         eventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
@@ -141,7 +140,6 @@ class Router {
         const routeData = this.getRouteData(path);
 
         if (this.currentController === routeData.controller) {
-            const eventBus = EventBus.getInstance();
             eventBus.emit(Events.UpdateUserInfo, data);
             return;
         }

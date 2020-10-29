@@ -1,4 +1,4 @@
-import CustomObject from "../tools/type";
+import {CustomObject} from "../tools/type";
 
 interface Callback {
     (param: any[]): void;
@@ -45,4 +45,4 @@ class EventBus {
     }
 }
 
-export default EventBus;
+export default EventBus.getInstance();

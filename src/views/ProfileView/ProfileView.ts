@@ -5,7 +5,7 @@ import ProfileMenuBar from '../../components/ProfileMenuBar/ProfileMenuBar';
 import PInfoFormBuilder from '../../tools/builders/PInfoFormBuilder';
 import PSecurityFormBuilder from '../../tools/builders/PSecurityFormBuilder';
 import template from './ProfileView.hbs';
-import EventBus from '../../services/EventBus';
+import eventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 
 class ProfileView extends View {
@@ -50,7 +50,6 @@ class ProfileView extends View {
     }
 
     hide() {
-        const eventBus = EventBus.getInstance();
         eventBus.off(Events.ProfileTabChanged, this.menuBar.onTabChanged)
             .off(Events.SubmitProfileForm, this.menuBar.onSubmit)
             .off(Events.UpdateUserProfile, this.usrInfoBlock.onUpdateProfile)

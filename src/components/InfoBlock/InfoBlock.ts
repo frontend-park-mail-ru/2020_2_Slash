@@ -4,7 +4,7 @@ import TabBar from '../TabBar/TabBar';
 import MainTab from '../MainTab/MainTab';
 import DetailsTab from '../DetailsTab/DetailsTab';
 import Events from '../../consts/events';
-import EventBus from '../../services/EventBus';
+import eventBus from '../../services/EventBus';
 import template from './InfoBlock.hbs';
 
 /**
@@ -39,7 +39,6 @@ class InfoBlock extends Component {
 
         this.context.CurrentTab = new MainTab(this.context.contentData).render();
 
-        const eventBus = EventBus.getInstance();
         eventBus.on(Events.ContentInfoTabChanged, this.onTabChanged.bind(this));
         eventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
 

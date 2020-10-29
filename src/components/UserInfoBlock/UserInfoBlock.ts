@@ -1,7 +1,7 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './UserInfoBlock.hbs';
-import EventBus from '../../services/EventBus';
+import eventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 
 /**
@@ -22,8 +22,6 @@ class UserInfoBlock extends Component {
         super(context, parent);
         this.template = template;
 
-
-        const eventBus = EventBus.getInstance();
         eventBus.on(Events.UpdateUserProfile, this.onUpdateProfile)
             .on(Events.UpdateProfileAvatar, this.onUploadAvatar);
     }
@@ -50,7 +48,6 @@ class UserInfoBlock extends Component {
             avatar: data.avatar,
             authorized: true,
         };
-        const eventBus = EventBus.getInstance();
         eventBus.emit(Events.UpdateHeader, headerData);
     }
 }

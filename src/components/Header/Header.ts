@@ -1,7 +1,7 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './Header.hbs';
-import EventBus from '../../services/EventBus';
+import eventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 import UserHeader from '../UserHeader/UserHeader';
 
@@ -26,7 +26,6 @@ class Header extends Component {
         this.UserBlock = new UserHeader(this.context);
         this.context.UserBlock = this.UserBlock.render();
 
-        const eventBus = EventBus.getInstance();
         eventBus.on(Events.UpdateHeader, this.onUpdate.bind(this));
     }
 
