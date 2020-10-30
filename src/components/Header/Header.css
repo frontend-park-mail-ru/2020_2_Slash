@@ -61,20 +61,6 @@
     display: none;
 }
 
-.header__avatar {
-    width: 32px;
-    height: 32px;
-}
-
-.header__user {
-    display: flex;
-    align-items: center;
-}
-
-.header__arrow {
-    margin-left: 5px;
-}
-
 @media (max-width: 850px) {
     .header__menu {
         display: none;
@@ -89,11 +75,6 @@
     }
 
     .header__search-img {
-        width: 24px;
-        height: 24px;
-    }
-
-    .header__avatar {
         width: 24px;
         height: 24px;
     }

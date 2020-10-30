@@ -143,4 +143,39 @@
     .play-btn__text, .info-btn__text {
         font-size: 1.8vw;
     }
+
+    .sound-btn, .sound-btn__img {
+        width: 6vw;
+        height: 6vw;
+    }
+}
+
+@media (max-width: 375px) {
+    .info-btn, .play-btn {
+        width: 30vw;
+        height: 9vw;
+    }
+
+    .sound-btn__img, .sound-btn {
+        width: 9vw;
+        height: 9vw;
+    }
+
+    .info-btn__img, .play-btn__img {
+        width: 5vw;
+        height: 5vw;
+    }
+
+    .play-btn__text, .info-btn__text {
+        font-size: 2.5vw;
+    }
+
+    .sound-btn, .sound-btn__img {
+        width: 8vw;
+        height: 8vw;
+    }
+
+    .preview__panel {
+        top: 45vw;
+    }
 }

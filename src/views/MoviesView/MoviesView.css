@@ -1,0 +1,158 @@
+.movies__banner {
+    position: absolute;
+    z-index: 2;
+    top: 70px;
+    left: 0;
+    display: flex;
+    width: 15%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.movies-title {
+    margin: 0;
+    padding: 0;
+    color: var(--white);
+    font-size: 1.5em;
+}
+
+.genres-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 7vw;
+    height: 2vw;
+    border: none;
+    outline: none;
+    padding: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: var(--filter-btn);
+}
+
+.genres-btn:hover {
+    background-color: var(--filter-btn-hover);
+}
+
+.genres-btn__label {
+    font-size: 1vw;
+    color: var(--white);
+}
+
+.genres-btn__arrow {
+    width: 1vw;
+    height: 1vw;
+}
+
+.genres__sub-menu {
+    position: absolute;
+    display: flex;
+    height: 10vw;
+    top: 2.5vw;
+    padding: 1vw;
+    background-color: var(--filter-btn-hover);
+}
+
+.sub-menu__list {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.sub-menu__item {
+    font-size: 1em;
+    color: var(--white);
+    flex-basis: 20%;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.sub-menu__item:hover {
+    transition: all 0.1s ease-in-out;
+    transform: scale(1.02);
+    filter: drop-shadow(0px 0px 0.5px var(--white));
+}
+
+.sub-menu__close-btn {
+    padding: 0;
+    width: 1.5vw;
+    height: 1.5vw;
+    background-position: center center;
+    background-color: var(--crystal-clear);
+    outline: none;
+    border: none;
+    border-radius: 25px;
+}
+
+@media (max-width: 850px) {
+    .movies__banner {
+        width: 30%;
+    }
+
+    .movies-title {
+        font-size: 3em;
+    }
+
+    .genres-btn {
+        width: 14vw;
+        height: 4vw;
+        border-radius: 3px;
+    }
+
+    .genres-btn__label {
+        font-size: 2.5vw;
+    }
+
+    .genres-btn__arrow {
+        width: 2vw;
+        height: 2vw;
+    }
+
+    .genres__sub-menu {
+        top: 4vw;
+        height: 15vw;
+        display: block;
+        overflow-x: scroll;
+    }
+
+    .sub-menu__item {
+        font-size: 2.3em;
+        flex-basis: 20%;
+    }
+}
+
+@media (max-width: 375px) {
+    .movies__banner {
+        width: 40%;
+    }
+
+    .movies-title {
+        font-size: 5em;
+    }
+
+    .genres-btn {
+        width: 20vw;
+        height: 8vw;
+        border-radius: 3px;
+    }
+
+    .genres-btn__label {
+        font-size: 3vw;
+    }
+
+    .genres-btn__arrow {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    .genres__sub-menu {
+        top: 8vw;
+        height: 20vw;
+        display: block;
+        overflow-x: scroll;
+    }
+
+    .sub-menu__item {
+        font-size: 3em;
+        flex-basis: 20%;
+    }
+}

@@ -48,7 +48,6 @@ class Router {
 
         eventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
         eventBus.on(Events.RedirectBack, this.back.bind(this));
-        eventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
 
         this.application.addEventListener('click', (e: Event) => {
             const target = <HTMLInputElement>e.target;
@@ -100,7 +99,13 @@ class Router {
      */
     getRouteData(path: string) {
         let targetController: object = null;
-        let query: QueryType = {resourceId: 0};
+        let query: QueryType = {resourceId: null};
+
+        const result = this.getParam(path);
+        if (result) {
+            query.resourceId = +result.data;
+            path = result.path;
+        }
 
         this.routes.forEach(({reg, controller}) => {
             const res = path.match(reg);
@@ -122,6 +127,28 @@ class Router {
         };
     }
 
+    getParam(path: string) {
+        const reg = new RegExp('^' + '/movie' + '(\\?\\w+\\=\\w+)?$');
+        let res = path.match(reg);
+
+        let data: string = null;
+
+        if (res) {
+            data = res.slice(1)[0];
+
+            if (data) {
+                const key = new RegExp('^' + `\\?\\w+` + '(\\=\\' + 'w+)?$');
+                res = data.match(key);
+                data = res.slice(1)[0].substr(1, data.length - 1);
+                return {
+                    data: data,
+                    path: '/movie'
+                }
+            }
+        }
+        return null;
+    }
+
     start() {
         window.addEventListener('popstate', (event) => {
             this.go(window.location.pathname);
@@ -137,10 +164,11 @@ class Router {
      * @param {Object} data
      */
     go(path: string, data = {}) {
+        eventBus.emit(Events.UpdateUserInfo, data);
+
         const routeData = this.getRouteData(path);
 
-        if (this.currentController === routeData.controller) {
-            eventBus.emit(Events.UpdateUserInfo, data);
+        if (this.currentController === routeData.controller && !routeData.query) {
             return;
         }
 

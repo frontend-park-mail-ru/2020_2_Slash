@@ -13,7 +13,7 @@ import eventBus from '../services/EventBus';
  * Контроллер для страницы регистрации
  */
 class SignupController extends Controller {
-
+    eventBus: EventBus
     constructor() {
         super(new MainView());
 
