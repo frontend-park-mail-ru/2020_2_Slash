@@ -157,23 +157,11 @@ class MainController extends Controller {
             ],
         };
 
-        UserModel.getProfile().then((response) => {
-            const sessionData: any = {
-                authorized: false,
-            };
+        this.view.insertIntoContext(contentData);
 
-            if (!response.error) {
-                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : '/static/img/default.svg';
-                sessionData.authorized = true;
-                sessionData.avatar = avatar;
-            }
+        this.view.show();
 
-            this.view.insertIntoContext(sessionData, contentData);
-
-            this.view.show();
-
-            this.onSwitchOn(data);
-        }).catch((error: Error) => console.log(error));
+        this.onSwitchOn(data);
     }
 
     onSwitchOn(data: any = {}) {

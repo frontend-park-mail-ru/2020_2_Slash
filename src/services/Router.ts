@@ -111,7 +111,7 @@ class Router {
             const res = path.match(reg);
 
             if (res) {
-                const data: string = res.slice(1)[0];
+                const data: string = res[1];
 
                 if (data) {
                     query.resourceId = +data;
@@ -128,25 +128,16 @@ class Router {
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^' + '/movie' + '(\\?\\w+\\=\\w+)?$');
-        let res = path.match(reg);
+        const reg = new RegExp('^/(\\w+)\\?\\w+=\(\\w+)?$');
+        const result = path.match(reg);
 
-        let data: string = null;
-
-        if (res) {
-            data = res.slice(1)[0];
-
-            if (data) {
-                const key = new RegExp('^' + `\\?\\w+` + '(\\=\\' + 'w+)?$');
-                res = data.match(key);
-                data = res.slice(1)[0].substr(1, data.length - 1);
-                return {
-                    data: data,
-                    path: '/movie'
-                }
-            }
+        if (!result) {
+            return null;
         }
-        return null;
+        return {
+            path: `/${result[1]}`,
+            data: result[2]
+        }
     }
 
     start() {
@@ -168,7 +159,7 @@ class Router {
 
         const routeData = this.getRouteData(path);
 
-        if (this.currentController === routeData.controller && !routeData.query) {
+        if (this.currentController === routeData.controller && !routeData.query.resourceId) {
             return;
         }
 

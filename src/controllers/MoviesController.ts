@@ -191,11 +191,11 @@ class MoviesController extends Controller {
     }
 
     onOpenSubMenuGenres = (data: any = {}) => {
-        const genresSubMenu = document.getElementsByClassName('genres__sub-menu')[0];
-        if (genresSubMenu.classList[1] == 'hidden') {
+        const genresSubMenu = document.querySelector('.genres .hidden');
+        if (genresSubMenu !== null) {
             genresSubMenu.classList.remove('hidden');
         } else {
-            genresSubMenu.classList.add('hidden');
+            document.querySelector('.genres__sub-menu').classList.add('hidden');
         }
     }
 }

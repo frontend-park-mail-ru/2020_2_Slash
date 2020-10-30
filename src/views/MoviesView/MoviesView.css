@@ -55,10 +55,13 @@
 
 .sub-menu__list {
     display: flex;
-    flex-flow: column wrap;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    writing-mode: vertical-lr;
 }
 
 .sub-menu__item {
+    writing-mode: horizontal-tb;
     font-size: 1em;
     color: var(--white);
     flex-basis: 20%;
