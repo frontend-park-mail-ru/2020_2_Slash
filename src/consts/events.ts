@@ -23,6 +23,7 @@ enum Events {
     FullscreenModeOn = 'fullscreenModeOn',
     FullscreenModeOff = 'fullscreenModeOff',
     UpdateHeader = 'updateHeader',
+    OpenSubMenuGenres = 'openSubMenuGenres',
 }
 
 export default Events;

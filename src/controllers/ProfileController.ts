@@ -6,7 +6,6 @@ import Events from '../consts/events';
 import Routes from '../consts/routes';
 import {SERVER_HOST} from '../consts/settings';
 
-
 /**
  * @class
  * Контроллер для страницы профиля

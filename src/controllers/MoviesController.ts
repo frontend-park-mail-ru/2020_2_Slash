@@ -1,29 +1,40 @@
 import Controller from './Controller';
-import MainView from '../views/MainVIew/MainView';
-import UserModel from '../models/UserModel';
+import MoviesView from '../views/MoviesView/MoviesView';
 import ModalService from '../services/ModalService';
-import {SERVER_HOST} from '../consts/settings';
+import Events from "../consts/events";
+import eventBus from '../services/EventBus';
 
 /**
  * @class
  * Контроллер для главной страницы
  */
-class MainController extends Controller {
-    view: MainView;
+class MoviesController extends Controller {
+    view: MoviesView;
 
     constructor() {
-        super(new MainView());
+        super(new MoviesView());
+
+        eventBus.on(Events.OpenSubMenuGenres, this.onOpenSubMenuGenres);
     }
 
     switchOn(data: any = {}) {
+        if (data.query.resourceId) {
+            this.showGenrePage(data.query.resourceId);
+            return;
+        }
         const contentData = { // фейковый контент, пока не реализовали
+            genres: [
+                {name: 'аниме', id: 1}, {name: 'биографический', id: 2}, {name: 'боевик', id: 3},
+                {name: 'вестерн', id: 4}, {name: 'военный', id: 5}, {name: 'детектив', id: 6},
+                {name: 'детский', id: 9}, {name: 'документальный', id: 8},
+            ],
             preview: {
                 poster: '/static/img/movie.png',
-                title: 'Психопаспорт',
+                title: 'Фильм',
             },
             blocks: [
                 {
-                    title: 'Топ',
+                    title: 'Триллеры',
                     content: [
                         {
                             id: 1,
@@ -56,7 +67,7 @@ class MainController extends Controller {
                     ],
                 },
                 {
-                    title: 'Последнее',
+                    title: 'Ужасы',
                     content: [
                         {
                             id: 7,
@@ -89,7 +100,7 @@ class MainController extends Controller {
                     ],
                 },
                 {
-                    title: 'Фильмы',
+                    title: 'Драмы',
                     content: [
                         {
                             id: 14,
@@ -122,7 +133,7 @@ class MainController extends Controller {
                     ],
                 },
                 {
-                    title: 'Сериалы',
+                    title: 'Комедии',
                     content: [
                         {
                             id: 111,
@@ -174,6 +185,19 @@ class MainController extends Controller {
         super.switchOff();
         this.view.hide();
     }
+
+    showGenrePage = (index: number) => {
+        //TODO: Сделать открытие контента по жанру (в соотетствующем тикете)
+    }
+
+    onOpenSubMenuGenres = (data: any = {}) => {
+        const genresSubMenu = document.querySelector('.genres .hidden');
+        if (genresSubMenu !== null) {
+            genresSubMenu.classList.remove('hidden');
+        } else {
+            document.querySelector('.genres__sub-menu').classList.add('hidden');
+        }
+    }
 }
 
-export default MainController;
+export default MoviesController;

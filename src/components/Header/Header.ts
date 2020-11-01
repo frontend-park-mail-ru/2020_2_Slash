@@ -33,7 +33,10 @@ class Header extends Component {
         this.context.authorized = data.authorized;
         this.context.avatar = data.avatar;
 
-        document.querySelector('.header__user-block').innerHTML = this.UserBlock.template(this.context);
+        const userBlock = document.querySelector('.header__user-block');
+        if (userBlock) {
+            userBlock.innerHTML = this.UserBlock.template(this.context);
+        }
     }
 }
 

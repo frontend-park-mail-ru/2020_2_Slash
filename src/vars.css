@@ -11,6 +11,8 @@
     --low-transparent-gray: rgba(20, 20, 20, 0.6);
     --blackout-for-popup: rgba(0,0,0,.5);
     --white: rgba(255, 255, 255, 255);
+    --filter-btn: rgba(0, 0, 0, 1);
+    --filter-btn-hover: rgba(0, 0, 0, 0.3);
     --light-grey: #CCCCCC;
     --low-transparent-white: rgba(255, 255, 255, 0.6);
     --medium-transparent-white: rgba(255, 255, 255, 0.4);

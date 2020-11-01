@@ -3,20 +3,6 @@
     cursor: pointer;
 }
 
-.header__control-bars {
-    display: flex;
-    align-items: center;
-}
-
-.header__search-img {
-    width: 32px;
-    height: 32px;
-}
-
-.header__burger {
-    display: none;
-}
-
 .header__avatar {
     width: 32px;
     height: 32px;
@@ -29,6 +15,8 @@
 
 .header__arrow {
     margin-left: 5px;
+    width: 1vw;
+    height: 2vw;
 }
 
 @media (max-width: 850px) {
@@ -39,5 +27,17 @@
     .header__avatar {
         width: 24px;
         height: 24px;
+    }
+
+    .header__arrow {
+        width: 2vw;
+        height: 4vw;
+    }
+}
+
+@media (max-width: 375px) {
+    .header__arrow {
+        width: 4vw;
+        height: 8vw;
     }
 }

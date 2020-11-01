@@ -1,5 +1,6 @@
 @import "vars.css";
 @import "components/Header/Header.css";
+@import "components/UserHeader/UserHeader.css";
 @import "components/Footer/Footer.css";
 @import "components/Preview/Preview.css";
 @import "components/Slider/Slider.css";
@@ -18,6 +19,7 @@
 @import "components/Player/Player.css";
 @import "views/ProfileView/ProfileView.css";
 @import "views/PlayerView/PlayerView.css";
+@import "views/MoviesView/MoviesView.css";
 
 body {
     font-family: "Inter", Arial, sans-serif;
@@ -37,6 +39,10 @@ body {
     display: none;
 }
 
+a {
+    text-decoration: none;
+}
+
 .main-view {
     min-height: calc(100vh - 2 * var(--header-height));
 }
@@ -50,25 +56,6 @@ body {
 }
 
 @media (max-width: 850px) {
-    .info-btn, .play-btn {
-        width: 20vw;
-        height: 6vw;
-    }
-
-    .sound-btn {
-        width: 5vw;
-        height: 5vw;
-    }
-
-    .sound-btn__img, .info-btn__img, .play-btn__img {
-        width: 2.5vw;
-        height: 2.5vw;
-    }
-
-    .play-btn__text, .info-btn__text {
-        font-size: 1.8vw;
-    }
-
     .pad-both {
         padding: 0 20px;
     }

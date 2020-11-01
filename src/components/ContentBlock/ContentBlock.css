@@ -2,3 +2,9 @@
     position: relative;
     margin-top: 40vw;
 }
+
+@media (max-width: 375px) {
+    .content {
+        margin-top: 55vw;
+    }
+}

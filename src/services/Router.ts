@@ -48,7 +48,6 @@ class Router {
 
         eventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
         eventBus.on(Events.RedirectBack, this.back.bind(this));
-        eventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
 
         this.application.addEventListener('click', (e: Event) => {
             const target = <HTMLInputElement>e.target;
@@ -100,13 +99,19 @@ class Router {
      */
     getRouteData(path: string) {
         let targetController: object = null;
-        let query: QueryType = {resourceId: 0};
+        let query: QueryType = {resourceId: null};
+
+        const result = this.getParam(path);
+        if (result) {
+            query.resourceId = +result.data;
+            path = result.path;
+        }
 
         this.routes.forEach(({reg, controller}) => {
             const res = path.match(reg);
 
             if (res) {
-                const data: string = res.slice(1)[0];
+                const data: string = res[1];
 
                 if (data) {
                     query.resourceId = +data;
@@ -120,6 +125,19 @@ class Router {
             controller: targetController,
             query: query,
         };
+    }
+
+    getParam(path: string) {
+        const reg = new RegExp('^/(\\w+)\\?\\w+=\(\\w+)?$');
+        const result = path.match(reg);
+
+        if (!result) {
+            return null;
+        }
+        return {
+            path: `/${result[1]}`,
+            data: result[2]
+        }
     }
 
     start() {
@@ -137,10 +155,11 @@ class Router {
      * @param {Object} data
      */
     go(path: string, data = {}) {
+        eventBus.emit(Events.UpdateUserInfo, data);
+
         const routeData = this.getRouteData(path);
 
-        if (this.currentController === routeData.controller) {
-            eventBus.emit(Events.UpdateUserInfo, data);
+        if (this.currentController === routeData.controller && !routeData.query.resourceId) {
             return;
         }
 
