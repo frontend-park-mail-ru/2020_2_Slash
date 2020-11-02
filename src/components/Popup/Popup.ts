@@ -5,6 +5,7 @@ import Events from '../../consts/events';
 import eventBus from '../../services/EventBus';
 import ValidationService from '../../services/ValidationService';
 import template from './Popup.hbs';
+import {Errors, Error} from '../../consts/errors';
 
 /**
  * @class
@@ -71,7 +72,7 @@ class Popup extends Component {
         }
     }
 
-    onError(error: string, formType: string) {
+    onError(error: Error, formType: string) {
         const form = this.parent.getElementsByTagName('form')[0];
 
         if (formType === Modals.signup) {

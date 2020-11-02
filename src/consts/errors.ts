@@ -1,10 +1,17 @@
-// TODO: Договориться с бэком об умных ошибках
-enum Errors {
-    EmailAlreadyExists = 'User with this Email already exists',
-    EmailAlreadyExistsProfile = 'email already exists', // TODO: на бэке две разные ошибки на этот кейс
-    EmailDoesntExist = 'email doesn\'t exist',
-    WrongPassword = 'wrong password',
-    PasswordsDontMatch = 'passwords don\'t match',
+export enum Errors {
+    CodeBadRequest = 101,
+    CodeInternalError,
+    CodeUserUnauthorized,
+    CodeUserDoesNotExist,
+    CodeTooShortPassword,
+    CodeEmailDoesNotExist,
+    CodeWrongPassword,
+    CodeEmailAlreadyExists,
+    CodeWrongImgExtension,
+    CodeSessionDoesNotExist,
 }
 
-export default Errors;
+export interface Error {
+    code: number,
+    user_message: string,
+}

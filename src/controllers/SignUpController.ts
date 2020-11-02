@@ -1,19 +1,17 @@
-import Controller, {ResponseUserType} from './Controller';
+import ResponseType from '../tools/ResponseType';
+import Controller from './Controller';
+import UserModel from '../models/UserModel';
+import eventBus from '../services/EventBus';
+import MainView from '../views/MainVIew/MainView';
 import Events from '../consts/events';
 import Routes from '../consts/routes';
 import Modals from '../consts/modals';
-import Statuses from '../consts/statuses';
-import MainView from '../views/MainVIew/MainView';
-import SessionModel from '../models/SessionModel';
-import UserModel from '../models/UserModel';
-import eventBus from '../services/EventBus';
 
 /**
  * @class
  * Контроллер для страницы регистрации
  */
 class SignupController extends Controller {
-    eventBus: EventBus
     constructor() {
         super(new MainView());
 
@@ -21,12 +19,12 @@ class SignupController extends Controller {
     }
 
     switchOn(data: any = {}) {
-        SessionModel.check().then((response: ResponseUserType) => {
+        UserModel.getProfile().then((response: ResponseType) => {
             const callbackData: any = {
                 path: Routes.MainPage,
             };
 
-            if (response.status === Statuses.UNAUTHORIZED) {
+            if (response.error) {
                 callbackData.misc = {
                     modalStatus: Modals.signup,
                 };
@@ -49,7 +47,7 @@ class SignupController extends Controller {
             email: email,
             password: password,
             repeated_password: repeatedPassword,
-        }).then((response: ResponseUserType) => {
+        }).then((response: ResponseType) => {
             if (!response.error) {
                 eventBus.emit(Events.PathChanged, {
                     path: Routes.MainPage,

@@ -1,6 +1,6 @@
 import {http} from '../services/Http';
 import ApiMethods from '../consts/ApiMethods';
-import {SignUpRequest, LoginRequest, UpdateProfileRequest} from './Requests';
+import {SignUpRequest, UpdateProfileRequest} from './Requests';
 import {SERVER_API_V1_PREFIX} from '../consts/settings';
 
 class UserModel {
@@ -16,19 +16,6 @@ class UserModel {
     getProfile() {
         return http.fetchGet({
             route: ApiMethods.UserProfile,
-        }).then((response: Response) => response.json());
-    }
-
-    logout() {
-        return http.fetchDelete({
-            route: ApiMethods.UserLogout,
-        }).then((response: Response) => response.json());
-    }
-
-    login(data: LoginRequest) {
-        return http.fetchPost({
-            route: ApiMethods.UserLogin,
-            body: JSON.stringify({...data}),
         }).then((response: Response) => response.json());
     }
 

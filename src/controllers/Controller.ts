@@ -1,18 +1,10 @@
-import UserModel from '../models/UserModel';
 import {SERVER_HOST} from '../consts/settings';
+import ResponseType from '../tools/ResponseType';
+import UserModel from '../models/UserModel';
 import eventBus from '../services/EventBus';
+import {Error} from '../consts/errors';
 import Events from '../consts/events';
 import View from '../views/View';
-
-export interface ResponseUserType {
-    id: number,
-    nickname: string,
-    avatar: string,
-    email: string,
-    status: string,
-    result: string,
-    error: boolean,
-}
 
 abstract class Controller {
     view: View;
@@ -35,13 +27,14 @@ abstract class Controller {
     }
 
     onUpdateUserInfo = () => {
-        UserModel.getProfile().then((response: ResponseUserType) => {
+        UserModel.getProfile().then((response: ResponseType) => {
             const sessionData: any = {
                 authorized: false,
             };
 
             if (!response.error) {
-                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : '/static/img/default.svg';
+                const {body} = response;
+                const avatar = body.avatar ? `${SERVER_HOST}${body.avatar}` : '/static/img/default.svg';
                 sessionData.authorized = true;
                 sessionData.avatar = avatar;
             }
