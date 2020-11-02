@@ -1,17 +1,18 @@
-import Controller, {ResponseUserType} from './Controller';
+import SessionModel from '../models/SessionModel';
+import ResponseType from '../tools/ResponseType';
+import Controller from './Controller';
+import UserModel from '../models/UserModel';
 import MainView from '../views/MainVIew/MainView';
+import eventBus from '../services/EventBus';
 import Routes from '../consts/routes';
 import Modals from '../consts/modals';
 import Events from '../consts/events';
-import Statuses from '../consts/statuses';
-import UserModel from '../models/UserModel';
-import SessionModel from '../models/SessionModel';
-import eventBus from '../services/EventBus';
 
 /**
  * @class
  * Контроллер для страницы авторизации
  */
+
 class LoginController extends Controller {
     constructor() {
         super(new MainView());
@@ -21,16 +22,17 @@ class LoginController extends Controller {
     }
 
     switchOn(data: any = {}) {
-        SessionModel.check().then((response: ResponseUserType) => {
+        UserModel.getProfile().then((response: ResponseType) => {
             const callbackData: any = {
                 path: Routes.MainPage,
             };
 
-            if (response.status === Statuses.UNAUTHORIZED) {
+            if (response.error) {
                 callbackData.misc = {
                     modalStatus: Modals.signin,
                 };
             }
+
             eventBus.emit(Events.PathChanged, callbackData);
         }).catch((error: Error) => console.log(error));
     }
@@ -41,8 +43,8 @@ class LoginController extends Controller {
     }
 
     onLogout(data: any = {}) {
-        UserModel.logout().then((response: ResponseUserType) => {
-            if (response.result === Statuses.OK) {
+        SessionModel.logout().then((response: ResponseType) => {
+            if (!response.error) {
                 eventBus.emit(Events.PathChanged, {path: Routes.MainPage});
                 eventBus.emit(Events.UpdateHeader, {authorized: false});
             }
@@ -52,10 +54,10 @@ class LoginController extends Controller {
     onLoginUser(data: any = {}) {
         const {email, password} = data.params;
 
-        UserModel.login({
+        SessionModel.login({
             email: email,
             password: password,
-        }).then((response: ResponseUserType) => {
+        }).then((response: ResponseType) => {
             if (!response.error) {
                 eventBus.emit(Events.PathChanged, {
                     path: Routes.MainPage,

@@ -1,10 +1,11 @@
-import Controller, {ResponseUserType} from './Controller';
+import {SERVER_HOST} from '../consts/settings';
+import ResponseType from '../tools/ResponseType';
 import ProfileView from '../views/ProfileView/ProfileView';
+import Controller from './Controller';
 import UserModel from '../models/UserModel';
 import eventBus from '../services/EventBus';
 import Events from '../consts/events';
 import Routes from '../consts/routes';
-import {SERVER_HOST} from '../consts/settings';
 
 /**
  * @class
@@ -22,15 +23,16 @@ class ProfileController extends Controller {
     }
 
     switchOn(data: any = {}) {
-        UserModel.getProfile().then((response: ResponseUserType) => {
+        UserModel.getProfile().then((response: ResponseType) => {
             let sessionData: any = {
                 authorized: false,
             };
 
             if (!response.error) {
                 sessionData.authorized = true;
-                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : '/static/img/default.svg';
-                const {nickname, email} = response;
+                const user = response.body.user;
+                const avatar = user.avatar ? `${SERVER_HOST}${user.avatar}` : '/static/img/default.svg';
+                const {nickname, email} = user;
                 sessionData = {...sessionData, avatar, nickname, email};
 
                 this.view.insertIntoContext(sessionData);
@@ -62,7 +64,7 @@ class ProfileController extends Controller {
         UserModel.updateProfile({
             nickname: nickname,
             email: email,
-        }).then((response: ResponseUserType) => {
+        }).then((response: ResponseType) => {
             if (!response.error) {
                 eventBus.emit(Events.UpdateUserProfile, {
                     nickname: nickname,
@@ -93,9 +95,8 @@ class ProfileController extends Controller {
                         return;
                     }
                     const data = {
-                        avatar: `${SERVER_HOST}/avatars/${response.avatar}`,
+                        avatar: `${SERVER_HOST}/avatars/${response.body.avatar}`,
                     };
-
                     eventBus.emit(Events.UpdateProfileAvatar, data);
                 }).catch((error: Error) => console.log(error));
             }
