@@ -47,7 +47,7 @@ class ValidationService {
         const inputs: HTMLInputElement[] = Array.from(form.getElementsByTagName('input'));
         const errors: Element[] = Array.from(form.getElementsByClassName('error'));
 
-        const [emailInput, passwordInput] = inputs
+        const [emailInput, passwordInput] = inputs;
 
         this.clearErrors(inputs, errors);
 

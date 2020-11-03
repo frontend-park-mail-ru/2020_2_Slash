@@ -2,7 +2,7 @@ export interface SignUpRequest {
     nickname: string,
     email: string,
     password: string,
-    repeated_password: string
+    repeated_password: string //eslint-disable-line
 }
 
 export interface LoginRequest {
