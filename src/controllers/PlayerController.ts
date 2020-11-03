@@ -16,7 +16,7 @@ class PlayerController extends Controller {
         this.playerService = null;
     }
 
-    switchOn(data: any = {}) {
+    switchOn() {
         this.view.insertIntoContext( {
             title: 'Witcher',
             poster: '/static/img/witcher2.jpg',
@@ -33,7 +33,7 @@ class PlayerController extends Controller {
         this.onSwitchOff();
     }
 
-    onSwitchOn(data?: any) {
+    onSwitchOn() {
         this.playerService = new PlayerService();
         this.playerService.start();
     }

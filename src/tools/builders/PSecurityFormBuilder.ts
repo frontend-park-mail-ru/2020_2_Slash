@@ -1,6 +1,6 @@
 import FormBuilder from './FormBuilder';
 import Form from '../../components/Form/Form';
-import {ButtonDataType, InputsDataType} from "../type";
+import {ButtonDataType, InputsDataType} from '../type';
 
 class PSecurityFormBuilder extends FormBuilder {
     private buttonData: ButtonDataType;

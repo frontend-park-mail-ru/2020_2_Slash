@@ -1,0 +1,27 @@
+.content__title {
+    color: var(--white);
+    font-size: 1.4vw;
+    letter-spacing: 0.1vw;
+    font-weight: lighter;
+    margin: 10px 0;
+}
+
+.content__grid {
+    display: grid;
+    grid-row-gap: 7vh;
+    grid-column-gap: 0.2vw;
+    grid-template-columns: repeat(6, 1fr);
+
+    padding: 9vh 60px 7vh 60px;
+}
+
+@media (max-width: 850px) {
+    .content__grid {
+        display: grid;
+        grid-row-gap: 3vh;
+        grid-column-gap: 0.5vw;
+        grid-template-columns: repeat(2, 1fr);
+
+        padding: 9vh 20px 2vh 20px;
+    }
+}

@@ -37,7 +37,7 @@ class InfoBlock extends Component {
                 }],
         });
 
-        this.context.CurrentTab = new MainTab(this.context.contentData).render();
+        this.context.CurrentTab = new MainTab(this.context.contentData.body).render();
 
         eventBus.on(Events.ContentInfoTabChanged, this.onTabChanged.bind(this));
         eventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));

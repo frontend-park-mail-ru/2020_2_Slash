@@ -5,7 +5,7 @@ import Events from '../../consts/events';
 import eventBus from '../../services/EventBus';
 import ValidationService from '../../services/ValidationService';
 import template from './Popup.hbs';
-import {Errors, Error} from '../../consts/errors';
+import {Error} from '../../consts/errors';
 
 /**
  * @class

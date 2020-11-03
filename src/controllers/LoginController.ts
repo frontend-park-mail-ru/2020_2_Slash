@@ -21,7 +21,7 @@ class LoginController extends Controller {
         eventBus.on(Events.LogoutUser, this.onLogout.bind(this));
     }
 
-    switchOn(data: any = {}) {
+    switchOn() {
         UserModel.getProfile().then((response: ResponseType) => {
             const callbackData: any = {
                 path: Routes.MainPage,
@@ -42,7 +42,7 @@ class LoginController extends Controller {
         this.view.hide();
     }
 
-    onLogout(data: any = {}) {
+    onLogout() {
         SessionModel.logout().then((response: ResponseType) => {
             if (!response.error) {
                 eventBus.emit(Events.PathChanged, {path: Routes.MainPage});
