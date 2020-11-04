@@ -17,6 +17,8 @@
 @import "components/ContentBlock/ContentBlock.css";
 @import "components/MiniModal/MiniModal.css";
 @import "components/Player/Player.css";
+@import "components/Grid/Grid.css";
+@import "components/GridItem/GridItem.css";
 @import "views/ProfileView/ProfileView.css";
 @import "views/PlayerView/PlayerView.css";
 @import "views/MoviesView/MoviesView.css";

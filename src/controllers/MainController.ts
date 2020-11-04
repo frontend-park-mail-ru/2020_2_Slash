@@ -1,8 +1,6 @@
 import Controller from './Controller';
 import MainView from '../views/MainVIew/MainView';
-import UserModel from '../models/UserModel';
 import ModalService from '../services/ModalService';
-import {SERVER_HOST} from '../consts/settings';
 
 /**
  * @class

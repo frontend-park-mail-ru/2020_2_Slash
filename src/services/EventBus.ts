@@ -1,4 +1,4 @@
-import {CustomObject} from "../tools/type";
+import {CustomObject} from '../tools/type';
 
 interface Callback {
     (param: any[]): void;
@@ -37,7 +37,7 @@ class EventBus {
         return this;
     }
 
-    emit(event: string, data?: {}) {
+    emit(event: string, data?: any) {
         if (this.listeners[event]) {
             this.listeners[event].forEach((listener) => listener(data));
         }
