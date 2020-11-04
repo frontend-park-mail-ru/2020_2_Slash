@@ -5,7 +5,7 @@ import ResponseType from '../tools/ResponseType';
 
 interface InfoBlockType {
     contentId: number,
-    contentData: ResponseType,
+    contentData: {[key: string]: string},
 }
 
 /**
@@ -84,7 +84,7 @@ class ContentService {
 
         const infoBlockData: InfoBlockType = {
             contentId: data.id,
-            contentData: contentData,
+            contentData: contentData.body,
         };
 
         const infoBlock = new InfoBlock(infoBlockData);

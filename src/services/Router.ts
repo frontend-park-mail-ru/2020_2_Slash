@@ -156,7 +156,7 @@ class Router {
      * @param {Object} data
      */
     go(path: string, data = {}) {
-        eventBus.emit(Events.UpdateUserInfo, data);
+        eventBus.emit(Events.CheckSession, data);
 
         const routeData = this.getRouteData(path);
 

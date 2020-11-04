@@ -1,11 +1,5 @@
 import Controller from './Controller';
 import MyListView from '../views/MyListView/MyListView';
-import UserModel from '../models/UserModel';
-import {SERVER_HOST} from '../consts/settings';
-import ModalService from '../services/ModalService';
-import eventBus from '../services/EventBus';
-import Routes from '../consts/routes';
-import Events from '../consts/events';
 
 class MyListController extends Controller {
     view: MyListView;
@@ -133,33 +127,9 @@ class MyListController extends Controller {
             ],
         };
 
-        UserModel.getProfile().then((response) => {
-            const sessionData: any = {
-                authorized: false,
-            };
+        this.view.insertIntoContext(contentData);
 
-            if (!response.error) {
-                const avatar = response.avatar ? `${SERVER_HOST}${response.avatar}` : '/static/img/default.svg';
-                sessionData.authorized = true;
-                sessionData.avatar = avatar;
-            }
-
-            this.view.insertIntoContext(sessionData, contentData);
-
-            if (!sessionData.authorized) {
-                eventBus.emit(Events.PathChanged, {path: Routes.MainPage});
-            } else {
-                this.view.show();
-            }
-
-            this.onSwitchOn(data);
-        }).catch((error: Error) => console.log(error));
-    }
-
-    onSwitchOn(data: any = {}) {
-        if (data.modalStatus) {
-            ModalService.show(data.modalStatus);
-        }
+        this.view.show();
     }
 
     switchOff() {

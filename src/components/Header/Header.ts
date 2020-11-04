@@ -4,6 +4,7 @@ import template from './Header.hbs';
 import eventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 import UserHeader from '../UserHeader/UserHeader';
+import {CreateDomElement} from '../../tools/helper';
 
 /**
  * @class
@@ -27,15 +28,40 @@ class Header extends Component {
         this.context.UserBlock = this.UserBlock.render();
 
         eventBus.on(Events.UpdateHeader, this.onUpdate.bind(this));
+        eventBus.on(Events.UpdateHeader, this.onUpdateHeaderNav.bind(this));
     }
 
     onUpdate(data: any = {}) {
         this.context.authorized = data.authorized;
         this.context.avatar = data.avatar;
-
         const userBlock = document.querySelector('.header__user-block');
         if (userBlock) {
             userBlock.innerHTML = this.UserBlock.template(this.context);
+        }
+    }
+
+    onUpdateHeaderNav(data: any = {}) {
+        const {authorized} = data;
+        const myListButton = document.querySelector('.my-list');
+
+        if (authorized && !myListButton) {
+            const li = document.createElement('li');
+            const a = CreateDomElement('a', {
+                class: 'my-list list-item-text list-item-text-selected',
+                href: '/mylist',
+                innerText: 'my-list',
+                'data-event': 'pathChanged',
+            });
+            a.innerText = 'Мой список';
+
+            document.querySelector('.nav__list')
+                .appendChild(li)
+                .appendChild(a);
+            return;
+        }
+
+        if (!authorized && myListButton) {
+            myListButton.remove();
         }
     }
 }

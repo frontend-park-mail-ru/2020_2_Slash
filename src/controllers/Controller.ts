@@ -8,13 +8,13 @@ import View from '../views/View';
 
 abstract class Controller {
     view: View;
-    private readonly _onUpdateUserInfo: any;
+    private readonly _onCheckSession: any;
 
     protected constructor(view: View) {
         this.view = view;
 
-        if (!eventBus.getListeners().updateUserInfo) {
-            eventBus.on(Events.UpdateUserInfo, this.onUpdateUserInfo);
+        if (!eventBus.getListeners().checkSession) {
+            eventBus.on(Events.CheckSession, this.onCheckSession);
         }
     }
 
@@ -23,10 +23,10 @@ abstract class Controller {
     onSwitchOn(data?: any) {} // eslint-disable-line
 
     switchOff() {
-        eventBus.off(Events.UpdateUserInfo, this._onUpdateUserInfo);
+        eventBus.off(Events.CheckSession, this._onCheckSession);
     }
 
-    onUpdateUserInfo = () => {
+    onCheckSession = () => {
         UserModel.getProfile().then((response: ResponseType) => {
             const sessionData: any = {
                 authorized: false,
@@ -34,7 +34,7 @@ abstract class Controller {
 
             if (!response.error) {
                 const {body} = response;
-                const avatar = body.avatar ? `${SERVER_HOST}${body.avatar}` : '/static/img/default.svg';
+                const avatar = body.user.avatar ? `${SERVER_HOST}${body.user.avatar}` : '/static/img/default.svg';
                 sessionData.authorized = true;
                 sessionData.avatar = avatar;
             }
