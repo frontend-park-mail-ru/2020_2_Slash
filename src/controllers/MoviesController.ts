@@ -1,7 +1,7 @@
 import Controller from './Controller';
 import MoviesView from '../views/MoviesView/MoviesView';
 import ModalService from '../services/ModalService';
-import Events from '../consts/events';
+import Events from "../consts/events";
 import eventBus from '../services/EventBus';
 
 /**
@@ -186,11 +186,11 @@ class MoviesController extends Controller {
         this.view.hide();
     }
 
-    showGenrePage = (index: number) => { // eslint-disable-line
-        // TODO: Сделать открытие контента по жанру (в соотетствующем тикете)
+    showGenrePage = (index: number) => {
+        //TODO: Сделать открытие контента по жанру (в соотетствующем тикете)
     }
 
-    onOpenSubMenuGenres = () => {
+    onOpenSubMenuGenres = (data: any = {}) => {
         const genresSubMenu = document.querySelector('.genres .hidden');
         if (genresSubMenu !== null) {
             genresSubMenu.classList.remove('hidden');

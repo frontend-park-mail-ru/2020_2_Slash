@@ -13,5 +13,5 @@ export enum Errors {
 
 export interface Error {
     code: number,
-    user_message: string, // eslint-disable-line
+    user_message: string,
 }

@@ -5,7 +5,7 @@ import Popup from '../components/Popup/Popup';
 import eventBus from './EventBus';
 import Events from '../consts/events';
 import ModalBuilder from '../tools/builders/ModalBuilder';
-import MiniModal from '../components/MiniModal/MiniModal';
+import MiniModal from "../components/MiniModal/MiniModal";
 
 type Modal = MiniModal | Popup;
 
@@ -14,6 +14,7 @@ type Modal = MiniModal | Popup;
  * @class
  */
 class ModalService {
+
     private static instance: ModalService;
     private readonly app: HTMLElement;
     private modal: Modal;

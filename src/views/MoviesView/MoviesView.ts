@@ -1,7 +1,7 @@
 import View from '../View';
 import Context from '../../tools/Context';
 import Preview from '../../components/Preview/Preview';
-import ContentBlock from '../../components/ContentBlock/ContentBlock';
+import ContentBlock from "../../components/ContentBlock/ContentBlock";
 import template from './MoviesView.hbs';
 
 class MoviesView extends View {
