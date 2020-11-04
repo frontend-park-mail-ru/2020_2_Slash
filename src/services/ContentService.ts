@@ -22,7 +22,10 @@ class ContentService {
      * @this  {ContentService}
      */
     private constructor() {
-        eventBus.on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this));
+        eventBus.on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this))
+            .on(Events.ContentIsAdded, this.onContentIsAdded.bind(this))
+            .on(Events.ContentIsLiked, this.onContentIsLiked.bind(this))
+            .on(Events.ContentIsDisliked, this.onContentIsDisliked.bind(this))
     }
 
     /**
@@ -90,6 +93,45 @@ class ContentService {
         const infoBlock = new InfoBlock(infoBlockData);
 
         infoBlock.render();
+    }
+
+    changeIcon(iconOn: string, iconOff: string) {
+        if (event.srcElement.parentElement.dataset.status === 'false') {
+            event.srcElement.setAttribute('src', iconOn);
+            event.srcElement.parentElement.dataset.status = 'true';
+        } else {
+            event.srcElement.setAttribute('src', iconOff);
+            event.srcElement.parentElement.dataset.status = 'false';
+        }
+    }
+
+    onContentIsAdded(data: {event: string, id: number, status: boolean}) {
+        //TODO: Запрос на бек
+        this.changeIcon('/static/img/is-added.svg', '/static/img/add.svg');
+    }
+
+    onContentIsLiked(data: {event: string, id: number, isLiked: boolean}) {
+        //TODO: Запрос на бек
+        this.changeIcon('/static/img/is-liked.svg', '/static/img/like.svg');
+
+        const parent = event.srcElement.closest('.slider-item__buttons');
+        const disBtn: Element = parent.getElementsByClassName('slider-item__dislike-btn')[0];
+        if (event.srcElement.parentElement.dataset.status === 'true' && disBtn.attributes[3].value === 'true') {
+            disBtn.attributes[3].value = 'false';
+            disBtn.querySelector('.slider__btn-img').setAttribute('src', '/static/img/dislike.svg');
+        }
+    }
+
+    onContentIsDisliked(data: {event: string, id: number, isDisliked: boolean}) {
+        //TODO: Запрос на бек
+        this.changeIcon('/static/img/is-disliked.svg', '/static/img/dislike.svg');
+
+        const parent = event.srcElement.closest('.slider-item__buttons');
+        const disBtn: Element = parent.getElementsByClassName('slider-item__like-btn')[0];
+        if (event.srcElement.parentElement.dataset.status === 'true' && disBtn.attributes[3].value === 'true') {
+            disBtn.attributes[3].value = 'false';
+            disBtn.querySelector('.slider__btn-img').setAttribute('src', '/static/img/like.svg');
+        }
     }
 }
 

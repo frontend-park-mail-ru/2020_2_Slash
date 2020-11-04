@@ -23,7 +23,9 @@ enum Events {
     FullscreenModeOff = 'fullscreenModeOff',
     UpdateHeader = 'updateHeader',
     OpenSubMenuGenres = 'openSubMenuGenres',
-    CheckSession = 'checkSession',
+    ContentIsAdded = 'contentIsAdded',
+    ContentIsLiked = 'contentIsLiked',
+    ContentIsDisliked = 'contentIsDisliked',
 }
 
 export default Events;
