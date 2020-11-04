@@ -67,7 +67,7 @@ class Http {
      * @return  {Promise}
      * @param api
      */
-    fetchDelete(api: Api) {
+fetchDelete(api: Api) {
         return this.fetchRequest({
             method: 'DELETE',
             route: api.route,

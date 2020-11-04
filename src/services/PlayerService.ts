@@ -59,14 +59,14 @@ class PlayerService {
         });
     }
 
-    onVideoPlay() {
+    onVideoPlay(event: any) {
         this.video.play();
         this.video.setAttribute('data-event', 'videoPause');
         this.changeButton('.player-bar__play-btn', '.player-play-btn__img',
             '/static/img/player-pause.svg', 'videoPause');
     }
 
-    onVideoPause() {
+    onVideoPause(event: any) {
         this.video.pause();
         this.video.setAttribute('data-event', 'videoPlay');
         this.changeButton('.player-bar__play-btn', '.player-play-btn__img',
@@ -99,7 +99,7 @@ class PlayerService {
         timelineMiddle.style.width = `${100 * currentPosition / width}%`;
     }
 
-    onHoverOffTimeline() {
+    onHoverOffTimeline(event: any) {
         const timelineMiddle: any = document.getElementsByClassName('timeline__middle')[0];
 
         timelineMiddle.style.width = '0%';
@@ -118,21 +118,21 @@ class PlayerService {
         this.video.volume = value;
     }
 
-    onMuteVolume() {
+    onMuteVolume(event: any) {
         this.setVolumeValue(0);
 
         this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
             '/static/img/player-mute.svg', 'volumeOn');
     }
 
-    onVolumeOn() {
+    onVolumeOn(event: any) {
         this.setVolumeValue(0.5);
 
         this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
             '/static/img/player-sound.svg', 'mute');
     }
 
-    onUpdateTime() {
+    onUpdateTime(event: any) {
         const currentTime = this.video.currentTime;
         const duration = this.video.duration;
 
@@ -152,7 +152,7 @@ class PlayerService {
         }
     }
 
-    onFullScreenOn() {
+    onFullScreenOn(event: any) {
         document.querySelector('.watch__page').requestFullscreen();
 
         const btnBack: HTMLButtonElement = document.querySelector('.watch__back-btn');
@@ -162,7 +162,7 @@ class PlayerService {
             '/static/img/player-fullscreen-out.svg', 'fullscreenModeOff');
     }
 
-    onFullScreenOff() {
+    onFullScreenOff(event: any) {
         document.exitFullscreen();
 
         const btnBack: any = document.querySelector('.watch__back-btn');
@@ -172,11 +172,11 @@ class PlayerService {
             '/static/img/player-fullscreen.svg', 'fullscreenModeOn');
     }
 
-    hideProgressBar() {
+    hideProgressBar(event: any) {
         this.timeline.setAttribute('style', 'opacity:0;');
     }
 
-    showProgressBar() {
+    showProgressBar(event: any) {
         this.timeline.setAttribute('style', 'opacity:1;');
     }
 

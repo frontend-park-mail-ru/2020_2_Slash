@@ -4,12 +4,12 @@ import ContentService from './ContentService';
 import Routes from '../consts/routes';
 import eventBus from './EventBus';
 import Events from '../consts/events';
-import {CustomObject} from '../tools/type';
-import Controller from '../controllers/Controller';
+import Modals from "../consts/modals";
+import {CustomObject} from "../tools/type";
 
 interface RoutObjectType {
     reg: RegExp,
-    controller: Controller,
+    controller: object,
 }
 
 interface QueryType {
@@ -79,14 +79,13 @@ class Router {
      * @param {string} path - Путь, который нужно добавить
      * @param {Object} controller - Контроллер, который соответствует этому пути
      */
-    register(path: string, controller: Controller) {
-        const reg = new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)') + '\/?$'); //eslint-disable-line
+    register(path: string, controller: object) {
+        const reg = new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)') + '\/?$');
 
         const obj: RoutObjectType = {
             reg: reg,
             controller: controller,
-        };
-
+        }
         this.routes.push(obj);
 
         return this;
@@ -99,8 +98,8 @@ class Router {
      * @param {string} path - Путь, из которого нужно вытащить данные запроса
      */
     getRouteData(path: string) {
-        let targetController: Controller = null;
-        const query: QueryType = {resourceId: null};
+        let targetController: object = null;
+        let query: QueryType = {resourceId: null};
 
         const result = this.getParam(path);
         if (result) {
@@ -129,7 +128,7 @@ class Router {
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^/(\\w+)\\?\\w+=\(\\w+)?$'); //eslint-disable-line
+        const reg = new RegExp('^/(\\w+)\\?\\w+=\(\\w+)?$');
         const result = path.match(reg);
 
         if (!result) {
@@ -137,12 +136,12 @@ class Router {
         }
         return {
             path: `/${result[1]}`,
-            data: result[2],
-        };
+            data: result[2]
+        }
     }
 
     start() {
-        window.addEventListener('popstate', () => {
+        window.addEventListener('popstate', (event) => {
             this.go(window.location.pathname);
         });
 

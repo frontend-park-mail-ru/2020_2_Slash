@@ -12,6 +12,7 @@ import Routes from '../consts/routes';
  * Контроллер для страницы профиля
  */
 class ProfileController extends Controller {
+
     view: ProfileView;
 
     constructor() {
@@ -21,7 +22,7 @@ class ProfileController extends Controller {
         eventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
-    switchOn() {
+    switchOn(data: any = {}) {
         UserModel.getProfile().then((response: ResponseType) => {
             let sessionData: any = {
                 authorized: false,
@@ -81,7 +82,7 @@ class ProfileController extends Controller {
      * Коллбэк на загрузку аватарки
      * @param {Object} data - Данные
      */
-    onUploadAvatar() {
+    onUploadAvatar(data: any = {}) {
         const fileUploader = document.getElementById('file-upload');
 
         fileUploader.addEventListener('change', function() {

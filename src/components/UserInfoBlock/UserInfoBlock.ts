@@ -9,6 +9,7 @@ import Events from '../../consts/events';
  * Компонента инфо пользователя для страницы профиля - ник, почта, автарка
  */
 class UserInfoBlock extends Component {
+
     /**
      * Создает экземпляр UserInfoBlock
      *

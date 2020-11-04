@@ -18,9 +18,9 @@ abstract class Controller {
         }
     }
 
-    switchOn(data: any = {}) {} // eslint-disable-line
+    switchOn(data: any = {}) {}
 
-    onSwitchOn(data?: any) {} // eslint-disable-line
+    onSwitchOn(data?: any) {}
 
     switchOff() {
         eventBus.off(Events.UpdateUserInfo, this._onUpdateUserInfo);

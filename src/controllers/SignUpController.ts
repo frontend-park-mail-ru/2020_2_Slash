@@ -18,7 +18,7 @@ class SignupController extends Controller {
         eventBus.on(Events.SignupUser, this.onSignupUser.bind(this));
     }
 
-    switchOn() {
+    switchOn(data: any = {}) {
         UserModel.getProfile().then((response: ResponseType) => {
             const callbackData: any = {
                 path: Routes.MainPage,

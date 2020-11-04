@@ -1,11 +1,11 @@
-import {Error} from '../consts/errors'
+import {Error} from "../consts/errors";
 
 interface Body {
-    [key: string]: any;
+    [key: string]: any,
 }
 
 export default interface ResponseType {
-    body: Body;
-    message: string;
-    error: Error;
-} /* eslint semi: ["error", "never"]*/
+    body: Body,
+    message: string,
+    error: Error,
+}
