@@ -1,0 +1,128 @@
+.content__info-block-wrapper {
+  transition: all 0.5s ease-in-out;
+  font-size: 16px;
+  position: relative;
+  bottom: 2.8vw;
+}
+
+.content__info-block {
+  font-weight: lighter;
+  height: 550px;
+  background-color: black;
+  min-height: 20vw;
+}
+
+.info-block_tab {
+  height: 100%;
+}
+
+.misc-item_year, .misc-item_season, .misc-item_rating {
+  padding: 0 1vw 0 0;
+  margin: 0;
+}
+
+.info-block__title-text {
+  letter-spacing: 0.2em;
+  color: var(--white);
+  padding: 0;
+  margin: 0;
+  font-size: 35px;
+}
+
+.item-value {
+  letter-spacing: 0.08em;
+  color: var(--white);
+  padding-left: 0.5vw;
+}
+
+.info-block__about,
+.item-title {
+  color: var(--heading-grey);
+  letter-spacing: 0.08em;
+  font-weight: normal;
+}
+
+.info-block__close-btn {
+  position: absolute;
+  right: 1vw;
+  top: 1vw;
+}
+
+.close-btn {
+  padding: 0;
+  width: 1.5vw;
+  height: 1.5vw;
+  background-position: center center;
+  background-color: var(--crystal-clear);
+  outline: none;
+  border: none;
+  border-radius: 25px;
+}
+
+.close-btn:hover {
+  transition: all 0.1s ease-in-out;
+  transform: scale(1.05);
+  filter: drop-shadow(0px 0px 1px var(--white));
+  cursor: pointer;
+}
+
+.close-btn:active {
+  background-color: var(--crystal-clear);
+  cursor: pointer;
+}
+
+.content__slider-item_selected {
+  border: 5px solid var(--white);
+}
+
+.misc-item__rating {
+  color: var(--rating-green);
+}
+
+@media (max-width: 1000px) {
+  .info-block__buttons {
+    width: 30vw;
+    padding-top: 4vw;
+  }
+
+  .info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn {
+    width: 5vw;
+    height: 5vw;
+    border-radius: 35px;
+  }
+
+  .add-btn__img, .like-btn__img, .dislike-btn__img {
+    width: 5vw;
+    height: 5vw;
+  }
+}
+
+@media (max-width: 850px) {
+  .info-block__buttons {
+    width: 50vw;
+    padding-top: 4vw;
+  }
+
+  .info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn {
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50px;
+  }
+
+  .add-btn__img, .like-btn__img, .dislike-btn__img {
+    width: 7vw;
+    height: 7vw;
+  }
+}
+
+@media (max-width: 375px) {
+  .info-block__close-btn {
+    top: 3vw;
+    right: 6vw;
+  }
+
+  .info-block__buttons {
+    width: 50vw;
+    padding-top: 4vw;
+  }
+}
