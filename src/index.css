@@ -9,7 +9,9 @@
 @import "components/Popup/Popup.css";
 @import "components/Input/Input.css";
 @import "components/Button/Button.css";
+@import "components/Item/Item.css";
 @import "components/SliderItem/SliderItem.css";
+@import "components/GridItem/GridItem.css";
 @import "components/InfoBlock/InfoBlock.css";
 @import "components/TabBar/TabBar.css";
 @import "components/MainTab/MainTab.css";
@@ -18,7 +20,6 @@
 @import "components/MiniModal/MiniModal.css";
 @import "components/Player/Player.css";
 @import "components/Grid/Grid.css";
-@import "components/GridItem/GridItem.css";
 @import "views/ProfileView/ProfileView.css";
 @import "views/PlayerView/PlayerView.css";
 @import "views/MoviesView/MoviesView.css";

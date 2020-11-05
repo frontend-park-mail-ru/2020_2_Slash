@@ -47,9 +47,9 @@ class Header extends Component {
         if (authorized && !myListButton) {
             const li = document.createElement('li');
             const a = CreateDomElement('a', {
-                class: 'my-list list-item-text list-item-text-selected',
-                href: '/mylist',
-                innerText: 'my-list',
+                'class': 'my-list list-item-text list-item-text-selected',
+                'href': '/mylist',
+                'innerText': 'my-list',
                 'data-event': 'pathChanged',
             });
             a.innerText = 'Мой список';

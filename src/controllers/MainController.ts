@@ -26,18 +26,25 @@ class MainController extends Controller {
                         {
                             id: 1,
                             poster: '/static/img/witcher.png',
+                            isAdded: true,
                         },
                         {
                             id: 2,
                             poster: '/static/img/witcher.png',
+                            isAdded: true,
+                            isLike: false,
                         },
                         {
                             id: 3,
                             poster: '/static/img/witcher.png',
+                            isAdded: false,
+                            isLike: true,
                         },
                         {
                             id: 58746,
                             poster: '/static/img/witcher.png',
+                            isAdded: false,
+                            isLike: true,
                         },
                         {
                             id: 4,

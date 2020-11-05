@@ -2,6 +2,7 @@ enum Events {
     PathChanged = 'pathChanged',
     RedirectBack = 'redirectBack',
     ProfileTabChanged = 'profileTabChanged',
+    OpenInfoBlock = 'openInfoBlock',
     ContentInfoRequested = 'contentInfoRequested',
     RevealPopup = 'revealPopup',
     ContentInfoTabChanged = 'contentInfoTabChanged',
@@ -23,7 +24,9 @@ enum Events {
     FullscreenModeOff = 'fullscreenModeOff',
     UpdateHeader = 'updateHeader',
     OpenSubMenuGenres = 'openSubMenuGenres',
-    CheckSession = 'checkSession',
+    ContentIsAdded = 'contentIsAdded',
+    ContentIsLiked = 'contentIsLiked',
+    ContentIsDisliked = 'contentIsDisliked',
 }
 
 export default Events;

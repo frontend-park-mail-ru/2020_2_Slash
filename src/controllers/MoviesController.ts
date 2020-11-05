@@ -183,6 +183,7 @@ class MoviesController extends Controller {
 
     switchOff() {
         super.switchOff();
+        eventBus.off(Events.OpenSubMenuGenres, this.onOpenSubMenuGenres);
         this.view.hide();
     }
 

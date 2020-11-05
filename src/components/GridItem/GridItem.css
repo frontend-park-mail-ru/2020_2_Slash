@@ -4,11 +4,7 @@
     box-shadow: 10px 5px 5px var(--shadow);
 }
 
-.content__grid-item_hovered {
-    position: absolute;
-    display: none;
-    width: 100%;
-    bottom: -3.4vw;
+.content__item_hovered {
     box-shadow: 10px 5px 5px var(--shadow);
 }
 
@@ -17,90 +13,24 @@
     transform: scale(1.2);
 }
 
-.grid-item__img {
-    display: block;
-    height: 100%;
-    width: 100%;
-    border-radius: 3px;
-}
-
-.grid-item__buttons {
-    padding: 0.5vw 0;
-    background-color: var(--hover-gray);
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    align-self: center;
-}
-
-.grid__btn {
-    padding: 0;
-    margin: 0;
-    width: 2.5vw;
-    height: 2.5vw;
-    background-position: center center;
-    background-color: var(--crystal-clear);
-    outline: none;
-    border: none;
-    border-radius: 25px;
-}
-
-.grid__btn-img {
-    width: 2.5vw;
-    height: 2.5vw;
-}
-
-.grid__btn:hover {
-    background-color: var(--medium-transparent-white);
-    cursor: pointer;
-}
-
-.grid__btn:active {
-    background-color: var(--crystal-clear);
-}
-
-.content__grid-item:hover > .content__grid-item_hovered {
+.content__grid-item:hover > .content__item_hovered {
     color: var(--white);
     font-size: 0.5vw;
     display: flex;
 }
 
 @media (max-width: 850px) {
+    .content__grid-item > .content__item_hovered > .item__buttons {
+        justify-content: space-around;
+        width: 100%;
+    }
 
     .content__grid-item {
         box-shadow: none;
     }
 
-    .content__grid-item_hovered {
-        background-color: var(--crystal-clear);
-        box-shadow: none;
-    }
-
-    .content__grid-item:hover > .content__grid-item_hovered {
+    .content__grid-item:hover > .content__item_hovered {
         color: var(--white);
         font-size: 0.5vw;
-    }
-
-    .grid-item__buttons {
-        background-color: var(--crystal-clear);
-        padding-bottom: 8.5vw;
-        display: flex;
-    }
-
-    .grid__btn, .grid__btn-img, .grid__play-btn-img {
-        background-position: center center;
-        width: 6.5vw;
-        height: 6.5vw;
-    }
-
-    .content__grid-item:hover > .grid-item__img {
-        transform: none;
-    }
-
-    .grid-item__add-btn, .grid-item__like-btn, .grid-item__dislike-btn {
-        display: none;
     }
 }

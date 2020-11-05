@@ -1,0 +1,83 @@
+.item__img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.content__item_hovered {
+    position: absolute;
+    display: none;
+    width: 100%;
+    bottom: -3.4vw;
+}
+
+.item__buttons {
+    padding: 0.5vw 0;
+    background-color: var(--hover-gray);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    align-self: center;
+}
+
+.item__btn {
+    padding: 0;
+    margin: 0;
+    width: 2.5vw;
+    height: 2.5vw;
+    background-position: center center;
+    background-color: var(--crystal-clear);
+    outline: none;
+    border: none;
+    border-radius: 25px;
+}
+
+.item__btn:hover {
+    background-color: var(--medium-transparent-white);
+    cursor: pointer;
+}
+
+.item__btn:active {
+    background-color: var(--crystal-clear);
+}
+
+.item__btn-img {
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+@media (max-width: 850px) {
+    .content__item_hovered {
+        background-color: var(--crystal-clear);
+        width: 100%;
+        bottom: 0;
+    }
+
+    .item__buttons {
+        background-color: var(--crystal-clear);
+        padding-bottom: 8.5vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80%;
+        align-self: center;
+    }
+
+    .item__btn, .item__btn-img, .item__play-btn-img {
+        background-position: center center;
+        width: 6.5vw;
+        height: 6.5vw;
+    }
+
+    .content__slider-item:hover > .item__img {
+        transform: none;
+    }
+
+    .item__add-btn, .item__like-btn, .item__dislike-btn {
+        display: none;
+    }
+}
