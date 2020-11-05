@@ -4,12 +4,12 @@ import ContentService from './ContentService';
 import Routes from '../consts/routes';
 import eventBus from './EventBus';
 import Events from '../consts/events';
-import Modals from "../consts/modals";
-import {CustomObject} from "../tools/type";
+import {CustomObject} from '../tools/type';
+import Controller from '../controllers/Controller';
 
 interface RoutObjectType {
     reg: RegExp,
-    controller: object,
+    controller: Controller,
 }
 
 interface QueryType {
@@ -79,13 +79,14 @@ class Router {
      * @param {string} path - Путь, который нужно добавить
      * @param {Object} controller - Контроллер, который соответствует этому пути
      */
-    register(path: string, controller: object) {
-        const reg = new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)') + '\/?$');
+    register(path: string, controller: Controller) {
+        const reg = new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)') + '\/?$'); //eslint-disable-line
 
         const obj: RoutObjectType = {
             reg: reg,
             controller: controller,
-        }
+        };
+
         this.routes.push(obj);
 
         return this;
@@ -98,8 +99,8 @@ class Router {
      * @param {string} path - Путь, из которого нужно вытащить данные запроса
      */
     getRouteData(path: string) {
-        let targetController: object = null;
-        let query: QueryType = {resourceId: null};
+        let targetController: Controller = null;
+        const query: QueryType = {resourceId: null};
 
         const result = this.getParam(path);
         if (result) {
@@ -128,7 +129,7 @@ class Router {
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^/(\\w+)\\?\\w+=\(\\w+)?$');
+        const reg = new RegExp('^/(\\w+)\\?\\w+=\(\\w+)?$'); //eslint-disable-line
         const result = path.match(reg);
 
         if (!result) {
@@ -136,12 +137,12 @@ class Router {
         }
         return {
             path: `/${result[1]}`,
-            data: result[2]
-        }
+            data: result[2],
+        };
     }
 
     start() {
-        window.addEventListener('popstate', (event) => {
+        window.addEventListener('popstate', () => {
             this.go(window.location.pathname);
         });
 
@@ -155,7 +156,7 @@ class Router {
      * @param {Object} data
      */
     go(path: string, data = {}) {
-        eventBus.emit(Events.UpdateUserInfo, data);
+        eventBus.emit(Events.CheckSession, data);
 
         const routeData = this.getRouteData(path);
 

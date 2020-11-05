@@ -1,6 +1,6 @@
 import FormBuilder from './FormBuilder';
 import Form from '../../components/Form/Form';
-import {ButtonDataType, HelperDataType, InputsDataType} from "../type";
+import {ButtonDataType, HelperDataType, InputsDataType} from '../type';
 
 class SignupFormBuilder extends FormBuilder {
     private heading: string;

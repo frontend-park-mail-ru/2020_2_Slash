@@ -14,7 +14,6 @@ enum Events {
     UpdateProfileInfo = 'updateProfileInfo',
     UpdateProfileAvatar = 'updateProfileAvatar',
     UpdateUserProfile = 'updateUserProfile',
-    UpdateUserInfo = 'updateUserInfo',
     UploadAvatar = 'uploadAvatar',
     VideoPlay = 'videoPlay',
     VideoPause = 'videoPause',
@@ -24,6 +23,7 @@ enum Events {
     FullscreenModeOff = 'fullscreenModeOff',
     UpdateHeader = 'updateHeader',
     OpenSubMenuGenres = 'openSubMenuGenres',
+    CheckSession = 'checkSession',
 }
 
 export default Events;
