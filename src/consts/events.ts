@@ -2,6 +2,7 @@ enum Events {
     PathChanged = 'pathChanged',
     RedirectBack = 'redirectBack',
     ProfileTabChanged = 'profileTabChanged',
+    OpenInfoBlock = 'openInfoBlock',
     ContentInfoRequested = 'contentInfoRequested',
     RevealPopup = 'revealPopup',
     ContentInfoTabChanged = 'contentInfoTabChanged',

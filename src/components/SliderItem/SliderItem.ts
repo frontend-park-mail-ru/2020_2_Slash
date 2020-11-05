@@ -1,23 +1,27 @@
-import Component from '../Component';
 import Context from '../../tools/Context';
-import template from './SliderItem.hbs';
+import Item from '../Item/Item';
 
 /**
  * @class
  * Компонента элемента слайдера - фильм/сериал миниатюра
  */
-class SliderItem extends Component {
+class SliderItem extends Item {
     /**
-     * Создает экземпляр SliderItem
+     * Создает экземпляр Item
      *
      * @constructor
-     * @this  {SliderItem}
+     * @this  {Item}
      * @param context
      * @param parent
      */
     constructor(context: Context, parent?: any) {
+        context.contentItem = 'content__slider-item';
+        context.infoEvent = 'openInfoBlock';
         super(context, parent);
-        this.template = template;
+    }
+
+    render(): any {
+        return super.render();
     }
 }
 

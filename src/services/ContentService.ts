@@ -22,10 +22,10 @@ class ContentService {
      * @this  {ContentService}
      */
     private constructor() {
-        eventBus.on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this))
+        eventBus.on(Events.OpenInfoBlock, this.onOpenInfoBlock.bind(this))
             .on(Events.ContentIsAdded, this.onContentIsAdded.bind(this))
             .on(Events.ContentIsLiked, this.onContentIsLiked.bind(this))
-            .on(Events.ContentIsDisliked, this.onContentIsDisliked.bind(this))
+            .on(Events.ContentIsDisliked, this.onContentIsDisliked.bind(this));
     }
 
     /**
@@ -48,7 +48,7 @@ class ContentService {
      * Наполняет данными и отрисовывает инфоблок
      * @param {Object} data - Данные для этого коллбэка
      */
-    onContentInfoRequested(data: {event: string, id: number}) {
+    onOpenInfoBlock(data: {event: string, id: number}) {
         const contentData: ResponseType = { // запрос за контентом по id
             body: {
                 poster: '/static/img/witcher2.jpg',
@@ -96,41 +96,41 @@ class ContentService {
     }
 
     changeIcon(iconOn: string, iconOff: string) {
-        if (event.srcElement.parentElement.dataset.status === 'false') {
-            event.srcElement.setAttribute('src', iconOn);
-            event.srcElement.parentElement.dataset.status = 'true';
-        } else {
+        if (event.srcElement.parentElement.dataset.status === 'true') {
             event.srcElement.setAttribute('src', iconOff);
             event.srcElement.parentElement.dataset.status = 'false';
+        } else {
+            event.srcElement.setAttribute('src', iconOn);
+            event.srcElement.parentElement.dataset.status = 'true';
         }
     }
 
     onContentIsAdded(data: {event: string, id: number, status: boolean}) {
-        //TODO: Запрос на бек
+        // TODO: Запрос на бек
         this.changeIcon('/static/img/is-added.svg', '/static/img/add.svg');
     }
 
     onContentIsLiked(data: {event: string, id: number, isLiked: boolean}) {
-        //TODO: Запрос на бек
+        // TODO: Запрос на бек
         this.changeIcon('/static/img/is-liked.svg', '/static/img/like.svg');
 
-        const parent = event.srcElement.closest('.slider-item__buttons');
-        const disBtn: Element = parent.getElementsByClassName('slider-item__dislike-btn')[0];
+        const parent = event.srcElement.closest('.item__buttons');
+        const disBtn: Element = parent.getElementsByClassName('item__dislike-btn')[0];
         if (event.srcElement.parentElement.dataset.status === 'true' && disBtn.attributes[3].value === 'true') {
             disBtn.attributes[3].value = 'false';
-            disBtn.querySelector('.slider__btn-img').setAttribute('src', '/static/img/dislike.svg');
+            disBtn.querySelector('.item__btn-img').setAttribute('src', '/static/img/dislike.svg');
         }
     }
 
     onContentIsDisliked(data: {event: string, id: number, isDisliked: boolean}) {
-        //TODO: Запрос на бек
+        // TODO: Запрос на бек
         this.changeIcon('/static/img/is-disliked.svg', '/static/img/dislike.svg');
 
-        const parent = event.srcElement.closest('.slider-item__buttons');
-        const disBtn: Element = parent.getElementsByClassName('slider-item__like-btn')[0];
+        const parent = event.srcElement.closest('.item__buttons');
+        const disBtn: Element = parent.getElementsByClassName('item__like-btn')[0];
         if (event.srcElement.parentElement.dataset.status === 'true' && disBtn.attributes[3].value === 'true') {
             disBtn.attributes[3].value = 'false';
-            disBtn.querySelector('.slider__btn-img').setAttribute('src', '/static/img/like.svg');
+            disBtn.querySelector('.item__btn-img').setAttribute('src', '/static/img/like.svg');
         }
     }
 }
