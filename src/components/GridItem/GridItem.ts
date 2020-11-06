@@ -16,7 +16,7 @@ class GridItem extends Item {
      */
     constructor(context: Context, parent?: any) {
         context.contentItem = 'content__grid-item';
-        context.infoEvent = 'contentInfoRequested';
+        context.infoEvent = 'revealPopup';
         super(context, parent);
     }
 }

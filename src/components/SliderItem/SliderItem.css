@@ -1,6 +1,6 @@
 .content__slider-item {
     z-index: 1000;
-    top: 4.2vw;
+    top: 3.6vw;
     width: var(--one-sixth-of-screen);
     cursor: pointer;
     display: inline-block;

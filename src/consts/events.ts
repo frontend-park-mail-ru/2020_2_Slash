@@ -27,6 +27,7 @@ enum Events {
     ContentIsAdded = 'contentIsAdded',
     ContentIsLiked = 'contentIsLiked',
     ContentIsDisliked = 'contentIsDisliked',
+    CheckSession = 'checkSession',
 }
 
 export default Events;

@@ -16,6 +16,7 @@ class MainController extends Controller {
     switchOn(data: any = {}) {
         const contentData = { // фейковый контент, пока не реализовали
             preview: {
+                id: 1,
                 poster: '/static/img/movie.png',
                 title: 'Психопаспорт',
             },

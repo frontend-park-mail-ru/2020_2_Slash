@@ -82,7 +82,6 @@
     bottom: 0;
 }
 
-
 @media (max-width: 1000px) {
     .info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn {
         width: 5vw;

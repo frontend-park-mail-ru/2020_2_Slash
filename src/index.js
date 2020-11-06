@@ -8,6 +8,7 @@ import LoginController from './controllers/LoginController';
 import PlayerController from './controllers/PlayerController';
 import MoviesController from './controllers/MoviesController';
 import MyListController from './controllers/MyListController';
+import ContentController from './controllers/ContentController';
 
 const app = document.querySelector('.application');
 (new Router(app))
@@ -18,4 +19,5 @@ const app = document.querySelector('.application');
     .register(Routes.Watch, new PlayerController)
     .register(Routes.MoviePage, new MoviesController)
     .register(Routes.MyList, new MyListController)
+    .register(Routes.ContentPage, new ContentController)
     .start();

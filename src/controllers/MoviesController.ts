@@ -29,6 +29,7 @@ class MoviesController extends Controller {
                 {name: 'детский', id: 9}, {name: 'документальный', id: 8},
             ],
             preview: {
+                id: 1,
                 poster: '/static/img/movie.png',
                 title: 'Фильм',
             },

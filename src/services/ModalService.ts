@@ -2,10 +2,10 @@ import Modals from '../consts/modals';
 import SignupBuilderForm from '../tools/builders/SignupFormBuilder';
 import LoginFormBuilder from '../tools/builders/LoginFormBuilder';
 import Popup from '../components/Popup/Popup';
-import eventBus from './EventBus';
 import Events from '../consts/events';
 import ModalBuilder from '../tools/builders/ModalBuilder';
 import MiniModal from '../components/MiniModal/MiniModal';
+import EventBus from './EventBus';
 
 type Modal = MiniModal | Popup;
 
@@ -27,7 +27,7 @@ class ModalService {
     constructor() {
         this.app = document.querySelector('.application');
 
-        eventBus.on(Events.RevealPopup, this.onRevealPopup.bind(this));
+        EventBus.on(Events.RevealPopup, this.onRevealPopup.bind(this));
     }
 
     public static getInstance(): ModalService {
@@ -44,20 +44,20 @@ class ModalService {
      * @param {Object} data - Данные для этого коллбэка
      */
     onRevealPopup(data: any) {
-        this.show(data.modalstatus);
+        this.show(data);
     }
 
     /**
      * @function
      * Создает и рендерит нужный попап
-     * @param {string} modalStatus - тип попапа
+     * @param data
      */
-    show(modalStatus: string) {
+    show(data: any) {
         if (this.modal) {
             this.modal.remove();
         }
 
-        switch (modalStatus) {
+        switch (data.modalstatus) {
         case Modals.signup: {
             this.modal = new Popup({
                 heading: SignupBuilderForm.getMeta().heading,
@@ -79,11 +79,15 @@ class ModalService {
             break;
         }
         case Modals.authMini: {
-            this.modal = ModalBuilder.build(modalStatus);
+            this.modal = ModalBuilder.build(data.modalstatus);
             break;
         }
         case Modals.unauthMini: {
-            this.modal = ModalBuilder.build(modalStatus);
+            this.modal = ModalBuilder.build(data.modalstatus);
+            break;
+        }
+        case Modals.contentPage: {
+            EventBus.emit(Events.ContentInfoRequested, {parent: this.app, id: data.id});
             break;
         }
         }

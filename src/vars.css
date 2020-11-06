@@ -9,7 +9,7 @@
     --popup-shadow-color-title: rgba(0, 0, 0, 0.25);
     --header-height: 70px;
     --low-transparent-gray: rgba(20, 20, 20, 0.6);
-    --blackout-for-popup: rgba(0,0,0,.5);
+    --blackout-for-popup: rgba(0,0,0,.7);
     --white: rgba(255, 255, 255, 255);
     --filter-btn: rgba(0, 0, 0, 1);
     --filter-btn-hover: rgba(0, 0, 0, 0.3);
@@ -25,4 +25,5 @@
     --rating-green: #65AD59;
     --heading-grey: #BCBCBC;
     --shadow: rgba(0, 0, 0, 0.5);
+    --content-popup-background-color: rgba(20, 20, 20, 1);
 }

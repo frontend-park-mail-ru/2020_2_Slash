@@ -1,13 +1,13 @@
 <div class="{{{contentItem}}}">
     <img class="item__img" src="{{poster}}">
     <div class="content__item_hovered">
-        <div class="item__buttons">
+        <div class="item__buttons content__buttons">
             <a href="/watch/{{id}}" data-event="pathChanged" data-id="{{id}}">
                 <button class="item__play-btn item__btn">
                     <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg">
                 </button>
             </a>
-            <button class="item__add-btn item__btn" data-event="contentIsAdded" data-id="{{id}}" data-status="{{isAdded}}">
+            <button class="item__add-btn add-btn item__btn" data-event="contentIsAdded" data-id="{{id}}" data-status="{{isAdded}}">
                 {{#if isAdded}}
                     <img class="item__add-btn__img item__btn-img" src="/static/img/is-added.svg">
                 {{else}}
@@ -15,17 +15,18 @@
                 {{/if}}
             </button>
 
-            <button class="item__like-btn item__btn" data-event="contentIsLiked" data-id="{{id}}" data-status="{{isLike}}">
+            <button class="item__like-btn like-btn item__btn" data-event="contentIsLiked" data-id="{{id}}" data-status="{{isLike}}">
                 {{{like}}}
             </button>
 
-            <button class="item__dislike-btn item__btn" data-event="contentIsDisliked" data-id="{{id}}" data-status="{{isLike}}">
+            <button class="item__dislike-btn dislike-btn item__btn" data-event="contentIsDisliked" data-id="{{id}}" data-status="{{isLike}}">
                 {{{dislike}}}
             </button>
 
-            <button class="item__more-btn item__btn" data-event={{{infoEvent}}} data-id="{{id}}">
+            <a class="item__more-btn item__btn" href="/content/{{{preview.id}}}"
+               data-event="{{{infoEvent}}}"  data-id="{{id}}" data-modalstatus="contentPage">
                 <img class="more-btn__img item__btn-img" src="/static/img/more.svg">
-            </button>
+            </a>
         </div>
     </div>
     <div class="slider-item__arrow hidden"><img class="slider-item__arrow-img" src="/static/img/arrow2.svg"></div>

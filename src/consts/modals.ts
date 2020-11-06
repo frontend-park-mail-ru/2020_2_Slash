@@ -5,6 +5,7 @@ enum Modals {
     unauthMini = 'unauthmini',
     profileInfo = 'profileInfo',
     profileSecurity = 'profileSecurity',
+    contentPage = 'contentPage',
 }
 
 export default Modals;
