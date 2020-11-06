@@ -53,10 +53,6 @@
     .info-block__left, .info-block__right {
         height: 65%;
     }
-
-    .info-block__close-btn {
-        right: 3vw;
-    }
 }
 
 @media (max-width: 375px) {
@@ -84,10 +80,5 @@
 
     .info-block__misc {
         font-size: 14px;
-    }
-
-    .info-block__close-btn {
-        top: 3vw;
-        right: 6vw;
     }
 }
