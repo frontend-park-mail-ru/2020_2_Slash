@@ -1,9 +1,3 @@
-$white: rgb(255, 255, 255);
-$rating-green: #65AD59;
-$crystal-clear: rgba(255, 255, 255, 0);
-$black: rgb(0, 0, 0);
-$heading-grey: rgb(188, 188, 188);
-
 .content {
   &__info-block-wrapper {
     font-size: 16px;
@@ -13,7 +7,7 @@ $heading-grey: rgb(188, 188, 188);
   &__info-block {
     font-weight: lighter;
     height: 550px;
-    background-color: $black;
+    background-color: var(--black);
     min-height: 20vw;
   }
 }
@@ -25,7 +19,7 @@ $heading-grey: rgb(188, 188, 188);
 .info-block{
   &__title-text {
     letter-spacing: 0.2em;
-    color: $white;
+    color: var(--white);
     padding: 0;
     margin: 0;
     font-size: 35px;
@@ -46,7 +40,7 @@ $heading-grey: rgb(188, 188, 188);
 
 .info-block__about,
 .item-title {
-  color: $heading-grey;
+  color: var(--heading-grey);
   letter-spacing: 0.08em;
   font-weight: normal;
 }
@@ -56,7 +50,7 @@ $heading-grey: rgb(188, 188, 188);
   width: 1.5vw;
   height: 1.5vw;
   background-position: center center;
-  background-color: $crystal-clear;
+  background-color: var(--crystal-clear);
   outline: none;
   border: none;
   border-radius: 25px;
@@ -65,17 +59,17 @@ $heading-grey: rgb(188, 188, 188);
   &:hover {
     transition: all 0.1s ease-in-out;
     transform: scale(1.05);
-    filter: drop-shadow(0px 0px 1px $white);
-    background-color: $crystal-clear;
+    filter: drop-shadow(0px 0px 1px var(--white));
+    background-color: var(--crystal-clear);
   }
 }
 
 .misc-item__rating {
-  color: $rating-green;
+  color: var(--rating-green);
 }
 
 .item-value {
   letter-spacing: 0.08em;
-  color: $white;
+  color: var(--white);
   padding-left: 0.5vw;
 }
