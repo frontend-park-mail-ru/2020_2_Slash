@@ -6,6 +6,7 @@ enum Modals {
     profileInfo = 'profileInfo',
     profileSecurity = 'profileSecurity',
     contentPage = 'contentPage',
+    genresModal = 'genresModal',
 }
 
 export default Modals;

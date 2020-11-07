@@ -1,8 +1,6 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './ContentPopup.hbs';
-import EventBus from '../../services/EventBus';
-import Events from '../../consts/events';
 import Grid from '../Grid/Grid';
 
 /**
@@ -10,8 +8,8 @@ import Grid from '../Grid/Grid';
  * Компонента попапа
  */
 class ContentPopup extends Component {
-    private _onClick: any;
-    private _onPlay: any;
+    private readonly _onClick: any;
+    private readonly _onPopstate: any;
 
     /**
      * Создает экземпляр Popup
@@ -32,12 +30,12 @@ class ContentPopup extends Component {
             }
         }.bind(this);
 
-        this._onPlay = function(event: any) {
+        this._onPopstate = function(event: any) {
             this.remove();
         }.bind(this);
 
+        window.addEventListener('popstate', this._onPopstate);
         this.parent.addEventListener('click', this._onClick);
-        EventBus.on(Events.PathChanged, this._onPlay);
     }
 
     /**
@@ -48,19 +46,27 @@ class ContentPopup extends Component {
         if (page) {
             this.parent.innerHTML = page.innerHTML;
         }
-        const popup = document.querySelector('.content-popup');
 
-        if (popup) {
-            this.parent.removeChild(popup);
-            this.onDestroy();
-        }
+        this.onDestroy();
     }
 
     /**
      * Коллбэк на удаление элемента Popup со страницы
      */
     onDestroy() {
+        window.removeEventListener('popstate', this._onPopstate);
         this.parent.removeEventListener('click', this._onClick);
+
+        const path = document.location.href;
+        window.history.pushState(null, null, path);
+
+        const reg = new RegExp('^/content/\\d+?$'); //eslint-disable-line
+        const result = window.location.pathname.match(reg);
+        if (result) {
+            window.history.replaceState(history.state, null, '/browse');
+        } else {
+            window.history.replaceState(history.state, null, window.location.pathname);
+        }
     }
 
     addLikeIcons() {

@@ -4,6 +4,7 @@ enum Events {
     ProfileTabChanged = 'profileTabChanged',
     OpenInfoBlock = 'openInfoBlock',
     ContentInfoRequested = 'contentInfoRequested',
+    ContentByExternalReference = 'сontentByExternalReference',
     RevealPopup = 'revealPopup',
     ContentInfoTabChanged = 'contentInfoTabChanged',
     InfoBlockClosed = 'infoBlockClosed',

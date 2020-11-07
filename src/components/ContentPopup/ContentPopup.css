@@ -115,7 +115,7 @@
 .modal__description-right, .modal__description-left {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .modal__extra-description {
@@ -139,6 +139,7 @@
 }
 
 .modal__buttons {
+    padding: 0;
     width: 10vw;
     justify-content: space-between;
 }
