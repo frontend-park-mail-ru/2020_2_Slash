@@ -1,0 +1,175 @@
+.info-block {
+    &__page-main {
+        height: 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    &__main-wrapper {
+        height: 100%;
+        width: 100%;
+        backdrop-filter: brightness(0%);
+        @media (max-width: 850px) {
+            backdrop-filter: blur(10px) brightness(70%);
+        }
+    }
+
+    &__description {
+        padding: 20px 0 0 60px;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        left: 0;
+        z-index: 1;
+        width: 40%;
+        height: 90%;
+        @media (max-width: 1000px) {
+            height: 80%;
+            width: 80%;
+        }
+    }
+
+    &__title-text {
+        @media (max-width: 1000px){
+            font-size: 30px;
+        }
+    }
+
+    &__buttons {
+        width: 10vw;
+        justify-content: space-between;
+        @media (max-width: 1000px) {
+            width: 30vw;
+            padding-top: 4vw;
+        }
+        @media (max-width: 850px) {
+            width: 50vw;
+            padding-top: 4vw;
+        }
+    }
+
+    &__video-holder {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        @media (max-width: 1000px) {
+            left: 0;
+        }
+        @media (max-width: 850px) {
+            top: 100px;
+        }
+        @media (max-width: 375px) {
+            top: 200px;
+            left: 0;
+            bottom: 0;
+        }
+    }
+
+    &__video {
+        height: 100%;
+        img {
+            height: 100%;
+            @media (max-width: 1000px) {
+                width: 100%;
+            }
+            @media (max-width: 850px) {
+                height: 60vw;
+            }
+            @media (max-width: 375px) {
+                border: 2px solid var(--white);
+                height: 60%;
+            }
+        }
+    }
+
+    &__video-shade {
+        position: absolute;
+        background-image: linear-gradient(90deg, rgb(0, 0, 0) 10%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0));
+        height: 100%;
+        width: 10%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        @media (max-width: 375px) {
+            display: none;
+        }
+    }
+
+    &__misc, &__buttons {
+        display: flex;
+    }
+
+    &__add-btn, &__like-btn, &__dislike-btn {
+        padding: 0;
+        width: var(--button-size-normal);
+        height: var(--button-size-normal);
+        background-position: center center;
+        background-color: var(--crystal-clear);
+        outline: none;
+        border: none;
+        border-radius: 25px;
+        &:hover {
+            background-color: var(--medium-transparent-white);
+            cursor: pointer;
+        }
+        @media (max-width: 1000px) {
+            border-radius: 35px;
+            width: var(--button-size-1000);
+            height: var(--button-size-1000);
+        }
+        @media (max-width: 850px) {
+            width: var(--button-size-850);
+            height: var(--button-size-850);
+            border-radius: 50px;
+        }
+        @media (max-width: 375px) {
+            width: var(--button-size-375);
+            height: var(--button-size-375);
+            border-radius: 70px;
+        }
+    }
+
+    &__video_shade {
+        @media (max-width: 850px) {
+            display: none;
+        }
+        @media (max-width: 375px) {
+            display: none;
+        }
+    }
+}
+
+.add-btn, .like-btn, .dislike-btn {
+    &__img {
+        width: var(--button-size-normal);
+        height: var(--button-size-normal);;
+        @media (max-width: 1000px) {
+            width: var(--button-size-1000);
+            height: var(--button-size-1000);
+        }
+        @media (max-width: 850px) {
+            width: var(--button-size-850);
+            height: var(--button-size-850);
+        }
+        @media (max-width: 375px) {
+            width: var(--button-size-375);
+            height: var(--button-size-375);
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .tabs__list-item-text { //TODO: этот стиль надо будет вынести в компоненту TabBar
+        font-size: 1rem;
+        padding: 0 1vw 0 1vw;
+    }
+}
+
+@media (max-width: 375px) {
+    .hidden-item {
+        display: none;
+    }
+}

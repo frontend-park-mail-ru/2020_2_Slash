@@ -18,8 +18,16 @@ module.exports = {
     module: {
         rules: [
             {
+                test:/\.s[ac]ss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                ],
+            },
+            {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader'], //TODO: смерджить это правило с правилом выше
             },
             {
                 test: /\.hbs$/i,

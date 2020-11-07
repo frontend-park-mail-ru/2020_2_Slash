@@ -13,10 +13,10 @@
 @import "components/Item/Item.css";
 @import "components/SliderItem/SliderItem.css";
 @import "components/GridItem/GridItem.css";
-@import "components/InfoBlock/InfoBlock.css";
+@import "components/InfoBlock/InfoBlock.scss";
 @import "components/TabBar/TabBar.css";
-@import "components/MainTab/MainTab.css";
-@import "components/DetailsTab/DetailsTab.css";
+@import "components/MainTab/MainTab.scss";
+@import "components/DetailsTab/DetailsTab.scss";
 @import "components/ContentBlock/ContentBlock.css";
 @import "components/MiniModal/MiniModal.css";
 @import "components/Player/Player.css";
@@ -26,45 +26,45 @@
 @import "views/MoviesView/MoviesView.css";
 
 body {
-    font-family: "Inter", Arial, sans-serif;
-    background-color: var(--main-color);
-    padding: 0;
-    margin: 0;
-    font-size: 1vw;
-    font-weight: lighter;
+  font-family: "Inter", Arial, sans-serif;
+  background-color: var(--main-color);
+  padding: 0;
+  margin: 0;
+  font-size: 1vw;
+  font-weight: lighter;
 }
 
 @font-face {
-    font-family: "Inter";
-    src: url("../public/fonts/Inter.ttf");
+  font-family: "Inter";
+  src: url("../public/fonts/Inter.ttf");
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .main-view {
-    min-height: calc(100vh - 2 * var(--header-height));
+  min-height: calc(100vh - 2 * var(--header-height));
 }
 
 .pad-both {
-    padding: 0 60px;
+  padding: 0 60px;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 @media (max-width: 850px) {
-    .pad-both {
-        padding: 0 20px;
-    }
+  .pad-both {
+    padding: 0 20px;
+  }
 
-    .control__item {
-        margin-left: 10px;
-    }
+  .control__item {
+    margin-left: 10px;
+  }
 }

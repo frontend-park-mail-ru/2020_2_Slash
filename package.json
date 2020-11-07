@@ -10,7 +10,8 @@
     "start": "node server/server.js",
     "build-dev": "webpack",
     "build-prod": "webpack --mode=production",
-    "dev-live": "webpack --watch"
+    "dev-live": "webpack --watch",
+    "sass-compile": "sass"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,8 @@
     "handlebars-loader": "^1.7.1",
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^1.0.0",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.0.5",
     "style-loader": "^2.0.0",
     "typescript": "^2.9.2",
     "webpack": "^4.44.2",

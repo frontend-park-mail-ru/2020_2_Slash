@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scss';
 import Router from './services/Router.ts';
 import Routes from './consts/routes.ts';
 import MainController from './controllers/MainController';

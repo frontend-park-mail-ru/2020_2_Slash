@@ -11,6 +11,7 @@
     --low-transparent-gray: rgba(20, 20, 20, 0.6);
     --blackout-for-popup: rgba(0,0,0,.7);
     --white: rgba(255, 255, 255, 255);
+    --black: rgba(0, 0, 0, 255);
     --filter-btn: rgba(0, 0, 0, 1);
     --filter-btn-hover: rgba(0, 0, 0, 0.3);
     --light-grey: #CCCCCC;
@@ -26,4 +27,8 @@
     --heading-grey: #BCBCBC;
     --shadow: rgba(0, 0, 0, 0.5);
     --content-popup-background-color: rgba(20, 20, 20, 1);
+    --button-size-normal: 2.5vw;
+    --button-size-1000: 5.5vw;
+    --button-size-850: 5vw;
+    --button-size-375: 9vw;
 }
