@@ -22,10 +22,11 @@
         grid-column-gap: 0.5vw;
         grid-template-columns: repeat(2, 1fr);
 
-        padding: 9vh 20px 2vh 40px;
+        padding: 5vh 20px 2vh 40px;
     }
 
     .content__title {
+        font-size: 3vw;
         margin-left: 20px;
     }
 }

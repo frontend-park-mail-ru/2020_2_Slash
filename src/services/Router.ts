@@ -129,24 +129,31 @@ class Router {
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^/(\\w+)\\?\\w+=\(\\w+)?$'); //eslint-disable-line
+        const reg = new RegExp('^/(\\w+)\\?(\\w+)=\(\\w+)?$'); //eslint-disable-line
         const result = path.match(reg);
+        let resultPath;
 
-        if (!result) {
-            return null;
+        if (result) {
+            if (result[2] === 'cid') {
+                resultPath = `/content/${result[3]}`;
+            } else {
+                resultPath = `/${result[1]}`;
+            }
+            return {
+                path: resultPath,
+                data: result[3],
+            };
         }
-        return {
-            path: `/${result[1]}`,
-            data: result[2],
-        };
+
+        return null;
     }
 
     start() {
         window.addEventListener('popstate', () => {
-            this.go(window.location.pathname);
+            this.go(window.location.pathname + window.location.search);
         });
 
-        this.go(window.location.pathname);
+        this.go(window.location.pathname + window.location.search);
     }
 
     /**

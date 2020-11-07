@@ -2,24 +2,11 @@
     <div class="movies__banner pad-both">
         <div class="movies-title">Фильмы</div>
         <div class="genres">
-            <button class="genres-btn" data-event="openSubMenuGenres">
+            <button class="genres-btn" data-event="revealPopup" data-modalstatus="genresModal">
                 <div class="genres-btn__label">Жанры</div>
                 <img class="genres-btn__arrow" src="/static/img/arrow.svg">
             </button>
-            <div class="genres__sub-menu hidden">
-                <div class="sub-menu__list">
-                    {{#each genres}}
-                        <a href="/movie?genre={{this.id}}" data-event="pathChanged">
-                        <div class="sub-menu__item">
-                            {{{this.name}}}
-                        </div>
-                        </a>
-                    {{/each}}
-                </div>
-                <button class="sub-menu__close-btn" data-event="openSubMenuGenres">
-                    <img class="close-btn__img" src="/static/img/close.svg">
-                </button>
-            </div>
+            {{{SubMenu}}}
         </div>
     </div>
     {{{Preview}}}

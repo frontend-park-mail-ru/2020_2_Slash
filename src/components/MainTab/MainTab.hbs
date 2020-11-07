@@ -33,27 +33,24 @@
                     {{/each}}
                 </span>
             </div>
-            <div class="info-block__buttons">
-                <button class="info-block__add-btn" data-event="contentIsAdded" data-id="{{id}}" data-status="{{isAdded}}">
+            <div class="info-block__buttons content__buttons">
+                <button class="item__add-btn add-btn item__btn" data-event="contentIsAdded" data-id="{{id}}"
+                        data-status="{{isAdded}}">
                     {{#if isAdded}}
-                        <img class="add-btn__img item__btn-img" src="/static/img/is-added.svg">
+                        <img class="item__add-btn__img item__btn-img" src="/static/img/is-added.svg">
                     {{else}}
-                        <img class="add-btn__img item__btn-img" src="/static/img/add.svg">
+                        <img class="item__add-btn__img item__btn-img" src="/static/img/add.svg">
                     {{/if}}
                 </button>
-                <button class="info-block__like-btn" data-event="contentIsLiked" data-id="{{id}}" data-status="{{isLiked}}">
-                    {{#if isLiked}}
-                        <img class="like-btn__img item__btn-img" src="/static/img/is-liked.svg">
-                    {{else}}
-                        <img class="like-btn__img item__btn-img" src="/static/img/like.svg">
-                    {{/if}}
+
+                <button class="item__like-btn like-btn item__btn" data-event="contentIsLiked" data-id="{{id}}"
+                        data-status="{{isLike}}">
+                    {{{like}}}
                 </button>
-                <button class="info-block__dislike-btn" data-event="contentIsDisliked" data-id="{{id}}" data-status="{{isDisliked}}">
-                    {{#if isDisliked}}
-                        <img class="dislike-btn__img item__btn-img" src="/static/img/is-disliked.svg">
-                    {{else}}
-                        <img class="dislike-btn__img item__btn-img" src="/static/img/dislike.svg">
-                    {{/if}}
+
+                <button class="item__dislike-btn dislike-btn item__btn" data-event="contentIsDisliked" data-id="{{id}}"
+                        data-status="{{isLike}}">
+                    {{{dislike}}}
                 </button>
             </div>
         </div>

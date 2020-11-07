@@ -1,0 +1,12 @@
+<div class="sub-menu__list">
+    {{#each genres}}
+        <a href="/movies?genre={{this.id}}" data-event="pathChanged">
+        <div class="sub-menu__item">
+            {{{this.name}}}
+        </div>
+        </a>
+    {{/each}}
+</div>
+<button class="close-btn">
+    <img class="close-btn__img" src="/static/img/close.svg">
+</button>

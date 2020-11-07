@@ -1,0 +1,115 @@
+<div class="blocker"></div>
+<div class="content-popup-wrapper">
+    <div class="modal__video-holder">
+        <div class="modal__video-wrapper">
+            <img class="modal__video" src="{{poster}}">
+            <div class="modal__video-shade"></div>
+        </div>
+        <div class="modal__name margin">
+            <p>{{title}}</p>
+        </div>
+        <div class="modal__controller margin">
+            <div class="modal__play">
+                <a href="/watch/{{id}}" data-event="pathChanged" data-id="{{id}}" style="text-decoration: none">
+                    <button class="preview__btn play-btn">
+                        <img class="play-btn__img" src="/static/img/play.svg">
+                        <p class="play-btn__text">Воспроизвести</p>
+                    </button>
+                </a>
+            </div>
+            <div class="modal__sound">
+                <button class="sound-btn">
+                    <img class="sound-btn__img" src="/static/img/mute.svg">
+                    <img class="sound-btn__img sound-btn_hidden" src="/static/img/sound-on.svg">
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal__description margin">
+        <div class="modal__description-left">
+            <div class="modal__buttons content__buttons">
+                <button class="modal__add-btn add-btn item__btn" data-event="contentIsAdded" data-id="{{id}}"
+                        data-status="{{isAdded}}">
+                    {{#if isAdded}}
+                        <img class="item__add-btn__img item__btn-img" src="/static/img/is-added.svg">
+                    {{else}}
+                        <img class="item__add-btn__img item__btn-img" src="/static/img/add.svg">
+                    {{/if}}
+                </button>
+
+                <button class="modal__like-btn like-btn item__btn" data-event="contentIsLiked" data-id="{{id}}"
+                        data-status="{{isLike}}">
+                    {{{like}}}
+                </button>
+
+                <button class="modal__dislike-btn dislike-btn item__btn" data-event="contentIsDisliked" data-id="{{id}}"
+                        data-status="{{isLike}}">
+                    {{{dislike}}}
+                </button>
+            </div>
+            <div class="modal__misc">
+                <p class="misc-item__rating misc-item">{{rating}}</p>
+                <p class="misc-item__year misc-item item-value">{{year}}</p>
+                <p class="misc-item__season misc-item item-value">{{seasons}}</p>
+            </div>
+            <div class="modal__about  ">
+                <span>{{about}}</span>
+            </div>
+        </div>
+        <div class="modal__description-right">
+            <div class="modal__country country-item  ">
+                <span class="modal__title item-title">Страна:</span>
+                <span class="modal__value item-value">{{country}}</span>
+            </div>
+            <div class="modal__genre genre-item  ">
+                <span class="genre-item__title item-title">Жанр:</span>
+                <span class="genre-item__value item-value">
+                    {{#each  genre}}
+                        {{{this}}},
+                    {{/each}}
+                </span>
+            </div>
+            <div class="modal__cast cast-item  ">
+                <span class="cast-item__title item-title">Актеры:</span>
+                <span class="cast-item__value item-value">
+                    {{#each slicedCast}}
+                        {{{this}}},
+                    {{/each}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="modal__headline margin">Похожее</div>
+    {{{moreLikeThis}}}
+    <div class="modal__headline margin">Больше информации</div>
+    <div class="modal__extra-description margin">
+        <div class="modal__extra-description-left">
+            <div class="modal__about  ">
+                <span>{{fullAbout}}</span>
+            </div>
+        </div>
+        <div class="modal__extra-description-right">
+            <div class="modal__director director-item">
+                <span class="director-item__title item-title">Режиссеры:</span>
+                <span class="director-item__value item-value">
+                    {{#each directors}}
+                        {{{this}}},
+                    {{/each}}
+                </span>
+            </div>
+            <div class="modal__cast cast-item">
+                <span class="cast-item__title item-title">Актеры:</span>
+                <span class="cast-item__value item-value">
+                    {{#each cast}}
+                        {{{this}}},
+                    {{/each}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="modal__close-btn">
+        <button class="close-btn" data-event="">
+            <img class="close-btn__img" src="/static/img/close.svg">
+        </button>
+    </div>
+</div>

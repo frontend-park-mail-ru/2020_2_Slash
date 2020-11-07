@@ -84,6 +84,7 @@
     outline: none;
     border: none;
     border-radius: 25px;
+    cursor: pointer;
 }
 
 @media (max-width: 850px) {

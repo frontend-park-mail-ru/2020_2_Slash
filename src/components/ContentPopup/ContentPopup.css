@@ -1,0 +1,273 @@
+.blocker {
+    position: fixed;
+    opacity: 1000;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: ' ';
+    background: var(--blackout-for-popup);
+    z-index: 1000;
+}
+
+.scroll-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.margin {
+    padding-left: 2.5vw;
+}
+
+.content-popup {
+    width: 60%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 20%;
+    top: 10%;
+    z-index: 1001;
+}
+
+.content-popup-wrapper {
+    background-color: var(--content-popup-background-color);
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 8px;
+}
+
+.modal__video-holder {
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.modal__video-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.modal__video {
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+.modal__video-shade {
+    position: absolute;
+    background-image: linear-gradient(0deg, rgba(20, 20, 20, 1) 10%, rgba(20, 20, 20, 0.5) 50%, rgba(20, 20, 20, 0));
+    height: 20%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.modal__name {
+    margin: 0;
+    bottom: 15%;
+    position: absolute;
+    color: var(--white);
+    font-size: 3em;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.modal__controller {
+    width: 90%;
+    bottom: 10%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+}
+
+.misc-item {
+    margin: 0;
+}
+
+.modal__misc {
+    margin: 1vw 0;
+}
+
+.modal__description {
+    display: flex;
+    justify-content: space-evenly;
+    margin-right: 2.5vw;
+}
+
+.modal__description-right {
+    width: 30%;
+}
+
+.modal__description-left {
+    width: 70%;
+}
+
+.modal__description-right, .modal__description-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modal__extra-description {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2vw;
+    margin-right: 2.5vw;
+}
+
+.modal__extra-description-right {
+    width: 40%;
+}
+
+.modal__extra-description-left {
+    width: 60%;
+    padding-right: 2vw;
+}
+
+.modal__misc, .modal__buttons {
+    display: flex;
+}
+
+.modal__buttons {
+    padding: 0;
+    width: 10vw;
+    justify-content: space-between;
+}
+
+.misc-item_year, .misc-item_season, .misc-item_rating {
+    padding: 0 1vw 0 0;
+    margin: 0;
+}
+
+.modal__country, .modal__genre, .modal__cast, .modal__director {
+    margin-bottom: 2vw;
+}
+
+.modal__title-text {
+    letter-spacing: 0.2em;
+    color: var(--white);
+    padding: 0;
+    margin: 0;
+    font-size: 35px;
+}
+
+.item-value {
+    letter-spacing: 0.08em;
+    color: var(--white);
+    padding-left: 0.5vw;
+}
+
+.modal__about,
+.item-title {
+    color: var(--heading-grey);
+    letter-spacing: 0.08em;
+    font-weight: normal;
+}
+
+.modal__close-btn {
+    position: absolute;
+    right: 1vw;
+    top: 1vw;
+}
+
+.close-btn {
+    padding: 0;
+    width: 1.5vw;
+    height: 1.5vw;
+    background-position: center center;
+    background-color: var(--crystal-clear);
+    outline: none;
+    border: none;
+    border-radius: 25px;
+}
+
+.close-btn:hover {
+    transition: all 0.1s ease-in-out;
+    transform: scale(1.05);
+    filter: drop-shadow(0px 0px 1px var(--white));
+    cursor: pointer;
+}
+
+.close-btn:active {
+    background-color: var(--crystal-clear);
+    cursor: pointer;
+}
+
+.modal__headline {
+    margin: 2vw 0 0 0;
+    color: var(--white);
+    font-size: 1.8vw;
+}
+
+.modal__grid {
+    display: grid;
+    grid-row-gap: 7vh;
+    grid-column-gap: 0.2vw;
+    grid-template-columns: repeat(4, 1fr);
+
+    padding: 2vw 2.5vw 2vw 2.5vw;
+}
+
+@media (max-width: 850px) {
+    .content-popup {
+        width: 96%;
+        left: 2%;
+        top: 2%;
+    }
+
+    .modal__grid {
+        grid-row-gap: 1vh;
+        grid-column-gap: 1vh;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modal__headline {
+        font-size: 3vw;
+    }
+
+    .modal__description, .modal__extra-description {
+        font-size: 2vw;
+    }
+
+    .modal__name {
+        bottom: 20%;
+        font-size: 4vw;
+    }
+
+    .modal__buttons {
+        width: 30vw;
+    }
+
+    .modal__close-btn {
+        right: 3vw;
+        top: 1.5vw;
+    }
+}
+
+@media (max-width: 375px) {
+    .modal__headline {
+        font-size: 4vw;
+    }
+
+    .modal__description, .modal__extra-description {
+        font-size: 3vw;
+    }
+
+    .modal__name {
+        font-size: 5vw;
+    }
+
+    .modal__close-btn {
+        right: 4.5vw;
+    }
+}

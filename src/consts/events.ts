@@ -4,6 +4,7 @@ enum Events {
     ProfileTabChanged = 'profileTabChanged',
     OpenInfoBlock = 'openInfoBlock',
     ContentInfoRequested = 'contentInfoRequested',
+    ContentByExternalReference = 'сontentByExternalReference',
     RevealPopup = 'revealPopup',
     ContentInfoTabChanged = 'contentInfoTabChanged',
     InfoBlockClosed = 'infoBlockClosed',
@@ -27,6 +28,7 @@ enum Events {
     ContentIsAdded = 'contentIsAdded',
     ContentIsLiked = 'contentIsLiked',
     ContentIsDisliked = 'contentIsDisliked',
+    CheckSession = 'checkSession',
 }
 
 export default Events;

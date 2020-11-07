@@ -5,7 +5,7 @@ enum Routes {
     ProfilePage = '/profile',
     ContentPage = '/content/:id',
     Watch = '/watch/:id',
-    MoviePage = '/movie',
+    MoviePage = '/movies',
     MyList = '/mylist',
 }
 

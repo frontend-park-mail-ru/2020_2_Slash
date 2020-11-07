@@ -3,6 +3,9 @@ import Context from '../../tools/Context';
 import Preview from '../../components/Preview/Preview';
 import ContentBlock from '../../components/ContentBlock/ContentBlock';
 import template from './MoviesView.hbs';
+import SubMenuPopup from '../../components/SubMenuPopup/SubMenuPopup';
+import EventBus from '../../services/EventBus';
+import Events from '../../consts/events';
 
 class MoviesView extends View {
     private parent: any;
@@ -11,6 +14,8 @@ class MoviesView extends View {
         super(title, context);
         this.template = template;
         this.parent = document.querySelector('.application');
+
+        EventBus.on(Events.RevealPopup, this.renderPopup.bind(this));
     }
 
     show() {
@@ -25,11 +30,15 @@ class MoviesView extends View {
         const data: Context = {
             Preview: preview.render(),
             ContentBlock: contentBlock.render(),
-            genres: this.context.genres,
         };
 
         this.insertIntoContext(data);
         super.show(this.template(data));
+    }
+
+    renderPopup() {
+        const subMenu = new SubMenuPopup(this.context, document.querySelector('.genres'));
+        this.insertIntoContext({SubMenu: subMenu.render()});
     }
 }
 
