@@ -1,10 +1,10 @@
+import {Genres} from '../consts/genres';
+
 export function CreateDomElement(tagName: string, attrs?: {[key:string]: string}) {
     const element = document.createElement(tagName);
-
     if (attrs) {
         Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value));
     }
-
     return element;
 }
 
@@ -16,3 +16,14 @@ export function ParseUrlParam(url: string) {
     });
     return paramsMap;
 }
+
+export function GetGenreNameById(index: number) {
+    let genre: string = null;
+    Object.entries(Genres).forEach((item) => {
+        if (item[1].id == index) {
+            genre = item[1].name;
+        }
+    });
+    return genre;
+}
+
