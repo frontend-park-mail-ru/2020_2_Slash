@@ -6,6 +6,7 @@ import eventBus from './EventBus';
 import Events from '../consts/events';
 import {CustomObject} from '../tools/type';
 import Controller from '../controllers/Controller';
+import {ParseUrlParam} from '../tools/helper';
 
 interface RoutObjectType {
     reg: RegExp,
@@ -104,7 +105,7 @@ class Router {
 
         const result = this.getParam(path);
         if (result) {
-            query.resourceId = +result.data;
+            query.resourceId = result.data;
             path = result.path;
         }
 
@@ -129,19 +130,25 @@ class Router {
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^/(\\w+)\\?(\\w+)=\(\\w+)?$'); //eslint-disable-line
+        const reg = new RegExp('^/(\\w+)\\?((\\w+=\\w+&)*\\w+=\\w+)?');
         const result = path.match(reg);
+
+        let params: any;
+        if (result) {
+            params = ParseUrlParam(result[2]);
+        }
+
         let resultPath;
 
-        if (result) {
-            if (result[2] === 'cid') {
-                resultPath = `/content/${result[3]}`;
+        if (params) {
+            if (params.has('cid')) {
+                resultPath = `/content/${params.get('cid')}`;
             } else {
                 resultPath = `/${result[1]}`;
             }
             return {
                 path: resultPath,
-                data: result[3],
+                data: params,
             };
         }
 

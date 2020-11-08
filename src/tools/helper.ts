@@ -7,3 +7,12 @@ export function CreateDomElement(tagName: string, attrs?: {[key:string]: string}
 
     return element;
 }
+
+export function ParseUrlParam(url: string) {
+    const params = url.split('&');
+    const paramsMap = new Map<string, string>();
+    params.forEach((item) => {
+        paramsMap.set(item.split('=')[0], item.split('=')[1]);
+    });
+    return paramsMap;
+}
