@@ -19,7 +19,7 @@ class PlayerController extends Controller {
     switchOn() {
         this.view.insertIntoContext( {
             title: 'Witcher',
-            poster: '/static/img/witcher2.jpg',
+            poster: '/static/img/witcher2.webp',
             video: '/static/img/witcher.mp4',
         });
         this.view.show();

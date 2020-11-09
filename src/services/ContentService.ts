@@ -54,7 +54,7 @@ class ContentService {
     onOpenInfoBlock(data: any) {
         const contentData: ResponseType = { // запрос за контентом по id
             body: {
-                poster: '/static/img/witcher2.jpg',
+                poster: '/static/img/witcher2.webp',
                 video: '/static/img/witcher.mp4',
                 title: 'Ведьмак',
                 originTitle: 'Witcher',
@@ -101,7 +101,7 @@ class ContentService {
     onContentInfoRequested(data: any) {
         const contentData: ResponseType = { // запрос за контентом по id
             body: {
-                poster: '/static/img/witcher2.jpg',
+                poster: '/static/img/witcher2.webp',
                 video: '/static/img/witcher.mp4',
                 title: 'Ведьмак',
                 originTitle: 'Witcher',
@@ -138,35 +138,35 @@ class ContentService {
         const content = [
             {
                 id: 1,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 2,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 3,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 58746,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 4,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 5,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 6,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 7,
-                poster: '/static/img/fword.png',
+                poster: '/static/img/fword.webp',
             },
         ];
 
@@ -195,7 +195,7 @@ class ContentService {
     onContentByExternalReference(data: any) {
         const contentData: ResponseType = { // запрос за контентом по id
             body: {
-                poster: '/static/img/witcher2.jpg',
+                poster: '/static/img/witcher2.webp',
                 video: '/static/img/witcher.mp4',
                 title: 'Ведьмак',
                 originTitle: 'Witcher',
@@ -232,35 +232,35 @@ class ContentService {
         const content = [
             {
                 id: 1,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 2,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 3,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 58746,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 4,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 5,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 6,
-                poster: '/static/img/witcher.png',
+                poster: '/static/img/witcher.webp',
             },
             {
                 id: 7,
-                poster: '/static/img/fword.png',
+                poster: '/static/img/fword.webp',
             },
         ];
 
