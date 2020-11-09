@@ -1,6 +1,7 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './SubMenuPopup.hbs';
+import {Genres} from '../../consts/genres';
 
 /**
  * @class
@@ -8,11 +9,12 @@ import template from './SubMenuPopup.hbs';
  */
 class SubMenuPopup extends Component {
     private _onClick: any;
+
     /**
-     * Создает экземпляр MiniModal
+     * Создает экземпляр SubMenuPopup
      *
      * @constructor
-     * @this  {MiniModal}
+     * @this  {SubMenuPopup}
      * @param context
      * @param parent
      */
@@ -20,10 +22,13 @@ class SubMenuPopup extends Component {
         super(context, parent);
         this.template = template;
         this.context = context;
+        this.context.genres = Object.entries(Genres).map((elem) => elem[1]);
 
         this._onClick = function(event: any) {
             const {target} = event;
-            if (target.closest('.close-btn')) {
+            if (!target.classList.contains('genres') ||
+                target.closest('.close-btn') ||
+                !target.classList.contains('genres-btn')) {
                 this.remove();
             }
         }.bind(this);
@@ -43,10 +48,10 @@ class SubMenuPopup extends Component {
     }
 
     /**
-     * Коллбэк на удаление элемента MiniModal со страницы
+     * Коллбэк на удаление элемента SubMenuPopup со страницы
      */
     onDestroy() {
-        this.parent.removeEventListener('click', this._onClick);
+        document.querySelector('.application').removeEventListener('click', this._onClick);
     }
 
     /**

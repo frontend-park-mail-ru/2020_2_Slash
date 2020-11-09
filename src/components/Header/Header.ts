@@ -11,7 +11,7 @@ import {CreateDomElement} from '../../tools/helper';
  * Компонента хэдера
  */
 class Header extends Component {
-    private UserBlock: UserHeader;
+    public UserBlock: UserHeader;
     /**
      * Создает экземпляр Header
      *
@@ -27,14 +27,17 @@ class Header extends Component {
         this.UserBlock = new UserHeader(this.context);
         this.context.UserBlock = this.UserBlock.render();
 
-        eventBus.on(Events.UpdateHeader, this.onUpdate.bind(this));
-        eventBus.on(Events.UpdateHeader, this.onUpdateHeaderNav.bind(this));
+        if (!eventBus.getListeners().updateHeader) {
+            eventBus.on(Events.UpdateHeader, this.onUpdate.bind(this));
+            eventBus.on(Events.UpdateHeader, this.onUpdateHeaderNav.bind(this));
+        }
     }
 
     onUpdate(data: any = {}) {
         this.context.authorized = data.authorized;
         this.context.avatar = data.avatar;
         const userBlock = document.querySelector('.header__user-block');
+
         if (userBlock) {
             userBlock.innerHTML = this.UserBlock.template(this.context);
         }
@@ -49,14 +52,14 @@ class Header extends Component {
             const a = CreateDomElement('a', {
                 'class': 'my-list list-item-text list-item-text-selected',
                 'href': '/mylist',
-                'innerText': 'my-list',
                 'data-event': 'pathChanged',
             });
             a.innerText = 'Мой список';
 
-            document.querySelector('.nav__list')
-                .appendChild(li)
-                .appendChild(a);
+            const navBar = document.querySelector('.nav__list');
+            if (navBar) {
+                document.querySelector('.nav__list').appendChild(li).appendChild(a);
+            }
             return;
         }
 

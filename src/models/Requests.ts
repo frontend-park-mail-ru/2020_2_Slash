@@ -14,3 +14,7 @@ export interface UpdateProfileRequest {
     nickname: string,
     email: string,
 }
+
+export interface ContentRequest {
+    content_id: number //eslint-disable-line
+}

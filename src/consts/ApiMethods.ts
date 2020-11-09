@@ -4,7 +4,11 @@ enum ApiMethods {
     UserLogout = '/session',
     UserLogin = '/session',
     UserAvatar = '/user/avatar',
-    CheckSession = '/session',
+    Movies = '/movies',
+    LatestMovies = '/movies/latest',
+    TopMovies = '/movies/top',
+    FavouritesMovies = '/favourites',
+    Rating = '/rating',
 }
 
 export default ApiMethods;

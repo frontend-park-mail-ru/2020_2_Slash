@@ -25,7 +25,7 @@ enum Events {
     FullscreenModeOff = 'fullscreenModeOff',
     UpdateHeader = 'updateHeader',
     OpenSubMenuGenres = 'openSubMenuGenres',
-    ContentIsAdded = 'contentIsAdded',
+    AddToFavourites = 'AddToFavourites',
     ContentIsLiked = 'contentIsLiked',
     ContentIsDisliked = 'contentIsDisliked',
     CheckSession = 'checkSession',

@@ -1,13 +1,14 @@
 <div class="preview">
     <div class="preview__video-block">
         <div class="preview__video">
-            <div><img src="{{preview.poster}}"></div>
+            <div><img src="{{host}}{{preview.images}}/large.png"></div>
             <div class="preview__shade"></div>
         </div>
     </div>
     <div class="preview__panel">
-        <div class="preview__name pad-both">
-            <p>{{preview.title}}</p>
+        <div class="preview__label pad-both">
+            <p class="preview__name">{{preview.name}}</p>
+            <p class="preview__origin-name">{{preview.original_name}}</p>
         </div>
         <div class="preview__controller pad-both">
             <div class="preview__play">

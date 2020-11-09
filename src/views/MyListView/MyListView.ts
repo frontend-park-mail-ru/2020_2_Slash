@@ -1,6 +1,6 @@
 import View from '../View';
 import Context from '../../tools/Context';
-import template from '../MainVIew/MainView.hbs';
+import template from '../MyListView/MyListView.hbs';
 import Grid from '../../components/Grid/Grid';
 
 class MyListView extends View {
@@ -14,7 +14,6 @@ class MyListView extends View {
 
     show() {
         const grid = new Grid({
-            title:   this.context.title,
             content: this.context.content,
         });
 

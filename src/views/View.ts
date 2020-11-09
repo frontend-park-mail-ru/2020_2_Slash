@@ -10,6 +10,8 @@ abstract class View {
     template: any;
     baseTemplate: any;
     typeView: string;
+    header: Header;
+    footer: Footer;
 
     protected constructor(title?: string, context?: Context, type?: string) {
         document.title = title;
@@ -17,21 +19,21 @@ abstract class View {
         this.context = context;
         this.baseTemplate = template;
         this.typeView = type;
+
+        this.header = new Header({
+            authorized: this.context.authorized,
+            avatar: this.context.avatar,
+        },
+        this.root,
+        );
+
+        this.footer = new Footer();
     }
 
     show(contentTemplate: any) {
         if (!document.querySelector('.header__logo') && this.typeView !== 'player') {
-            const header = new Header({
-                authorized: this.context.authorized,
-                avatar: this.context.avatar,
-            },
-            this.root,
-            );
-
-            const footer = new Footer();
-
-            this.context.Header = header.render();
-            this.context.Footer = footer.render();
+            this.context.Header = this.header.render();
+            this.context.Footer = this.footer.render();
             this.root.innerHTML = this.baseTemplate(this.context);
         } else if (this.typeView === 'player') {
             this.root.innerHTML = contentTemplate;

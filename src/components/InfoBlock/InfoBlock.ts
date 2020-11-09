@@ -37,12 +37,12 @@ class InfoBlock extends Component {
                 }],
         });
 
-        this.context.CurrentTab = new MainTab(this.context.contentData).render();
-
         eventBus.on(Events.ContentInfoTabChanged, this.onTabChanged.bind(this));
         eventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
+    }
 
-        this.context.TabBar = this.tabBar.render();
+    public addToContext(obj: Context) {
+        this.context = {...this.context, ...obj};
     }
 
     /**
@@ -90,18 +90,18 @@ class InfoBlock extends Component {
      * @return {*|string}
      */
     render() {
+        this.context.CurrentTab = new MainTab(this.context.contentData).render();
+        this.context.TabBar = this.tabBar.render();
+
         this.deleteOpenedInfoBlock();
 
-        const currentButtonInfo = document.querySelector(
-            `a.item__more-btn[data-id='${this.context.contentId}']`);
-
-        const currentSliderItem = currentButtonInfo.closest('.content__slider-item');
+        const currentSliderItem = this.context.targetButton.closest('.content__slider-item');
         currentSliderItem.classList.add('slider-item_selected');
         currentSliderItem.classList.remove('content__slider-item');
         currentSliderItem.classList.add('slider-item_selected_hover-off');
         currentSliderItem.querySelector('.slider-item__arrow').classList.remove('hidden');
 
-        const closestSlider = currentButtonInfo.closest('.content__slider-container');
+        const closestSlider = this.context.targetButton.closest('.content__slider-container');
 
         closestSlider.innerHTML += this.template(this.context);
     }

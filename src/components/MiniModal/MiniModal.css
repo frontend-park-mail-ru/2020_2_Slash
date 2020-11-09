@@ -30,6 +30,7 @@
     cursor: pointer;
     line-height: 1em;
     color: var(--white);
+    filter: drop-shadow(0px 0px 2px var(--black));
     text-decoration: none;
     letter-spacing: 0.1em;
 }

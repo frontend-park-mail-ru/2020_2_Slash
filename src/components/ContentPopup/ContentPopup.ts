@@ -2,6 +2,7 @@ import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './ContentPopup.hbs';
 import Grid from '../Grid/Grid';
+import {SERVER_HOST} from '../../consts/settings';
 
 /**
  * @class
@@ -75,10 +76,10 @@ class ContentPopup extends Component {
         const isLikedIcon =' <img class="item-like-btn__img item__btn-img" src="/static/img/is-liked.svg">';
         const isDislikedIcon = '<img class="slider-dislike-btn__img item__btn-img" src="/static/img/is-disliked.svg">';
 
-        if (this.context.isLike === true) {
+        if (this.context.is_liked === true) {
             this.context.like = isLikedIcon;
             this.context.dislike = disLikeIcon;
-        } else if (this.context.isLike === false) {
+        } else if (this.context.is_liked === false) {
             this.context.like = likeIcon;
             this.context.dislike = isDislikedIcon;
         } else {
@@ -102,21 +103,31 @@ class ContentPopup extends Component {
         popupDiv.classList.add('content-popup');
 
         const grid = new Grid(this.context);
-        this.context = {...this.context.contentData,
+        this.context = {
+            ...this.context.contentData,
             id: this.context.contentId,
             content: this.context.content,
             moreLikeThis: grid.render(),
         };
-        this.context.slicedCast = this.context.cast.slice(0, 3);
+
+        if (this.context.actors && this.context.actors.length > 3) {
+            this.context.slicedCast = this.context.actors.slice(0, 3);
+        } else {
+            this.context.slicedCast = this.context.actors;
+        }
 
         this.addLikeIcons();
+
+        this.context.host = SERVER_HOST;
 
         popupDiv.innerHTML = this.template(this.context);
         this.parent.appendChild(popupDiv);
 
         const gridElement = document.querySelector('.content-popup-wrapper .content__grid');
-        gridElement.classList.remove('content__grid');
-        gridElement.classList.add('modal__grid');
+        if (gridElement) {
+            gridElement.classList.remove('content__grid');
+            gridElement.classList.add('modal__grid');
+        }
     }
 }
 

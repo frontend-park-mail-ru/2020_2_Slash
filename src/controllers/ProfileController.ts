@@ -35,14 +35,17 @@ class ProfileController extends Controller {
                 sessionData = {...sessionData, avatar, nickname, email};
 
                 this.view.insertIntoContext(sessionData);
-
                 this.view.show();
-
+                this.onSwitchOn();
                 return;
             }
 
             eventBus.emit(Events.PathChanged, {path: Routes.MainPage});
         });
+    }
+
+    onSwitchOn(data?: any) {
+        super.onSwitchOn(data);
     }
 
     switchOff() {

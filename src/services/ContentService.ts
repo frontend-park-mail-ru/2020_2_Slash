@@ -3,10 +3,14 @@ import Events from '../consts/events';
 import InfoBlock from '../components/InfoBlock/InfoBlock';
 import ResponseType from '../tools/ResponseType';
 import ContentPopup from '../components/ContentPopup/ContentPopup';
+import MovieModel from '../models/MovieModel';
+import {Error} from '../consts/errors';
+import Context from '../tools/Context';
 
-interface InfoBlockType {
+interface ContextData {
     contentId: number,
-    contentData: {[key: string]: string},
+    contentData: { [key: string]: string },
+    content?: { [key: string]: string }[],
 }
 
 /**
@@ -24,7 +28,7 @@ class ContentService {
      */
     private constructor() {
         eventBus.on(Events.OpenInfoBlock, this.onOpenInfoBlock.bind(this))
-            .on(Events.ContentIsAdded, this.onContentIsAdded.bind(this))
+            .on(Events.AddToFavourites, this.onAddToFavourites.bind(this))
             .on(Events.ContentIsLiked, this.onContentIsLiked.bind(this))
             .on(Events.ContentIsDisliked, this.onContentIsDisliked.bind(this))
             .on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this))
@@ -51,271 +55,213 @@ class ContentService {
      * Наполняет данными и отрисовывает инфоблок
      * @param {Object} data - Данные для этого коллбэка
      */
-    onOpenInfoBlock(data: any) {
-        const contentData: ResponseType = { // запрос за контентом по id
-            body: {
-                poster: '/static/img/witcher2.webp',
-                video: '/static/img/witcher.mp4',
-                title: 'Ведьмак',
-                originTitle: 'Witcher',
-                rating: '100% понравилось',
-                year: '2019',
-                seasons: '2 сезона',
-                about: 'Ведьмак Геральт, мутант и убийца чудовищ, на своей ' +
-                    'верной лошади по кличке Плотва путешествует по Континенту.',
-                fullAbout: 'Ведьмак Геральт, мутант и убийца чудовищ, на своей верной лошади по кличке Плотва\n' +
-                    'путешествует по Континенту. За тугой мешочек чеканных монет этот мужчина избавит\n' +
-                    'вас от всякой настырной нечисти - хоть от чудищ болотных, оборотней и даже\n' +
-                    'заколдованных принцесс. В сельской глуши местную девушку Йеннифэр, которой\n' +
-                    'сильно не повезло с внешностью, зато посчастливилось иметь способности к магии,\n' +
-                    'отец продаёт колдунье в ученицы. А малолетняя наследница королевства Цинтра по\n' +
-                    'имени Цири вынуждена пуститься в бега, когда их страну захватывает империя\n' +
-                    'Нильфгаард. Судьбы этих троих окажутся тесно связаны, но скоро сказка\n' +
-                    'сказывается, да не скоро дело делается.',
-                cast: ['Генри Кавилл', 'Фрейя Аллан', 'Аня Чалотра', 'Мими Дивени', 'Месия', 'Симсон',
-                    'Имон Фэррен', 'МайАнна Бёринг', 'Ройс Пирресон', 'Имон Фаррен',
-                    'Мими Дивени', 'Уилсон Раджу-Пухальте', 'Анна Шаффер', 'Махеш Джаду'],
-                directors: ['Алик Сахаров', 'Шарлотта Брандстром', 'Алекс Гарсиа Лопес',
-                    'Марк Йобст', 'Эдвард Базалгетт', 'Сара О’Горман', 'Гита Патель', 'Стивен Серджик'],
-                genre: ['фэнтези', 'приключения', 'драма', 'ужасы'],
-                country: 'США, Польша',
-                isAdded: false,
-            },
-            message: '',
-            error: {
-                code: 1,
-                user_message: '',
-            },
-        };
 
-        const infoBlockData: InfoBlockType = {
-            contentId: data.id,
-            contentData: contentData.body,
-        };
+    async onOpenInfoBlock(data: any) {
+        const infoBlock = new InfoBlock({targetButton: window.event.target});
 
-        const infoBlock = new InfoBlock(infoBlockData);
+        const promise = MovieModel.getMovie({id: data.id}).then((response: ResponseType) => {
+            if (!response.error) {
+                const contentData: Context = response.body.movie;
 
-        infoBlock.render();
+                const infoBlockData: ContextData = {
+                    contentId: data.id,
+                    contentData: contentData,
+                };
+                infoBlock.addToContext(infoBlockData);
+            }
+            return infoBlock;
+        });
+
+        const resultInfoBlock = await promise;
+        resultInfoBlock.render();
     }
 
     onContentInfoRequested(data: any) {
-        const contentData: ResponseType = { // запрос за контентом по id
-            body: {
-                poster: '/static/img/witcher2.webp',
-                video: '/static/img/witcher.mp4',
-                title: 'Ведьмак',
-                originTitle: 'Witcher',
-                rating: '100% понравилось',
-                year: '2019',
-                seasons: '2 сезона',
-                about: 'Ведьмак Геральт, мутант и убийца чудовищ, на своей ' +
-                    'верной лошади по кличке Плотва путешествует по Континенту.',
-                fullAbout: 'Ведьмак Геральт, мутант и убийца чудовищ, на своей верной лошади по кличке Плотва\n' +
-                    'путешествует по Континенту. За тугой мешочек чеканных монет этот мужчина избавит\n' +
-                    'вас от всякой настырной нечисти - хоть от чудищ болотных, оборотней и даже\n' +
-                    'заколдованных принцесс. В сельской глуши местную девушку Йеннифэр, которой\n' +
-                    'сильно не повезло с внешностью, зато посчастливилось иметь способности к магии,\n' +
-                    'отец продаёт колдунье в ученицы. А малолетняя наследница королевства Цинтра по\n' +
-                    'имени Цири вынуждена пуститься в бега, когда их страну захватывает империя\n' +
-                    'Нильфгаард. Судьбы этих троих окажутся тесно связаны, но скоро сказка\n' +
-                    'сказывается, да не скоро дело делается.',
-                cast: ['Генри Кавилл', 'Фрейя Аллан', 'Аня Чалотра', 'Мими Дивени', 'Месия', 'Симсон',
-                    'Имон Фэррен', 'МайАнна Бёринг', 'Ройс Пирресон', 'Имон Фаррен',
-                    'Мими Дивени', 'Уилсон Раджу-Пухальте', 'Анна Шаффер', 'Махеш Джаду'],
-                directors: ['Алик Сахаров', 'Шарлотта Брандстром', 'Алекс Гарсиа Лопес',
-                    'Марк Йобст', 'Эдвард Базалгетт', 'Сара О’Горман', 'Гита Патель', 'Стивен Серджик'],
-                genre: ['фэнтези', 'приключения', 'драма', 'ужасы'],
-                country: 'США, Польша',
-                isAdded: false,
-            },
-            message: '',
-            error: {
-                code: 1,
-                user_message: '',
-            },
-        };
+        MovieModel.getMovie({id: data.id}).then((response: ResponseType) => {
+            if (!response.error) {
+                const contentData: any = response.body.movie;
+                let content: Context[];
 
-        const content = [
-            {
-                id: 1,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 2,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 3,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 58746,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 4,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 5,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 6,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 7,
-                poster: '/static/img/fword.webp',
-            },
-        ];
+                const infoBlockData: ContextData = {
+                    contentId: data.id,
+                    contentData: contentData,
+                };
 
-        const infoBlockData = {
-            contentId: data.id,
-            contentData: contentData.body,
-            content: content,
-        };
+                MovieModel.getMoviesByGenre(contentData.genres[0].id, 8).then((response: ResponseType) => {
+                    if (response.error) {
+                        return;
+                    }
 
-        const path = document.location.href;
-        window.history.pushState(null, null, path);
-        window.history.replaceState(history.state, null, path.includes('?') ?
-            path + `&cid=${data.id}` :
-            path + `?cid=${data.id}`);
+                    const {movies} = response.body;
+                    const content = movies.filter((movie: any) => movie.id !== contentData.id);
+                    if (content.length > 0) {
+                        infoBlockData.content = content;
+                    } else {
+                        infoBlockData.content = null;
+                    }
+                    const path = document.location.href;
+                    window.history.pushState(null, null, path);
+                    window.history.replaceState(history.state, null, path.includes('?') ?
+                        path + `&cid=${data.id}` :
+                        path + `?cid=${data.id}`);
 
-        const oldContentPopup = document.querySelector('.content-popup');
-        if (oldContentPopup) {
-            oldContentPopup.remove();
-        }
+                    const oldContentPopup = document.querySelector('.content-popup');
+                    if (oldContentPopup) {
+                        oldContentPopup.remove();
+                    }
 
-        const contentPopup = new ContentPopup(infoBlockData, document.querySelector('.application'));
+                    const contentPopup = new ContentPopup(infoBlockData, document.querySelector('.application'));
 
-        contentPopup.render();
+                    contentPopup.render();
+                }).catch((error: Error) => console.log(error));
+            }
+        }).catch((error: Error) => console.log(error));
     }
 
     onContentByExternalReference(data: any) {
-        const contentData: ResponseType = { // запрос за контентом по id
-            body: {
-                poster: '/static/img/witcher2.webp',
-                video: '/static/img/witcher.mp4',
-                title: 'Ведьмак',
-                originTitle: 'Witcher',
-                rating: '100% понравилось',
-                year: '2019',
-                seasons: '2 сезона',
-                about: 'Ведьмак Геральт, мутант и убийца чудовищ, на своей ' +
-                    'верной лошади по кличке Плотва путешествует по Континенту.',
-                fullAbout: 'Ведьмак Геральт, мутант и убийца чудовищ, на своей верной лошади по кличке Плотва\n' +
-                    'путешествует по Континенту. За тугой мешочек чеканных монет этот мужчина избавит\n' +
-                    'вас от всякой настырной нечисти - хоть от чудищ болотных, оборотней и даже\n' +
-                    'заколдованных принцесс. В сельской глуши местную девушку Йеннифэр, которой\n' +
-                    'сильно не повезло с внешностью, зато посчастливилось иметь способности к магии,\n' +
-                    'отец продаёт колдунье в ученицы. А малолетняя наследница королевства Цинтра по\n' +
-                    'имени Цири вынуждена пуститься в бега, когда их страну захватывает империя\n' +
-                    'Нильфгаард. Судьбы этих троих окажутся тесно связаны, но скоро сказка\n' +
-                    'сказывается, да не скоро дело делается.',
-                cast: ['Генри Кавилл', 'Фрейя Аллан', 'Аня Чалотра', 'Мими Дивени', 'Месия', 'Симсон',
-                    'Имон Фэррен', 'МайАнна Бёринг', 'Ройс Пирресон', 'Имон Фаррен',
-                    'Мими Дивени', 'Уилсон Раджу-Пухальте', 'Анна Шаффер', 'Махеш Джаду'],
-                directors: ['Алик Сахаров', 'Шарлотта Брандстром', 'Алекс Гарсиа Лопес',
-                    'Марк Йобст', 'Эдвард Базалгетт', 'Сара О’Горман', 'Гита Патель', 'Стивен Серджик'],
-                genre: ['фэнтези', 'приключения', 'драма', 'ужасы'],
-                country: 'США, Польша',
-                isAdded: false,
-            },
-            message: '',
-            error: {
-                code: 1,
-                user_message: '',
-            },
-        };
+        MovieModel.getMovie({id: data.id}).then((response: ResponseType) => {
+            if (!response.error) {
+                const contentData: any = response.body.movie;
+                let content: Context[];
 
-        const content = [
-            {
-                id: 1,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 2,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 3,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 58746,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 4,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 5,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 6,
-                poster: '/static/img/witcher.webp',
-            },
-            {
-                id: 7,
-                poster: '/static/img/fword.webp',
-            },
-        ];
+                const infoBlockData: ContextData = {
+                    contentId: data.id,
+                    contentData: contentData,
+                };
 
-        const infoBlockData = {
-            contentId: data.id,
-            contentData: contentData.body,
-            content: content,
-        };
+                MovieModel.getMoviesByGenre(contentData.genres[0].id, 8).then((response: ResponseType) => {
+                    if (response.error) {
+                        return;
+                    }
 
-        const path = document.location.href;
-        window.history.pushState(null, null, path);
-        window.history.replaceState(history.state, null, `/content/${data.id}`);
+                    const {movies} = response.body;
+                    const content = movies.filter((movie: any) => movie.id !== contentData.id);
+                    if (content.length > 0) {
+                        infoBlockData.content = content;
+                    } else {
+                        infoBlockData.content = null;
+                    }
 
-        const contentPopup = new ContentPopup(infoBlockData, document.querySelector('.application'));
+                    const path = document.location.href;
+                    window.history.pushState(null, null, path);
+                    window.history.replaceState(history.state, null, `/content/${data.id}`);
 
-        contentPopup.render();
+                    const contentPopup = new ContentPopup(infoBlockData, document.querySelector('.application'));
+
+                    contentPopup.render();
+                }).catch((error: Error) => console.log(error));
+            }
+        }).catch((error: Error) => console.log(error));
     }
 
-    changeIcon(iconOn: string, iconOff: string) {
-        if (event.srcElement.parentElement.dataset.status === 'true') {
-            event.srcElement.setAttribute('src', iconOff);
-            event.srcElement.parentElement.dataset.status = 'false';
+    changeIcon(currentButton: any, anotherButton: any, icon: string, status: string) {
+        currentButton.setAttribute('src', icon);
+        currentButton.parentElement.dataset.status = status;
+        if (anotherButton) anotherButton.dataset.status = status;
+    }
+
+    onAddToFavourites(data: { event: string, id: string, status: boolean }) {
+        const btn = window.event.srcElement;
+        if (window.event.srcElement.parentElement.dataset.status == 'true') {
+            MovieModel.removeFromFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
+                if (!response.error) {
+                    this.changeIcon(btn, null, '/static/img/add.svg', 'false');
+                    this.fixAllAddButtons(data.id, '/static/img/add.svg', 'false');
+                }
+            }).catch((error: Error) => console.log(error));
         } else {
-            event.srcElement.setAttribute('src', iconOn);
-            event.srcElement.parentElement.dataset.status = 'true';
+            MovieModel.addToFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
+                if (!response.error) {
+                    this.changeIcon(btn, null, '/static/img/is-added.svg', 'true');
+                    this.fixAllAddButtons(data.id, '/static/img/is-added.svg', 'true');
+                }
+            }).catch((error: Error) => console.log(error));
         }
     }
 
-    onContentIsAdded(data: {event: string, id: number, status: boolean}) {
-        // TODO: Запрос на бек
-        this.changeIcon('/static/img/is-added.svg', '/static/img/add.svg');
-    }
+    onContentIsLiked(data: { id: number, status: string }) {
+        const btn = window.event.srcElement;
 
-    onContentIsLiked(data: {event: string, id: number, isLiked: boolean}) {
-        // TODO: Запрос на бек
-        this.changeIcon('/static/img/is-liked.svg', '/static/img/like.svg');
-
-        const parent = event.srcElement.closest('.content__buttons');
-        const disBtn: Element = parent.getElementsByClassName('dislike-btn')[0];
-        if (event.srcElement.parentElement.dataset.status === 'true' && disBtn.attributes[3].value === 'true') {
-            disBtn.attributes[3].value = 'false';
-            disBtn.querySelector('.item__btn-img').setAttribute('src', '/static/img/dislike.svg');
+        if (data.status === '') {
+            MovieModel.addVote(data.id, true).then((response: ResponseType) => {
+                if (!response.error) {
+                    this.changeIcon(btn, btn.parentElement.nextElementSibling,
+                        '/static/img/is-liked.svg', 'true');
+                    this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
+                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
+                }
+            }).catch((error: Error) => console.log(error));
+        } else if (data.status === 'true') {
+            MovieModel.removeVote(data.id).then((response: ResponseType) => {
+                if (!response.error) {
+                    this.changeIcon(btn, btn.parentElement.nextElementSibling, '/static/img/like.svg', '');
+                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
+                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
+                }
+            }).catch((error: Error) => console.log(error));
+        } else if (data.status === 'false') {
+            MovieModel.changeVote(data.id, true).then((response: ResponseType) => {
+                if (!response.error) {
+                    this.changeIcon(btn, btn.parentElement.nextElementSibling,
+                        '/static/img/is-liked.svg', 'true');
+                    this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
+                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
+                }
+            }).catch((error: Error) => console.log(error));
         }
     }
 
-    onContentIsDisliked(data: {event: string, id: number, isDisliked: boolean}) {
-        // TODO: Запрос на бек
-        this.changeIcon('/static/img/is-disliked.svg', '/static/img/dislike.svg');
-
-        const parent = event.srcElement.closest('.content__buttons');
-        const disBtn: Element = parent.getElementsByClassName('like-btn')[0];
-        if (event.srcElement.parentElement.dataset.status === 'true' && disBtn.attributes[3].value === 'true') {
-            disBtn.attributes[3].value = 'false';
-            disBtn.querySelector('.item__btn-img').setAttribute('src', '/static/img/like.svg');
+    onContentIsDisliked(data: { id: number, status: string }) {
+        const btn = window.event.srcElement;
+        if (data.status === '') {
+            MovieModel.addVote(data.id, false).then((response: ResponseType) => {
+                if (!response.error) {
+                    this.changeIcon(btn, btn.parentElement.previousElementSibling,
+                        '/static/img/is-disliked.svg', 'false');
+                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
+                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
+                }
+            }).catch((error: Error) => console.log(error));
+        } else if (data.status == 'true') {
+            MovieModel.changeVote(data.id, false).then((response: ResponseType) => {
+                if (!response.error) {
+                    this.changeIcon(btn, btn.parentElement.previousElementSibling,
+                        '/static/img/is-disliked.svg', 'false');
+                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
+                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
+                }
+            }).catch((error: Error) => console.log(error));
+        } else if (data.status === 'false') {
+            MovieModel.removeVote(data.id).then((response: ResponseType) => {
+                if (!response.error) {
+                    this.changeIcon(btn, btn.parentElement.previousElementSibling,
+                        '/static/img/dislike.svg', '');
+                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
+                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
+                }
+            }).catch((error: Error) => console.log(error));
         }
+    }
+
+    fixAllAddButtons(id: string, icon: string, status: string) {
+        const addButtons = document.querySelectorAll(`[data-event="AddToFavourites"][data-id="${id}"] img`);
+        addButtons.forEach((button) => {
+            this.changeIcon(button, null, icon, status);
+        });
+    }
+
+    fixAllLikeButtons(id: string, icon: string, status: string) {
+        const addButtons = document.querySelectorAll(`[data-event="contentIsLiked"][data-id="${id}"] img`);
+        addButtons.forEach((button) => {
+            this.changeIcon(button, null, icon, status);
+        });
+    }
+
+    fixAllDislikeButtons(id: string, icon: string, status: string) {
+        const addButtons = document.querySelectorAll(`[data-event="contentIsDisliked"][data-id="${id}"] img`);
+        addButtons.forEach((button) => {
+            this.changeIcon(button, null, icon, status);
+        });
     }
 }
 

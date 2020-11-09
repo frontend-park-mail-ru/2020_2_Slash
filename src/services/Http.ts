@@ -71,6 +71,7 @@ class Http {
         return this.fetchRequest({
             method: 'DELETE',
             route: api.route,
+            body: api.body,
         });
     }
 

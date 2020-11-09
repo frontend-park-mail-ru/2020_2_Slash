@@ -163,8 +163,6 @@ class Router {
      * @param {Object} data
      */
     go(path: string, data = {}) {
-        eventBus.emit(Events.CheckSession, data);
-
         const routeData = this.getRouteData(path);
 
         if (this.currentController === routeData.controller && !routeData.query.resourceId) {

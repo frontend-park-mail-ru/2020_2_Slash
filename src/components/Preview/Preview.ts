@@ -1,6 +1,7 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './Preview.hbs';
+import {SERVER_HOST} from '../../consts/settings';
 
 /**
  * @class
@@ -18,6 +19,7 @@ class Preview extends Component {
     constructor(context: Context, parent?: any) {
         super(context, parent);
         this.template = template;
+        this.context.host = SERVER_HOST;
     }
 }
 
