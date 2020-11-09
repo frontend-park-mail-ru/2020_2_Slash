@@ -145,7 +145,7 @@
 .add-btn, .like-btn, .dislike-btn {
     &__img {
         width: var(--button-size-normal);
-        height: var(--button-size-normal);;
+        height: var(--button-size-normal);
         @media (max-width: 1000px) {
             width: var(--button-size-1000);
             height: var(--button-size-1000);

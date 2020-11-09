@@ -6,6 +6,7 @@
         padding: 0 3.6vw 0 3.6vw;
         width: 100%;
         backdrop-filter: blur(10px) brightness(70%);
+
         @media (max-width: 375px) {
             font-size: 10px;
             flex-direction: column;
@@ -19,18 +20,25 @@
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
+
+        @media (max-width: 850px) {
+            font-size: 1.8vw;
+        }
     }
 
-    &__left, &__right {
+    &__left,
+    &__right {
         margin-top: 30px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         width: 50%;
         height: 80%;
+
         @media (max-width: 850px) {
             height: 65%;
         }
+
         @media (max-width: 375px) {
             padding: 0;
             margin: 0;
@@ -41,6 +49,7 @@
     &__right {
         padding-left: 5vw;
         margin-top: 45px;
+
         @media (max-width: 375px) {
             margin-bottom: 40px;
             margin-top: 0;
@@ -56,12 +65,6 @@
     &__title-text {
         @media (max-width: 1000px) {
             font-size: 30px;
-        }
-    }
-
-    &__page-details{
-        @media (max-width: 850px) {
-            font-size: 1.8vw;
         }
     }
 
@@ -81,7 +84,6 @@
 }
 
 @media (max-width: 1000px) {
-
     .tabs__list-item-text { // TODO: Перенести в компоненту TabBar
         font-size: 1rem;
         padding: 0 1vw 0 1vw;

@@ -8,7 +8,9 @@
     justify-content: center;
 }
 
-.profile-view__security-form , .profile-view__info-form, .profile-view__sub-form {
+.profile-view__security-form,
+.profile-view__info-form,
+.profile-view__sub-form {
     margin: 20px;
     display: flex;
     flex-direction: column;
@@ -16,7 +18,8 @@
 }
 
 @media (max-width: 850px) {
-    .user-meta__nickname, .user-meta__email {
+    .user-meta__nickname,
+    .user-meta__email {
         font-size: 2.1vw;
     }
 }

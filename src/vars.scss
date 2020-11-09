@@ -1,20 +1,20 @@
 :root {
     --main-color: #141414;
     --popup-button-color: #434343;
-    --popup-background-color: rgba(20, 20, 20, 0.90);
-    --popup-text-color: #B8B8B8;
-    --popup-text-white: #ffffff;
-    --popup-input-color: #FAFAFA;
-    --popup-input-border-color: #000000;
+    --popup-background-color: rgba(20, 20, 20, 0.9);
+    --popup-text-color: #b8b8b8;
+    --popup-text-white: #fff;
+    --popup-input-color: #fafafa;
+    --popup-input-border-color: #000;
     --popup-shadow-color-title: rgba(0, 0, 0, 0.25);
     --header-height: 70px;
     --low-transparent-gray: rgba(20, 20, 20, 0.6);
-    --blackout-for-popup: rgba(0,0,0,.7);
+    --blackout-for-popup: rgba(0, 0, 0, 0.7);
     --white: rgba(255, 255, 255, 255);
     --black: rgba(0, 0, 0, 255);
     --filter-btn: rgba(0, 0, 0, 1);
     --filter-btn-hover: rgba(0, 0, 0, 0.3);
-    --light-grey: #CCCCCC;
+    --light-grey: #ccc;
     --low-transparent-white: rgba(255, 255, 255, 0.6);
     --medium-transparent-white: rgba(255, 255, 255, 0.4);
     --highly-transparent-white: rgba(255, 255, 255, 0.2);
@@ -23,8 +23,8 @@
     --one-third-of-screen: 48%;
     --orangered: rgb(255, 69, 0);
     --hover-gray: rgb(30, 30, 30);
-    --rating-green: #65AD59;
-    --heading-grey: #BCBCBC;
+    --rating-green: #65ad59;
+    --heading-grey: #bcbcbc;
     --shadow: rgba(0, 0, 0, 0.5);
     --content-popup-background-color: rgba(20, 20, 20, 1);
     --button-size-normal: 2.5vw;
