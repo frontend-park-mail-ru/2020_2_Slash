@@ -1,3 +1,8 @@
 <div class="main-view">
-    {{{ContentBlock}}}
+    <div class="my-list__title pad-both">Мой список</div>
+    {{#if ContentBlock}}
+        {{{ContentBlock}}}
+    {{else}}
+        <h2 class="my-list__label pad-both">Ваш список пуст</h2>
+    {{/if}}
 </div>

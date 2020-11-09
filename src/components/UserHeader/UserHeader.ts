@@ -6,12 +6,12 @@ import template from './UserHeader.hbs';
  * @class
  * Компонента профиля в хэдере (аватар + выпадающее меню)
  */
-class UserHeaderHeader extends Component {
+class UserHeader extends Component {
     /**
      * Создает экземпляр UserHeaderHeader
      *
      * @constructor
-     * @this  {UserHeaderHeader}
+     * @this  {UserHeader}
      * @param context
      * @param parent
      */
@@ -21,4 +21,4 @@ class UserHeaderHeader extends Component {
     }
 }
 
-export default UserHeaderHeader;
+export default UserHeader;

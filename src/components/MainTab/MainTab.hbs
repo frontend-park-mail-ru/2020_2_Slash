@@ -3,25 +3,31 @@
     <div class="info-block__main-wrapper">
         <div class="info-block__description">
             <div class="info-block__title">
-                <h3 class="info-block__title-text">{{title}}</h3>
+                <h3 class="info-block__title-text">{{name}}</h3>
             </div>
             <div class="info-block__misc">
-                <p class="misc-item__rating misc-item">{{rating}}</p>
+                <p class="misc-item__rating misc-item">Рейтинг {{rating}}</p>
                 <p class="misc-item__year misc-item item-value">{{year}}</p>
                 <p class="misc-item__season misc-item item-value">{{seasons}}</p>
             </div>
             <div class="info-block__about hidden-item">
-                <span>{{about}}</span>
+                <span>{{short_description}}</span>
             </div>
             <div class="info-block__country country-item hidden-item">
                 <span class="country-item__title item-title">Страна:</span>
-                <span class="country-item__value item-value">{{country}}</span>
+                <span class="country-item__value item-value">
+                    {{#each countries}}
+                        {{{this.name}}}{{#unless @last}},
+                        {{/unless}}
+                    {{/each}}
+                </span>
             </div>
             <div class="info-block__genre genre-item hidden-item">
                 <span class="genre-item__title item-title">Жанр:</span>
                 <span class="genre-item__value item-value">
-                    {{#each genre}}
-                        {{{this}}}
+                    {{#each genres}}
+                        {{{this.name}}}{{#unless @last}},
+                        {{/unless}}
                     {{/each}}
                 </span>
             </div>
@@ -29,14 +35,15 @@
                 <span class="cast-item__title item-title">Актеры:</span>
                 <span class="cast-item__value item-value">
                     {{#each slicedCast}}
-                        {{{this}}}
+                        {{{this.name}}}{{#unless @last}},
+                        {{/unless}}
                     {{/each}}
                 </span>
             </div>
             <div class="info-block__buttons content__buttons">
-                <button class="item__add-btn add-btn item__btn" data-event="contentIsAdded" data-id="{{id}}"
-                        data-status="{{isAdded}}">
-                    {{#if isAdded}}
+                <button class="item__add-btn add-btn item__btn" data-event="AddToFavourites" data-id="{{id}}"
+                        data-status="{{is_favourite}}">
+                    {{#if is_favourite}}
                         <img class="item__add-btn__img item__btn-img" src="/static/img/is-added.svg">
                     {{else}}
                         <img class="item__add-btn__img item__btn-img" src="/static/img/add.svg">
@@ -44,19 +51,19 @@
                 </button>
 
                 <button class="item__like-btn like-btn item__btn" data-event="contentIsLiked" data-id="{{id}}"
-                        data-status="{{isLike}}">
+                        data-status="{{is_liked}}">
                     {{{like}}}
                 </button>
 
                 <button class="item__dislike-btn dislike-btn item__btn" data-event="contentIsDisliked" data-id="{{id}}"
-                        data-status="{{isLike}}">
+                        data-status="{{is_liked}}">
                     {{{dislike}}}
                 </button>
             </div>
         </div>
         <div class="info-block__video-holder">
             <div class="info-block__video">
-                <img src="{{poster}}">
+                <img src="{{host}}{{images}}/large.png">
                 <div class="info-block__video-shade"></div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './MainTab.hbs';
+import {SERVER_HOST} from '../../consts/settings';
 
 /**
  * @class
@@ -26,10 +27,10 @@ class MainTab extends Component {
         const isLikedIcon =' <img class="item-like-btn__img item__btn-img" src="/static/img/is-liked.svg">';
         const isDislikedIcon = '<img class="slider-dislike-btn__img item__btn-img" src="/static/img/is-disliked.svg">';
 
-        if (this.context.isLike === true) {
+        if (this.context.is_liked === true) {
             this.context.like = isLikedIcon;
             this.context.dislike = disLikeIcon;
-        } else if (this.context.isLike === false) {
+        } else if (this.context.is_liked === false) {
             this.context.like = likeIcon;
             this.context.dislike = isDislikedIcon;
         } else {
@@ -43,9 +44,15 @@ class MainTab extends Component {
      * @return {*|string}
      */
     render() {
+        this.context.host = SERVER_HOST;
+
         this.addLikeIcons();
 
-        this.context.slicedCast = this.context.cast.slice(0, 3);
+        if (this.context.actors && this.context.actors.length > 3) {
+            this.context.slicedCast = this.context.actors.slice(0, 3);
+        } else {
+            this.context.slicedCast = this.context.actors;
+        }
         return this.template(this.context);
     }
 }

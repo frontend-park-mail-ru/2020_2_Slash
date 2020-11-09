@@ -1,14 +1,14 @@
 <div class="info-block__page-details info-block_page"
-     style="background-image: url('{{poster}}');background-size: cover;">
+     style="background-image: url('{{host}}{{images}}/large.png');background-size: cover;">
     <img class="details-background" src="" alt="">
     <div class="info-block__details-wrapper">
         <div class="info-block__left">
             <div class="info-block__title-details">
-                <h3 class="info-block__title-text">{{{title}}}</h3>
+                <h3 class="info-block__title-text">{{{name}}}</h3>
             </div>
             <div class="info-block__origin-title origin-item">
                 <span class="origin-item__title item-title">Оригинальное название:</span>
-                <span class="origin-item__value item-value">{{{originTitle}}}</span>
+                <span class="origin-item__value item-value">{{{original_name}}}</span>
             </div>
             <div class="info-block__misc misc-item">
                 <span class="misc-item__rating">{{rating}}</span>
@@ -16,20 +16,26 @@
                 <span class="misc-item__season item-value">{{seasons}}</span>
             </div>
             <div class="info-block__full-about">
-                <span>{{{fullAbout}}}
+                <span>{{{full_descriptip}}}
                 </span>
             </div>
         </div>
         <div class="info-block__right">
             <div class="info-block__country country-item">
                 <span class="country-item__title item-title">Страна:</span>
-                <span class="country-item__value item-value">{{country}}</span>
+                <span class="country-item__value item-value">
+                    {{#each countries}}
+                        {{{this.name}}}{{#unless @last}},
+                        {{/unless}}
+                    {{/each}}
+                </span>
             </div>
             <div class="info-block__genre genre-item">
                 <span class="genre-item__title item-title">Жанр:</span>
                 <span class="genre-item__value item-value">
-                    {{#each genre}}
-                        {{{this}}},
+                    {{#each genres}}
+                        {{{this.name}}}{{#unless @last}},
+                        {{/unless}}
                     {{/each}}
                 </span>
             </div>
@@ -37,15 +43,17 @@
                 <span class="director-item__title item-title">Режиссеры:</span>
                 <span class="director-item__value item-value">
                     {{#each directors}}
-                        {{{this}}},
+                        {{{this.name}}}{{#unless @last}},
+                        {{/unless}}
                     {{/each}}
                 </span>
             </div>
             <div class="info-block__cast cast-item">
                 <span class="cast-item__title item-title">Актеры:</span>
                 <span class="cast-item__value item-value">
-                    {{#each cast}}
-                        {{{this}}},
+                    {{#each actors}}
+                        {{{this.name}}}{{#unless @last}},
+                        {{/unless}}
                     {{/each}}
                 </span>
             </div>

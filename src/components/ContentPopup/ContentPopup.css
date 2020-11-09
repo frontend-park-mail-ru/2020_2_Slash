@@ -77,7 +77,7 @@
     bottom: 15%;
     position: absolute;
     color: var(--white);
-    font-size: 3em;
+    font-size: 2vw;
     letter-spacing: 0.3em;
     text-transform: uppercase;
 }
@@ -105,11 +105,12 @@
 }
 
 .modal__description-right {
-    width: 30%;
+    width: 40%;
 }
 
 .modal__description-left {
-    width: 70%;
+    width: 60%;
+    padding-right: 2vw;
 }
 
 .modal__description-right, .modal__description-left {

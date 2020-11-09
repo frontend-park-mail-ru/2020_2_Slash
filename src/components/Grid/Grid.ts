@@ -12,12 +12,15 @@ class Grid extends Component {
     render() {
         const list: string[] = [];
 
-        this.context.content.forEach((item: any) => {
-            list.push(new GridItem(item).render());
-        });
+        const {content} = this.context;
+        if (content) {
+            content.forEach((item: any) => {
+                list.push(new GridItem(item).render());
+            });
+        }
 
         this.context.content = list;
-        return this.template(this.context);
+        return list.length > 0 ? this.template(this.context) : '';
     }
 }
 

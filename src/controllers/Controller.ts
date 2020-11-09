@@ -20,7 +20,9 @@ abstract class Controller {
 
     switchOn(data: any = {}) {} // eslint-disable-line
 
-    onSwitchOn(data?: any) {} // eslint-disable-line
+    onSwitchOn(data?: any) {
+        eventBus.emit(Events.CheckSession, data);
+    } // eslint-disable-line
 
     switchOff() {
         eventBus.off(Events.CheckSession, this._onCheckSession);

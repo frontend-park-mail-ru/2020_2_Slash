@@ -1,0 +1,13 @@
+.my-list__label {
+    padding-top: 4vw;
+    color: var(--white);
+    font-size: 1vw;
+}
+
+.my-list__title {
+    color: var(--white);
+    font-size: 1.6vw;
+    letter-spacing: 0.1vw;
+    font-weight: lighter;
+    margin: 10px 0;
+}

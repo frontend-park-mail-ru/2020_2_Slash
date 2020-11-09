@@ -24,6 +24,7 @@
 @import "views/ProfileView/ProfileView.css";
 @import "views/PlayerView/PlayerView.css";
 @import "views/MoviesView/MoviesView.css";
+@import "views/MyListView/MyListView.css";
 
 body {
   font-family: "Inter", Arial, sans-serif;
@@ -32,6 +33,7 @@ body {
   margin: 0;
   font-size: 1vw;
   font-weight: lighter;
+  user-select: none;
 }
 
 @font-face {

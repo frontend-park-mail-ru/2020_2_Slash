@@ -24,6 +24,7 @@
     .content__title {
         font-size: 3vw;
         letter-spacing: 0.1vw;
+        padding: 0;
     }
 
     .content__slider {

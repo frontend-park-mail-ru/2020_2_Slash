@@ -1,6 +1,14 @@
 import Controller from './Controller';
 import MainView from '../views/MainVIew/MainView';
 import ModalService from '../services/ModalService';
+import MovieModel from '../models/MovieModel';
+import {Error} from '../consts/errors';
+import selectRandomMovie from '../tools/selectRandom';
+
+interface ContextData {
+    preview: { [key: string]: string },
+    blocks: { [key: string]: string }[],
+}
 
 /**
  * @class
@@ -14,11 +22,12 @@ class MainController extends Controller {
     }
 
     switchOn(data: any = {}) {
-        const contentData = { // фейковый контент, пока не реализовали
+        const fakeContentData = { // фейковый контент, пока не реализовали
             preview: {
                 id: 1,
-                poster: '/static/img/movie.webp',
-                title: 'Психопаспорт',
+
+                poster: '/static/img/movie.png',
+                name: 'Фильм',
             },
             blocks: [
                 {
@@ -163,14 +172,47 @@ class MainController extends Controller {
             ],
         };
 
-        this.view.insertIntoContext(contentData);
+        Promise.all([
+            MovieModel.getTopMovies(15),
+            MovieModel.getLatestMovies(15),
+        ]).then(([topResponse, latestResponse]) => {
+            if (topResponse.error || latestResponse.error) {
+                this.view.insertIntoContext(fakeContentData);
+                this.view.show();
+                this.onSwitchOn(data);
+                return;
+            }
 
-        this.view.show();
+            const randomMovie = selectRandomMovie([
+                topResponse.body.movies || [],
+                latestResponse.body.movies || [],
+            ],
+            );
 
-        this.onSwitchOn(data);
+            const contentData: ContextData = {
+                preview: randomMovie,
+                blocks: [
+                    {
+                        title: 'Топ',
+                        content: topResponse.body.movies || [],
+                    },
+                    {
+                        title: 'Последнее',
+                        content: latestResponse.body.movies || [],
+                    },
+                ],
+            };
+
+            this.view.insertIntoContext(contentData);
+            this.view.show();
+            this.onSwitchOn(data);
+            super.switchOn(data);
+        }).catch((error: Error) => console.log(error));
     }
 
     onSwitchOn(data: any = {}) {
+        super.onSwitchOn();
+
         if (data.modalStatus) {
             ModalService.show(data.modalStatus);
         }
