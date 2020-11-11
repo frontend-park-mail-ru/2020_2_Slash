@@ -16,6 +16,11 @@
     object-fit: cover;
 }
 
+.slider-item_selected {
+    border: 0.3vw solid var(--white);
+    border-radius: 3px;
+}
+
 .slider-item_selected_hover-off {
     z-index: 1000;
     top: 2.5vw;
@@ -68,11 +73,6 @@
     height: 1.5vw;
 }
 
-.slider-item_selected {
-    border: 0.2vw solid var(--white);
-    border-radius: 3px;
-}
-
 .content__slider-item:hover > .content__item_hovered {
     color: var(--white);
     font-size: 0.5vw;
@@ -81,7 +81,7 @@
     padding-bottom: 1vw;
 }
 
-.content__slider-item:hover > .item__img{
+.content__slider-item:hover > .item__img {
     transform: translateY(-10%);
 }
 
@@ -92,7 +92,7 @@
         height: 25vw;
     }
 
-    .content__slider-item:hover > .item__img{
+    .content__slider-item:hover > .item__img {
         transform: translateY(0%);
     }
 

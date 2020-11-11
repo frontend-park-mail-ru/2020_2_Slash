@@ -11,7 +11,9 @@
     justify-content: center;
 }
 
-.profile-view__security-form , .profile-view__info-form, .profile-view__sub-form {
+.profile-view__security-form,
+.profile-view__info-form,
+.profile-view__sub-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -92,7 +94,7 @@
     height: 1.8vw;
     width: 20vw;
     margin: 10px 0;
-    border:solid 1px var(--light-grey);
+    border: solid 1px var(--light-grey);
     border-radius: 0.3vw;
 }
 

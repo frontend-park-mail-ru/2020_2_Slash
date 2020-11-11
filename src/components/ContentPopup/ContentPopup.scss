@@ -113,7 +113,8 @@
     padding-right: 2vw;
 }
 
-.modal__description-right, .modal__description-left {
+.modal__description-right,
+.modal__description-left {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -135,7 +136,8 @@
     padding-right: 2vw;
 }
 
-.modal__misc, .modal__buttons {
+.modal__misc,
+.modal__buttons {
     display: flex;
 }
 
@@ -145,12 +147,17 @@
     justify-content: space-between;
 }
 
-.misc-item_year, .misc-item_season, .misc-item_rating {
+.misc-item_year,
+.misc-item_season,
+.misc-item_rating {
     padding: 0 1vw 0 0;
     margin: 0;
 }
 
-.modal__country, .modal__genre, .modal__cast, .modal__director {
+.modal__country,
+.modal__genre,
+.modal__cast,
+.modal__director {
     margin-bottom: 2vw;
 }
 
@@ -195,7 +202,7 @@
 .close-btn:hover {
     transition: all 0.1s ease-in-out;
     transform: scale(1.05);
-    filter: drop-shadow(0px 0px 1px var(--white));
+    filter: drop-shadow(0 0 1px var(--white));
     cursor: pointer;
 }
 
@@ -215,7 +222,6 @@
     grid-row-gap: 7vh;
     grid-column-gap: 0.2vw;
     grid-template-columns: repeat(4, 1fr);
-
     padding: 2vw 2.5vw 2vw 2.5vw;
 }
 
@@ -236,7 +242,8 @@
         font-size: 3vw;
     }
 
-    .modal__description, .modal__extra-description {
+    .modal__description,
+    .modal__extra-description {
         font-size: 2vw;
     }
 
@@ -260,7 +267,8 @@
         font-size: 4vw;
     }
 
-    .modal__description, .modal__extra-description {
+    .modal__description,
+    .modal__extra-description {
         font-size: 3vw;
     }
 
