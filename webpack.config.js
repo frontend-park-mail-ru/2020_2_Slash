@@ -3,10 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CheckerPlugin} = require('awesome-typescript-loader');
+const ServiceWorkerPlugin = require('serviceworker-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].[chunkhash].js',
@@ -56,6 +57,7 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 {from: './public/img', to: 'img'},
+                {from: './public/fallback.html', to: '.'},
             ],
         }),
         new HtmlWebpackPlugin({
@@ -67,5 +69,11 @@ module.exports = {
             filename: 'style-[contenthash].css',
         }),
         new CheckerPlugin(),
+        new ServiceWorkerPlugin({
+            entry: path.resolve(__dirname, 'src/sw.js'),
+            options: {
+                scope: '/',
+            }
+        })
     ],
 };

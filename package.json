@@ -27,10 +27,12 @@
     "@fortawesome/fontawesome-free": "^5.15.1",
     "express": "^4.17.1",
     "handlebars": "^4.7.6",
+    "serviceworker-webpack-plugin": "^1.0.1",
     "typescript": "^2.9.2"
   },
   "devDependencies": {
     "@types/handlebars": "^4.1.0",
+    "@types/serviceworker-webpack-plugin": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
     "awesome-typescript-loader": "^5.2.1",

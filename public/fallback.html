@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Flicks Box</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .offline-page {
+            bottom: 0;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #141414;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            justify-items: center;
+            align-items: center;
+            align-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .offline-logo-img {
+            animation: flowing 2s ease-in-out infinite;
+            transform: translateY(3vw);
+        }
+
+        .offline-message {
+            font-family: "Inter", Arial, sans-serif;
+            font-weight: lighter;
+            font-size: 1vw;
+            color: white;
+        }
+
+        @keyframes flowing {
+            50% {
+                transform: translateY(100%);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="offline-page">
+    <div class="logo-wrapper">
+            <img class="offline-logo-img" src="/static/img/offline-logo.svg">
+        <span class="offline-message">У вас нет подключения к сети :(</span>
+    </div>
+</div>
+</body>
