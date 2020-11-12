@@ -18,7 +18,6 @@ class PlayerController extends Controller {
     }
 
     switchOn(data: any) {
-	console.log(data);
 	MovieModel.getMovie({id: data.path.resourceId}).then((response) => {
 	    if (response.error) {
 	    	return;

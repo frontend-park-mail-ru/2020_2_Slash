@@ -118,23 +118,23 @@ class Router {
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^(/\\w+)/(\\w+)?\\??((\\w+=\\w+&)*\\w+=\\w+)?$');
+        const reg = new RegExp('^(/\\w+)(/(\\w+))?\\??((\\w+=\\w+&)*\\w+=\\w+)?$');
         const result = path.match(reg);
         // result[0] - все совпадение
         // result[1] - путь (/movies) - без path-параметров
-        // result[2] - path-параметр(один)
-        // result[3] - query-парамтры
+        // result[3] - path-параметр(один)
+        // result[4] - query-парамтры
 
         let GETparams = null;
         let PATHparam = null;
 
         if (result) {
-            if (result[2]) {
-                PATHparam = result[2];
+            if (result[3]) {
+                PATHparam = result[3];
             }
 
-            if (result[3]) {
-                GETparams = ParseUrlParam(result[3]);
+            if (result[4]) {
+                GETparams = ParseUrlParam(result[4]);
             }
 
             if (GETparams) {

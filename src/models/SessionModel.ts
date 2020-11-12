@@ -17,7 +17,6 @@ class SessionModel {
             body: JSON.stringify({...data}),
         }).then((response: Response) => {
             localStorage.setItem('X-Csrf-Token', response.headers.get('X-Csrf-Token'));
-            console.log(localStorage.getItem('X-Csrf-Token'));
             return response.json();
         });
     }
