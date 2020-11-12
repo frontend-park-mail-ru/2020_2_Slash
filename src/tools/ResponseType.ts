@@ -5,6 +5,7 @@ interface Body {
 }
 
 export default interface ResponseType {
+    headers: Headers,
     body: Body;
     message: string;
     error: Error;

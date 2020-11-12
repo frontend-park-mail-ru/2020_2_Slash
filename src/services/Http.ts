@@ -19,6 +19,7 @@ interface Api {
  */
 class Http {
     private prefix : string = SERVER_API_V1_PREFIX;
+    private CSRFtoken: string;
 
     /**
      * @function
@@ -97,6 +98,7 @@ class Http {
         if (body) {
             options.headers = {
                 'Content-Type': 'application/json',
+                'X-Csrf-Token': localStorage.getItem('X-Csrf-Token'),
             };
             options.body = body;
         }

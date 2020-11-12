@@ -61,7 +61,6 @@ class LoginController extends Controller {
                 eventBus.emit(Events.PathChanged, {
                     path: Routes.MainPage,
                 });
-
                 data.popup.remove();
                 return;
             }
