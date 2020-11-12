@@ -10,7 +10,10 @@ class UserModel {
         return http.fetchPost({
             route: ApiMethods.UserRegister,
             body: JSON.stringify({...data}),
-        }).then((response: Response) => response.json());
+        }).then((response: Response) => {
+            localStorage.setItem('X-Csrf-Token', response.headers.get('X-Csrf-Token'));
+            return response.json();
+        });
     }
 
     getProfile() {
