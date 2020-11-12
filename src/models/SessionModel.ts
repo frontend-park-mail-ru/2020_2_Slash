@@ -6,7 +6,6 @@ class SessionModel {
     logout() {
         return http.fetchDelete({
             route: ApiMethods.UserLogout,
-            body: 'kek',
         }).then((response: Response) => {
             return response.json();
         });

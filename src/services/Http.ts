@@ -98,10 +98,13 @@ class Http {
         if (body) {
             options.headers = {
                 'Content-Type': 'application/json',
-                'X-Csrf-Token': localStorage.getItem('X-Csrf-Token'),
             };
             options.body = body;
         }
+
+	if (method == 'POST' || method == 'PUT' || method == 'DELETE') {
+	    Object.assign(options.headers, {'X-Csrf-Token': localStorage.getItem('X-Csrf-Token')});
+	}
 
         return fetch(`${this.prefix}${route}`, options);
     }

@@ -111,14 +111,14 @@ class Router {
         return {
             controller: targetController,
             path: {
-                resourceId: result.PATHparam,
+                resourceId: +result.PATHparam,
             },
             query: result.GETparams,
         };
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^(/\\w+)(/\\w+)?\\??((\\w+=\\w+&)*\\w+=\\w+)?$');
+        const reg = new RegExp('^(/\\w+)/(\\w+)?\\??((\\w+=\\w+&)*\\w+=\\w+)?$');
         const result = path.match(reg);
         // result[0] - все совпадение
         // result[1] - путь (/movies) - без path-параметров

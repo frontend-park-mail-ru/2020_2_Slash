@@ -37,6 +37,9 @@ class UserModel {
             method: 'POST',
             credentials: 'include',
             mode: 'cors',
+	    headers: {
+		'X-Csrf-Token': localStorage.getItem('X-Csrf-Token'),	    
+	    },
             body: formData,
         }).then((response: Response) => response.json());
     }

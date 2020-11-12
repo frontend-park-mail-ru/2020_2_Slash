@@ -1,6 +1,7 @@
 import Controller from './Controller';
 import PlayerView from '../views/PlayerView/PlayerView';
 import PlayerService from '../services/PlayerService';
+import MovieModel from '../models/MovieModel';
 
 /**
  * @class
@@ -16,15 +17,25 @@ class PlayerController extends Controller {
         this.playerService = null;
     }
 
-    switchOn() {
-        this.view.insertIntoContext( {
-            title: 'Witcher',
-            poster: '/static/img/witcher2.webp',
-            video: '/static/img/witcher.mp4',
-        });
-        this.view.show();
+    switchOn(data: any) {
+	console.log(data);
+	MovieModel.getMovie({id: data.path.resourceId}).then((response) => {
+	    if (response.error) {
+	    	return;
+	    }
 
-        this.onSwitchOn();
+	    const {movie} = response.body;
+
+	    this.view.insertIntoContext({
+		title: movie.name,
+		images: movie.images,
+		video: movie.video,
+	    });
+
+	    this.view.show();
+
+	    this.onSwitchOn();
+	}).catch((error) => console.log(error));
     }
 
     switchOff() {
