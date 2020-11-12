@@ -6,6 +6,8 @@ import ContentPopup from '../components/ContentPopup/ContentPopup';
 import MovieModel from '../models/MovieModel';
 import {Error} from '../consts/errors';
 import Context from '../tools/Context';
+import EventBus from "./EventBus";
+import Modals from "../consts/modals";
 
 interface ContextData {
     contentId: number,
@@ -161,85 +163,97 @@ class ContentService {
     }
 
     onAddToFavourites(data: { event: string, id: string, status: boolean }) {
-        const btn = window.event.srcElement;
-        if (window.event.srcElement.parentElement.dataset.status == 'true') {
-            MovieModel.removeFromFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, null, '/static/img/add.svg', 'false');
-                    this.fixAllAddButtons(data.id, '/static/img/add.svg', 'false');
-                }
-            }).catch((error: Error) => console.log(error));
+        if (localStorage.getItem('authorized') == 'true') {
+            const btn = window.event.srcElement;
+            if (window.event.srcElement.parentElement.dataset.status == 'true') {
+                MovieModel.removeFromFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, null, '/static/img/add.svg', 'false');
+                        this.fixAllAddButtons(data.id, '/static/img/add.svg', 'false');
+                    }
+                }).catch((error: Error) => console.log(error));
+            } else {
+                MovieModel.addToFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, null, '/static/img/is-added.svg', 'true');
+                        this.fixAllAddButtons(data.id, '/static/img/is-added.svg', 'true');
+                    }
+                }).catch((error: Error) => console.log(error));
+            }
         } else {
-            MovieModel.addToFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, null, '/static/img/is-added.svg', 'true');
-                    this.fixAllAddButtons(data.id, '/static/img/is-added.svg', 'true');
-                }
-            }).catch((error: Error) => console.log(error));
+            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signup});
         }
     }
 
     onContentIsLiked(data: { id: number, status: string }) {
-        const btn = window.event.srcElement;
+        if (localStorage.getItem('authorized') == 'true') {
+            const btn = window.event.srcElement;
 
-        if (data.status === '') {
-            MovieModel.addVote(data.id, true).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.nextElementSibling,
-                        '/static/img/is-liked.svg', 'true');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
-                }
-            }).catch((error: Error) => console.log(error));
-        } else if (data.status === 'true') {
-            MovieModel.removeVote(data.id).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.nextElementSibling, '/static/img/like.svg', '');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
-                }
-            }).catch((error: Error) => console.log(error));
-        } else if (data.status === 'false') {
-            MovieModel.changeVote(data.id, true).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.nextElementSibling,
-                        '/static/img/is-liked.svg', 'true');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
-                }
-            }).catch((error: Error) => console.log(error));
+            if (data.status === '') {
+                MovieModel.addVote(data.id, true).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.nextElementSibling,
+                            '/static/img/is-liked.svg', 'true');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
+                    }
+                }).catch((error: Error) => console.log(error));
+            } else if (data.status === 'true') {
+                MovieModel.removeVote(data.id).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.nextElementSibling, '/static/img/like.svg', '');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
+                    }
+                }).catch((error: Error) => console.log(error));
+            } else if (data.status === 'false') {
+                MovieModel.changeVote(data.id, true).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.nextElementSibling,
+                            '/static/img/is-liked.svg', 'true');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
+                    }
+                }).catch((error: Error) => console.log(error));
+            }
+        } else {
+            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signup});
         }
     }
 
     onContentIsDisliked(data: { id: number, status: string }) {
-        const btn = window.event.srcElement;
-        if (data.status === '') {
-            MovieModel.addVote(data.id, false).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.previousElementSibling,
-                        '/static/img/is-disliked.svg', 'false');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
-                }
-            }).catch((error: Error) => console.log(error));
-        } else if (data.status == 'true') {
-            MovieModel.changeVote(data.id, false).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.previousElementSibling,
-                        '/static/img/is-disliked.svg', 'false');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
-                }
-            }).catch((error: Error) => console.log(error));
-        } else if (data.status === 'false') {
-            MovieModel.removeVote(data.id).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.previousElementSibling,
-                        '/static/img/dislike.svg', '');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
-                }
-            }).catch((error: Error) => console.log(error));
+        if (localStorage.getItem('authorized') == 'true') {
+            const btn = window.event.srcElement;
+            if (data.status === '') {
+                MovieModel.addVote(data.id, false).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.previousElementSibling,
+                            '/static/img/is-disliked.svg', 'false');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
+                    }
+                }).catch((error: Error) => console.log(error));
+            } else if (data.status == 'true') {
+                MovieModel.changeVote(data.id, false).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.previousElementSibling,
+                            '/static/img/is-disliked.svg', 'false');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
+                    }
+                }).catch((error: Error) => console.log(error));
+            } else if (data.status === 'false') {
+                MovieModel.removeVote(data.id).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.previousElementSibling,
+                            '/static/img/dislike.svg', '');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
+                    }
+                }).catch((error: Error) => console.log(error));
+            }
+        } else {
+            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signup});
         }
     }
 

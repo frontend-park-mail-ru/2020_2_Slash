@@ -34,10 +34,13 @@ abstract class Controller {
                 authorized: false,
             };
 
+            localStorage.setItem('authorized', 'false')
+
             if (!response.error) {
                 const {body} = response;
                 const avatar = body.user.avatar ? `${SERVER_HOST}${body.user.avatar}` : '/static/img/default.svg';
                 sessionData.authorized = true;
+                localStorage.setItem('authorized', 'true')
                 sessionData.avatar = avatar;
             }
 
