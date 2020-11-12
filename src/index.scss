@@ -27,6 +27,8 @@
 @import "views/MyListView/MyListView.scss";
 
 body {
+  position: relative;
+  min-height: 100vh;
   font-family: "Inter", Arial, sans-serif;
   background-color: var(--main-color);
   padding: 0;

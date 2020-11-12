@@ -8,10 +8,13 @@ import {Genres} from '../consts/genres';
 import MovieModel from '../models/MovieModel';
 import {Error} from '../consts/errors';
 import selectRandomMovie from '../tools/selectRandom';
+import Context from '../tools/Context';
+import {GetGenreNameById} from '../tools/helper';
 
 interface ContextData {
     preview: { [key: string]: string },
     blocks: { [key: string]: string }[],
+    genre: string;
 }
 
 /**
@@ -28,10 +31,11 @@ class MoviesController extends Controller {
     }
 
     switchOn(data: any = {}) {
-        if (data.query.resourceId) {
-            this.showGenrePage(data.query.resourceId);
+        if (data.query && data.query.has('genre')) {
+            this.showGenrePage(data.query.get('genre'));
             return;
         }
+
         Promise.all([
             MovieModel.getMoviesByGenre(Genres.actions.id, 15),
             MovieModel.getMoviesByGenre(Genres.comedies.id, 15),
@@ -42,7 +46,6 @@ class MoviesController extends Controller {
                 dramasResponse.error || melodramasResponse.error) {
                 return;
             }
-
             const randomMovie = selectRandomMovie([
                 actionResponse.body.movies || [],
                 comediesResponse.body.movies || [],
@@ -52,6 +55,7 @@ class MoviesController extends Controller {
             );
 
             const contentData: ContextData = {
+                genre: null,
                 preview: randomMovie,
                 blocks: [
                     {
@@ -92,8 +96,23 @@ class MoviesController extends Controller {
         this.view.hide();
     }
 
-    showGenrePage = (index: number) => { // eslint-disable-line
-        // TODO: Сделать открытие контента по жанру (в соотетствующем тикете)
+    showGenrePage = (index: number) => {
+        const genre = GetGenreNameById(index);
+        MovieModel.getMoviesByGenre(index, 15).then((response) => {
+            if (response.error) {
+                return;
+            }
+
+            eventBus.emit(Events.CheckSession, {});
+
+            const contentData: Context = {
+                content: response.body.movies || [],
+                genre: genre,
+            };
+
+            this.view.insertIntoContext(contentData);
+            this.view.show();
+        }).catch((error: Error) => console.log(error));
     }
 
     onOpenSubMenuGenres() {

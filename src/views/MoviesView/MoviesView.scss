@@ -16,6 +16,10 @@
     font-size: 1.5em;
 }
 
+.movies-view {
+    min-height: calc(100vh - 2 * var(--header-height));
+}
+
 .genres-btn {
     display: flex;
     align-items: center;

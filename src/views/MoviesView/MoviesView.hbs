@@ -1,14 +1,16 @@
 <div class="movies-view">
     <div class="movies__banner pad-both">
-        <div class="movies-title">Фильмы</div>
+        <div class="movies-title"><a href="/movies" class="list-item-text" data-event="pathChanged">Фильмы</a></div>
         <div class="genres">
             <button class="genres-btn" data-event="openSubMenuGenres" data-modalstatus="genresModal">
-                <div class="genres-btn__label">Жанры</div>
+                <div class="genres-btn__label">{{{Genre}}}</div>
                 <img class="genres-btn__arrow" src="/static/img/arrow.svg">
             </button>
             {{{SubMenu}}}
         </div>
     </div>
-    {{{Preview}}}
-    {{{ContentBlock}}}
+    <div class="movies-view-content">
+        {{{Preview}}}
+        {{{Content}}}
+    </div>
 </div>

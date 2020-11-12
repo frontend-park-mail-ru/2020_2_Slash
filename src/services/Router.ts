@@ -6,14 +6,11 @@ import eventBus from './EventBus';
 import Events from '../consts/events';
 import {CustomObject} from '../tools/type';
 import Controller from '../controllers/Controller';
+import {ParseUrlParam} from '../tools/helper';
 
 interface RoutObjectType {
     reg: RegExp,
     controller: Controller,
-}
-
-interface QueryType {
-    resourceId: number,
 }
 
 interface onPathChangeDataType {
@@ -80,7 +77,7 @@ class Router {
      * @param {Object} controller - Контроллер, который соответствует этому пути
      */
     register(path: string, controller: Controller) {
-        const reg = new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)') + '\/?$'); //eslint-disable-line
+        const reg = new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)?') + '.*$'); //eslint-disable-line
 
         const obj: RoutObjectType = {
             reg: reg,
@@ -100,52 +97,59 @@ class Router {
      */
     getRouteData(path: string) {
         let targetController: Controller = null;
-        const query: QueryType = {resourceId: null};
 
         const result = this.getParam(path);
-        if (result) {
-            query.resourceId = +result.data;
-            path = result.path;
-        }
 
         this.routes.forEach(({reg, controller}) => {
             const res = path.match(reg);
 
             if (res) {
-                const data: string = res[1];
-
-                if (data) {
-                    query.resourceId = +data;
-                }
-
                 targetController = controller;
             }
         });
 
         return {
             controller: targetController,
-            query: query,
+            path: {
+                resourceId: result.PATHparam,
+            },
+            query: result.GETparams,
         };
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^/(\\w+)\\?(\\w+)=\(\\w+)?$'); //eslint-disable-line
+        const reg = new RegExp('^(/\\w+)(/\\w+)?\\??((\\w+=\\w+&)*\\w+=\\w+)?$');
         const result = path.match(reg);
-        let resultPath;
+        // result[0] - все совпадение
+        // result[1] - путь (/movies) - без path-параметров
+        // result[2] - path-параметр(один)
+        // result[3] - query-парамтры
+
+        let GETparams = null;
+        let PATHparam = null;
 
         if (result) {
-            if (result[2] === 'cid') {
-                resultPath = `/content/${result[3]}`;
-            } else {
-                resultPath = `/${result[1]}`;
+            if (result[2]) {
+                PATHparam = result[2];
             }
-            return {
-                path: resultPath,
-                data: result[3],
-            };
+
+            if (result[3]) {
+                GETparams = ParseUrlParam(result[3]);
+            }
+
+            if (GETparams) {
+                if (GETparams.has('cid')) {
+                    PATHparam = `/content/${GETparams.get('cid')}`;
+                } else {
+                    PATHparam = `${result[2]}`;
+                }
+            }
         }
 
-        return null;
+        return {
+            PATHparam: PATHparam,
+            GETparams: GETparams,
+        };
     }
 
     start() {
@@ -165,7 +169,9 @@ class Router {
     go(path: string, data = {}) {
         const routeData = this.getRouteData(path);
 
-        if (this.currentController === routeData.controller && !routeData.query.resourceId) {
+        if (this.currentController === routeData.controller && !routeData.query) {
+            this.currentController.switchOff();
+            this.currentController.switchOn();
             return;
         }
 
