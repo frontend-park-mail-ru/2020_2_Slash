@@ -22,6 +22,16 @@
     background: rgba(20, 20, 20, 0.9);
     padding: 15px 5px;
     border-radius: 10px;
+    animation: appearing-blocker ease-in 0.4s;
+}
+
+@keyframes appearing {
+    from {
+        filter: opacity(0) blur(10px)
+    }
+    to {
+        filter: opacity(1) blur(0)
+    }
 }
 
 .popup-container__heading {
@@ -60,17 +70,6 @@
 
 .btn-close__img {
     cursor: pointer;
-}
-
-.blocker {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    content: ' ';
-    background: var(--blackout-for-popup);
-    z-index: 1000;
 }
 
 .scroll-off {

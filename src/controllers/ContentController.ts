@@ -19,7 +19,7 @@ class ContentController extends Controller {
         };
 
         EventBus.emit(Events.PathChanged, callbackData);
-        EventBus.emit(Events.ContentByExternalReference, {id: data.query.resourceId});
+        EventBus.emit(Events.ContentByExternalReference, {id: data.path.resourceId});
 
         this.onSwitchOn(data);
     }

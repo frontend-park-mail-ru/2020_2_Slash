@@ -89,7 +89,14 @@ class ContentService {
                     contentData: contentData,
                 };
 
-                MovieModel.getMoviesByGenre(contentData.genres[0].id, 8).then((response: ResponseType) => {
+                let genre;
+                if (contentData.genres) {
+                    genre = contentData.genres[0].id;
+                } else {
+                    genre = 1;
+                }
+
+                MovieModel.getMoviesByGenre(genre, 8).then((response: ResponseType) => {
                     if (response.error) {
                         return;
                     }
@@ -131,7 +138,14 @@ class ContentService {
                     contentData: contentData,
                 };
 
-                MovieModel.getMoviesByGenre(contentData.genres[0].id, 8).then((response: ResponseType) => {
+                let genre;
+                if (contentData.genres) {
+                    genre = contentData.genres[0].id;
+                } else {
+                    genre = 1;
+                }
+
+                MovieModel.getMoviesByGenre(genre, 8).then((response: ResponseType) => {
                     if (response.error) {
                         return;
                     }
@@ -181,7 +195,7 @@ class ContentService {
                 }).catch((error: Error) => console.log(error));
             }
         } else {
-            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signup});
+            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
         }
     }
 
@@ -217,7 +231,7 @@ class ContentService {
                 }).catch((error: Error) => console.log(error));
             }
         } else {
-            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signup});
+            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
         }
     }
 
@@ -253,7 +267,7 @@ class ContentService {
                 }).catch((error: Error) => console.log(error));
             }
         } else {
-            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signup});
+            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
         }
     }
 

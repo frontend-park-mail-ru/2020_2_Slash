@@ -97,7 +97,6 @@ class MoviesController extends Controller {
     }
 
     showGenrePage = (index: number) => {
-        console.log(index)
         const genre = GetGenreNameById(index);
         MovieModel.getMoviesByGenre(index, 15).then((response) => {
             if (response.error) {
