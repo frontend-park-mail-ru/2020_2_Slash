@@ -5,6 +5,13 @@
     right: 55px;
     top: 70px;
     font-size: 1vw;
+    animation: appearing-mini-modal  ease-in 0.3s 0s;
+}
+
+@keyframes appearing-mini-modal {
+    from {filter: opacity(0)}
+    50% {filter: opacity(0.5)}
+    to {filter: opacity(1)}
 }
 
 .mini-modal__wrapper {

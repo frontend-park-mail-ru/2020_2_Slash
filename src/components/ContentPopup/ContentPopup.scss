@@ -6,8 +6,15 @@
     bottom: 0;
     right: 0;
     content: ' ';
-    background: var(--blackout-for-popup);
     z-index: 1000;
+    background: var(--blackout-for-popup);
+    animation: appearing-blocker ease-in 0.3s 0s;
+}
+
+@keyframes appearing-blocker {
+    from {filter: opacity(0)}
+    50% {filter: opacity(0.5)}
+    to {filter: opacity(1)}
 }
 
 .scroll-fixed {
@@ -20,6 +27,16 @@
 
 .margin {
     padding-left: 2.5vw;
+}
+
+.content-popup-wrapper {
+    animation: appearing ease-in 0.4s;
+}
+
+@keyframes appearing {
+    from {filter: opacity(0) blur(10px)}
+    50% {filter: opacity(0.5) blur(2px)}
+    to {filter: opacity(1) blur(0)}
 }
 
 .content-popup {
@@ -74,17 +91,27 @@
 
 .modal__name {
     margin: 0;
-    bottom: 15%;
+    bottom: 20%;
     position: absolute;
     color: var(--white);
     font-size: 2vw;
     letter-spacing: 0.3em;
     text-transform: uppercase;
+    text-shadow: 0 0 5px var(--black);
+}
+
+.modal__name p{
+    margin: 0;
+}
+
+.modal__origin-name {
+    font-size: 0.8vw;
+    letter-spacing: 0.1em;
 }
 
 .modal__controller {
     width: 90%;
-    bottom: 10%;
+    bottom: 5%;
     position: absolute;
     display: flex;
     justify-content: space-between;
@@ -125,6 +152,7 @@
     justify-content: space-evenly;
     margin-top: 2vw;
     margin-right: 2.5vw;
+    margin-bottom: 3vw;
 }
 
 .modal__extra-description-right {

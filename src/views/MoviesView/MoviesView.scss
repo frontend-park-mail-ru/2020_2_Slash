@@ -4,16 +4,17 @@
     top: 70px;
     left: 0;
     display: flex;
-    width: 15%;
-    justify-content: space-between;
+    width: 20%;
+    justify-content: flex-start;
     align-items: center;
 }
 
 .movies-title {
-    margin: 0;
+    margin: 0 2vw 0 0;
     padding: 0;
     color: var(--white);
     font-size: 1.5em;
+    text-shadow: 0 0 5px var(--black);
 }
 
 .movies-view {
@@ -32,6 +33,14 @@
     border-radius: 3px;
     cursor: pointer;
     background-color: var(--filter-btn);
+}
+
+.genre__label {
+    text-shadow: 0 0 5px var(--black);
+    margin: 0;
+    padding: 0;
+    color: var(--white);
+    font-size: 1.5em;
 }
 
 .genres-btn:hover {

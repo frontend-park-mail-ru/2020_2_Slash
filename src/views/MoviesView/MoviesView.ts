@@ -37,6 +37,7 @@ class MoviesView extends View {
             data = {
                 Content: grid.render(),
                 Genre: this.context.genre,
+                singleGenre: this.context.singleGenre,
             };
         }
         this.insertIntoContext(data);

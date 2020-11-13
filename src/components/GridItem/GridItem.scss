@@ -1,5 +1,8 @@
 .content__grid-item {
     cursor: pointer;
+    height: 9vw;
+    width: 15vw;
+    background-position: center center;
     background-color: var(--hover-gray);
 }
 
@@ -22,6 +25,7 @@
     }
 
     .content__grid-item {
+        height: 25vw;
         box-shadow: none;
     }
 

@@ -1,6 +1,6 @@
 export const Genres = {
     actions: {
-        name: 'Боевики', id: 4,
+        name: 'Боевики', id: 3,
     },
     dramas: {
         name: 'Драмы', id: 2,
@@ -9,6 +9,6 @@ export const Genres = {
         name: 'Комедии', id: 1,
     },
     melodramas: {
-        name: 'Мелодрамы', id: 3,
+        name: 'Мелодрамы', id: 4,
     },
 };

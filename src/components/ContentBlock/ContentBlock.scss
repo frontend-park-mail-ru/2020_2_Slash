@@ -3,6 +3,21 @@
     margin-top: 40vw;
 }
 
+.content__info-block-wrapper {
+    animation: appearing 0.3s 0s;
+}
+
+@keyframes appearing {
+    from {
+        top: -10vw;
+        filter: opacity(0)
+    }
+    to {
+        top: -4.85vw;
+        filter: opacity(1)
+    }
+}
+
 @media (max-width: 375px) {
     .content {
         margin-top: 55vw;

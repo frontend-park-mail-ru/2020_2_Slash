@@ -4,6 +4,13 @@
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
+        animation: appearing-info-block  ease-in 0.3s 0s;
+    }
+
+    @keyframes appearing-info-block {
+        from {filter: opacity(0)}
+        50% {filter: opacity(0.5)}
+        to {filter: opacity(1)}
     }
 
     &__main-wrapper {
@@ -87,9 +94,9 @@
 
     &__video-shade {
         position: absolute;
-        background-image: linear-gradient(90deg, rgb(0, 0, 0) 10%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0));
+        background-image: linear-gradient(90deg, rgb(0, 0, 0) 10%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0));
         height: 100%;
-        width: 10%;
+        width: 30%;
         top: 0;
         left: 0;
         bottom: 0;

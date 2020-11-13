@@ -1,4 +1,4 @@
-import eventBus from './EventBus';
+import EventBus from './EventBus';
 import Events from '../consts/events';
 import InfoBlock from '../components/InfoBlock/InfoBlock';
 import ResponseType from '../tools/ResponseType';
@@ -6,6 +6,7 @@ import ContentPopup from '../components/ContentPopup/ContentPopup';
 import MovieModel from '../models/MovieModel';
 import {Error} from '../consts/errors';
 import Context from '../tools/Context';
+import Modals from '../consts/modals';
 
 interface ContextData {
     contentId: number,
@@ -27,7 +28,7 @@ class ContentService {
      * @this  {ContentService}
      */
     private constructor() {
-        eventBus.on(Events.OpenInfoBlock, this.onOpenInfoBlock.bind(this))
+        EventBus.on(Events.OpenInfoBlock, this.onOpenInfoBlock.bind(this))
             .on(Events.AddToFavourites, this.onAddToFavourites.bind(this))
             .on(Events.ContentIsLiked, this.onContentIsLiked.bind(this))
             .on(Events.ContentIsDisliked, this.onContentIsDisliked.bind(this))
@@ -59,17 +60,23 @@ class ContentService {
     async onOpenInfoBlock(data: any) {
         const infoBlock = new InfoBlock({targetButton: window.event.target});
 
-        const promise = MovieModel.getMovie({id: data.id}).then((response: ResponseType) => {
-            if (!response.error) {
-                const contentData: Context = response.body.movie;
+        const promise = Promise.all([
+            MovieModel.getMovie({id: data.id}),
+            MovieModel.getRating({id: data.id}),
+        ]).then(([movies, rating]) => {
+            if (!movies.error || !rating.error) {
+                const contentData: Context = movies.body.movie;
+
+                contentData.rating = rating.body.match;
 
                 const infoBlockData: ContextData = {
                     contentId: data.id,
                     contentData: contentData,
                 };
+
                 infoBlock.addToContext(infoBlockData);
+                return infoBlock;
             }
-            return infoBlock;
         });
 
         const resultInfoBlock = await promise;
@@ -77,28 +84,31 @@ class ContentService {
     }
 
     onContentInfoRequested(data: any) {
-        MovieModel.getMovie({id: data.id}).then((response: ResponseType) => {
-            if (!response.error) {
-                const contentData: any = response.body.movie;
-                let content: Context[];
+        Promise.all([
+            MovieModel.getMovie({id: data.id}),
+            MovieModel.getRating({id: data.id}),
+        ]).then(([movies, rating]) => {
+            if (!movies.error || !rating.error) {
+                const contentData: any = movies.body.movie;
 
-                const infoBlockData: ContextData = {
+                const infoPopupData: ContextData = {
                     contentId: data.id,
                     contentData: contentData,
                 };
 
-                MovieModel.getMoviesByGenre(contentData.genres[0].id, 8).then((response: ResponseType) => {
+                infoPopupData.contentData.rating = rating.body.match;
+
+                const genre = contentData.genres ? contentData.genres[0].id : 1;
+
+                MovieModel.getMoviesByGenre(genre, 3).then((response: ResponseType) => {
                     if (response.error) {
                         return;
                     }
 
                     const {movies} = response.body;
                     const content = movies.filter((movie: any) => movie.id !== contentData.id);
-                    if (content.length > 0) {
-                        infoBlockData.content = content;
-                    } else {
-                        infoBlockData.content = null;
-                    }
+                    infoPopupData.content = content.length > 0 ? content : null;
+
                     const path = document.location.href;
                     window.history.pushState(null, null, path);
                     window.history.replaceState(history.state, null, path.includes('?') ?
@@ -110,48 +120,50 @@ class ContentService {
                         oldContentPopup.remove();
                     }
 
-                    const contentPopup = new ContentPopup(infoBlockData, document.querySelector('.application'));
+                    const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
 
                     contentPopup.render();
                 }).catch((error: Error) => console.log(error));
             }
-        }).catch((error: Error) => console.log(error));
+        });
     }
 
     onContentByExternalReference(data: any) {
-        MovieModel.getMovie({id: data.id}).then((response: ResponseType) => {
-            if (!response.error) {
-                const contentData: any = response.body.movie;
-                let content: Context[];
+        Promise.all([
+            MovieModel.getMovie({id: data.id}),
+            MovieModel.getRating({id: data.id}),
+        ]).then(([movies, rating]) => {
+            if (!movies.error || !rating.error) {
+                const contentData: any = movies.body.movie;
 
-                const infoBlockData: ContextData = {
+                const infoPopupData: ContextData = {
                     contentId: data.id,
                     contentData: contentData,
                 };
 
-                MovieModel.getMoviesByGenre(contentData.genres[0].id, 8).then((response: ResponseType) => {
+                infoPopupData.contentData.rating = rating.body.match;
+
+                const genre = contentData.genres ? contentData.genres[0].id : 1;
+
+                MovieModel.getMoviesByGenre(genre, 3).then((response: ResponseType) => {
                     if (response.error) {
                         return;
                     }
 
                     const {movies} = response.body;
                     const content = movies.filter((movie: any) => movie.id !== contentData.id);
-                    if (content.length > 0) {
-                        infoBlockData.content = content;
-                    } else {
-                        infoBlockData.content = null;
-                    }
+                    infoPopupData.content = content.length > 0 ? content : null;
 
                     const path = document.location.href;
                     window.history.pushState(null, null, path);
                     window.history.replaceState(history.state, null, `/content/${data.id}`);
 
-                    const contentPopup = new ContentPopup(infoBlockData, document.querySelector('.application'));
+                    const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
 
                     contentPopup.render();
                 }).catch((error: Error) => console.log(error));
             }
-        }).catch((error: Error) => console.log(error));
+        });
     }
 
     changeIcon(currentButton: any, anotherButton: any, icon: string, status: string) {
@@ -161,85 +173,97 @@ class ContentService {
     }
 
     onAddToFavourites(data: { event: string, id: string, status: boolean }) {
-        const btn = window.event.srcElement;
-        if (window.event.srcElement.parentElement.dataset.status == 'true') {
-            MovieModel.removeFromFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, null, '/static/img/add.svg', 'false');
-                    this.fixAllAddButtons(data.id, '/static/img/add.svg', 'false');
-                }
-            }).catch((error: Error) => console.log(error));
+        if (localStorage.getItem('authorized') == 'true') {
+            const btn = window.event.srcElement;
+            if (window.event.srcElement.parentElement.dataset.status == 'true') {
+                MovieModel.removeFromFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, null, '/static/img/add.svg', 'false');
+                        this.fixAllAddButtons(data.id, '/static/img/add.svg', 'false');
+                    }
+                }).catch((error: Error) => console.log(error));
+            } else {
+                MovieModel.addToFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, null, '/static/img/is-added.svg', 'true');
+                        this.fixAllAddButtons(data.id, '/static/img/is-added.svg', 'true');
+                    }
+                }).catch((error: Error) => console.log(error));
+            }
         } else {
-            MovieModel.addToFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, null, '/static/img/is-added.svg', 'true');
-                    this.fixAllAddButtons(data.id, '/static/img/is-added.svg', 'true');
-                }
-            }).catch((error: Error) => console.log(error));
+            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
         }
     }
 
     onContentIsLiked(data: { id: number, status: string }) {
-        const btn = window.event.srcElement;
+        if (localStorage.getItem('authorized') == 'true') {
+            const btn = window.event.srcElement;
 
-        if (data.status === '') {
-            MovieModel.addVote(data.id, true).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.nextElementSibling,
-                        '/static/img/is-liked.svg', 'true');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
-                }
-            }).catch((error: Error) => console.log(error));
-        } else if (data.status === 'true') {
-            MovieModel.removeVote(data.id).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.nextElementSibling, '/static/img/like.svg', '');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
-                }
-            }).catch((error: Error) => console.log(error));
-        } else if (data.status === 'false') {
-            MovieModel.changeVote(data.id, true).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.nextElementSibling,
-                        '/static/img/is-liked.svg', 'true');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
-                }
-            }).catch((error: Error) => console.log(error));
+            if (data.status === '') {
+                MovieModel.addVote(data.id, true).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.nextElementSibling,
+                            '/static/img/is-liked.svg', 'true');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
+                    }
+                }).catch((error: Error) => console.log(error));
+            } else if (data.status === 'true') {
+                MovieModel.removeVote(data.id).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.nextElementSibling, '/static/img/like.svg', '');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
+                    }
+                }).catch((error: Error) => console.log(error));
+            } else if (data.status === 'false') {
+                MovieModel.changeVote(data.id, true).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.nextElementSibling,
+                            '/static/img/is-liked.svg', 'true');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
+                    }
+                }).catch((error: Error) => console.log(error));
+            }
+        } else {
+            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
         }
     }
 
     onContentIsDisliked(data: { id: number, status: string }) {
-        const btn = window.event.srcElement;
-        if (data.status === '') {
-            MovieModel.addVote(data.id, false).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.previousElementSibling,
-                        '/static/img/is-disliked.svg', 'false');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
-                }
-            }).catch((error: Error) => console.log(error));
-        } else if (data.status == 'true') {
-            MovieModel.changeVote(data.id, false).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.previousElementSibling,
-                        '/static/img/is-disliked.svg', 'false');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
-                }
-            }).catch((error: Error) => console.log(error));
-        } else if (data.status === 'false') {
-            MovieModel.removeVote(data.id).then((response: ResponseType) => {
-                if (!response.error) {
-                    this.changeIcon(btn, btn.parentElement.previousElementSibling,
-                        '/static/img/dislike.svg', '');
-                    this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
-                    this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
-                }
-            }).catch((error: Error) => console.log(error));
+        if (localStorage.getItem('authorized') == 'true') {
+            const btn = window.event.srcElement;
+            if (data.status === '') {
+                MovieModel.addVote(data.id, false).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.previousElementSibling,
+                            '/static/img/is-disliked.svg', 'false');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
+                    }
+                }).catch((error: Error) => console.log(error));
+            } else if (data.status == 'true') {
+                MovieModel.changeVote(data.id, false).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.previousElementSibling,
+                            '/static/img/is-disliked.svg', 'false');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
+                    }
+                }).catch((error: Error) => console.log(error));
+            } else if (data.status === 'false') {
+                MovieModel.removeVote(data.id).then((response: ResponseType) => {
+                    if (!response.error) {
+                        this.changeIcon(btn, btn.parentElement.previousElementSibling,
+                            '/static/img/dislike.svg', '');
+                        this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
+                        this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
+                    }
+                }).catch((error: Error) => console.log(error));
+            }
+        } else {
+            EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
         }
     }
 

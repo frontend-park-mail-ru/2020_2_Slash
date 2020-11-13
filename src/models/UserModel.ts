@@ -4,7 +4,8 @@ import {SignUpRequest, UpdateProfileRequest} from './Requests';
 import {SERVER_API_V1_PREFIX} from '../consts/settings';
 
 class UserModel {
-    constructor() {}
+    constructor() {
+    }
 
     register(data: SignUpRequest) {
         return http.fetchPost({
@@ -37,6 +38,9 @@ class UserModel {
             method: 'POST',
             credentials: 'include',
             mode: 'cors',
+            headers: {
+                'X-Csrf-Token': localStorage.getItem('X-Csrf-Token'),
+            },
             body: formData,
         }).then((response: Response) => response.json());
     }

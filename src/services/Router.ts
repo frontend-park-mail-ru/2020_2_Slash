@@ -99,9 +99,8 @@ class Router {
         let targetController: Controller = null;
 
         const result = this.getParam(path);
-
         this.routes.forEach(({reg, controller}) => {
-            const res = path.match(reg);
+            const res = result.path.match(reg);
 
             if (res) {
                 targetController = controller;
@@ -111,44 +110,46 @@ class Router {
         return {
             controller: targetController,
             path: {
-                resourceId: result.PATHparam,
+                resourceId: +result.pathParams,
             },
-            query: result.GETparams,
+            query: result.getParams,
         };
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^(/\\w+)(/\\w+)?\\??((\\w+=\\w+&)*\\w+=\\w+)?$');
+        const reg = new RegExp('^(/\\w+)(/(\\w+))?\\??((\\w+=\\w+&)*\\w+=\\w+)?$');
         const result = path.match(reg);
         // result[0] - все совпадение
         // result[1] - путь (/movies) - без path-параметров
-        // result[2] - path-параметр(один)
-        // result[3] - query-парамтры
+        // result[3] - path-параметр(один)
+        // result[4] - query-парамтры
 
-        let GETparams = null;
-        let PATHparam = null;
+        let getParams = null;
+        let pathParams = null;
+        let resultPath;
 
         if (result) {
-            if (result[2]) {
-                PATHparam = result[2];
-            }
+            resultPath = `${result[1]}`;
 
             if (result[3]) {
-                GETparams = ParseUrlParam(result[3]);
+                pathParams = result[3];
+                resultPath = `${result[1]}/${pathParams}`;
             }
 
-            if (GETparams) {
-                if (GETparams.has('cid')) {
-                    PATHparam = `/content/${GETparams.get('cid')}`;
-                } else {
-                    PATHparam = `${result[2]}`;
-                }
+            if (result[4]) {
+                getParams = ParseUrlParam(result[4]);
+            }
+
+            if (getParams && getParams.has('cid')) {
+                resultPath = `/content/${getParams.get('cid')}`;
+                pathParams = getParams.get('cid');
             }
         }
 
         return {
-            PATHparam: PATHparam,
-            GETparams: GETparams,
+            path: resultPath,
+            pathParams: pathParams,
+            getParams: getParams,
         };
     }
 
