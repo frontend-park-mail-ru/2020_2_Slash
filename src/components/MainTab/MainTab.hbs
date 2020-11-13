@@ -6,7 +6,7 @@
                 <h3 class="info-block__title-text">{{name}}</h3>
             </div>
             <div class="info-block__misc">
-                <p class="misc-item__rating misc-item">Рейтинг {{rating}}</p>
+                <p class="misc-item__rating misc-item">{{rating}}% оценили положительно</p>
                 <p class="misc-item__year misc-item item-value">{{year}}</p>
                 <p class="misc-item__season misc-item item-value">{{seasons}}</p>
             </div>
@@ -14,7 +14,7 @@
                 <span>{{short_description}}</span>
             </div>
             <div class="info-block__country country-item hidden-item">
-                <span class="country-item__title item-title">Страна:</span>
+                <span class="country-item__title item-title">Страны:</span>
                 <span class="country-item__value item-value">
                     {{#each countries}}
                         {{{this.name}}}{{#unless @last}},

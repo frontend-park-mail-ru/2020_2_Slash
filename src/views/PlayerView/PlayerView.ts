@@ -19,8 +19,8 @@ class PlayerView extends View {
         };
 
         this.context = {...this.context, data};
-	
-	this.context.host = SERVER_HOST;
+
+        this.context.host = SERVER_HOST;
 
         this.insertIntoContext(data);
         super.show(this.template(this.context));

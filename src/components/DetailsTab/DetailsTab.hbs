@@ -11,18 +11,18 @@
                 <span class="origin-item__value item-value">{{{original_name}}}</span>
             </div>
             <div class="info-block__misc misc-item">
-                <span class="misc-item__rating">{{rating}}</span>
+                <span class="misc-item__rating">{{rating}}% оценили положительно</span>
                 <span class="misc-item__year item-value">{{year}}</span>
                 <span class="misc-item__season item-value">{{seasons}}</span>
             </div>
             <div class="info-block__full-about">
-                <span>{{{full_descriptip}}}
+                <span>{{{description}}}
                 </span>
             </div>
         </div>
         <div class="info-block__right">
             <div class="info-block__country country-item">
-                <span class="country-item__title item-title">Страна:</span>
+                <span class="country-item__title item-title">Страны:</span>
                 <span class="country-item__value item-value">
                     {{#each countries}}
                         {{{this.name}}}{{#unless @last}},

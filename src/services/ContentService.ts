@@ -1,4 +1,4 @@
-import eventBus from './EventBus';
+import EventBus from './EventBus';
 import Events from '../consts/events';
 import InfoBlock from '../components/InfoBlock/InfoBlock';
 import ResponseType from '../tools/ResponseType';
@@ -6,8 +6,7 @@ import ContentPopup from '../components/ContentPopup/ContentPopup';
 import MovieModel from '../models/MovieModel';
 import {Error} from '../consts/errors';
 import Context from '../tools/Context';
-import EventBus from "./EventBus";
-import Modals from "../consts/modals";
+import Modals from '../consts/modals';
 
 interface ContextData {
     contentId: number,
@@ -29,7 +28,7 @@ class ContentService {
      * @this  {ContentService}
      */
     private constructor() {
-        eventBus.on(Events.OpenInfoBlock, this.onOpenInfoBlock.bind(this))
+        EventBus.on(Events.OpenInfoBlock, this.onOpenInfoBlock.bind(this))
             .on(Events.AddToFavourites, this.onAddToFavourites.bind(this))
             .on(Events.ContentIsLiked, this.onContentIsLiked.bind(this))
             .on(Events.ContentIsDisliked, this.onContentIsDisliked.bind(this))
@@ -61,17 +60,23 @@ class ContentService {
     async onOpenInfoBlock(data: any) {
         const infoBlock = new InfoBlock({targetButton: window.event.target});
 
-        const promise = MovieModel.getMovie({id: data.id}).then((response: ResponseType) => {
-            if (!response.error) {
-                const contentData: Context = response.body.movie;
+        const promise = Promise.all([
+            MovieModel.getMovie({id: data.id}),
+            MovieModel.getRating({id: data.id}),
+        ]).then(([movies, rating]) => {
+            if (!movies.error || !rating.error) {
+                const contentData: Context = movies.body.movie;
+
+                contentData.rating = rating.body.match;
 
                 const infoBlockData: ContextData = {
                     contentId: data.id,
                     contentData: contentData,
                 };
+
                 infoBlock.addToContext(infoBlockData);
+                return infoBlock;
             }
-            return infoBlock;
         });
 
         const resultInfoBlock = await promise;
@@ -79,35 +84,31 @@ class ContentService {
     }
 
     onContentInfoRequested(data: any) {
-        MovieModel.getMovie({id: data.id}).then((response: ResponseType) => {
-            if (!response.error) {
-                const contentData: any = response.body.movie;
-                let content: Context[];
+        Promise.all([
+            MovieModel.getMovie({id: data.id}),
+            MovieModel.getRating({id: data.id}),
+        ]).then(([movies, rating]) => {
+            if (!movies.error || !rating.error) {
+                const contentData: any = movies.body.movie;
 
-                const infoBlockData: ContextData = {
+                const infoPopupData: ContextData = {
                     contentId: data.id,
                     contentData: contentData,
                 };
 
-                let genre;
-                if (contentData.genres) {
-                    genre = contentData.genres[0].id;
-                } else {
-                    genre = 1;
-                }
+                infoPopupData.contentData.rating = rating.body.match;
 
-                MovieModel.getMoviesByGenre(genre, 8).then((response: ResponseType) => {
+                const genre = contentData.genres ? contentData.genres[0].id : 1;
+
+                MovieModel.getMoviesByGenre(genre, 3).then((response: ResponseType) => {
                     if (response.error) {
                         return;
                     }
 
                     const {movies} = response.body;
                     const content = movies.filter((movie: any) => movie.id !== contentData.id);
-                    if (content.length > 0) {
-                        infoBlockData.content = content;
-                    } else {
-                        infoBlockData.content = null;
-                    }
+                    infoPopupData.content = content.length > 0 ? content : null;
+
                     const path = document.location.href;
                     window.history.pushState(null, null, path);
                     window.history.replaceState(history.state, null, path.includes('?') ?
@@ -119,55 +120,50 @@ class ContentService {
                         oldContentPopup.remove();
                     }
 
-                    const contentPopup = new ContentPopup(infoBlockData, document.querySelector('.application'));
+                    const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
 
                     contentPopup.render();
                 }).catch((error: Error) => console.log(error));
             }
-        }).catch((error: Error) => console.log(error));
+        });
     }
 
     onContentByExternalReference(data: any) {
-        MovieModel.getMovie({id: data.id}).then((response: ResponseType) => {
-            if (!response.error) {
-                const contentData: any = response.body.movie;
-                let content: Context[];
+        Promise.all([
+            MovieModel.getMovie({id: data.id}),
+            MovieModel.getRating({id: data.id}),
+        ]).then(([movies, rating]) => {
+            if (!movies.error || !rating.error) {
+                const contentData: any = movies.body.movie;
 
-                const infoBlockData: ContextData = {
+                const infoPopupData: ContextData = {
                     contentId: data.id,
                     contentData: contentData,
                 };
 
-                let genre;
-                if (contentData.genres) {
-                    genre = contentData.genres[0].id;
-                } else {
-                    genre = 1;
-                }
+                infoPopupData.contentData.rating = rating.body.match;
 
-                MovieModel.getMoviesByGenre(genre, 8).then((response: ResponseType) => {
+                const genre = contentData.genres ? contentData.genres[0].id : 1;
+
+                MovieModel.getMoviesByGenre(genre, 3).then((response: ResponseType) => {
                     if (response.error) {
                         return;
                     }
 
                     const {movies} = response.body;
                     const content = movies.filter((movie: any) => movie.id !== contentData.id);
-                    if (content.length > 0) {
-                        infoBlockData.content = content;
-                    } else {
-                        infoBlockData.content = null;
-                    }
+                    infoPopupData.content = content.length > 0 ? content : null;
 
                     const path = document.location.href;
                     window.history.pushState(null, null, path);
                     window.history.replaceState(history.state, null, `/content/${data.id}`);
 
-                    const contentPopup = new ContentPopup(infoBlockData, document.querySelector('.application'));
+                    const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
 
                     contentPopup.render();
                 }).catch((error: Error) => console.log(error));
             }
-        }).catch((error: Error) => console.log(error));
+        });
     }
 
     changeIcon(currentButton: any, anotherButton: any, icon: string, status: string) {

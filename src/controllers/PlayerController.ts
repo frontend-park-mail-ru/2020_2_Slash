@@ -18,23 +18,23 @@ class PlayerController extends Controller {
     }
 
     switchOn(data: any) {
-	MovieModel.getMovie({id: data.path.resourceId}).then((response) => {
-	    if (response.error) {
-	    	return;
-	    }
+        MovieModel.getMovie({id: data.path.resourceId}).then((response) => {
+            if (response.error) {
+                return;
+            }
 
-	    const {movie} = response.body;
+            const {movie} = response.body;
 
-	    this.view.insertIntoContext({
-		title: movie.name,
-		images: movie.images,
-		video: movie.video,
-	    });
+            this.view.insertIntoContext({
+                title: movie.name,
+                images: movie.images,
+                video: movie.video,
+            });
 
-	    this.view.show();
+            this.view.show();
 
-	    this.onSwitchOn();
-	}).catch((error) => console.log(error));
+            this.onSwitchOn();
+        }).catch((error) => console.log(error));
     }
 
     switchOff() {

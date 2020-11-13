@@ -6,12 +6,12 @@
     left: 0;
     opacity: 0;
     width: 100%;
-    height: 100px;
+    height: 70px;
     z-index: 5;
 }
 
 .player__container:hover {
-    transition: opacity 0.1s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
     opacity: 1;
 }
 
@@ -25,13 +25,13 @@
 
 .player-bar__time {
     color: var(--white);
-    font-size: 20px;
-    margin-right: 20px;
+    font-size: 16px;
+    margin-right: 10px;
 }
 
 .player-bar__title {
     color: var(--white);
-    font-size: 23px;
+    font-size: 16px;
 }
 
 .player__timeline {
@@ -43,10 +43,10 @@
 .timeline__back {
     position: absolute;
     left: 0;
-    top: 10px;
+    top: 8px;
     width: 100%;
     cursor: pointer;
-    height: 7px;
+    height: 6px;
     background-color: var(--medium-transparent-white);
     transition: opacity 0.2s 0.1s ease-in-out;
 }
@@ -54,9 +54,9 @@
 .timeline__front {
     position: absolute;
     left: 0;
-    top: 10px;
+    top: 8px;
     cursor: pointer;
-    height: 7px;
+    height: 6px;
     transition: opacity 0.2s 0.1s ease-in-out;
     background-color: var(--orangered);
 }
@@ -64,9 +64,9 @@
 .timeline__middle {
     position: absolute;
     left: 0;
-    top: 10px;
+    top: 8px;
     cursor: pointer;
-    height: 7px;
+    height: 6px;
     transition: opacity 0.2s 0.1s ease-in-out;
     background-color: var(--low-transparent-white);
 }
@@ -100,7 +100,7 @@
 .player__timeline:hover > .timeline__back,
 .player__timeline:hover > .timeline__front,
 .player__timeline:hover > .timeline__middle {
-    height: 10px;
+    height: 8px;
 }
 
 .player__player-bar {
@@ -123,8 +123,8 @@
     opacity: 0;
     cursor: pointer;
     position: absolute;
-    left: -55%;
-    bottom: 100px;
+    left: -80%;
+    bottom: 90px;
     transform: rotate(0.25turn) scale(-1, 1);
     width: 100px;
     height: 10px;
@@ -141,8 +141,8 @@
 .player-bar__btn {
     z-index: 2;
     padding: 0;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-position: center center;
     background-color: var(--crystal-clear);
     border: none;
@@ -158,8 +158,8 @@
 
 .player-btn__img {
     padding-top: 0.2vw;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 }
 
 .player-bar__btn:hover

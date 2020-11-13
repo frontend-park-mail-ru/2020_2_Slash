@@ -10,6 +10,12 @@ class MovieModel {
         }).then((response: Response) => response.json());
     }
 
+    getRating(data: any) {
+        return http.fetchGet({
+            route: `${ApiMethods.Movies}/${data.id}${ApiMethods.Rating}`,
+        }).then((response: Response) => response.json());
+    }
+
     getTopMovies(count: number, from = 0) {
         return http.fetchGet({
             route: `${ApiMethods.TopMovies}?count=${count}&from=${from}`,
@@ -25,6 +31,12 @@ class MovieModel {
     getMoviesByGenre(id: number, count: number, from = 0) {
         return http.fetchGet({
             route: `${ApiMethods.Movies}?genre=${id}&count=${count}&from=${from}`,
+        }).then((response: Response) => response.json());
+    }
+
+    getGenres() {
+        return http.fetchGet({
+            route: `${ApiMethods.Genres}`,
         }).then((response: Response) => response.json());
     }
 

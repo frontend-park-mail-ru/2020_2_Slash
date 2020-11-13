@@ -4,6 +4,13 @@
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
+        animation: appearing-info-block  ease-in 0.3s 0s;
+    }
+
+    @keyframes appearing-info-block {
+        from {filter: opacity(0)}
+        50% {filter: opacity(0.5)}
+        to {filter: opacity(1)}
     }
 
     &__main-wrapper {

@@ -7,6 +7,7 @@
         </div>
         <div class="modal__name margin">
             <p>{{name}}</p>
+            <p class="modal__origin-name">{{original_name}}</p>
         </div>
         <div class="modal__controller margin">
             <div class="modal__play">
@@ -48,19 +49,20 @@
                 </button>
             </div>
             <div class="modal__misc">
-                <p class="misc-item__rating misc-item">Рейтинг {{rating}}</p>
+                <p class="misc-item__rating misc-item">{{rating}}% оценили положительно</p>
                 <p class="misc-item__year misc-item item-value">{{year}}</p>
                 <p class="misc-item__season misc-item item-value">{{seasons}}</p>
             </div>
-            <div class="modal__about  ">
+            <div class="modal__about">
                 <span>{{short_description}}</span>
             </div>
         </div>
         <div class="modal__description-right">
             <div class="modal__country country-item  ">
-                <span class="modal__title item-title">Страна:</span>
+                <span class="modal__title item-title">Страны:</span>
                 <span class="modal__value item-value">{{#each countries}}
-                    {{{this.name}}},
+                    {{{this.name}}}{{#unless @last}},
+                {{/unless}}
                 {{/each}}</span>
             </div>
             <div class="modal__genre genre-item  ">

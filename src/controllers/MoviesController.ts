@@ -13,6 +13,7 @@ import {GetGenreNameById} from '../tools/helper';
 
 interface ContextData {
     preview: { [key: string]: string },
+    singleGenre: boolean,
     blocks: { [key: string]: string }[],
     genre: string;
 }
@@ -56,6 +57,7 @@ class MoviesController extends Controller {
 
             const contentData: ContextData = {
                 genre: null,
+                singleGenre: false,
                 preview: randomMovie,
                 blocks: [
                     {
@@ -108,6 +110,7 @@ class MoviesController extends Controller {
             const contentData: Context = {
                 content: response.body.movies || [],
                 genre: genre,
+                singleGenre: true,
             };
 
             this.view.insertIntoContext(contentData);

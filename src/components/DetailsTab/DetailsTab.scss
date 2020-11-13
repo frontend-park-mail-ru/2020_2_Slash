@@ -5,7 +5,7 @@
         align-content: space-between;
         padding: 0 3.6vw 0 3.6vw;
         width: 100%;
-        backdrop-filter: blur(10px) brightness(70%);
+        backdrop-filter: blur(10px) brightness(85%);
 
         @media (max-width: 375px) {
             font-size: 10px;
@@ -20,6 +20,7 @@
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
+        animation: appearing-info-block  ease-in 0.3s 0s;
 
         @media (max-width: 850px) {
             font-size: 1.8vw;

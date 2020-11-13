@@ -91,12 +91,22 @@
 
 .modal__name {
     margin: 0;
-    bottom: 15%;
+    bottom: 20%;
     position: absolute;
     color: var(--white);
     font-size: 2vw;
     letter-spacing: 0.3em;
     text-transform: uppercase;
+    text-shadow: 0 0 5px var(--black);
+}
+
+.modal__name p{
+    margin: 0;
+}
+
+.modal__origin-name {
+    font-size: 0.8vw;
+    letter-spacing: 0.1em;
 }
 
 .modal__controller {

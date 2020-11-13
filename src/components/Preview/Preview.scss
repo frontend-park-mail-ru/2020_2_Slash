@@ -27,6 +27,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 2vw 0;
+    text-shadow: 0 0 5px var(--black);
 }
 
 .preview__name {
@@ -84,6 +85,14 @@
 .play-btn__text,
 .info-btn__text {
     font-size: 0.9vw;
+}
+
+.info-btn__text {
+    text-shadow: 0 0 5px var(--black);
+}
+
+.info-btn__img {
+    filter: drop-shadow(0 0 5px var(--black));
 }
 
 .info-btn {

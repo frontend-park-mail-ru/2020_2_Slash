@@ -9,7 +9,7 @@ interface Options {
 }
 
 interface Api {
-    route : string,
+    route: string,
     body?: string,
 }
 
@@ -18,7 +18,7 @@ interface Api {
  * Класс для работы с сетью - делает http запросы
  */
 class Http {
-    private prefix : string = SERVER_API_V1_PREFIX;
+    private prefix: string = SERVER_API_V1_PREFIX;
     private CSRFtoken: string;
 
     /**
@@ -82,11 +82,7 @@ class Http {
      * @return  {Promise}
      * @param {{route: string, method: string, body: Object}}
      */
-    fetchRequest({
-        route = '/',
-        method = 'GET',
-        body = null,
-    }) {
+    fetchRequest({route = '/', method = 'GET', body = null}) {
         const options: Options = {
             method: method,
             mode: 'cors',
@@ -102,9 +98,9 @@ class Http {
             options.body = body;
         }
 
-	if (method == 'POST' || method == 'PUT' || method == 'DELETE') {
-	    Object.assign(options.headers, {'X-Csrf-Token': localStorage.getItem('X-Csrf-Token')});
-	}
+        if (method == 'POST' || method == 'PUT' || method == 'DELETE') {
+            Object.assign(options.headers, {'X-Csrf-Token': localStorage.getItem('X-Csrf-Token')});
+        }
 
         return fetch(`${this.prefix}${route}`, options);
     }
