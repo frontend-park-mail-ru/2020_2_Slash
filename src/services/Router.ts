@@ -126,7 +126,7 @@ class Router {
 
         let getParams = null;
         let pathParams = null;
-        let resultPath;
+        let resultPath = '/';
 
         if (result) {
             resultPath = `${result[1]}`;
