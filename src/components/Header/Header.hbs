@@ -1,5 +1,5 @@
 <div class="header__logo">
-    <a href="/browse" data-event="pathChanged" ><img src="/static/img/logo.svg"></a>
+    <a href="/browse" data-event="pathChanged"><img src="/static/img/logo.svg"></a>
 </div>
 <div class="header__menu">
     <nav class="header__nav">
@@ -15,8 +15,11 @@
     <div class="header__burger control__item">
         <img src="/static/img/burger.svg">
     </div>
-    <img class="header__search-img control__item" src="/static/img/search.svg">
+    {{{SearchInput}}}
+    <button class="header__search-button" data-event="showSearchLine">
+        <img class="header__search-img control__item" src="/static/img/search.svg">
+    </button>
     <div class="header__user-block control__item">
-    {{{UserBlock}}}
+        {{{UserBlock}}}
     </div>
 </div>

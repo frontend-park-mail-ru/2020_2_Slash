@@ -1,6 +1,6 @@
 const cacheName = 'flicksbox-cache-v1';
 
-const assets = global.serviceWorkerOption.assets.map(asset => '/static'.concat(asset));
+const assets = global.serviceWorkerOption.assets.map((asset) => '/static'.concat(asset)); //eslint-disable-line
 
 self.addEventListener('install', (event) => {
     event.waitUntil(

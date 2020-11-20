@@ -52,9 +52,19 @@
     align-items: center;
 }
 
+.header__search-button {
+    background-color: var(--crystal-clear);
+    border: none;
+    outline: none;
+}
+
 .header__search-img {
     width: 32px;
     height: 32px;
+}
+
+.header__search-img:hover {
+    filter: drop-shadow(0 0 1px var(--white));
 }
 
 .header__burger {
