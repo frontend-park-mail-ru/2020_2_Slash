@@ -1,0 +1,8 @@
+.person-movies {
+    &__title {
+        position: absolute;
+        color: white;
+        font-size: 1.5em;
+        text-shadow: 0 0 5px var(--black);
+    }
+}

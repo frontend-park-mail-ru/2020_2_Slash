@@ -149,6 +149,13 @@
     }
 }
 
+.item-link {
+    color: var(--white);
+    &:hover {
+        color: var(--low-transparent-white);
+    }
+}
+
 .add-btn, .like-btn, .dislike-btn {
     &__img {
         width: var(--button-size-normal);

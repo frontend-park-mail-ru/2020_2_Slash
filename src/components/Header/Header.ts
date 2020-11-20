@@ -69,7 +69,6 @@ class Header extends Component {
             const a = CreateDomElement('a', {
                 'class': 'my-list list-item-text list-item-text-selected',
                 'href': '/mylist',
-                'data-event': 'pathChanged',
             });
             a.innerText = 'Мой список';
 

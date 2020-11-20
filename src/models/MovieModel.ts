@@ -34,6 +34,12 @@ class MovieModel {
         }).then((response: Response) => response.json());
     }
 
+    getMoviesByActor(id: number, count: number, from = 0) {
+        return http.fetchGet({
+            route: `${ApiMethods.Movies}?actor=${id}&count=${count}&from=${from}`,
+        }).then((response: Response) => response.json());
+    }
+
     getGenres() {
         return http.fetchGet({
             route: `${ApiMethods.Genres}`,

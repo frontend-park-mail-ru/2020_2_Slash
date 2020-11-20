@@ -35,8 +35,10 @@
                 <span class="cast-item__title item-title">Актеры:</span>
                 <span class="cast-item__value item-value">
                     {{#each slicedCast}}
-                        {{{this.name}}}{{#unless @last}},
-                        {{/unless}}
+                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">
+                            {{{this.name}}}{{#unless @last}},
+                            {{/unless}}
+                        </a>
                     {{/each}}
                 </span>
             </div>
