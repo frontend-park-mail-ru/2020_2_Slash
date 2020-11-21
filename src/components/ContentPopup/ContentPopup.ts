@@ -31,7 +31,7 @@ class ContentPopup extends Component {
             }
         }.bind(this);
 
-        this._onPopstate = function(event: any) {
+        this._onPopstate = function() {
             this.remove();
         }.bind(this);
 

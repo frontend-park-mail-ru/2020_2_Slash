@@ -10,7 +10,7 @@ class MyListController extends Controller {
         super(new MyListView());
     }
 
-    switchOn(data: any = {}) {
+    switchOn() {
         MovieModel.getFavourites().then((response: ResponseType) => {
             if (!response.error) {
                 const contentData = {
@@ -24,7 +24,7 @@ class MyListController extends Controller {
         }).catch((error: Error) => console.log(error));
     }
 
-    onSwitchOn(data?: any) {
+    onSwitchOn() {
         super.onSwitchOn();
     }
 

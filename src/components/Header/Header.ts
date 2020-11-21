@@ -4,6 +4,7 @@ import template from './Header.hbs';
 import eventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 import UserHeader from '../UserHeader/UserHeader';
+import SearchInput from '../SearchInput/SearchInput';
 import {CreateDomElement} from '../../tools/helper';
 
 /**
@@ -12,6 +13,7 @@ import {CreateDomElement} from '../../tools/helper';
  */
 class Header extends Component {
     public UserBlock: UserHeader;
+    public SearchInput: SearchInput;
     /**
      * Создает экземпляр Header
      *
@@ -27,10 +29,25 @@ class Header extends Component {
         this.UserBlock = new UserHeader(this.context);
         this.context.UserBlock = this.UserBlock.render();
 
+        this.SearchInput = new SearchInput(this.context, document.querySelector('.application'));
+        this.context.SearchInput = this.SearchInput.render();
+
         if (!eventBus.getListeners().updateHeader) {
             eventBus.on(Events.UpdateHeader, this.onUpdate.bind(this));
             eventBus.on(Events.UpdateHeader, this.onUpdateHeaderNav.bind(this));
         }
+
+        if (!eventBus.getListeners().showSearchLine) {
+            eventBus.on(Events.ShowSearchLine, this.onSearchClick.bind(this));
+        }
+    }
+
+    onSearchClick() {
+        this.SearchInput.addRemove();
+        const searchLine = document.querySelector('.search-line');
+        searchLine.classList.remove('hidden');
+        searchLine.classList.add('search-line_visible');
+        document.querySelector('.header__search-img').classList.add('hidden');
     }
 
     onUpdate(data: any = {}) {
