@@ -10,6 +10,7 @@ import PlayerController from './controllers/PlayerController';
 import MoviesController from './controllers/MoviesController';
 import MyListController from './controllers/MyListController';
 import PersonController from './controllers/PersonController';
+import SearchController from './controllers/SearchController';
 
 if (navigator.serviceWorker) {
     navigator.serviceWorker.register('/sw.js').then();
@@ -26,4 +27,5 @@ const app: HTMLElement = document.querySelector('.application');
     .register(Routes.MyList, new MyListController)
     .register(Routes.ContentPage, new ContentController)
     .register(Routes.Person, new PersonController)
+    .register(Routes.SearchPage, new SearchController())
     .start();
