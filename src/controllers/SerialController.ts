@@ -1,5 +1,5 @@
 import Controller from './Controller';
-import MoviesView from '../views/MoviesView/MoviesView';
+import SerialView from '../views/SerialView/SerialView';
 import ModalService from '../services/ModalService';
 import Events from '../consts/events';
 import eventBus from '../services/EventBus';
@@ -22,11 +22,11 @@ interface ContextData {
  * @class
  * Контроллер для главной страницы
  */
-class MoviesController extends Controller {
-    view: MoviesView;
+class SerialController extends Controller {
+    view: SerialView;
 
     constructor() {
-        super(new MoviesView());
+        super(new SerialView());
     }
 
     switchOn(data: any = {}) {
@@ -48,11 +48,11 @@ class MoviesController extends Controller {
                 return;
             }
             const randomMovie = selectRandomMovie([
-                actionResponse.body.movies || [],
-                comediesResponse.body.movies || [],
-                dramasResponse.body.movies || [],
-                melodramasResponse.body.movies || [],
-            ],
+                    actionResponse.body.movies || [],
+                    comediesResponse.body.movies || [],
+                    dramasResponse.body.movies || [],
+                    melodramasResponse.body.movies || [],
+                ],
             );
 
             const contentData: ContextData = {
@@ -100,6 +100,7 @@ class MoviesController extends Controller {
     }
 
     showGenrePage = (index: number) => {
+        debugger;
         const genre = GetGenreNameById(index);
         MovieModel.getMoviesByGenre(index, 15).then((response) => {
             if (response.error) {
@@ -120,9 +121,9 @@ class MoviesController extends Controller {
     }
 
     onOpenSubMenuGenres() {
-        const subMenu = new SubMenuPopup({contentType: 'movies'}, document.querySelector('.genres'));
+        const subMenu = new SubMenuPopup({contentType: 'serials'}, document.querySelector('.genres'));
         this.view.insertIntoContext({SubMenu: subMenu.render()});
     }
 }
 
-export default MoviesController;
+export default SerialController;

@@ -9,6 +9,7 @@ enum Routes {
     MyList = '/mylist',
     Person = '/actor/:id',
     SearchPage = '/search',
+    Serials = '/serials',
 }
 
 export default Routes;
