@@ -1,6 +1,9 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './SearchInput.hbs';
+import eventBus from "../../services/EventBus";
+import Events from "../../consts/events";
+import Routes from "../../consts/routes";
 
 /**
  * @class
@@ -8,6 +11,7 @@ import template from './SearchInput.hbs';
  */
 class SearchInput extends Component {
     private _onClick: any;
+    private input: any;
     /**
      * Создает экземпляр SearchInput
      *
@@ -30,6 +34,26 @@ class SearchInput extends Component {
         }.bind(this);
 
         this.parent.addEventListener('click', this._onClick);
+        this.input = document.querySelector('.search-line__input');
+    }
+
+    addPromptWindow() {
+        this.input.addEventListener('keydown', this.onSearching.bind(this));
+    }
+
+    onSearching() {
+        document.querySelector('.prompt-window').classList.remove('hidden');
+    }
+
+    addCallbackResult() {
+        this.input.addEventListener('keydown', this.onEnter.bind(this));
+    }
+
+    onEnter(event: any) {
+        if (event.keyCode === 13) {
+            eventBus.emit(Events.PathChanged, {path: Routes.SearchPage});
+            this.remove();
+        }
     }
 
     remove() {
@@ -37,6 +61,8 @@ class SearchInput extends Component {
         document.querySelector('.header__search-img').classList.remove('hidden');
 
         this.parent.removeEventListener('click', this._onClick);
+        this.input.removeEventListener('keydown', this.onSearching);
+        this.input.removeEventListener('keydown', this.onEnter.bind(this));
     }
 }
 

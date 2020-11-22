@@ -44,10 +44,16 @@ class Header extends Component {
 
     onSearchClick() {
         this.SearchInput.addRemove();
+        this.SearchInput.addPromptWindow();
+        this.SearchInput.addCallbackResult();
         const searchLine = document.querySelector('.search-line');
         searchLine.classList.remove('hidden');
         searchLine.classList.add('search-line_visible');
         document.querySelector('.header__search-img').classList.add('hidden');
+        const promptWindow = document.querySelector('.prompt-window');
+        if (promptWindow) {
+            promptWindow.classList.add('hidden');
+        }
     }
 
     onUpdate(data: any = {}) {
