@@ -11,6 +11,7 @@ import {SERVER_HOST} from '../../consts/settings';
 class ContentPopup extends Component {
     private readonly _onClick: any;
     private readonly _onPopstate: any;
+    private readonly _onClickEscape: any;
 
     /**
      * Создает экземпляр Popup
@@ -36,6 +37,13 @@ class ContentPopup extends Component {
             this.remove();
         }.bind(this);
 
+        this._onClickEscape = function(event: any) {
+            if(event.key === "Escape") {
+                this.remove();
+            }
+        }.bind(this);
+
+        window.addEventListener('keydown', this._onClickEscape);
         window.addEventListener('popstate', this._onPopstate);
         this.parent.addEventListener('click', this._onClick);
     }
