@@ -43,21 +43,26 @@
                 </span>
             </div>
             <div class="info-block__buttons content__buttons">
-                <button class="item__add-btn add-btn item__btn" data-event="AddToFavourites" data-id="{{id}}"
+                <a href="/watch/{{id}}" data-event="pathChanged" data-id="{{id}}">
+                    <button class="info-block__play-btn">
+                        <img class="info-block__play-btn__img info-block__btn-img" src="/static/img/play2.svg">
+                    </button>
+                </a>
+                <button class="info-block__add-btn add-btn" data-event="AddToFavourites" data-id="{{id}}"
                         data-status="{{is_favourite}}">
                     {{#if is_favourite}}
-                        <img class="item__add-btn__img item__btn-img" src="/static/img/is-added.svg">
+                        <img class="info-block__add-btn__img info-block__btn-img" src="/static/img/is-added.svg">
                     {{else}}
-                        <img class="item__add-btn__img item__btn-img" src="/static/img/add.svg">
+                        <img class="info-block__add-btn__img info-block__btn-img" src="/static/img/add.svg">
                     {{/if}}
                 </button>
 
-                <button class="item__like-btn like-btn item__btn" data-event="contentIsLiked" data-id="{{id}}"
+                <button class="info-block__like-btn like-btn" data-event="contentIsLiked" data-id="{{id}}"
                         data-status="{{is_liked}}">
                     {{{like}}}
                 </button>
 
-                <button class="item__dislike-btn dislike-btn item__btn" data-event="contentIsDisliked" data-id="{{id}}"
+                <button class="info-block__dislike-btn dislike-btn" data-event="contentIsDisliked" data-id="{{id}}"
                         data-status="{{is_liked}}">
                     {{{dislike}}}
                 </button>

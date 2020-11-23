@@ -1,5 +1,7 @@
 <div class="{{{contentItem}}}">
-    <img class="item__img" src="{{host}}{{images}}/small.png">
+    <button class="item__card" data-event="{{{infoEvent}}}" data-id="{{id}}" data-modalstatus="contentPage">
+        <img class="item__img" src="{{host}}{{images}}/small.png">
+    </button>
     <div class="content__item_hovered">
         <div class="item__buttons content__buttons">
             <a href="/watch/{{id}}" data-id="{{id}}">
@@ -7,7 +9,8 @@
                     <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg">
                 </button>
             </a>
-            <button class="item__add-btn add-btn item__btn" data-event="AddToFavourites" data-id="{{id}}" data-status="{{is_favourite}}">
+            <button class="item__add-btn add-btn item__btn" data-event="AddToFavourites" data-id="{{id}}"
+                    data-status="{{is_favourite}}">
                 {{#if is_favourite}}
                     <img class="item__add-btn__img item__btn-img" src="/static/img/is-added.svg">
                 {{else}}
@@ -15,16 +18,18 @@
                 {{/if}}
             </button>
 
-            <button class="item__like-btn like-btn item__btn" data-event="contentIsLiked" data-id="{{id}}" data-status="{{is_liked}}">
+            <button class="item__like-btn like-btn item__btn" data-event="contentIsLiked" data-id="{{id}}"
+                    data-status="{{is_liked}}">
                 {{{like}}}
             </button>
 
-            <button class="item__dislike-btn dislike-btn item__btn" data-event="contentIsDisliked" data-id="{{id}}" data-status="{{is_liked}}">
+            <button class="item__dislike-btn dislike-btn item__btn" data-event="contentIsDisliked" data-id="{{id}}"
+                    data-status="{{is_liked}}">
                 {{{dislike}}}
             </button>
 
             <button class="item__more-btn item__btn" href="/content/{{{id}}}"
-               data-event="{{{infoEvent}}}"  data-id="{{id}}" data-modalstatus="contentPage">
+                    data-event="{{{infoEvent}}}" data-id="{{id}}" data-modalstatus="contentPage">
                 <img class="more-btn__img item__btn-img" src="/static/img/more.svg">
             </button>
         </div>
