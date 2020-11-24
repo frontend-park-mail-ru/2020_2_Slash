@@ -1,9 +1,9 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './SearchInput.hbs';
-import eventBus from "../../services/EventBus";
-import Events from "../../consts/events";
-import Routes from "../../consts/routes";
+import eventBus from '../../services/EventBus';
+import Events from '../../consts/events';
+import Routes from '../../consts/routes';
 
 /**
  * @class
@@ -23,6 +23,13 @@ class SearchInput extends Component {
     constructor(context: Context, parent?: any) {
         super(context, parent);
         this.template = template;
+
+        this._onClick = function(event: any) {
+            const {target} = event;
+            if (target.classList.contains('blocker')) {
+                this.remove();
+            }
+        }.bind(this);
     }
 
     addRemove() {
@@ -57,12 +64,43 @@ class SearchInput extends Component {
     }
 
     remove() {
-        document.querySelector('.search-line').classList.add('hidden');
+        if (window.innerWidth < 440) {
+            document.querySelector('.blocker').classList.add('hidden');
+
+            const page = document.querySelector('.scroll-fixed');
+            if (page) {
+                this.parent.innerHTML = page.innerHTML;
+            }
+        }
+        const searchLine = document.querySelector('.search-line');
+        if (searchLine) {
+            searchLine.classList.add('hidden');
+        }
         document.querySelector('.header__search-img').classList.remove('hidden');
 
         this.parent.removeEventListener('click', this._onClick);
         this.input.removeEventListener('keydown', this.onSearching);
         this.input.removeEventListener('keydown', this.onEnter.bind(this));
+    }
+
+    render() {
+        if (window.innerWidth > 440) {
+            return super.render();
+        } else {
+            const page = document.createElement('div');
+            page.classList.add('scroll-fixed');
+            page.innerHTML = this.parent.innerHTML;
+            this.parent.innerHTML = '';
+            this.parent.appendChild(page);
+
+            const popupDiv = document.createElement('div');
+            popupDiv.classList.add('search-popup');
+
+            popupDiv.innerHTML = this.template(this.context);
+            this.parent.appendChild(popupDiv);
+
+            document.querySelector('.blocker').classList.remove('hidden');
+        }
     }
 }
 

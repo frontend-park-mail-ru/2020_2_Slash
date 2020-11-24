@@ -43,6 +43,9 @@ class Header extends Component {
     }
 
     onSearchClick() {
+        if (window.innerWidth < 440) {
+            this.SearchInput.render();
+        }
         this.SearchInput.addRemove();
         this.SearchInput.addPromptWindow();
         this.SearchInput.addCallbackResult();
