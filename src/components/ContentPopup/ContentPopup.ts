@@ -25,8 +25,9 @@ class ContentPopup extends Component {
         this.template = template;
 
         this._onClick = function(event: any) {
-            const {target} = event;
-            if (target.classList.contains('blocker') || target.closest('.close-btn')) {
+            const closingTarget = event.target.classList.contains('blocker') ||
+                event.target.closest('.close-btn');
+            if (closingTarget) {
                 this.remove();
             }
         }.bind(this);

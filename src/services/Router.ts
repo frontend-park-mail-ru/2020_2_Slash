@@ -57,7 +57,12 @@ class Router {
                 const data = {...closestLink.dataset};
 
                 data.path = closestLink.getAttribute('href');
-                eventBus.emit(data.event, data);
+
+                if (!data.event) {
+                    eventBus.emit(Events.PathChanged, data);
+                } else {
+                    eventBus.emit(data.event, data);
+                }
             } else if (closestButton instanceof HTMLButtonElement) {
                 e.preventDefault();
 
@@ -169,10 +174,11 @@ class Router {
      */
     go(path: string, data = {}) {
         const routeData = this.getRouteData(path);
+        data = {...data, ...routeData};
 
         if (this.currentController === routeData.controller && !routeData.query) {
             this.currentController.switchOff();
-            this.currentController.switchOn();
+            this.currentController.switchOn(data);
             return;
         }
 
@@ -191,7 +197,6 @@ class Router {
             window.history.pushState(null, null, path);
         }
 
-        data = {...data, ...routeData};
         this.currentController.switchOn(data);
     }
 

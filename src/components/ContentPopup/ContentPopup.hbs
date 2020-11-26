@@ -11,7 +11,7 @@
         </div>
         <div class="modal__controller margin">
             <div class="modal__play">
-                <a href="/watch/{{id}}" data-event="pathChanged" data-id="{{id}}" style="text-decoration: none">
+                <a href="/watch/{{id}}" data-id="{{id}}" style="text-decoration: none">
                     <button class="preview__btn play-btn">
                         <img class="play-btn__img" src="/static/img/play.svg">
                         <p class="play-btn__text">Воспроизвести</p>
@@ -74,12 +74,14 @@
                     {{/each}}
                 </span>
             </div>
-            <div class="modal__cast cast-item  ">
+            <div class="modal__cast cast-item">
                 <span class="cast-item__title item-title">Актеры:</span>
                 <span class="cast-item__value item-value">
                     {{#each slicedCast}}
-                        {{{this.name}}}{{#unless @last}},
-                    {{/unless}}
+                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">
+                            {{{this.name}}}{{#unless @last}},
+                            {{/unless}}
+                        </a>
                     {{/each}}
                 </span>
             </div>
@@ -110,8 +112,10 @@
                 <span class="cast-item__title item-title">Актеры:</span>
                 <span class="cast-item__value item-value">
                     {{#each actors}}
-                        {{{this.name}}}{{#unless @last}},
-                    {{/unless}}
+                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">
+                            {{{this.name}}}{{#unless @last}},
+                            {{/unless}}
+                        </a>
                     {{/each}}
                 </span>
             </div>

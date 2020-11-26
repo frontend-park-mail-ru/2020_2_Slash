@@ -7,6 +7,7 @@ enum Routes {
     Watch = '/watch/:id',
     MoviePage = '/movies',
     MyList = '/mylist',
+    Person = '/actor/:id'
 }
 
 export default Routes;

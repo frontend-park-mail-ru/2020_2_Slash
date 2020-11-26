@@ -19,6 +19,10 @@ class Grid extends Component {
             });
         }
 
+        if (!this.context.column) {
+            this.context.column = 6;
+        }
+
         this.context.content = list;
         return list.length > 0 ? this.template(this.context) : '';
     }
