@@ -6,6 +6,7 @@ import Events from '../../consts/events';
 import UserHeader from '../UserHeader/UserHeader';
 import SearchInput from '../SearchInput/SearchInput';
 import {CreateDomElement} from '../../tools/helper';
+import {MOBILE_DEVICE_WIDTH} from '../../consts/other';
 
 /**
  * @class
@@ -43,11 +44,20 @@ class Header extends Component {
     }
 
     onSearchClick() {
+        if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
+            this.SearchInput.render();
+        }
         this.SearchInput.addRemove();
+        this.SearchInput.addPromptWindow();
+        this.SearchInput.addCallbackResult();
         const searchLine = document.querySelector('.search-line');
         searchLine.classList.remove('hidden');
         searchLine.classList.add('search-line_visible');
         document.querySelector('.header__search-img').classList.add('hidden');
+        const promptWindow = document.querySelector('.prompt-window');
+        if (promptWindow) {
+            promptWindow.classList.add('hidden');
+        }
     }
 
     onUpdate(data: any = {}) {

@@ -9,14 +9,11 @@ import {SERVER_HOST} from '../../consts/settings';
  * Компонента попапа
  */
 class ContentPopup extends Component {
-    private readonly _onClick: any;
-    private readonly _onPopstate: any;
-
     /**
-     * Создает экземпляр Popup
+     * Создает экземпляр ContentPopup
      *
      * @constructor
-     * @this  {Popup}
+     * @this  {ContentPopup}
      * @param context
      * @param parent
      */
@@ -24,20 +21,27 @@ class ContentPopup extends Component {
         super(context, parent);
         this.template = template;
 
-        this._onClick = function(event: any) {
-            const closingTarget = event.target.classList.contains('blocker') ||
-                event.target.closest('.close-btn');
-            if (closingTarget) {
-                this.remove();
-            }
-        }.bind(this);
+        window.addEventListener('keydown', this.onKeydownEscape);
+        window.addEventListener('popstate', this.onPopstate);
+        this.parent.addEventListener('click', this.onClick);
+    }
 
-        this._onPopstate = function() {
+    onClick = (event: any) => {
+        const closingTarget = event.target.classList.contains('blocker') ||
+            event.target.closest('.close-btn');
+        if (closingTarget) {
             this.remove();
-        }.bind(this);
+        }
+    }
 
-        window.addEventListener('popstate', this._onPopstate);
-        this.parent.addEventListener('click', this._onClick);
+    onPopstate = () => {
+        this.remove();
+    }
+
+    onKeydownEscape = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+            this.remove();
+        }
     }
 
     /**
@@ -56,8 +60,8 @@ class ContentPopup extends Component {
      * Коллбэк на удаление элемента Popup со страницы
      */
     onDestroy() {
-        window.removeEventListener('popstate', this._onPopstate);
-        this.parent.removeEventListener('click', this._onClick);
+        window.removeEventListener('popstate', this.onPopstate);
+        this.parent.removeEventListener('click', this.onClick);
 
         const path = document.location.href;
         window.history.pushState(null, null, path);

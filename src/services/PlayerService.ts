@@ -184,7 +184,6 @@ class PlayerService {
         const button = document.querySelector(selectorBtn);
         const buttonImg = document.querySelector(selectorImg);
         buttonImg.setAttribute('src', attrImg);
-        button.removeAttribute('data-event');
         button.setAttribute('data-event', attrEvent);
     }
 
