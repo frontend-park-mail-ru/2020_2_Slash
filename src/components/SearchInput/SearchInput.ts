@@ -4,13 +4,13 @@ import template from './SearchInput.hbs';
 import eventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 import Routes from '../../consts/routes';
+import {MOBILE_DEVICE_WIDTH} from '../../consts/other';
 
 /**
  * @class
  * Компонента фильма/сериала на главной странице
  */
 class SearchInput extends Component {
-    private _onClick: any;
     private input: any;
     /**
      * Создает экземпляр SearchInput
@@ -23,24 +23,17 @@ class SearchInput extends Component {
     constructor(context: Context, parent?: any) {
         super(context, parent);
         this.template = template;
-
-        this._onClick = function(event: any) {
-            const {target} = event;
-            if (target.classList.contains('blocker')) {
-                this.remove();
-            }
-        }.bind(this);
     }
 
-    addRemove() {
-        this._onClick = function(event: any) {
-            const {target} = event;
-            if (!target.classList.contains('search-line__input') && !target.classList.contains('header__search-img')) {
-                this.remove();
-            }
-        }.bind(this);
+    onClick = (event: any) => {
+        const {target} = event;
+        if (!target.classList.contains('search-line__input') && !target.classList.contains('header__search-img')) {
+            this.remove();
+        }
+    };
 
-        this.parent.addEventListener('click', this._onClick);
+    addRemove() {
+        this.parent.addEventListener('click', this.onClick);
         this.input = document.querySelector('.search-line__input');
     }
 
@@ -78,13 +71,13 @@ class SearchInput extends Component {
         }
         document.querySelector('.header__search-img').classList.remove('hidden');
 
-        this.parent.removeEventListener('click', this._onClick);
+        this.parent.removeEventListener('click', this.onClick);
         this.input.removeEventListener('keydown', this.onSearching);
         this.input.removeEventListener('keydown', this.onEnter.bind(this));
     }
 
     render() {
-        if (window.innerWidth > 440) {
+        if (window.innerWidth > MOBILE_DEVICE_WIDTH) {
             return super.render();
         } else {
             const page = document.createElement('div');

@@ -13,7 +13,7 @@
   color: var(--white);
   background-color: var(--low-transparent-gray);
   height: 4vw;
-  width: 300px;
+  width: 298px;
   border: 1px solid var(--white);
 }
 
@@ -53,6 +53,10 @@
 
 .search-line__input:focus{
   outline: none;
+}
+
+input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-search-cancel-button {
+  opacity: 0;
 }
 
 @media (max-width: 1050px) {

@@ -6,6 +6,7 @@ import Events from '../../consts/events';
 import UserHeader from '../UserHeader/UserHeader';
 import SearchInput from '../SearchInput/SearchInput';
 import {CreateDomElement} from '../../tools/helper';
+import {MOBILE_DEVICE_WIDTH} from '../../consts/other';
 
 /**
  * @class
@@ -43,7 +44,7 @@ class Header extends Component {
     }
 
     onSearchClick() {
-        if (window.innerWidth < 440) {
+        if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
             this.SearchInput.render();
         }
         this.SearchInput.addRemove();

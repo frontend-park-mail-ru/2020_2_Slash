@@ -1,5 +1,5 @@
 import Controller from './Controller';
-import SearchView from "../views/SearchView/SearchView";
+import SearchView from '../views/SearchView/SearchView';
 
 class SearchController extends Controller {
     view: SearchView;
@@ -9,7 +9,7 @@ class SearchController extends Controller {
     }
 
     switchOn() {
-        const contentData = {}
+        const contentData = {};
         this.view.insertIntoContext(contentData);
         this.view.show();
         this.onSwitchOn();
