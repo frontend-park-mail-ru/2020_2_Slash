@@ -23,9 +23,12 @@ class MainTab extends Component {
 
     addLikeIcons() {
         const likeIcon = '<img class="info-block__like-btn__img info-block__btn-img" src="/static/img/like.svg">';
-        const disLikeIcon = '<img class="info-block__dislike-btn__img info-block__btn-img" src="/static/img/dislike.svg">';
-        const isLikedIcon =' <img class="info-block__like-btn__img info-block__btn-img" src="/static/img/is-liked.svg">';
-        const isDislikedIcon = '<img class="info-block__dislike-btn__img info-block__btn-img" src="/static/img/is-disliked.svg">';
+        const disLikeIcon =
+            '<img class="info-block__dislike-btn__img info-block__btn-img" src="/static/img/dislike.svg">';
+        const isLikedIcon =
+            ' <img class="info-block__like-btn__img info-block__btn-img" src="/static/img/is-liked.svg">';
+        const isDislikedIcon =
+            '<img class="info-block__dislike-btn__img info-block__btn-img" src="/static/img/is-disliked.svg">';
 
         if (this.context.is_liked === true) {
             this.context.like = isLikedIcon;

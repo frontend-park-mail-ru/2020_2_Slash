@@ -7,9 +7,11 @@ import MovieModel from '../models/MovieModel';
 import {Error} from '../consts/errors';
 import Context from '../tools/Context';
 import Modals from '../consts/modals';
+import TVShowsModel from '../models/TVShowsModel';
+import Types from '../consts/contentType';
 
 interface ContextData {
-    contentId: number,
+    contentId?: number,
     contentData: { [key: string]: string },
     content?: { [key: string]: string }[],
 }
@@ -60,72 +62,137 @@ class ContentService {
     async onOpenInfoBlock(data: any) {
         const infoBlock = new InfoBlock({targetButton: window.event.target});
 
-        const promise = Promise.all([
-            MovieModel.getMovie({id: data.id}),
-            MovieModel.getRating({id: data.id}),
-        ]).then(([movies, rating]) => {
-            if (!movies.error || !rating.error) {
-                const contentData: Context = movies.body.movie;
+        if (data.contenttype == Types.TVShow) {
+            const promise = Promise.all([
+                TVShowsModel.getTVShow({id: data.tvshowId}),
+                MovieModel.getRating({id: data.id}),
+            ]).then(([tvshows, rating]) => {
+                if (!tvshows.error || !rating.error) {
+                    const contentData: Context = tvshows.body.tvshow;
 
-                contentData.rating = rating.body.match;
+                    contentData.rating = rating.body.match;
 
-                const infoBlockData: ContextData = {
-                    contentId: data.id,
-                    contentData: contentData,
-                };
+                    const infoBlockData: ContextData = {
+                        contentData: contentData,
+                    };
 
-                infoBlock.addToContext(infoBlockData);
-                return infoBlock;
-            }
-        });
+                    infoBlock.addToContext(infoBlockData);
+                    return infoBlock;
+                }
+            });
+            const resultInfoBlock = await promise;
+            resultInfoBlock.render();
+        } else {
+            const promise = Promise.all([
+                MovieModel.getMovie({id: data.movieId}),
+                MovieModel.getRating({id: data.id}),
+            ]).then(([movies, rating]) => {
+                if (!movies.error || !rating.error) {
+                    const contentData: Context = movies.body.movie;
 
-        const resultInfoBlock = await promise;
-        resultInfoBlock.render();
+                    contentData.rating = rating.body.match;
+
+                    const infoBlockData: ContextData = {
+                        contentData: contentData,
+                    };
+
+                    infoBlock.addToContext(infoBlockData);
+                    return infoBlock;
+                }
+            });
+            const resultInfoBlock = await promise;
+            resultInfoBlock.render();
+        }
     }
 
     onContentInfoRequested(data: any) {
-        Promise.all([
-            MovieModel.getMovie({id: data.id}),
-            MovieModel.getRating({id: data.id}),
-        ]).then(([movies, rating]) => {
-            if (!movies.error || !rating.error) {
-                const contentData: any = movies.body.movie;
+        if (data.contenttype == Types.TVShow) {
+            Promise.all([
+                TVShowsModel.getTVShow({id: data.tvshowId}),
+                MovieModel.getRating({id: data.id}),
+            ]).then(([tvshows, rating]) => {
+                if (!tvshows.error || !rating.error) {
+                    const contentData: any = tvshows.body.tvshow;
 
-                const infoPopupData: ContextData = {
-                    contentId: data.id,
-                    contentData: contentData,
-                };
+                    const infoPopupData: ContextData = {
+                        contentId: data.id,
+                        contentData: contentData,
+                    };
 
-                infoPopupData.contentData.rating = rating.body.match;
+                    infoPopupData.contentData.rating = rating.body.match;
 
-                const genre = contentData.genres ? contentData.genres[0].id : 1;
+                    const genre = contentData.genres ? contentData.genres[0].id : 1;
 
-                MovieModel.getMoviesByGenre(genre, 3).then((response: ResponseType) => {
-                    if (response.error) {
-                        return;
-                    }
+                    TVShowsModel.getTVShowsByGenre(genre, 3).then((response: ResponseType) => {
+                        if (response.error) {
+                            return;
+                        }
 
-                    const {movies} = response.body;
-                    const content = movies.filter((movie: any) => movie.id !== contentData.id);
-                    infoPopupData.content = content.length > 0 ? content : null;
+                        const {tvshows} = response.body;
+                        const content = tvshows.filter((tvshow: any) => tvshow.id !== contentData.id);
+                        infoPopupData.content = content.length > 0 ? content : null;
 
-                    const path = document.location.href;
-                    window.history.pushState(null, null, path);
-                    window.history.replaceState(history.state, null, path.includes('?') ?
-                        path + `&cid=${data.id}` :
-                        path + `?cid=${data.id}`);
+                        const path = document.location.href;
+                        window.history.pushState(null, null, path);
+                        window.history.replaceState(history.state, null, path.includes('?') ?
+                            path + `&cid=${data.id}` :
+                            path + `?cid=${data.id}`);
 
-                    const oldContentPopup = document.querySelector('.content-popup');
-                    if (oldContentPopup) {
-                        oldContentPopup.remove();
-                    }
+                        const oldContentPopup = document.querySelector('.content-popup');
+                        if (oldContentPopup) {
+                            oldContentPopup.remove();
+                        }
 
-                    const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
+                        const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
 
-                    contentPopup.render();
-                }).catch((error: Error) => console.log(error));
-            }
-        });
+                        contentPopup.render();
+                    }).catch((error: Error) => console.log(error));
+                }
+            });
+        } else {
+            Promise.all([
+                MovieModel.getMovie({id: data.movieId}),
+                MovieModel.getRating({id: data.id}),
+            ]).then(([movies, rating]) => {
+                if (!movies.error || !rating.error) {
+                    const contentData: any = movies.body.movie;
+
+                    const infoPopupData: ContextData = {
+                        contentId: data.id,
+                        contentData: contentData,
+                    };
+
+                    infoPopupData.contentData.rating = rating.body.match;
+
+                    const genre = contentData.genres ? contentData.genres[0].id : 1;
+
+                    MovieModel.getMoviesByGenre(genre, 3).then((response: ResponseType) => {
+                        if (response.error) {
+                            return;
+                        }
+
+                        const {movies} = response.body;
+                        const content = movies.filter((movie: any) => movie.id !== contentData.id);
+                        infoPopupData.content = content.length > 0 ? content : null;
+
+                        const path = document.location.href;
+                        window.history.pushState(null, null, path);
+                        window.history.replaceState(history.state, null, path.includes('?') ?
+                            path + `&cid=${data.id}` :
+                            path + `?cid=${data.id}`);
+
+                        const oldContentPopup = document.querySelector('.content-popup');
+                        if (oldContentPopup) {
+                            oldContentPopup.remove();
+                        }
+
+                        const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
+
+                        contentPopup.render();
+                    }).catch((error: Error) => console.log(error));
+                }
+            });
+        }
     }
 
     onContentByExternalReference(data: any) {

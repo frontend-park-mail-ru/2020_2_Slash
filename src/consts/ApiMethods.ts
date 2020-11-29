@@ -11,6 +11,7 @@ enum ApiMethods {
     Rating = '/rating',
     Genres = '/genres',
     Actors = '/actors',
+    TVShows = '/tvshows',
 }
 
 export default ApiMethods;

@@ -42,7 +42,19 @@ class MoviesController extends Controller {
             MovieModel.getMoviesByGenre(Genres.comedies.id, 15),
             MovieModel.getMoviesByGenre(Genres.dramas.id, 15),
             MovieModel.getMoviesByGenre(Genres.melodramas.id, 15),
-        ]).then(([actionResponse, comediesResponse, dramasResponse, melodramasResponse]) => {
+            MovieModel.getMoviesByGenre(Genres.adventures.id, 15),
+            MovieModel.getMoviesByGenre(Genres.animation.id, 15),
+            MovieModel.getMoviesByGenre(Genres.criminal.id, 15),
+            MovieModel.getMoviesByGenre(Genres.detective.id, 15),
+            MovieModel.getMoviesByGenre(Genres.fantastic.id, 15),
+            MovieModel.getMoviesByGenre(Genres.fantasy.id, 15),
+            MovieModel.getMoviesByGenre(Genres.horrors.id, 15),
+            MovieModel.getMoviesByGenre(Genres.military.id, 15),
+            MovieModel.getMoviesByGenre(Genres.thrillers.id, 15),
+            MovieModel.getMoviesByGenre(Genres.western.id, 15),
+        ]).then(([actionResponse, comediesResponse, dramasResponse, melodramasResponse,
+            advResponse, animResponse, crimeResponse, detectResponse, fantasticResponse,
+            fanResponse, horrResponse, militResponse, thrillResponse, westResponse]) => {
             if (actionResponse.error || comediesResponse.error ||
                 dramasResponse.error || melodramasResponse.error) {
                 return;
@@ -52,6 +64,16 @@ class MoviesController extends Controller {
                 comediesResponse.body.movies || [],
                 dramasResponse.body.movies || [],
                 melodramasResponse.body.movies || [],
+                advResponse.body.movies || [],
+                animResponse.body.movies || [],
+                crimeResponse.body.movies || [],
+                detectResponse.body.movies || [],
+                fantasticResponse.body.movies || [],
+                fanResponse.body.movies || [],
+                horrResponse.body.movies || [],
+                militResponse.body.movies || [],
+                thrillResponse.body.movies || [],
+                westResponse.body.movies || [],
             ],
             );
 
@@ -75,6 +97,46 @@ class MoviesController extends Controller {
                     {
                         title: Genres.melodramas.name,
                         content: melodramasResponse.body.movies || [],
+                    },
+                    {
+                        title: Genres.western.name,
+                        content: westResponse.body.movies || [],
+                    },
+                    {
+                        title: Genres.thrillers.name,
+                        content: thrillResponse.body.movies || [],
+                    },
+                    {
+                        title: Genres.military.name,
+                        content: militResponse.body.movies || [],
+                    },
+                    {
+                        title: Genres.horrors.name,
+                        content: horrResponse.body.movies || [],
+                    },
+                    {
+                        title: Genres.fantasy.name,
+                        content: fanResponse.body.movies || [],
+                    },
+                    {
+                        title: Genres.fantastic.name,
+                        content: fantasticResponse.body.movies || [],
+                    },
+                    {
+                        title: Genres.detective.name,
+                        content: detectResponse.body.movies || [],
+                    },
+                    {
+                        title: Genres.criminal.name,
+                        content: crimeResponse.body.movies || [],
+                    },
+                    {
+                        title: Genres.animation.name,
+                        content: animResponse.body.movies || [],
+                    },
+                    {
+                        title: Genres.adventures.name,
+                        content: advResponse.body.movies || [],
                     },
                 ],
             };
