@@ -45,14 +45,14 @@
     }
 
     &__buttons {
-        width: 10vw;
+        width: 15vw;
         justify-content: space-between;
         @media (max-width: 1000px) {
-            width: 30vw;
+            width: 35vw;
             padding-top: 4vw;
         }
         @media (max-width: 850px) {
-            width: 50vw;
+            width: 55vw;
             padding-top: 4vw;
         }
     }
@@ -109,7 +109,7 @@
         display: flex;
     }
 
-    &__add-btn, &__like-btn, &__dislike-btn {
+    &__add-btn, &__like-btn, &__dislike-btn, &__play-btn {
         padding: 0;
         width: var(--button-size-normal);
         height: var(--button-size-normal);
@@ -156,7 +156,7 @@
     }
 }
 
-.add-btn, .like-btn, .dislike-btn {
+.info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn, .info-block__play-btn {
     &__img {
         width: var(--button-size-normal);
         height: var(--button-size-normal);

@@ -45,6 +45,7 @@ class SubMenuPopup extends Component {
             modal.remove();
             this.onDestroy();
         }
+        document.querySelector('.application').removeEventListener('click', this._onClick);
     }
 
     /**
@@ -59,6 +60,10 @@ class SubMenuPopup extends Component {
      * @return {*|string}
      */
     render() {
+        this.context.genres.forEach((genre: any) => {
+            genre.contentType = this.context.contentType;
+        });
+
         const modalDiv = document.createElement('div');
         modalDiv.innerHTML = this.template(this.context);
         modalDiv.classList.add('genres__sub-menu');

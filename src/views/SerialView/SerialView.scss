@@ -1,0 +1,38 @@
+.serials__banner {
+  position: absolute;
+  z-index: 2;
+  top: 70px;
+  left: 0;
+  display: flex;
+  width: 20%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.serials-title {
+  margin: 0 2vw 0 0;
+  padding: 0;
+  color: var(--white);
+  font-size: 1.5em;
+  text-shadow: 0 0 5px var(--black);
+}
+
+.serials-view {
+  min-height: calc(100vh - 2 * var(--header-height));
+}
+
+@media (max-width: 850px) {
+  .serials__banner {
+    width: 30%;
+  }
+}
+
+@media (max-width: 375px) {
+  .serials__banner {
+    width: 40%;
+  }
+
+  .serials-title {
+    font-size: 5em;
+  }
+}

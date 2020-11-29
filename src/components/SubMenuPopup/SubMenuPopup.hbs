@@ -1,6 +1,6 @@
 <div class="sub-menu__list">
     {{#each genres}}
-        <a href="/movies?genre={{this.id}}">
+        <a href="/{{{this.contentType}}}?genre={{this.id}}">
         <div class="sub-menu__item">
             {{{this.name}}}
         </div>
