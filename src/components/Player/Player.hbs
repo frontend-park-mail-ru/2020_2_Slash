@@ -24,7 +24,13 @@
                 <input class="player-bar__volume-bar" min="0" max="1" value="0.5" step="0.01" type="range">
             </div>
             <span class="player-bar__time">0:0/0:0</span>
-            <span class="player-bar__title">{{{title}}}</span>
+            {{#if type}}
+                <span class="player-bar__title">{{{title}}}</span>
+            {{else}}
+                <span class="player-bar__title">{{{title}}}</span>
+                <span class="player-bar__title">{{{name}}}</span>
+                <span class="player-bar__title">S{{{season}}} : E{{{episode}}}</span>
+            {{/if}}
             <span class="player-bar__span"></span>
             <button class="player-bar__fullscreen-btn player-bar__btn" data-event="fullscreenModeOn">
                 <img class="fullscreen-btn__img player-btn__img" src="/static/img/player-fullscreen.svg">

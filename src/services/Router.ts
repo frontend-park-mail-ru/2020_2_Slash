@@ -197,7 +197,7 @@ class Router {
      * @param {Object} data - Данные для этого коллбэка
      */
     onPathChanged(data: onPathChangeDataType) {
-        this.go(data.path, data.misc || {});
+        this.go(data.path, data || {});
     }
 
     back() {

@@ -11,8 +11,23 @@ class PlayerView extends View {
     }
 
     show() {
-        const {title} = this.context;
-        const PlayerBar = new Player({title}, this);
+        const {type} = this.context;
+
+        let context = {};
+        if (type) {
+            context = {
+                title: this.context.title,
+                type: type,
+            };
+        } else {
+            context = {
+                title: this.context.title,
+                season: this.context.season,
+                episode: this.context.episode,
+                name: this.context.name,
+            };
+        }
+        const PlayerBar = new Player(context, this);
 
         const data: Context = {
             PlayerBar: PlayerBar.render(),
