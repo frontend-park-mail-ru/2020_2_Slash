@@ -19,7 +19,7 @@ class PlayerController extends Controller {
     }
 
     switchOn(data: any) {
-        if (data.movieId) {
+        if (!data.query) {
             MovieModel.getMovie({id: data.path.resourceId}).then((response) => {
                 if (response.error) {
                     return;
@@ -44,16 +44,20 @@ class PlayerController extends Controller {
                     return;
                 }
 
+                const indexSeason = data.query.get('season') - 1;
+                const indexEpisode = data.query.get('episode') - 1;
+
                 const {tvshow} = response.body;
 
                 this.view.insertIntoContext({
                     title: tvshow.name,
-                    name: tvshow.seasons[0].episodes[0].name,
-                    season: tvshow.seasons[0].number,
-                    episode: tvshow.seasons[0].episodes[0].number,
-                    images: tvshow.seasons[0].episodes[0].images,
-                    video: tvshow.seasons[0].episodes[0].video,
+                    name: tvshow.seasons[indexSeason].episodes[indexEpisode].name,
+                    season: tvshow.seasons[indexSeason].number,
+                    episode: tvshow.seasons[indexSeason].episodes[indexEpisode].number,
+                    images: tvshow.seasons[indexSeason].episodes[indexEpisode].images,
+                    video: tvshow.seasons[indexSeason].episodes[indexEpisode].video,
                     seasons: tvshow.seasons,
+                    type: null,
                 });
 
                 this.view.show();

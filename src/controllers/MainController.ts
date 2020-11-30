@@ -4,7 +4,7 @@ import ModalService from '../services/ModalService';
 import MovieModel from '../models/MovieModel';
 import {Error} from '../consts/errors';
 import selectRandomMovie from '../tools/selectRandom';
-import TVShowsModel from "../models/TVShowsModel";
+import TVShowsModel from '../models/TVShowsModel';
 
 interface ContextData {
     preview: { [key: string]: string },
