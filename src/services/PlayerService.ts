@@ -1,6 +1,7 @@
 import setTime from '../tools/time';
 import eventBus from './EventBus';
 import Events from '../consts/events';
+import NextEpisodeModal from '../components/NextEpisodeModal/NextEpisodeModal';
 
 class PlayerService {
     private video: any;
@@ -14,8 +15,11 @@ class PlayerService {
     private _onMuteVolume: any;
     private _onFullScreenOn: any;
     private _onFullScreenOff: any;
+    private _context: any
 
-    constructor() {
+    constructor(context?: any) {
+        this._context = context;
+
         this._onVideoPlay = this.onVideoPlay.bind(this);
         this._onVideoPause = this.onVideoPause.bind(this);
         this._onMuteVolume = this.onMuteVolume.bind(this);
@@ -49,6 +53,11 @@ class PlayerService {
         const volumeBar = document.querySelector('.player-bar__volume');
         volumeBar.addEventListener('pointermove', this.hideProgressBar.bind(this));
         volumeBar.addEventListener('pointerout', this.showProgressBar.bind(this));
+
+        const nextContentButton = document.querySelector('.player-bar__next-content-btn');
+        nextContentButton.addEventListener('pointermove', this.hoverOnNextContentModal.bind(this));
+        nextContentButton.addEventListener('pointerout', this.hoverOffNextContentModal.bind(this));
+        // nextContentButton.addEventListener('click', this.clickOnNextContentModal.bind(this));
 
         document.addEventListener('DOMContentLoaded', function() {
             const button = document.querySelector('.player-bar__play-btn');
@@ -156,6 +165,22 @@ class PlayerService {
             timeLabel.appendChild(text);
         }
     }
+
+    hoverOnNextContentModal() {
+        const nextEpisodeModal = new NextEpisodeModal(this._context, document.querySelector('.watch__wrapper'));
+        nextEpisodeModal.render();
+    }
+
+    hoverOffNextContentModal() {
+        const nextEpisodeModal = document.querySelector('.next-episode-modal');
+        if (nextEpisodeModal) {
+            nextEpisodeModal.remove();
+        }
+    }
+
+    // clickOnNextContentModal() {
+    //
+    // }
 
     onFullScreenOn() {
         document.querySelector('.watch__page').requestFullscreen();

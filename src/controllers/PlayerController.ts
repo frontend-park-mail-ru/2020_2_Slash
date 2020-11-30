@@ -44,8 +44,8 @@ class PlayerController extends Controller {
                     return;
                 }
 
-                const indexSeason = data.query.get('season') - 1;
-                const indexEpisode = data.query.get('episode') - 1;
+                const indexSeason = data.query.get('season') > 0 ? data.query.get('season') - 1 : 0;
+                const indexEpisode = data.query.get('episode') > 0 ? data.query.get('episode') - 1 : 0;
 
                 const {tvshow} = response.body;
 
@@ -56,13 +56,20 @@ class PlayerController extends Controller {
                     episode: tvshow.seasons[indexSeason].episodes[indexEpisode].number,
                     images: tvshow.seasons[indexSeason].episodes[indexEpisode].images,
                     video: tvshow.seasons[indexSeason].episodes[indexEpisode].video,
-                    seasons: tvshow.seasons,
                     type: null,
                 });
 
+                const episodesInfo = {
+                    episodeQueue: tvshow.seasons,
+                    currentEpisode: {
+                        indexSeason: indexSeason,
+                        indexEpisode: indexEpisode,
+                    },
+                };
+
                 this.view.show();
 
-                this.onSwitchOn();
+                this.onSwitchOn(episodesInfo);
             }).catch((error) => console.log(error));
         }
     }
@@ -73,8 +80,8 @@ class PlayerController extends Controller {
         this.onSwitchOff();
     }
 
-    onSwitchOn() {
-        this.playerService = new PlayerService();
+    onSwitchOn(context?: any) {
+        this.playerService = new PlayerService(context);
         this.playerService.start();
     }
 
