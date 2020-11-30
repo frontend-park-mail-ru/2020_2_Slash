@@ -11,3 +11,15 @@
     font-weight: lighter;
     margin: 10px 0;
 }
+
+@media (max-width: 850px) {
+    .my-list__title {
+        font-size: 3.2vw;
+    }
+}
+
+@media (max-width: 440px) {
+    .my-list__title {
+        font-size: 5vw;
+    }
+}

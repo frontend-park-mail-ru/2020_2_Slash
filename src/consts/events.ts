@@ -29,7 +29,8 @@ enum Events {
     ContentIsLiked = 'contentIsLiked',
     ContentIsDisliked = 'contentIsDisliked',
     CheckSession = 'checkSession',
-    ShowSearchLine = 'showSearchLine'
+    ShowSearchLine = 'showSearchLine',
+    SeasonChanged = 'seasonChanged',
 }
 
 export default Events;

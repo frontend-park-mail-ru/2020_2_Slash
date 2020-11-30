@@ -1,0 +1,16 @@
+<div class="info-block__page-seasons info-block_page"
+     style="background-image: url('{{host}}{{images}}/large.png');background-size: cover;">
+    <img class="seasons-background" src="" alt="">
+    <div class="info-block__seasons-wrapper">
+        <div class="seasons-wrapper__buttons">
+            <span class="seasons-wrapper__label">Сезоны</span>
+            {{#each seasons}}
+                <button class="seasons-wrapper__button" data-currentSeason="{{this.number}}"
+                data-event="seasonChanged">{{{this.number}}}</button>
+            {{/each}}
+        </div>
+        <div class="seasons-wrapper__grid">
+            {{{Grid}}}
+        </div>
+    </div>
+</div>

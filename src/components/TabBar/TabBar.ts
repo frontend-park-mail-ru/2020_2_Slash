@@ -26,8 +26,6 @@ class TabBar extends Component {
                 tab.class = 'list-item-text_selected';
             }
         });
-
-        eventBus.on(Events.ContentInfoTabChanged, this.onTabChanged);
     }
 
     /**

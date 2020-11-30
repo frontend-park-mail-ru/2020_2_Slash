@@ -246,11 +246,58 @@
 }
 
 .modal__grid {
-    display: grid;
-    grid-row-gap: 7vh;
-    grid-column-gap: 0.2vw;
-    grid-template-columns: repeat(4, 1fr);
     padding: 2vw 2.5vw 2vw 2.5vw;
+}
+
+.modal__season-grid {
+    margin-bottom: 4vw;
+}
+
+.modal__season-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.modal__season-label {
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 1vw;
+    color: var(--white);
+    margin-right: 15px;
+
+    @media (max-width: 850px) {
+        font-size: 2.5vw;
+    }
+    @media (max-width: 440px) {
+        font-size: 4vw;
+    }
+}
+
+.modal__season-button {
+    cursor: pointer;
+    color: var(--white);
+    margin-right: 15px;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: var(--highly-transparent-white);
+    font-family: "Inter", Arial, sans-serif;
+
+    @media (max-width: 850px) {
+        width: 4vw;
+        height: 4vw;
+    }
+
+    @media (max-width: 440px) {
+        width: 7vw;
+        height: 7vw;
+    }
+}
+
+.modal__season-button:hover {
+    transform: scale(1.05);
 }
 
 @media (max-width: 850px) {

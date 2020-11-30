@@ -30,7 +30,7 @@ class SerialController extends Controller {
     }
 
     switchOn(data: any = {}) {
-        eventBus.on(Events.OpenSubMenuGenres, this.onOpenSubMenuGenres.bind(this));
+        eventBus.on(Events.OpenSubMenuGenres, this.onOpenSubMenuGenres);
 
         if (data.query && data.query.has('genre')) {
             this.showGenrePage(data.query.get('genre'));
@@ -157,7 +157,7 @@ class SerialController extends Controller {
     }
 
     switchOff() {
-        eventBus.off(Events.OpenSubMenuGenres, this.onOpenSubMenuGenres.bind(this));
+        eventBus.off(Events.OpenSubMenuGenres, this.onOpenSubMenuGenres);
         super.switchOff();
         this.view.hide();
     }
@@ -182,7 +182,7 @@ class SerialController extends Controller {
         }).catch((error: Error) => console.log(error));
     }
 
-    onOpenSubMenuGenres() {
+    onOpenSubMenuGenres = () => {
         const subMenu = new SubMenuPopup({contentType: 'serials'}, document.querySelector('.genres'));
         this.view.insertIntoContext({SubMenu: subMenu.render()});
     }

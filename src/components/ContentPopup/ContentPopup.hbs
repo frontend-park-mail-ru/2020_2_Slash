@@ -49,9 +49,9 @@
                 </button>
             </div>
             <div class="modal__misc">
-                <p class="misc-item__rating misc-item">{{rating}}% оценили положительно</p>
-                <p class="misc-item__year misc-item item-value">{{year}}</p>
-                <p class="misc-item__season misc-item item-value">{{seasons}}</p>
+                <span class="misc-item__rating misc-item">{{rating}}% оценили положительно</span>
+                <span class="misc-item__year misc-item item-value">{{year}}</span>
+                <span class="misc-item__season misc-item item-value">Сезоны: {{seasons}}</span>
             </div>
             <div class="modal__about">
                 <span>{{short_description}}</span>
@@ -80,7 +80,7 @@
                     {{#each slicedCast}}
                         <a href="/actor/{{this.id}}" class="cast-item__link item-link">
                             {{{this.name}}}{{#unless @last}},
-                            {{/unless}}
+                        {{/unless}}
                         </a>
                     {{/each}}
                 </span>
@@ -89,7 +89,9 @@
     </div>
     {{#if moreLikeThis}}
         <div class="modal__headline margin">Похожее</div>
-        {{{moreLikeThis}}}
+        <div class="modal__grid">
+            {{{moreLikeThis}}}
+        </div>
     {{/if}}
     <div class="modal__headline margin">Больше информации</div>
     <div class="modal__extra-description margin">
@@ -114,7 +116,7 @@
                     {{#each actors}}
                         <a href="/actor/{{this.id}}" class="cast-item__link item-link">
                             {{{this.name}}}{{#unless @last}},
-                            {{/unless}}
+                        {{/unless}}
                         </a>
                     {{/each}}
                 </span>
@@ -126,4 +128,17 @@
             <img class="close-btn__img" src="/static/img/close.svg">
         </button>
     </div>
+    {{#if episodes}}
+        <div class="modal__season-buttons margin">
+            <span class="modal__season-label">Сезоны</span>
+            {{#each serialsSeasons}}
+                <button class="modal__season-button" data-currentSeason="{{this.number}}"
+                        data-event="seasonChanged">{{{this.number}}}
+                </button>
+            {{/each}}
+        </div>
+        <div class="modal__grid modal__season-grid">
+            {{{episodes}}}
+        </div>
+    {{/if}}
 </div>
