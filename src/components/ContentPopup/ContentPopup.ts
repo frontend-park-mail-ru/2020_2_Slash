@@ -3,9 +3,8 @@ import Context from '../../tools/Context';
 import template from './ContentPopup.hbs';
 import Grid from '../Grid/Grid';
 import {SERVER_HOST} from '../../consts/settings';
-import contentType from '../../consts/contentType';
-import EventBus from "../../services/EventBus";
-import Events from "../../consts/events";
+import EventBus from '../../services/EventBus';
+import Events from '../../consts/events';
 
 /**
  * @class
@@ -127,7 +126,7 @@ class ContentPopup extends Component {
         this.context.gap = '2vw';
         const grid = new Grid(this.context);
 
-        let seasonsGrid:string = '';
+        let seasonsGrid: string;
         let serialsSeasons = '';
 
         if (this.context.tvshow) {

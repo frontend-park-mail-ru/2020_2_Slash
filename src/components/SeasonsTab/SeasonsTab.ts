@@ -4,8 +4,7 @@ import template from './SeasonsTab.hbs';
 import {SERVER_HOST} from '../../consts/settings';
 import EventBus from '../../services/EventBus';
 import Events from '../../consts/events';
-import Grid from "../Grid/Grid";
-
+import Grid from '../Grid/Grid';
 /**
  * @class
  * Компонента страницы с подробной информацией о фильме/сериале

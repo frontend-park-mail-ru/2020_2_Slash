@@ -48,7 +48,7 @@ class Header extends Component {
         }
     }
 
-    onOpenBurger = (data: any) => {
+    onOpenBurger = () => {
         this.context.Menu = new HeaderMenu(this.context, document.querySelector('.header__control-bars')).render();
     }
 

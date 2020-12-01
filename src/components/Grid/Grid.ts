@@ -3,8 +3,7 @@ import Context from '../../tools/Context';
 import template from './Grid.hbs';
 import GridItem from '../GridItem/GridItem';
 import EpisodeCard from '../EpisodeCard/EpisodeCard';
-import {MOBILE_DEVICE_WIDTH} from '../../consts/other';
-import {CASE_DEVICE_WIDTH} from '../../consts/other';
+import {MOBILE_DEVICE_WIDTH, TABLET_DEVICE_WIDTH} from '../../consts/other';
 
 class Grid extends Component {
     constructor(context: Context, parent?: any) {
@@ -37,7 +36,7 @@ class Grid extends Component {
             this.context.gap = '0.2vw';
         }
 
-        if (window.innerWidth < CASE_DEVICE_WIDTH) {
+        if (window.innerWidth < TABLET_DEVICE_WIDTH) {
             this.context.column = 3;
         }
 

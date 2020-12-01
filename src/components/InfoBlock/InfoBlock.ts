@@ -4,7 +4,6 @@ import TabBar from '../TabBar/TabBar';
 import MainTab from '../MainTab/MainTab';
 import DetailsTab from '../DetailsTab/DetailsTab';
 import Events from '../../consts/events';
-import eventBus from '../../services/EventBus';
 import template from './InfoBlock.hbs';
 import SeasonsTab from '../SeasonsTab/SeasonsTab';
 import EventBus from '../../services/EventBus';
@@ -39,7 +38,7 @@ class InfoBlock extends Component {
                 },
                 {
                     key: 'seasonsTab',
-                    value: 'Сезоны'
+                    value: 'Сезоны',
                 },
                 {
                     key: 'detailsTab',
@@ -47,12 +46,12 @@ class InfoBlock extends Component {
                 }],
         });
 
-        if (eventBus.getListeners().contentInfoTabChanged) {
-            eventBus.getListeners().contentInfoTabChanged = [];
+        if (EventBus.getListeners().contentInfoTabChanged) {
+            EventBus.getListeners().contentInfoTabChanged = [];
         }
-        eventBus.on(Events.ContentInfoTabChanged, this.onTabChanged);
+        EventBus.on(Events.ContentInfoTabChanged, this.onTabChanged);
         if (!EventBus.getListeners().infoBlockClosed) {
-            eventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
+            EventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
         }
     }
 

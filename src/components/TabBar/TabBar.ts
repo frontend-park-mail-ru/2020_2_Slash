@@ -1,7 +1,5 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
-import Events from '../../consts/events';
-import eventBus from '../../services/EventBus';
 import template from './TabBar.hbs';
 
 /**

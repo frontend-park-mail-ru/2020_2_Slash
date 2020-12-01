@@ -13,7 +13,12 @@
     "dev-live": "webpack --watch",
     "lint-style": "stylelint src/**/*.scss"
   },
-  "repository": {
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run eslint-check"
+    }
+  },
+"repository": {
     "type": "git",
     "url": "git+https://github.com/frontend-park-mail-ru/2020_2_Slash.git"
   },
@@ -43,6 +48,7 @@
     "file-loader": "^6.1.1",
     "handlebars-loader": "^1.7.1",
     "html-webpack-plugin": "^4.5.0",
+    "husky": "^4.3.0",
     "mini-css-extract-plugin": "^1.0.0",
     "sass": "^1.29.0",
     "sass-loader": "^10.0.5",

@@ -1,13 +1,11 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './HeaderMenu.hbs';
-
 /**
  * @class
  * Компонента окошка для хэдера - войти/зарегаться // профиль/выйти
  */
 class HeaderMenu extends Component {
-
     /**
      * Создает экземпляр SubMenuPopup
      *

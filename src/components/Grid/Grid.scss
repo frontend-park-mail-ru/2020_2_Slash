@@ -9,7 +9,6 @@
 .content__grid {
     display: grid;
     grid-row-gap: 7vh;
-    //padding: 2vh 60px 7vh 60px;
 }
 
 @media (max-width: 850px) {
@@ -18,7 +17,6 @@
         grid-row-gap: 3vh;
         grid-column-gap: 1vw;
         grid-template-columns: repeat(2, 1fr);
-        //padding: 5vh 20px 2vh 20px;
     }
 
     .content__title {
