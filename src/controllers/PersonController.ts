@@ -48,7 +48,7 @@ class PersonController extends Controller {
         this.view.hide();
     }
 
-    onOpenSubMenuGenres() {
+    onOpenSubMenuGenres = () => {
         const subMenu = new SubMenuPopup({}, document.querySelector('.genres'));
         this.view.insertIntoContext({SubMenu: subMenu.render()});
     }

@@ -14,6 +14,7 @@ interface ContextData {
     contentId?: number,
     contentData: { [key: string]: string },
     content?: { [key: string]: string }[],
+    tvshow?: Array<any>,
 }
 
 /**
@@ -64,16 +65,18 @@ class ContentService {
 
         if (data.contenttype == Types.TVShow) {
             const promise = Promise.all([
-                TVShowsModel.getTVShow({id: data.tvshowId}),
+                TVShowsModel.getTVShow(data.tvshowId),
                 MovieModel.getRating({id: data.id}),
-            ]).then(([tvshows, rating]) => {
-                if (!tvshows.error || !rating.error) {
-                    const contentData: Context = tvshows.body.tvshow;
+                TVShowsModel.getSeasons(data.tvshowId),
+            ]).then(([tvshow, rating, seasons]) => {
+                if (!tvshow.error || !rating.error || !seasons.error) {
+                    const contentData: Context = tvshow.body.tvshow;
 
                     contentData.rating = rating.body.match;
 
                     const infoBlockData: ContextData = {
                         contentData: contentData,
+                        tvshow: seasons.body.tvshow,
                     };
 
                     infoBlock.addToContext(infoBlockData);
@@ -102,28 +105,31 @@ class ContentService {
             });
             const resultInfoBlock = await promise;
             resultInfoBlock.render();
+            document.querySelector('[data-tab="seasonsTab"]').classList.add('hidden');
         }
     }
 
     onContentInfoRequested(data: any) {
         if (data.contenttype == Types.TVShow) {
             Promise.all([
-                TVShowsModel.getTVShow({id: data.tvshowId}),
+                TVShowsModel.getTVShow(data.tvshowId),
                 MovieModel.getRating({id: data.id}),
-            ]).then(([tvshows, rating]) => {
-                if (!tvshows.error || !rating.error) {
+                TVShowsModel.getSeasons(data.tvshowId),
+            ]).then(([tvshows, rating, seasons]) => {
+                if (!tvshows.error || !rating.error || !seasons.error) {
                     const contentData: any = tvshows.body.tvshow;
 
                     const infoPopupData: ContextData = {
                         contentId: data.id,
                         contentData: contentData,
+                        tvshow: seasons.body.tvshow,
                     };
 
                     infoPopupData.contentData.rating = rating.body.match;
 
                     const genre = contentData.genres ? contentData.genres[0].id : 1;
 
-                    TVShowsModel.getTVShowsByGenre(genre, 3).then((response: ResponseType) => {
+                    TVShowsModel.getTVShowsByGenre(genre, 10).then((response: ResponseType) => {
                         if (response.error) {
                             return;
                         }
@@ -166,7 +172,7 @@ class ContentService {
 
                     const genre = contentData.genres ? contentData.genres[0].id : 1;
 
-                    MovieModel.getMoviesByGenre(genre, 3).then((response: ResponseType) => {
+                    MovieModel.getMoviesByGenre(genre, 10).then((response: ResponseType) => {
                         if (response.error) {
                             return;
                         }
@@ -196,41 +202,81 @@ class ContentService {
     }
 
     onContentByExternalReference(data: any) {
-        Promise.all([
-            MovieModel.getMovie({id: data.id}),
-            MovieModel.getRating({id: data.id}),
-        ]).then(([movies, rating]) => {
-            if (!movies.error || !rating.error) {
-                const contentData: any = movies.body.movie;
+        if (data.contenttype == Types.TVShow) {
+            Promise.all([
+                TVShowsModel.getTVShow(data.tvshowId),
+                MovieModel.getRating({id: data.id}),
+                TVShowsModel.getSeasons(data.tvshowId),
+            ]).then(([tvshows, rating, seasons]) => {
+                if (!tvshows.error || !rating.error || !seasons.error) {
+                    const contentData: any = tvshows.body.tvshow;
 
-                const infoPopupData: ContextData = {
-                    contentId: data.id,
-                    contentData: contentData,
-                };
+                    const infoPopupData: ContextData = {
+                        contentId: data.id,
+                        contentData: contentData,
+                        tvshow: seasons.body.tvshow,
+                    };
 
-                infoPopupData.contentData.rating = rating.body.match;
+                    infoPopupData.contentData.rating = rating.body.match;
 
-                const genre = contentData.genres ? contentData.genres[0].id : 1;
+                    const genre = contentData.genres ? contentData.genres[0].id : 1;
 
-                MovieModel.getMoviesByGenre(genre, 3).then((response: ResponseType) => {
-                    if (response.error) {
-                        return;
-                    }
+                    MovieModel.getMoviesByGenre(genre, 10).then((response: ResponseType) => {
+                        if (response.error) {
+                            return;
+                        }
 
-                    const {movies} = response.body;
-                    const content = movies.filter((movie: any) => movie.id !== contentData.id);
-                    infoPopupData.content = content.length > 0 ? content : null;
+                        const {movies} = response.body;
+                        const content = movies.filter((movie: any) => movie.id !== contentData.id);
+                        infoPopupData.content = content.length > 0 ? content : null;
 
-                    const path = document.location.href;
-                    window.history.pushState(null, null, path);
-                    window.history.replaceState(history.state, null, `/content/${data.id}`);
+                        const path = document.location.href;
+                        window.history.pushState(null, null, path);
+                        window.history.replaceState(history.state, null, `/content/${data.id}`);
 
-                    const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
+                        const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
 
-                    contentPopup.render();
-                }).catch((error: Error) => console.log(error));
-            }
-        });
+                        contentPopup.render();
+                    }).catch((error: Error) => console.log(error));
+                }
+            });
+        } else {
+            Promise.all([
+                MovieModel.getMovie({id: data.id}),
+                MovieModel.getRating({id: data.id}),
+            ]).then(([movies, rating]) => {
+                if (!movies.error || !rating.error) {
+                    const contentData: any = movies.body.movie;
+
+                    const infoPopupData: ContextData = {
+                        contentId: data.id,
+                        contentData: contentData,
+                    };
+
+                    infoPopupData.contentData.rating = rating.body.match;
+
+                    const genre = contentData.genres ? contentData.genres[0].id : 1;
+
+                    MovieModel.getMoviesByGenre(genre, 10).then((response: ResponseType) => {
+                        if (response.error) {
+                            return;
+                        }
+
+                        const {movies} = response.body;
+                        const content = movies.filter((movie: any) => movie.id !== contentData.id);
+                        infoPopupData.content = content.length > 0 ? content : null;
+
+                        const path = document.location.href;
+                        window.history.pushState(null, null, path);
+                        window.history.replaceState(history.state, null, `/content/${data.id}`);
+
+                        const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
+
+                        contentPopup.render();
+                    }).catch((error: Error) => console.log(error));
+                }
+            });
+        }
     }
 
     changeIcon(currentButton: any, anotherButton: any, icon: string, status: string) {

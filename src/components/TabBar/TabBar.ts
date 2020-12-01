@@ -1,7 +1,5 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
-import Events from '../../consts/events';
-import eventBus from '../../services/EventBus';
 import template from './TabBar.hbs';
 
 /**
@@ -26,8 +24,6 @@ class TabBar extends Component {
                 tab.class = 'list-item-text_selected';
             }
         });
-
-        eventBus.on(Events.ContentInfoTabChanged, this.onTabChanged);
     }
 
     /**

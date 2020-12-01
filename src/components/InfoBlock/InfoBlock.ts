@@ -4,8 +4,10 @@ import TabBar from '../TabBar/TabBar';
 import MainTab from '../MainTab/MainTab';
 import DetailsTab from '../DetailsTab/DetailsTab';
 import Events from '../../consts/events';
-import eventBus from '../../services/EventBus';
 import template from './InfoBlock.hbs';
+import SeasonsTab from '../SeasonsTab/SeasonsTab';
+import EventBus from '../../services/EventBus';
+import contentType from '../../consts/contentType';
 
 /**
  * @class
@@ -13,6 +15,9 @@ import template from './InfoBlock.hbs';
  */
 class InfoBlock extends Component {
     private tabBar: TabBar;
+    private MainTab: MainTab;
+    private SeasonsTab: SeasonsTab;
+    private DetailsTab: DetailsTab;
     /**
      * Создает экземпляр InfoBlock
      *
@@ -32,13 +37,22 @@ class InfoBlock extends Component {
                     value: 'О фильме',
                 },
                 {
+                    key: 'seasonsTab',
+                    value: 'Сезоны',
+                },
+                {
                     key: 'detailsTab',
                     value: 'Детали',
                 }],
         });
 
-        eventBus.on(Events.ContentInfoTabChanged, this.onTabChanged.bind(this));
-        eventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
+        if (EventBus.getListeners().contentInfoTabChanged) {
+            EventBus.getListeners().contentInfoTabChanged = [];
+        }
+        EventBus.on(Events.ContentInfoTabChanged, this.onTabChanged);
+        if (!EventBus.getListeners().infoBlockClosed) {
+            EventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
+        }
     }
 
     public addToContext(obj: Context) {
@@ -49,16 +63,20 @@ class InfoBlock extends Component {
      * Колбэк на изменение вкладки на таб баре
      * @param {Object} data - Данные для этого коллбэка
      */
-    onTabChanged(data: any) {
+    onTabChanged = (data: any) => {
         if (data.tab === 'mainTab') {
-            this.context.CurrentTab = new MainTab(this.context.contentData).render();
-        } else {
-            this.context.CurrentTab = new DetailsTab(this.context.contentData).render();
+            this.context.CurrentTab = this.MainTab.render();
+        } else if (data.tab === 'detailsTab') {
+            this.context.CurrentTab = this.DetailsTab.render();
+        } else if (data.tab === 'seasonsTab') {
+            this.context.CurrentTab = this.SeasonsTab.render();
         }
 
         const currentInfoBlock = document.querySelector('.info-block_tab');
 
         currentInfoBlock.innerHTML = this.context.CurrentTab;
+
+        this.tabBar.onTabChanged(data);
     }
 
     /**
@@ -90,7 +108,14 @@ class InfoBlock extends Component {
      * @return {*|string}
      */
     render() {
-        this.context.CurrentTab = new MainTab(this.context.contentData).render();
+        this.MainTab = new MainTab(this.context.contentData);
+        this.DetailsTab = new DetailsTab(this.context.contentData);
+        if (this.context.contentData.type === contentType.TVShow) {
+            this.context.tvshow.images = this.context.contentData.images;
+            this.SeasonsTab = new SeasonsTab(this.context.tvshow);
+        }
+
+        this.context.CurrentTab = this.MainTab.render();
         this.context.TabBar = this.tabBar.render();
 
         this.deleteOpenedInfoBlock();

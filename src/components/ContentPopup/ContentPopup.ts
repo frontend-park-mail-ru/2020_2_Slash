@@ -3,6 +3,8 @@ import Context from '../../tools/Context';
 import template from './ContentPopup.hbs';
 import Grid from '../Grid/Grid';
 import {SERVER_HOST} from '../../consts/settings';
+import EventBus from '../../services/EventBus';
+import Events from '../../consts/events';
 
 /**
  * @class
@@ -24,6 +26,11 @@ class ContentPopup extends Component {
         window.addEventListener('keydown', this.onKeydownEscape);
         window.addEventListener('popstate', this.onPopstate);
         this.parent.addEventListener('click', this.onClick);
+
+        if (EventBus.getListeners().seasonChanged) {
+            EventBus.getListeners().seasonChanged = [];
+        }
+        EventBus.on(Events.SeasonChanged, this.onSeasonChanged);
     }
 
     onClick = (event: any) => {
@@ -93,6 +100,14 @@ class ContentPopup extends Component {
         }
     }
 
+    onSeasonChanged = (data: any) => {
+        this.context.serialsSeasons[data.currentseason - 1].column = 3;
+        this.context.serialsSeasons[data.currentseason - 1].gap = '2vw';
+        this.context.Grid = new Grid(this.context.serialsSeasons[data.currentseason - 1]).render();
+        const grid = document.querySelector('.modal__season-grid');
+        grid.innerHTML = this.context.Grid;
+    }
+
     /**
      * Возвращает отрисованный в HTML компонент
      * @return {*|string}
@@ -107,12 +122,27 @@ class ContentPopup extends Component {
         const popupDiv = document.createElement('div');
         popupDiv.classList.add('content-popup');
 
+        this.context.column = 3;
+        this.context.gap = '2vw';
         const grid = new Grid(this.context);
+
+        let seasonsGrid: string;
+        let serialsSeasons = '';
+
+        if (this.context.tvshow) {
+            this.context.tvshow.seasons[0].column = 3;
+            this.context.tvshow.seasons[0].gap = '2vw';
+            seasonsGrid = new Grid(this.context.tvshow.seasons[0]).render();
+            serialsSeasons = this.context.tvshow.seasons;
+        }
+
         this.context = {
             ...this.context.contentData,
             id: this.context.contentId,
             content: this.context.content,
             moreLikeThis: grid.render(),
+            episodes: seasonsGrid,
+            serialsSeasons: serialsSeasons,
         };
 
         if (this.context.actors && this.context.actors.length > 3) {
@@ -127,12 +157,6 @@ class ContentPopup extends Component {
 
         popupDiv.innerHTML = this.template(this.context);
         this.parent.appendChild(popupDiv);
-
-        const gridElement = document.querySelector('.content-popup-wrapper .content__grid');
-        if (gridElement) {
-            gridElement.classList.remove('content__grid');
-            gridElement.classList.add('modal__grid');
-        }
     }
 }
 

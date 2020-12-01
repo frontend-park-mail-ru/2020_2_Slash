@@ -22,15 +22,30 @@
     .content__grid-item > .content__item_hovered > .item__buttons {
         justify-content: space-around;
         width: 100%;
+        padding-bottom: 5vw;
     }
 
     .content__grid-item {
-        height: 25vw;
+        height: 15vw;
+        width: 25vw;
         box-shadow: none;
     }
 
     .content__grid-item:hover > .content__item_hovered {
         color: var(--white);
         font-size: 0.5vw;
+    }
+}
+
+@media (max-width: 440px) {
+    .content__grid-item > .content__item_hovered > .item__buttons {
+        justify-content: space-around;
+        width: 100%;
+        padding-bottom: 5vw;
+    }
+
+    .content__grid-item {
+        height: 25vw;
+        width: 44vw;
     }
 }

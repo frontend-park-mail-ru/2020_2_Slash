@@ -1,0 +1,27 @@
+.header__sub-menu {
+  top: 100%;
+  right: 110px;
+  position: absolute;
+  @media (max-width: 440px) {
+    right: 50px;
+  }
+}
+
+.header-sub-menu__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-sub-menu__list li {
+  font-size: 2vw;
+  display: inline;
+  padding-bottom: 5px;
+  text-align: right;
+  filter: drop-shadow(0 0 5px var(--shadow));
+  @media (max-width: 440px) {
+    font-size: 4vw;
+    text-align: left;
+  }
+}

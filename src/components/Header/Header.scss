@@ -69,6 +69,11 @@
 
 .header__burger {
     display: none;
+    padding: 0;
+    background-position: center center;
+    background-color: var(--crystal-clear);
+    outline: none;
+    border: none;
 }
 
 @media (max-width: 850px) {
