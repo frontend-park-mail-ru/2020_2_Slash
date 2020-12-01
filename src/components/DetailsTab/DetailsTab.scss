@@ -7,8 +7,8 @@
         width: 100%;
         backdrop-filter: blur(10px) brightness(50%);
 
-        @media (max-width: 375px) {
-            font-size: 10px;
+        @media (max-width: 440px) {
+            font-size: 3.5vw;
             flex-direction: column;
             width: 100%;
         }
@@ -40,7 +40,7 @@
             height: 65%;
         }
 
-        @media (max-width: 375px) {
+        @media (max-width: 440px) {
             padding: 0;
             margin: 0;
             width: 100%;
@@ -51,7 +51,7 @@
         padding-left: 5vw;
         margin-top: 45px;
 
-        @media (max-width: 375px) {
+        @media (max-width: 440px) {
             margin-bottom: 40px;
             margin-top: 0;
             padding-left: 0;
@@ -70,16 +70,10 @@
     }
 
     &__description {
-        @media (max-width: 375px) {
+        @media (max-width: 440px) {
             padding-left: 20px;
             width: 320px;
             justify-content: flex-start;
-        }
-    }
-
-    &__misc {
-        @media (max-width: 375px) {
-            font-size: 14px;
         }
     }
 }

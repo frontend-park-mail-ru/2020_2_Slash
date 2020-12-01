@@ -5,12 +5,14 @@
             <div class="info-block__title">
                 <h3 class="info-block__title-text">{{name}}</h3>
             </div>
-            <div class="info-block__misc">
+            <div class="info-block__misc info-block__misc-main">
                 <p class="misc-item__rating misc-item">{{rating}}% оценили положительно</p>
                 <p class="misc-item__year misc-item item-value">{{year}}</p>
-                <p class="misc-item__season misc-item item-value">Сезоны: {{seasons}}</p>
+                {{#if seasons}}
+                    <p class="misc-item__season misc-item item-value">Сезоны: {{seasons}}</p>
+                {{/if}}
             </div>
-            <div class="info-block__about hidden-item">
+            <div class="info-block__about">
                 <span>{{short_description}}</span>
             </div>
             <div class="info-block__country country-item hidden-item">
@@ -18,7 +20,7 @@
                 <span class="country-item__value item-value">
                     {{#each countries}}
                         {{{this.name}}}{{#unless @last}},
-                        {{/unless}}
+                    {{/unless}}
                     {{/each}}
                 </span>
             </div>
@@ -27,7 +29,7 @@
                 <span class="genre-item__value item-value">
                     {{#each genres}}
                         {{{this.name}}}{{#unless @last}},
-                        {{/unless}}
+                    {{/unless}}
                     {{/each}}
                 </span>
             </div>
@@ -37,7 +39,7 @@
                     {{#each slicedCast}}
                         <a href="/actor/{{this.id}}" class="cast-item__link item-link">
                             {{{this.name}}}{{#unless @last}},
-                            {{/unless}}
+                        {{/unless}}
                         </a>
                     {{/each}}
                 </span>

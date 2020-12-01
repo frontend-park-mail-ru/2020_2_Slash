@@ -6,11 +6,13 @@
             <span class="seasons-wrapper__label">Сезоны</span>
             {{#each seasons}}
                 <button class="seasons-wrapper__button" data-currentSeason="{{this.number}}"
-                data-event="seasonChanged">{{{this.number}}}</button>
+                        data-event="seasonChanged">{{{this.number}}}</button>
             {{/each}}
         </div>
-        <div class="seasons-wrapper__grid">
-            {{{Grid}}}
+        <div class="seasons-wrapper__grid-wrapper">
+            <div class="seasons-wrapper__grid">
+                {{{Grid}}}
+            </div>
         </div>
     </div>
 </div>

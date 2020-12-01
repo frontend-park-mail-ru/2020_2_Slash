@@ -9,6 +9,14 @@
   align-items: center;
 }
 
+.serial-view-content {
+  margin-top: 40px;
+}
+
+.serial-view-content .content__grid {
+  padding: 0 60px;
+}
+
 .serials-title {
   margin: 0 2vw 0 0;
   padding: 0;
@@ -23,16 +31,24 @@
 
 @media (max-width: 850px) {
   .serials__banner {
-    width: 30%;
-  }
-}
-
-@media (max-width: 375px) {
-  .serials__banner {
-    width: 40%;
+    width: 50%;
   }
 
   .serials-title {
-    font-size: 5em;
+    font-size: 3em;
+  }
+
+  .serial-view-content .content__grid {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 440px) {
+  .serials__banner {
+    width: 60%;
+  }
+
+  .serials-title {
+    font-size: 4em;
   }
 }
