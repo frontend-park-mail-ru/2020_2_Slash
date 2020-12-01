@@ -31,6 +31,7 @@ enum Events {
     CheckSession = 'checkSession',
     ShowSearchLine = 'showSearchLine',
     SeasonChanged = 'seasonChanged',
+    ShowNavMenu = 'showNavMenu',
 }
 
 export default Events;

@@ -7,6 +7,7 @@ import UserHeader from '../UserHeader/UserHeader';
 import SearchInput from '../SearchInput/SearchInput';
 import {CreateDomElement} from '../../tools/helper';
 import {MOBILE_DEVICE_WIDTH} from '../../consts/other';
+import HeaderMenu from '../HeaderMenu/HeaderMenu';
 
 /**
  * @class
@@ -41,6 +42,14 @@ class Header extends Component {
         if (!eventBus.getListeners().showSearchLine) {
             eventBus.on(Events.ShowSearchLine, this.onSearchClick.bind(this));
         }
+
+        if (!eventBus.getListeners().showNavMenu) {
+            eventBus.on(Events.ShowNavMenu, this.onOpenBurger);
+        }
+    }
+
+    onOpenBurger = (data: any) => {
+        this.context.Menu = new HeaderMenu(this.context, document.querySelector('.header__control-bars')).render();
     }
 
     onSearchClick() {
@@ -92,6 +101,10 @@ class Header extends Component {
         if (!authorized && myListButton) {
             myListButton.remove();
         }
+    }
+
+    render(): any {
+        return super.render();
     }
 }
 
