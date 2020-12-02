@@ -122,7 +122,7 @@ class Router {
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^(/\\w+)(/(\\w+))?\\??((\\w+=\\w+&)*\\w+=\\w+)?$');
+        const reg = new RegExp('^(/\\w+)(/(\\w+))?\\??((\\w+=[а-яА-ЯёЁa-zA-Z0-9%]+&)*\\w+=[а-яА-ЯёЁa-zA-Z0-9]+)?$');
         const result = path.match(reg);
         // result[0] - все совпадение
         // result[1] - путь (/movies) - без path-параметров

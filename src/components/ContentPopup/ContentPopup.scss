@@ -221,6 +221,10 @@
     border-radius: 25px;
 }
 
+.genre-item__value {
+    color: var(--white);
+}
+
 .close-btn:hover {
     transition: all 0.1s ease-in-out;
     transform: scale(1.05);
@@ -331,7 +335,7 @@
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 440px) {
     .modal__headline {
         font-size: 4vw;
     }

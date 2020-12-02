@@ -31,6 +31,7 @@ class ContentPopup extends Component {
             EventBus.getListeners().seasonChanged = [];
         }
         EventBus.on(Events.SeasonChanged, this.onSeasonChanged);
+        EventBus.on(Events.PathChanged, this.remove);
     }
 
     onClick = (event: any) => {
@@ -54,7 +55,7 @@ class ContentPopup extends Component {
     /**
      * Удаляет попап в document
      */
-    remove() {
+    remove = () => {
         const page = document.querySelector('.scroll-fixed');
         if (page) {
             this.parent.innerHTML = page.innerHTML;
@@ -78,7 +79,10 @@ class ContentPopup extends Component {
         if (result) {
             window.history.replaceState(history.state, null, '/browse');
         } else {
-            window.history.replaceState(history.state, null, window.location.pathname);
+            const cidIndex = window.location.search.search('cid');
+            const pathWithoutCid = window.location.search.slice(0, cidIndex - 1);
+
+            window.history.replaceState(history.state, null, window.location.pathname + pathWithoutCid);
         }
     }
 
@@ -135,6 +139,11 @@ class ContentPopup extends Component {
             seasonsGrid = new Grid(this.context.tvshow.seasons[0]).render();
             serialsSeasons = this.context.tvshow.seasons;
         }
+
+
+        this.context.contentData.genres.forEach((genre: any) => {
+            genre.type = this.context.contentData.type + 's';
+        });
 
         this.context = {
             ...this.context.contentData,

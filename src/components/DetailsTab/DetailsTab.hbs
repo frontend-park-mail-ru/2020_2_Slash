@@ -11,7 +11,8 @@
                 <span class="origin-item__value item-value">{{{original_name}}}</span>
             </div>
             <div class="info-block__misc misc-item">
-                <span class="misc-item__rating">{{rating}}% оценили положительно</span>
+                <span class="misc-item__rating" data-misc="rating" data-id="{{id}}">{{rating}}
+                    % оценили положительно</span>
                 <span class="misc-item__year item-value">{{year}}</span>
                 {{#if seasons}}
                     <span class="misc-item__season item-value">Сезоны: {{seasons}}</span>
@@ -36,7 +37,9 @@
                 <span class="genre-item__title item-title">Жанр:</span>
                 <span class="genre-item__value item-value">
                     {{#each genres}}
-                        {{{this.name}}}{{#unless @last}},
+                        <a href="/{{type}}?genre={{this.id}}" class="genre-item__value">
+                            {{{this.name}}}{{#unless @last}},
+                        </a>
                     {{/unless}}
                     {{/each}}
                 </span>

@@ -1,6 +1,6 @@
 .search-line {
   height: 30px;
-  width: 300px;
+  width: 500px;
   position: relative;
 }
 
@@ -10,15 +10,31 @@
 
 .prompt-window {
   position: absolute;
+  box-sizing: border-box;
   color: var(--white);
   background-color: var(--low-transparent-gray);
-  height: 4vw;
-  width: 298px;
+  width: 500px;
   border: 1px solid var(--white);
 }
 
 .prompt-window__labels {
   padding: 0.5vw;
+}
+
+.prompt-window__label:first-child {
+  padding: 0 .5em 0 0;
+}
+
+.prompt-window__label:last-child {
+  border-right: none;
+}
+
+.prompt-window__label {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.8vw;
+  border-right: 1px solid grey;
+  padding: 0 .5em;
 }
 
 @keyframes appearing-search-line {
@@ -44,7 +60,7 @@
 .search-line__input {
   background-color: var(--low-transparent-gray);
   height: 30px;
-  width: 300px;
+  width: 500px;
   outline: none;
   color: var(--white);
   border-radius: 3px;
@@ -62,11 +78,11 @@ input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-s
 @media (max-width: 1050px) {
   .search-line {
     height: 30px;
-    width: 200px;
+    width: 300px;
   }
 
   .prompt-window {
-    width: 200px;
+    width: 300px;
   }
 
   .search-line__img {
@@ -77,7 +93,11 @@ input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-s
 
   .search-line__input {
     height: 30px;
-    width: 200px;
+    width: 300px;
+  }
+
+  .prompt-window__label {
+    font-size: 1.5vw;
   }
 }
 
@@ -98,13 +118,17 @@ input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-s
   }
 
   .prompt-window {
-    width: 99%;
-    font-size: 3vw;
+    width: 100%;
+    font-size: 5vw;
   }
 
   .search-line__input {
     height: 30px;
     width: 100%;
     background-color: var(--black);
+  }
+
+  .prompt-window__label {
+    font-size: 3vw;
   }
 }

@@ -5,6 +5,9 @@
             <li><a href="/serials" class="list-item-text">Сериалы</a></li>
             <li><a href="/movies" class="list-item-text">Фильмы</a></li>
             <li><a class="list-item-text" href="#">Последнее</a></li>
+            {{#if authorized}}
+                <li><a href="/mylist" class="list-item-text">Мой список</a></li>
+            {{/if}}
         </ul>
     </nav>
 </div>

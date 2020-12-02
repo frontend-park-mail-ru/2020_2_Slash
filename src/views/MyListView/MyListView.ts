@@ -13,8 +13,14 @@ class MyListView extends View {
     }
 
     show() {
+        let content: any[] = [];
+        content = this.context.content.movies;
+        if (this.context.content.tv_shows) {
+            content = content.concat(this.context.content.tv_shows);
+        }
+
         const grid = new Grid({
-            content: this.context.content,
+            content: content,
         });
 
         const data: Context = {

@@ -16,6 +16,7 @@ import HeaderMenu from '../HeaderMenu/HeaderMenu';
 class Header extends Component {
     public UserBlock: UserHeader;
     public SearchInput: SearchInput;
+    private flag: boolean;
     /**
      * Создает экземпляр Header
      *
@@ -46,6 +47,8 @@ class Header extends Component {
         if (!eventBus.getListeners().showNavMenu) {
             eventBus.on(Events.ShowNavMenu, this.onOpenBurger);
         }
+
+        this.flag = false;
     }
 
     onOpenBurger = () => {
@@ -56,9 +59,12 @@ class Header extends Component {
         if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
             this.SearchInput.render();
         }
-        this.SearchInput.addRemove();
-        this.SearchInput.addPromptWindow();
-        this.SearchInput.addCallbackResult();
+        if (!this.flag) {
+            this.SearchInput.addRemove();
+            this.SearchInput.addPromptWindow();
+            this.SearchInput.addCallbackResult();
+            this.flag = true;
+        }
         const searchLine = document.querySelector('.search-line');
         searchLine.classList.remove('hidden');
         searchLine.classList.add('search-line_visible');

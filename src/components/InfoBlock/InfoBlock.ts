@@ -108,6 +108,10 @@ class InfoBlock extends Component {
      * @return {*|string}
      */
     render() {
+        this.context.contentData.genres.forEach((genre: any) => {
+            genre.type = this.context.contentData.type + 's';
+        });
+
         this.MainTab = new MainTab(this.context.contentData);
         this.DetailsTab = new DetailsTab(this.context.contentData);
         if (this.context.contentData.type === contentType.TVShow) {

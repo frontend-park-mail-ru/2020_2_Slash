@@ -49,7 +49,7 @@
                 </button>
             </div>
             <div class="modal__misc">
-                <span class="misc-item__rating misc-item">{{rating}}% оценили положительно</span>
+                <span class="misc-item__rating misc-item" data-misc="rating" data-id="{{id}}">{{rating}}% оценили положительно</span>
                 <span class="misc-item__year misc-item item-value">{{year}}</span>
                 {{#if seasons}}
                     <span class="misc-item__season misc-item item-value">Сезоны: {{seasons}}</span>
@@ -71,7 +71,9 @@
                 <span class="genre-item__title item-title">Жанр:</span>
                 <span class="genre-item__value item-value">
                     {{#each genres}}
+                        <a href="/{{type}}?genre={{this.id}}" class="genre-item__value">
                         {{{this.name}}}{{#unless @last}},
+                        </a>
                     {{/unless}}
                     {{/each}}
                 </span>
