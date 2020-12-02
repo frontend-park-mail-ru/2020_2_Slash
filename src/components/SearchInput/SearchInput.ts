@@ -5,6 +5,14 @@ import eventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 import Routes from '../../consts/routes';
 import {MOBILE_DEVICE_WIDTH} from '../../consts/other';
+import ContentModel from '../../models/ContentModel';
+import {Error} from '../../consts/errors';
+
+interface resultType {
+    name: string,
+    id: number,
+    type: string,
+}
 
 /**
  * @class
@@ -41,7 +49,7 @@ class SearchInput extends Component {
         this.input.addEventListener('keydown', this.onSearching.bind(this));
     }
 
-    onSearching() {
+    onSearching = () => {
         document.querySelector('.prompt-window').classList.remove('hidden');
     }
 
@@ -49,9 +57,49 @@ class SearchInput extends Component {
         this.input.addEventListener('keydown', this.onEnter.bind(this));
     }
 
-    onEnter(event: any) {
+    onEnter = (event: any) => {
+        ContentModel.search(this.input.value, 5).then((response) => {
+            if (!response.error) {
+                const {result} = response.body;
+
+                const found: resultType[] = [];
+                result.actors.forEach((actor: any) => found.push({
+                    name: actor.name,
+                    id: actor.id,
+                    type: 'actor',
+                }));
+                result.movies.forEach((movie: any) => found.push({
+                    name: movie.name, id:
+                    movie.content_id,
+                    type: 'content',
+                }));
+                result.tv_shows.forEach((tvShow: any) => found.push({
+                    name: tvShow.name,
+                    id: tvShow.content_id,
+                    type: 'content',
+                }));
+
+                let items = '';
+                let max = 10;
+                if (found.length < max) {
+                    max = found.length;
+                }
+
+                found.slice(0, max).forEach((foundItem) => {
+                    items = items + `<a href="/${foundItem.type}/${foundItem.id}" 
+                            class="prompt-window__label">${foundItem.name}</a>`;
+                });
+
+                document.querySelector('.prompt-window__labels').innerHTML = items;
+            }
+        }).catch((error: Error) => console.log(error));
+
         if (event.keyCode === 13) {
-            eventBus.emit(Events.PathChanged, {path: Routes.SearchPage});
+            const misc = {
+                query: this.input.value,
+            };
+
+            eventBus.emit(Events.PathChanged, {path: `${Routes.SearchPage}?query=${this.input.value}`, misc: misc});
             this.remove();
         }
     }
@@ -73,7 +121,7 @@ class SearchInput extends Component {
 
         this.parent.removeEventListener('click', this.onClick);
         this.input.removeEventListener('keydown', this.onSearching);
-        this.input.removeEventListener('keydown', this.onEnter.bind(this));
+        this.input.removeEventListener('keydown', this.onEnter);
     }
 
     render() {

@@ -8,8 +8,7 @@
 
   @media (max-width: 440px) {
     top: 8vw;
-    background-color: var(--black);
-    width: 100%;
+    background-color: var(--blackout-for-popup);
     height: 40vw;
     overflow: scroll;
   }
@@ -56,10 +55,10 @@
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 440px) {
   .sub-menu__item {
     padding: 2px;
-    font-size: 3em;
+    font-size: 5em;
     flex-basis: 20%;
   }
 

@@ -1,8 +1,25 @@
 .person-movies {
     &__title {
-        position: absolute;
         color: white;
         font-size: 1.5em;
         text-shadow: 0 0 5px var(--black);
+
+        @media (max-width: 850px) {
+            font-size: 3em;
+        }
+        @media (max-width: 440px) {
+            font-size: 4em;
+        }
+    }
+
+    &__content-block {
+        margin-top: 40px;
+
+        @media (max-width: 850px) {
+            margin-top: 30px;
+        }
+        @media (max-width: 440px) {
+            margin-top: 20px;
+        }
     }
 }

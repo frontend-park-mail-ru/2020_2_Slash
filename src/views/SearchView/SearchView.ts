@@ -19,6 +19,7 @@ class SearchView extends View {
 
         const data: Context = {
             ContentBlock: grid.render(),
+            Persons: this.context.persons,
         };
 
         this.insertIntoContext(data);

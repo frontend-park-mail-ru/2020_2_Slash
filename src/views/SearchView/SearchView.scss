@@ -1,0 +1,57 @@
+.search-view__content-grid {
+  margin-top: 40px;
+}
+
+.search-view__title {
+  color: white;
+  font-size: 1.5vw;
+  text-shadow: 0 0 5px var(--black);
+}
+
+.search-view__label {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1vw;
+  border-right: 1px solid grey;
+  padding: 0 .5em;
+}
+
+.search-view__label:first-child {
+  padding: 0 .5em 0 0;
+}
+
+.search-view__label:last-child {
+  border-right: none;
+}
+
+.search-view__label:hover {
+  filter: drop-shadow(0 0 1px var(--white));
+}
+
+.search-view__content-persons {
+  margin-top: 40px;
+}
+
+@media (max-width: 850px) {
+  .search-view__title {
+    font-size: 3vw;
+  }
+
+  .search-view__content-persons {
+    margin-top: 20px;
+  }
+
+  .search-view__label {
+    font-size: 2.5vw;
+  }
+}
+
+@media (max-width: 440px) {
+  .search-view__label {
+    font-size: 3vw;
+  }
+
+  .search-view__title {
+    font-size: 4vw;
+  }
+}

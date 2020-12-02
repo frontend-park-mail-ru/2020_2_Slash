@@ -10,16 +10,11 @@
     letter-spacing: 0.1vw;
     font-weight: lighter;
     margin: 10px 0;
-}
 
-@media (max-width: 850px) {
-    .my-list__title {
-        font-size: 3.2vw;
+    @media (max-width: 850px) {
+        font-size: 3em;
     }
-}
-
-@media (max-width: 440px) {
-    .my-list__title {
-        font-size: 5vw;
+    @media (max-width: 440px) {
+        font-size: 4em;
     }
 }

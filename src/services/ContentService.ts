@@ -9,6 +9,7 @@ import Context from '../tools/Context';
 import Modals from '../consts/modals';
 import TVShowsModel from '../models/TVShowsModel';
 import Types from '../consts/contentType';
+import ContentModel from '../models/ContentModel';
 
 interface ContextData {
     contentId?: number,
@@ -36,7 +37,8 @@ class ContentService {
             .on(Events.ContentIsLiked, this.onContentIsLiked.bind(this))
             .on(Events.ContentIsDisliked, this.onContentIsDisliked.bind(this))
             .on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this))
-            .on(Events.ContentByExternalReference, this.onContentByExternalReference.bind(this));
+            .on(Events.ContentByExternalReference, this.onContentByExternalReference.bind(this))
+            .on(Events.UpdateRating, this.onUpdateRating.bind(this));
     }
 
     /**
@@ -66,7 +68,7 @@ class ContentService {
         if (data.contenttype == Types.TVShow) {
             const promise = Promise.all([
                 TVShowsModel.getTVShow(data.tvshowId),
-                MovieModel.getRating({id: data.id}),
+                ContentModel.getRating({id: data.id}),
                 TVShowsModel.getSeasons(data.tvshowId),
             ]).then(([tvshow, rating, seasons]) => {
                 if (!tvshow.error || !rating.error || !seasons.error) {
@@ -88,7 +90,7 @@ class ContentService {
         } else {
             const promise = Promise.all([
                 MovieModel.getMovie({id: data.movieId}),
-                MovieModel.getRating({id: data.id}),
+                ContentModel.getRating({id: data.id}),
             ]).then(([movies, rating]) => {
                 if (!movies.error || !rating.error) {
                     const contentData: Context = movies.body.movie;
@@ -113,7 +115,7 @@ class ContentService {
         if (data.contenttype == Types.TVShow) {
             Promise.all([
                 TVShowsModel.getTVShow(data.tvshowId),
-                MovieModel.getRating({id: data.id}),
+                ContentModel.getRating({id: data.id}),
                 TVShowsModel.getSeasons(data.tvshowId),
             ]).then(([tvshows, rating, seasons]) => {
                 if (!tvshows.error || !rating.error || !seasons.error) {
@@ -158,7 +160,7 @@ class ContentService {
         } else {
             Promise.all([
                 MovieModel.getMovie({id: data.movieId}),
-                MovieModel.getRating({id: data.id}),
+                ContentModel.getRating({id: data.id}),
             ]).then(([movies, rating]) => {
                 if (!movies.error || !rating.error) {
                     const contentData: any = movies.body.movie;
@@ -205,7 +207,7 @@ class ContentService {
         if (data.contenttype == Types.TVShow) {
             Promise.all([
                 TVShowsModel.getTVShow(data.tvshowId),
-                MovieModel.getRating({id: data.id}),
+                ContentModel.getRating({id: data.id}),
                 TVShowsModel.getSeasons(data.tvshowId),
             ]).then(([tvshows, rating, seasons]) => {
                 if (!tvshows.error || !rating.error || !seasons.error) {
@@ -243,7 +245,7 @@ class ContentService {
         } else {
             Promise.all([
                 MovieModel.getMovie({id: data.id}),
-                MovieModel.getRating({id: data.id}),
+                ContentModel.getRating({id: data.id}),
             ]).then(([movies, rating]) => {
                 if (!movies.error || !rating.error) {
                     const contentData: any = movies.body.movie;
@@ -289,14 +291,14 @@ class ContentService {
         if (localStorage.getItem('authorized') == 'true') {
             const btn = window.event.srcElement;
             if (window.event.srcElement.parentElement.dataset.status == 'true') {
-                MovieModel.removeFromFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
+                ContentModel.removeFromFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
                     if (!response.error) {
                         this.changeIcon(btn, null, '/static/img/add.svg', 'false');
                         this.fixAllAddButtons(data.id, '/static/img/add.svg', 'false');
                     }
                 }).catch((error: Error) => console.log(error));
             } else {
-                MovieModel.addToFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
+                ContentModel.addToFavourites(parseInt(data.id, 10)).then((response: ResponseType) => {
                     if (!response.error) {
                         this.changeIcon(btn, null, '/static/img/is-added.svg', 'true');
                         this.fixAllAddButtons(data.id, '/static/img/is-added.svg', 'true');
@@ -313,29 +315,32 @@ class ContentService {
             const btn = window.event.srcElement;
 
             if (data.status === '') {
-                MovieModel.addVote(data.id, true).then((response: ResponseType) => {
+                ContentModel.addVote(data.id, true).then((response: ResponseType) => {
                     if (!response.error) {
                         this.changeIcon(btn, btn.parentElement.nextElementSibling,
                             '/static/img/is-liked.svg', 'true');
                         this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
                         this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
+                        EventBus.emit(Events.UpdateRating, data);
                     }
                 }).catch((error: Error) => console.log(error));
             } else if (data.status === 'true') {
-                MovieModel.removeVote(data.id).then((response: ResponseType) => {
+                ContentModel.removeVote(data.id).then((response: ResponseType) => {
                     if (!response.error) {
                         this.changeIcon(btn, btn.parentElement.nextElementSibling, '/static/img/like.svg', '');
                         this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
                         this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
+                        EventBus.emit(Events.UpdateRating, data);
                     }
                 }).catch((error: Error) => console.log(error));
             } else if (data.status === 'false') {
-                MovieModel.changeVote(data.id, true).then((response: ResponseType) => {
+                ContentModel.changeVote(data.id, true).then((response: ResponseType) => {
                     if (!response.error) {
                         this.changeIcon(btn, btn.parentElement.nextElementSibling,
                             '/static/img/is-liked.svg', 'true');
                         this.fixAllLikeButtons(data.id.toString(), '/static/img/is-liked.svg', 'true');
                         this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', 'true');
+                        EventBus.emit(Events.UpdateRating, data);
                     }
                 }).catch((error: Error) => console.log(error));
             }
@@ -348,30 +353,33 @@ class ContentService {
         if (localStorage.getItem('authorized') == 'true') {
             const btn = window.event.srcElement;
             if (data.status === '') {
-                MovieModel.addVote(data.id, false).then((response: ResponseType) => {
+                ContentModel.addVote(data.id, false).then((response: ResponseType) => {
                     if (!response.error) {
                         this.changeIcon(btn, btn.parentElement.previousElementSibling,
                             '/static/img/is-disliked.svg', 'false');
                         this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
                         this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
+                        EventBus.emit(Events.UpdateRating, data);
                     }
                 }).catch((error: Error) => console.log(error));
             } else if (data.status == 'true') {
-                MovieModel.changeVote(data.id, false).then((response: ResponseType) => {
+                ContentModel.changeVote(data.id, false).then((response: ResponseType) => {
                     if (!response.error) {
                         this.changeIcon(btn, btn.parentElement.previousElementSibling,
                             '/static/img/is-disliked.svg', 'false');
                         this.fixAllDislikeButtons(data.id.toString(), '/static/img/is-disliked.svg', 'false');
                         this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', 'false');
+                        EventBus.emit(Events.UpdateRating, data);
                     }
                 }).catch((error: Error) => console.log(error));
             } else if (data.status === 'false') {
-                MovieModel.removeVote(data.id).then((response: ResponseType) => {
+                ContentModel.removeVote(data.id).then((response: ResponseType) => {
                     if (!response.error) {
                         this.changeIcon(btn, btn.parentElement.previousElementSibling,
                             '/static/img/dislike.svg', '');
                         this.fixAllDislikeButtons(data.id.toString(), '/static/img/dislike.svg', '');
                         this.fixAllLikeButtons(data.id.toString(), '/static/img/like.svg', '');
+                        EventBus.emit(Events.UpdateRating, data);
                     }
                 }).catch((error: Error) => console.log(error));
             }
@@ -399,6 +407,17 @@ class ContentService {
         addButtons.forEach((button) => {
             this.changeIcon(button, null, icon, status);
         });
+    }
+
+    onUpdateRating(data: any) {
+        ContentModel.getRating({id: data.id}).then((response: ResponseType) => {
+            if (!response.error) {
+                const rating = document.querySelector(`[data-misc="rating"][data-id="${data.id}"]`);
+                if (rating) {
+                    rating.textContent = `${response.body.match}% оценили положительно`;
+                }
+            }
+        }).catch((error: Error) => console.log(error));
     }
 }
 

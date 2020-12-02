@@ -45,6 +45,7 @@ class HeaderMenu extends Component {
      * @return {*|string}
      */
     render() {
+        this.context.authorized = localStorage.getItem('authorized');
         const modalDiv = document.createElement('div');
         modalDiv.innerHTML = this.template(this.context);
         modalDiv.classList.add('header__sub-menu');

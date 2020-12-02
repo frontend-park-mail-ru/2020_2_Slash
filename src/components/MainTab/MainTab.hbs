@@ -6,7 +6,7 @@
                 <h3 class="info-block__title-text">{{name}}</h3>
             </div>
             <div class="info-block__misc info-block__misc-main">
-                <p class="misc-item__rating misc-item">{{rating}}% оценили положительно</p>
+                <p class="misc-item__rating misc-item" data-misc="rating" data-id="{{id}}">{{rating}}% оценили положительно</p>
                 <p class="misc-item__year misc-item item-value">{{year}}</p>
                 {{#if seasons}}
                     <p class="misc-item__season misc-item item-value">Сезоны: {{seasons}}</p>
@@ -28,7 +28,9 @@
                 <span class="genre-item__title item-title">Жанр:</span>
                 <span class="genre-item__value item-value">
                     {{#each genres}}
-                        {{{this.name}}}{{#unless @last}},
+                        <a href="/{{type}}?genre={{this.id}}" class="genre-item__value">
+                            {{{this.name}}}{{#unless @last}},
+                        </a>
                     {{/unless}}
                     {{/each}}
                 </span>
