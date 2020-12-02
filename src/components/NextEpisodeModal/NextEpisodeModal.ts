@@ -2,7 +2,6 @@ import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './NextEpisodeModal.hbs';
 import {SERVER_HOST} from '../../consts/settings';
-import {GetNextEpisode} from '../../tools/helper';
 
 class NextEpisodeModal extends Component {
     constructor(context?: Context, parent?: any) {
@@ -11,12 +10,13 @@ class NextEpisodeModal extends Component {
     }
 
     render() {
-        const nextEpisode = GetNextEpisode(this.context);
+        const nextEpisodeContext = this.context.queue
+            .seasons[this.context.nextEpisode.indexSeason]
+            .episodes[this.context.nextEpisode.indexEpisode];
 
         const data = {
-            host: SERVER_HOST,
-            images: this.context.episodeQueue[nextEpisode.season].episodes[nextEpisode.episode].poster,
-            description: this.context.episodeQueue[nextEpisode.season].episodes[nextEpisode.episode].description,
+            poster: `${SERVER_HOST}${nextEpisodeContext.poster}`,
+            description: nextEpisodeContext.description,
         };
 
         const modal = this.parent.querySelector('.next-episode-modal');

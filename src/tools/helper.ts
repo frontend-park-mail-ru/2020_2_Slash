@@ -27,21 +27,8 @@ export function GetGenreNameById(index: number) {
     return genre;
 }
 
-export function GetNextEpisode(data: any) {
-    console.log(data);
-    const currentEpisode = data.currentEpisode.indexEpisode;
-    const currentSeason = data.currentEpisode.indexSeason;
-
-    if (currentEpisode + 1 === data.episodeQueue[currentSeason].episodes_number) {
-        return {
-            season: currentSeason + 1,
-            episode: 0,
-        };
-    } else {
-        return {
-            season: currentSeason,
-            episode: currentEpisode + 1,
-        };
-    }
+export function GetNextEpisode(currentEpisode: number, currentSeason: number, queue: any) {
+    return currentEpisode + 1 === queue.seasons[currentSeason].episodes_number ?
+        [currentSeason + 1, 0] : [currentSeason, currentEpisode + 1];
 }
 

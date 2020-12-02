@@ -60,11 +60,16 @@ class PlayerController extends Controller {
                 });
 
                 const episodesInfo = {
-                    episodeQueue: tvshow.seasons,
+                    queue: tvshow,
                     currentEpisode: {
                         indexSeason: indexSeason,
                         indexEpisode: indexEpisode,
                     },
+                    nextEpisode: {
+                        indexSeason: 0,
+                        indexEpisode: 0,
+                    },
+                    contentId: data.path.resourceId,
                 };
 
                 this.view.show();
