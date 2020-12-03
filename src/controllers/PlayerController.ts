@@ -39,7 +39,7 @@ class PlayerController extends Controller {
                 this.onSwitchOn();
             }).catch((error) => console.log(error));
         } else {
-            TVShowsModel.getTVShowsInfo({id: data.path.resourceId}).then((response) => {
+            TVShowsModel.getSeasons(data.path.resourceId).then((response) => {
                 if (response.error) {
                     return;
                 }
@@ -54,7 +54,7 @@ class PlayerController extends Controller {
                     name: tvshow.seasons[indexSeason].episodes[indexEpisode].name,
                     season: tvshow.seasons[indexSeason].number,
                     episode: tvshow.seasons[indexSeason].episodes[indexEpisode].number,
-                    images: tvshow.seasons[indexSeason].episodes[indexEpisode].images,
+                    images: tvshow.seasons[indexSeason].episodes[indexEpisode].poster,
                     video: tvshow.seasons[indexSeason].episodes[indexEpisode].video,
                     type: null,
                 });
@@ -66,6 +66,10 @@ class PlayerController extends Controller {
                         indexEpisode: indexEpisode,
                     },
                     nextEpisode: {
+                        indexSeason: 0,
+                        indexEpisode: 0,
+                    },
+                    prevEpisode: {
                         indexSeason: 0,
                         indexEpisode: 0,
                     },

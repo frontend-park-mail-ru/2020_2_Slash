@@ -190,8 +190,8 @@ class MainController extends Controller {
             const randomMovie = selectRandomMovie([
                 topResponseMovies.body.movies || [],
                 latestResponseMovies.body.movies || [],
-                topResponseTVShows.body.movies || [],
-                latestResponseTVShows.body.movies || [],
+                topResponseTVShows.body.tvshows || [],
+                latestResponseTVShows.body.tvshows || [],
             ],
             );
 

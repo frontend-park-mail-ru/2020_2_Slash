@@ -6,8 +6,13 @@
     </a>
     <div class="watch__wrapper">
         <div class="watch__video-wrapper">
-        <video class="video" id='video' src="{{host}}{{video}}" poster="{{host}}{{images}}/large.png" data-event="videoPlay" preload="auto" autoplay="true" loop="true">
-        </video>
+            {{#if type}}
+                <video class="video" id='video' src="{{host}}{{video}}" poster="{{host}}{{images}}/large.png" data-event="videoPlay" preload="auto" autoplay="true" loop="true">
+                </video>
+            {{else}}
+                <video class="video" id='video' src="{{host}}{{video}}" poster="{{host}}{{images}}" data-event="videoPlay" preload="auto" autoplay="true" loop="true">
+                </video>
+            {{/if}}
         </div>
     </div>
     {{{PlayerBar}}}

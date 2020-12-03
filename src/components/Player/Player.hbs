@@ -32,18 +32,17 @@
                 <span class="player-bar__episode-number">S{{{season}}} : E{{{episode}}}</span>
             {{/if}}
             <span class="player-bar__span"></span>
-            {{#if type}}
-                <button class="player-bar__fullscreen-btn player-bar__btn" data-event="fullscreenModeOn">
-                    <img class="fullscreen-btn__img player-btn__img" src="/static/img/player-fullscreen.svg">
+            {{#unless type}}
+                <button class="player-bar__prev-content-btn player-bar__btn">
+                    <img class="prev-content-btn__img player-btn__img" src="/static/img/player-next-content.svg">
                 </button>
-            {{else}}
-                <button class="player-bar__next-content-btn player-bar__btn" data-event="playNextContent">
+                <button class="player-bar__next-content-btn player-bar__btn">
                     <img class="next-content-btn__img player-btn__img" src="/static/img/player-next-content.svg">
                 </button>
-                <button class="player-bar__fullscreen-btn player-bar__btn" data-event="fullscreenModeOn">
-                    <img class="fullscreen-btn__img player-btn__img" src="/static/img/player-fullscreen.svg">
-                </button>
-            {{/if}}
+            {{/unless}}
+            <button class="player-bar__fullscreen-btn player-bar__btn" data-event="fullscreenModeOn">
+                <img class="fullscreen-btn__img player-btn__img" src="/static/img/player-fullscreen.svg">
+            </button>
         </div>
     </div>
 </div>

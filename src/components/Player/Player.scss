@@ -97,6 +97,12 @@
     opacity: 1;
 }
 
+.player-bar__prev-content-btn .player-btn__img{
+    transform: rotate(180deg);
+    padding-top: 0;
+    padding-bottom: 0.2vw;
+}
+
 .player__timeline:hover > .timeline__back,
 .player__timeline:hover > .timeline__front,
 .player__timeline:hover > .timeline__middle {

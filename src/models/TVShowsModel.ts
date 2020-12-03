@@ -28,12 +28,6 @@ class TVShowsModel {
         }).then((response: Response) => response.json());
     }
 
-    getTVShowsInfo(data: any) {
-        return http.fetchGet({
-            route: `${ApiMethods.TVShows}/${data.id}/episodes`,
-        }).then((response: Response) => response.json());
-    }
-
     getSeasons(id: number) {
         return http.fetchGet({
             route: `${ApiMethods.TVShows}/${id}/episodes`,

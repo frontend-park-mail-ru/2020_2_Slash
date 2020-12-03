@@ -72,10 +72,16 @@ class ContentPopup extends Component {
         this.parent.removeEventListener('click', this.onClick);
 
         const path = document.location.href;
+
+        if (path.indexOf('watch') !== -1) {
+            return;
+        }
+
         window.history.pushState(null, null, path);
 
         const reg = new RegExp('^/content/\\d+?$'); //eslint-disable-line
         const result = window.location.pathname.match(reg);
+
         if (result) {
             window.history.replaceState(history.state, null, '/browse');
         } else {
