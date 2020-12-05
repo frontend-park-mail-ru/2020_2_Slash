@@ -22,7 +22,7 @@
         background-size: cover;
         animation: appearing-info-block  ease-in 0.3s 0s;
 
-        @media (max-width: 850px) {
+        @media (max-width: 1024px) {
             font-size: 1.8vw;
         }
     }
@@ -36,7 +36,7 @@
         width: 50%;
         height: 80%;
 
-        @media (max-width: 850px) {
+        @media (max-width: 1024px) {
             height: 65%;
         }
 
@@ -58,29 +58,32 @@
         }
     }
 
+    &__title-details {
+        margin-top: 6vw;
+    }
+
     &__full-about {
         letter-spacing: 0.1em;
         color: var(--white);
     }
 
-    &__title-text {
-        @media (max-width: 1000px) {
-            font-size: 30px;
-        }
-    }
-
     &__description {
         @media (max-width: 440px) {
             padding-left: 20px;
-            width: 320px;
             justify-content: flex-start;
         }
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
     .tabs__list-item-text { // TODO: Перенести в компоненту TabBar
         font-size: 1rem;
         padding: 0 1vw 0 1vw;
+    }
+}
+
+@media (max-width: 1024px) {
+    .info-block__left__item, .info-block__right__item {
+        margin-bottom: 2vw;
     }
 }

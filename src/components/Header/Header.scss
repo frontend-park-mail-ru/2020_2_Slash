@@ -1,5 +1,5 @@
 .header {
-    height: 70px;
+    height: var(--header-height);
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0));
     letter-spacing: 2px;
     position: relative;
@@ -76,7 +76,7 @@
     border: none;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
     .header__menu {
         display: none;
     }
@@ -93,5 +93,12 @@
     .header__search-img {
         width: 24px;
         height: 24px;
+    }
+}
+
+@media (max-width: 440px) {
+    .header {
+        background-color: var(--blackout-for-popup);
+        height: var(--header-height-mobile);
     }
 }

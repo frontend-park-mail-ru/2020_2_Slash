@@ -4,7 +4,7 @@
         font-size: 1.5em;
         text-shadow: 0 0 5px var(--black);
 
-        @media (max-width: 850px) {
+        @media (max-width: 1024px) {
             font-size: 3em;
         }
         @media (max-width: 440px) {
@@ -15,7 +15,7 @@
     &__content-block {
         margin-top: 40px;
 
-        @media (max-width: 850px) {
+        @media (max-width: 1024px) {
             margin-top: 30px;
         }
         @media (max-width: 440px) {

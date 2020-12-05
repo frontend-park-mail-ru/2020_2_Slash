@@ -23,7 +23,7 @@
     background-size: cover;
     animation: appearing-info-block  ease-in 0.3s 0s;
 
-    @media (max-width: 850px) {
+    @media (max-width: 1024px) {
       font-size: 1.8vw;
     }
   }
@@ -39,7 +39,7 @@
     height: 88%;
     width: 5%;
 
-    @media (max-width: 850px) {
+    @media (max-width: 1024px) {
       width: 12%;
     }
 
@@ -56,7 +56,7 @@
     font-size: 1vw;
     color: var(--white);
 
-    @media (max-width: 850px) {
+    @media (max-width: 1024px) {
       font-size: 2.5vw;
     }
     @media (max-width: 440px) {
@@ -76,7 +76,7 @@
     background-color: var(--highly-transparent-white);
     font-family: "Inter", Arial, sans-serif;
 
-    @media (max-width: 850px) {
+    @media (max-width: 1024px) {
       width: 4vw;
       height: 4vw;
     }

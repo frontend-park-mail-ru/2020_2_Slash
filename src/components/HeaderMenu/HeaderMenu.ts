@@ -1,6 +1,9 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './HeaderMenu.hbs';
+import {CreateDomElement} from "../../tools/helper";
+import eventBus from "../../services/EventBus";
+import Events from "../../consts/events";
 /**
  * @class
  * Компонента окошка для хэдера - войти/зарегаться // профиль/выйти
@@ -40,6 +43,29 @@ class HeaderMenu extends Component {
         document.querySelector('.application').removeEventListener('click', this.onClick);
     }
 
+    onUpdateHeaderNav(authorized: boolean = false) {
+        const myListButton = document.querySelector('.my-list');
+
+        if (authorized) {
+            const li = document.createElement('li');
+            const a = CreateDomElement('a', {
+                'class': 'list-item-text my-list',
+                'href': '/mylist',
+            });
+            a.innerText = 'Мой список';
+
+            const navBar = document.querySelector('.header-sub-menu__list');
+            if (navBar) {
+                document.querySelector('.header-sub-menu__list').appendChild(li).appendChild(a);
+            }
+            return;
+        }
+
+        if (!authorized && myListButton) {
+            myListButton.remove();
+        }
+    }
+
     /**
      * Возвращает отрисованный в HTML компонент
      * @return {*|string}
@@ -50,6 +76,9 @@ class HeaderMenu extends Component {
         modalDiv.innerHTML = this.template(this.context);
         modalDiv.classList.add('header__sub-menu');
         this.parent.appendChild(modalDiv);
+        if (this.context.authorized === 'true') {
+            this.onUpdateHeaderNav(true);
+        }
     }
 }
 

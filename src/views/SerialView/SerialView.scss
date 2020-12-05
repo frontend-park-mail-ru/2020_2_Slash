@@ -29,7 +29,7 @@
   min-height: calc(100vh - 2 * var(--header-height));
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
   .serials__banner {
     width: 50%;
   }

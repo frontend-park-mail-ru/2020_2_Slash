@@ -65,7 +65,7 @@
     height: 1vw;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
     .movies__banner {
         width: 50%;
     }
@@ -102,6 +102,7 @@
 @media (max-width: 440px) {
     .movies__banner {
         width: 60%;
+        z-index: 1;
     }
 
     .movies-title, .genre__label {

@@ -28,12 +28,12 @@
     position: absolute;
     right: 1vw;
     top: 1vw;
-    @media (max-width: 850px) {
+    @media (max-width: 1024px) {
       right: 3vw;
     }
-    @media (max-width: 375px) {
+    @media (max-width: 440px) {
       top: 3vw;
-      right: 6vw;
+      right: 7vw;
     }
   }
 }
@@ -72,4 +72,8 @@
   letter-spacing: 0.08em;
   color: var(--white);
   padding-left: 0.5vw;
+}
+
+.close-btn__img {
+  background-size: auto 100%;
 }

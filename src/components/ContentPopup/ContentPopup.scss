@@ -263,7 +263,7 @@
     color: var(--white);
     margin-right: 15px;
 
-    @media (max-width: 850px) {
+    @media (max-width: 1024px) {
         font-size: 2.5vw;
     }
     @media (max-width: 440px) {
@@ -283,7 +283,7 @@
     background-color: var(--highly-transparent-white);
     font-family: "Inter", Arial, sans-serif;
 
-    @media (max-width: 850px) {
+    @media (max-width: 1024px) {
         width: 4vw;
         height: 4vw;
     }
@@ -298,7 +298,7 @@
     transform: scale(1.05);
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
     .content-popup {
         width: 96%;
         left: 2%;
