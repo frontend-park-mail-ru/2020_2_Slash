@@ -170,15 +170,45 @@
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 440px) {
     .preview__name {
-        font-size: 4.5vw;
+        font-size: 4vw;
     }
 
     .preview__origin-name {
         font-size: 3vw;
+        margin: 1vw 0;
     }
 
+    .info-btn,
+    .play-btn {
+        width: 20vw;
+        height: 6vw;
+    }
+
+    .info-btn__img,
+    .play-btn__img {
+        width: 3.5vw;
+        height: 3.5vw;
+    }
+
+    .play-btn__text,
+    .info-btn__text {
+        font-size: 2vw;
+    }
+
+    .sound-btn,
+    .sound-btn__img {
+        width: 5vw;
+        height: 5vw;
+    }
+
+    .preview__panel {
+        top: 50vw;
+    }
+}
+
+@media (max-width: 375px) {
     .info-btn,
     .play-btn {
         width: 30vw;
@@ -200,9 +230,5 @@
     .sound-btn__img {
         width: 8vw;
         height: 8vw;
-    }
-
-    .preview__panel {
-        top: 50vw;
     }
 }

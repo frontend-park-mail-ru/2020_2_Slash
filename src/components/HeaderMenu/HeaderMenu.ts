@@ -1,9 +1,7 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './HeaderMenu.hbs';
-import {CreateDomElement} from "../../tools/helper";
-import eventBus from "../../services/EventBus";
-import Events from "../../consts/events";
+import {CreateDomElement} from '../../tools/helper';
 /**
  * @class
  * Компонента окошка для хэдера - войти/зарегаться // профиль/выйти
@@ -43,11 +41,13 @@ class HeaderMenu extends Component {
         document.querySelector('.application').removeEventListener('click', this.onClick);
     }
 
-    onUpdateHeaderNav(authorized: boolean = false) {
+    onUpdateHeaderNav(authorized = false) {
         const myListButton = document.querySelector('.my-list');
 
         if (authorized) {
-            const li = document.createElement('li');
+            const li = CreateDomElement('li', {
+                'class': 'header-sub-menu__list__item',
+            });
             const a = CreateDomElement('a', {
                 'class': 'list-item-text my-list',
                 'href': '/mylist',

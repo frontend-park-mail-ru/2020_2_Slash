@@ -1,5 +1,4 @@
 .content__slider-item {
-    z-index: 1000;
     top: 2.8vw;
     width: var(--one-sixth-of-screen);
     cursor: pointer;
@@ -22,7 +21,6 @@
 }
 
 .slider-item_selected_hover-off {
-    z-index: 1000;
     top: 2.8vw;
     width: var(--one-sixth-of-screen);
     cursor: pointer;

@@ -1,24 +1,16 @@
 .genres__sub-menu {
+  z-index: 2;
   position: absolute;
   display: flex;
-  height: 10vw;
+  height: auto;
   top: 2.5vw;
   padding: 1vw;
-  background-color: var(--filter-btn-hover);
-
-  @media (max-width: 440px) {
-    top: 8vw;
-    background-color: var(--blackout-for-popup);
-    height: 40vw;
-    overflow: scroll;
-  }
+  background-color: var(--blackout-for-popup);
 }
 
 .sub-menu__list {
   display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  writing-mode: vertical-lr;
+  flex-direction: column;
 }
 
 .sub-menu__item {
@@ -56,13 +48,21 @@
 }
 
 @media (max-width: 440px) {
-  .sub-menu__item {
-    padding: 2px;
-    font-size: 5em;
-    flex-basis: 20%;
+  .genres__sub-menu {
+    top: 9vw;
+    width: 90%;
+    left: 0;
+    background-color: var(--blackout-for-popup);
+    height: 40vw;
+    overflow: scroll;
+    padding: 5%;
   }
 
-  .genres__sub-menu .close-btn {
-    opacity: 0;
+  .sub-menu__list {
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    writing-mode: vertical-lr;
   }
 }

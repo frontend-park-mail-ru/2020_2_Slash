@@ -2,7 +2,7 @@ import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './DetailsTab.hbs';
 import {SERVER_HOST} from '../../consts/settings';
-import {MOBILE_DEVICE_WIDTH} from "../../consts/other";
+import {MOBILE_DEVICE_WIDTH} from '../../consts/other';
 
 /**
  * @class

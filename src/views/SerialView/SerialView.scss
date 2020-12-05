@@ -1,6 +1,6 @@
 .serials__banner {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   top: 70px;
   left: 0;
   display: flex;
@@ -10,7 +10,7 @@
 }
 
 .serial-view-content {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
 .serial-view-content .content__grid {
@@ -45,10 +45,14 @@
 
 @media (max-width: 440px) {
   .serials__banner {
-    width: 60%;
+    width: calc(100% - 2 * 20px);
   }
 
   .serials-title {
     font-size: 4em;
+  }
+
+  .serial-view-content .content__grid {
+    padding: 0;
   }
 }
