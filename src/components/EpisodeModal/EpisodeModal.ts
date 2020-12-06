@@ -1,9 +1,9 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
-import template from './NextEpisodeModal.hbs';
+import template from './EpisodeModal.hbs';
 import {SERVER_HOST} from '../../consts/settings';
 
-class NextEpisodeModal extends Component {
+class EpisodeModal extends Component {
     private modalType: string;
 
     constructor(context?: Context, parent?: any, modalType?: string) {
@@ -21,6 +21,10 @@ class NextEpisodeModal extends Component {
             const data = {
                 poster: `${SERVER_HOST}${nextEpisodeContext.poster}`,
                 description: nextEpisodeContext.description,
+                title: 'Следующий эпизод',
+                name: nextEpisodeContext.name,
+                season: this.context.nextEpisode.indexSeason + 1,
+                episode: this.context.nextEpisode.indexEpisode + 1,
             };
 
             const modal = this.parent.querySelector('.episode-modal');
@@ -38,6 +42,10 @@ class NextEpisodeModal extends Component {
             const data = {
                 poster: `${SERVER_HOST}${prevEpisodeContext.poster}`,
                 description: prevEpisodeContext.description,
+                title: 'Предыдущий эпизод',
+                name: prevEpisodeContext.name,
+                season: this.context.prevEpisode.indexSeason + 1,
+                episode: this.context.prevEpisode.indexEpisode + 1,
             };
 
             const modal = this.parent.querySelector('.episode-modal');
@@ -51,4 +59,4 @@ class NextEpisodeModal extends Component {
     }
 }
 
-export default NextEpisodeModal;
+export default EpisodeModal;

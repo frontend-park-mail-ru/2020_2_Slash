@@ -121,7 +121,7 @@ class Router {
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^/\\w+/(\\w+)?$');
+        const reg = new RegExp('^/\\w+/(\\w+).*$');
         const result = path.match(reg);
 
         const parsedURL = new URL(window.location.origin + path);

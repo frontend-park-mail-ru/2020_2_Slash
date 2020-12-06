@@ -3,6 +3,7 @@ import PlayerView from '../views/PlayerView/PlayerView';
 import PlayerService from '../services/PlayerService';
 import MovieModel from '../models/MovieModel';
 import TVShowsModel from '../models/TVShowsModel';
+import {SERVER_HOST} from '../consts/settings';
 
 /**
  * @class
@@ -19,7 +20,8 @@ class PlayerController extends Controller {
     }
 
     switchOn(data: any) {
-        if (!data.query) {
+        const queryParams = data.query.has('season');
+        if (!queryParams) {
             MovieModel.getMovie({id: data.path.resourceId}).then((response) => {
                 if (response.error) {
                     return;
@@ -27,11 +29,11 @@ class PlayerController extends Controller {
 
                 const {movie} = response.body;
 
+                this.view.setContext({});
                 this.view.insertIntoContext({
                     title: movie.name,
-                    images: movie.images,
-                    video: movie.video,
-                    type: movie.type,
+                    images: `${SERVER_HOST}${movie.images}/large.png`,
+                    video: `${SERVER_HOST}${movie.video}`,
                 });
 
                 this.view.show();
@@ -44,19 +46,21 @@ class PlayerController extends Controller {
                     return;
                 }
 
-                const indexSeason = data.query.get('season') > 0 ? data.query.get('season') - 1 : 0;
-                const indexEpisode = data.query.get('episode') > 0 ? data.query.get('episode') - 1 : 0;
+                const indexSeason = data.query.get('season') - 1;
+                const indexEpisode = data.query.get('episode') - 1;
 
                 const {tvshow} = response.body;
 
+                const season = tvshow.seasons[indexSeason];
+                const episode = tvshow.seasons[indexSeason].episodes[indexEpisode];
+
                 this.view.insertIntoContext({
                     title: tvshow.name,
-                    name: tvshow.seasons[indexSeason].episodes[indexEpisode].name,
-                    season: tvshow.seasons[indexSeason].number,
-                    episode: tvshow.seasons[indexSeason].episodes[indexEpisode].number,
-                    images: tvshow.seasons[indexSeason].episodes[indexEpisode].poster,
-                    video: tvshow.seasons[indexSeason].episodes[indexEpisode].video,
-                    type: null,
+                    season: season.number,
+                    name: episode.name,
+                    episode: episode.number,
+                    images: `${SERVER_HOST}${episode.poster}`,
+                    video: `${SERVER_HOST}${episode.video}`,
                 });
 
                 const episodesInfo = {

@@ -1,9 +1,9 @@
 import setTime from '../tools/time';
 import eventBus from './EventBus';
 import Events from '../consts/events';
-import NextEpisodeModal from '../components/NextEpisodeModal/NextEpisodeModal';
+import EpisodeModal from '../components/EpisodeModal/EpisodeModal';
 import {SERVER_HOST} from '../consts/settings';
-import {GetNextEpisode, GetPrevEpisode, isLastEpisode, isFirstEpisode} from '../tools/helper';
+import tvShowQueue from '../tools/TVShowQueue';
 
 class PlayerService {
     private video: any;
@@ -57,14 +57,14 @@ class PlayerService {
         volumeBar.addEventListener('pointerout', this.showProgressBar.bind(this));
 
         const nextContentButton = document.querySelector('.player-bar__next-content-btn');
-        nextContentButton.addEventListener('pointermove', this.hoverOnNextContentModal.bind(this));
-        nextContentButton.addEventListener('pointerout', this.hoverOffContentModal.bind(this));
-        nextContentButton.addEventListener('click', this.clickOnNextContentModal.bind(this));
+        nextContentButton.addEventListener('pointermove', this.handleNextEpisodePointerMove);
+        nextContentButton.addEventListener('pointerout', this.hoverOffContentModal);
+        nextContentButton.addEventListener('click', this.handleNextEpisodeClick);
 
         const prevContentButton = document.querySelector('.player-bar__prev-content-btn');
-        prevContentButton.addEventListener('pointermove', this.hoverOnPrevContentModal.bind(this));
-        prevContentButton.addEventListener('pointerout', this.hoverOffContentModal.bind(this));
-        prevContentButton.addEventListener('click', this.clickOnPrevContentModal.bind(this));
+        prevContentButton.addEventListener('pointermove', this.handlePrevEpisodePointerMove);
+        prevContentButton.addEventListener('pointerout', this.hoverOffContentModal);
+        prevContentButton.addEventListener('click', this.handlePrevEpisodeClick);
 
         document.addEventListener('DOMContentLoaded', function() {
             const button = document.querySelector('.player-bar__play-btn');
@@ -79,12 +79,12 @@ class PlayerService {
             episode: this._context.currentEpisode.indexEpisode,
         };
 
-        if (isLastEpisode(indexCurrentEpisode.episode, indexCurrentEpisode.season, this._context.queue)) {
+        if (tvShowQueue.isLastEpisode(indexCurrentEpisode.episode, indexCurrentEpisode.season, this._context.queue)) {
             const nextContentButton: any = document.querySelector('.player-bar__next-content-btn');
             nextContentButton.hidden = true;
         }
 
-        if (isFirstEpisode(indexCurrentEpisode.episode, indexCurrentEpisode.season)) {
+        if (tvShowQueue.isFirstEpisode(indexCurrentEpisode.episode, indexCurrentEpisode.season)) {
             const prevContentButton: any = document.querySelector('.player-bar__prev-content-btn');
             prevContentButton.hidden = true;
         }
@@ -170,10 +170,7 @@ class PlayerService {
 
     onUpdateTime() {
         const currentTime = this.video.currentTime;
-        let duration = this.video.duration;
-        if (!duration) {
-            duration = 1;
-        }
+        const duration = this.video.duration ? this.video.duration : 1;
         this.timelineFront.style.width = `${(100 * currentTime / duration)}%`;
         this.timelineSlider.style.left = `${(100 * currentTime / duration)}%`;
         const timelineSliderText: any = document.getElementsByClassName('timeline__time-text')[0];
@@ -190,126 +187,100 @@ class PlayerService {
         }
     }
 
-    hoverOnNextContentModal() {
-        const currentEpisode = this._context.currentEpisode.indexEpisode;
-        const currentSeason = this._context.currentEpisode.indexSeason;
-        const nextEpisode = GetNextEpisode(currentEpisode, currentSeason, this._context.queue);
-
-        this._context.nextEpisode.indexSeason = nextEpisode.season;
-        this._context.nextEpisode.indexEpisode = nextEpisode.episode;
-
-        const nextEpisodeModal = new NextEpisodeModal(this._context, document.querySelector('.watch__wrapper'), 'next');
-        nextEpisodeModal.render();
+    handleNextEpisodePointerMove = () => {
+        this.hoverOnContentModal('next');
     }
 
-    hoverOffContentModal() {
+    handlePrevEpisodePointerMove = () => {
+        this.hoverOnContentModal('prev');
+    }
+
+    hoverOnContentModal = (type: string) => {
+        const currentEpisode = this._context.currentEpisode.indexEpisode;
+        const currentSeason = this._context.currentEpisode.indexSeason;
+        if (type === 'next') {
+            const nextEpisode = tvShowQueue.GetNextEpisode(currentEpisode, currentSeason, this._context.queue);
+            this._context.nextEpisode.indexSeason = nextEpisode.season;
+            this._context.nextEpisode.indexEpisode = nextEpisode.episode;
+        } else if (type === 'prev') {
+            const prevEpisode = tvShowQueue.GetPrevEpisode(currentEpisode, currentSeason, this._context.queue);
+            this._context.prevEpisode.indexSeason = prevEpisode.season;
+            this._context.prevEpisode.indexEpisode = prevEpisode.episode;
+        }
+
+        const episodeModal = new EpisodeModal(this._context, document.querySelector('.watch__wrapper'), type);
+        episodeModal.render();
+    }
+
+    hoverOffContentModal = () => {
         const episodeModal = document.querySelector('.episode-modal');
         if (episodeModal) {
             episodeModal.remove();
         }
     }
 
-    clickOnNextContentModal() {
-        const currentSeason = this._context.currentEpisode.indexSeason;
-        const currentEpisode = this._context.currentEpisode.indexEpisode;
-
-        const indexNextEpisode = GetNextEpisode(currentEpisode, currentSeason, this._context.queue);
-
-        if (isLastEpisode(indexNextEpisode.episode, indexNextEpisode.season, this._context.queue)) {
-            const nextContentButton: any = document.querySelector('.player-bar__next-content-btn');
-            nextContentButton.hidden = true;
-        }
-
-        if (!isFirstEpisode(indexNextEpisode.episode, indexNextEpisode.season)) {
-            const prevContentButton: any = document.querySelector('.player-bar__prev-content-btn');
-            prevContentButton.hidden = false;
-        }
-
-        const contextNextEpisode = this._context.queue.seasons[indexNextEpisode.season].
-            episodes[indexNextEpisode.episode];
-
-        window.history.replaceState(history.state, null,
-            // eslint-disable-next-line max-len
-            `/watch/${this._context.contentId}?season=${indexNextEpisode.season + 1}&episode=${indexNextEpisode.episode + 1}`);
-
-        const nextEpisode = {
-            season: indexNextEpisode.season,
-            episode: indexNextEpisode.episode,
-            video: SERVER_HOST + contextNextEpisode.video,
-            name: contextNextEpisode.name,
-        };
-
-        this._context.currentEpisode.indexSeason = nextEpisode.season;
-        this._context.currentEpisode.indexEpisode = nextEpisode.episode;
-
-        const video = document.querySelector('.video');
-        video.setAttribute('src', nextEpisode.video);
-
-        const episodeTitle: any = document.getElementsByClassName('player-bar__episode-title')[0];
-        const episodeNumber: any = document.getElementsByClassName('player-bar__episode-number')[0];
-        episodeTitle.innerText = nextEpisode.name;
-        episodeNumber.innerText = `S${nextEpisode.season + 1}:E${nextEpisode.episode + 1}`;
-
-        const episodeModal = document.querySelector('.episode-modal');
-        if (episodeModal) {
-            episodeModal.remove();
-        }
-
-        this._onVideoPlay();
+    handleNextEpisodeClick = () => {
+        this.clickOnChangeEpisode('next');
     }
 
-    hoverOnPrevContentModal() {
-        const currentEpisode = this._context.currentEpisode.indexEpisode;
-        const currentSeason = this._context.currentEpisode.indexSeason;
-
-        const prevEpisode = GetPrevEpisode(currentEpisode, currentSeason, this._context.queue);
-        this._context.prevEpisode.indexSeason = prevEpisode.season;
-        this._context.prevEpisode.indexEpisode = prevEpisode.episode;
-
-        const prevEpisodeModal = new NextEpisodeModal(this._context, document.querySelector('.watch__wrapper'), 'prev');
-        prevEpisodeModal.render();
+    handlePrevEpisodeClick = () => {
+        this.clickOnChangeEpisode('prev');
     }
 
-    clickOnPrevContentModal() {
+    clickOnChangeEpisode = (type: string) => {
         const currentSeason = this._context.currentEpisode.indexSeason;
         const currentEpisode = this._context.currentEpisode.indexEpisode;
 
-        const indexPrevEpisode = GetPrevEpisode(currentEpisode, currentSeason, this._context.queue);
+        let indexChangeEpisode;
+        if (type === 'next') {
+            indexChangeEpisode = tvShowQueue.GetNextEpisode(currentEpisode, currentSeason, this._context.queue);
+            if (tvShowQueue.isLastEpisode(indexChangeEpisode.episode, indexChangeEpisode.season, this._context.queue)) {
+                const nextContentButton: any = document.querySelector('.player-bar__next-content-btn');
+                nextContentButton.hidden = true;
+            }
 
-        if (isFirstEpisode(indexPrevEpisode.episode, indexPrevEpisode.season)) {
-            const prevContentButton: any = document.querySelector('.player-bar__prev-content-btn');
-            prevContentButton.hidden = true;
-        }
+            if (!tvShowQueue.isFirstEpisode(indexChangeEpisode.episode, indexChangeEpisode.season)) {
+                const prevContentButton: any = document.querySelector('.player-bar__prev-content-btn');
+                prevContentButton.hidden = false;
+            }
+        } else if (type === 'prev') {
+            indexChangeEpisode = tvShowQueue.GetPrevEpisode(currentEpisode, currentSeason, this._context.queue);
+            if (tvShowQueue.isFirstEpisode(indexChangeEpisode.episode, indexChangeEpisode.season)) {
+                const prevContentButton: any = document.querySelector('.player-bar__prev-content-btn');
+                prevContentButton.hidden = true;
+            }
 
-        if (!isLastEpisode(indexPrevEpisode.episode, indexPrevEpisode.season, this._context.queue)) {
-            const nextContentButton: any = document.querySelector('.player-bar__next-content-btn');
-            nextContentButton.hidden = false;
-        }
-
-        const contextPrevEpisode = this._context.queue.seasons[indexPrevEpisode.season].
-            episodes[indexPrevEpisode.episode];
-
-        window.history.replaceState(history.state, null,
             // eslint-disable-next-line max-len
-            `/watch/${this._context.contentId}?season=${indexPrevEpisode.season + 1}&episode=${indexPrevEpisode.episode + 1}`);
+            if (!tvShowQueue.isLastEpisode(indexChangeEpisode.episode, indexChangeEpisode.season, this._context.queue)) {
+                const nextContentButton: any = document.querySelector('.player-bar__next-content-btn');
+                nextContentButton.hidden = false;
+            }
+        }
 
-        const prevEpisode = {
-            season: indexPrevEpisode.season,
-            episode: indexPrevEpisode.episode,
-            video: SERVER_HOST + contextPrevEpisode.video,
-            name: contextPrevEpisode.name,
+        const contextChangeEpisode = this._context.queue.seasons[indexChangeEpisode.season].
+            episodes[indexChangeEpisode.episode];
+
+        const id = this._context.contentId;
+        const url = `/watch/${id}?season=${indexChangeEpisode.season + 1}&episode=${indexChangeEpisode.episode + 1}`;
+        window.history.replaceState(history.state, null, url);
+
+        const changeEpisode = {
+            season: indexChangeEpisode.season,
+            episode: indexChangeEpisode.episode,
+            video: SERVER_HOST + contextChangeEpisode.video,
+            name: contextChangeEpisode.name,
         };
 
-        this._context.currentEpisode.indexSeason = prevEpisode.season;
-        this._context.currentEpisode.indexEpisode = prevEpisode.episode;
+        this._context.currentEpisode.indexSeason = changeEpisode.season;
+        this._context.currentEpisode.indexEpisode = changeEpisode.episode;
 
         const video = document.querySelector('.video');
-        video.setAttribute('src', prevEpisode.video);
+        video.setAttribute('src', changeEpisode.video);
 
-        const episodeTitle: any = document.getElementsByClassName('player-bar__episode-title')[0];
-        const episodeNumber: any = document.getElementsByClassName('player-bar__episode-number')[0];
-        episodeTitle.innerText = prevEpisode.name;
-        episodeNumber.innerText = `S${prevEpisode.season + 1}:E${prevEpisode.episode + 1}`;
+        const [episodeTitle] = document.getElementsByClassName('player-bar__episode-title');
+        const [episodeNumber] = document.getElementsByClassName('player-bar__episode-number');
+        episodeTitle.textContent = changeEpisode.name;
+        episodeNumber.textContent = `S${changeEpisode.season + 1}:E${changeEpisode.episode + 1}`;
 
         const episodeModal = document.querySelector('.episode-modal');
         if (episodeModal) {

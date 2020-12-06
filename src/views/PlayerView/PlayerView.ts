@@ -5,7 +5,7 @@ import Player from '../../components/Player/Player';
 import {SERVER_HOST} from '../../consts/settings';
 
 class PlayerView extends View {
-    private parent: any;
+    private parent: HTMLElement;
 
     constructor(title = 'Flicks box', context = {}) {
         super(title, context, 'player');
