@@ -9,6 +9,12 @@ export function CreateDomElement(tagName: string, attrs?: {[key:string]: string}
 }
 
 export function ParseUrlParam(url: string) {
+    if (url === undefined) {
+        return undefined;
+    } else if (url == '') {
+        return undefined;
+    }
+
     const params = url.split('&');
     const paramsMap = new Map<string, string>();
     params.forEach((item) => {
