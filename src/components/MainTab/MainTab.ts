@@ -22,13 +22,17 @@ class MainTab extends Component {
     }
 
     addLikeIcons() {
-        const likeIcon = '<img class="info-block__like-btn__img info-block__btn-img" src="/static/img/like.svg">';
+        const likeIcon =
+            '<img class="info-block__like-btn__img info-block__btn-img" src="/static/img/like.svg" loading="lazy">';
         const disLikeIcon =
-            '<img class="info-block__dislike-btn__img info-block__btn-img" src="/static/img/dislike.svg">';
+            // eslint-disable-next-line max-len
+            '<img class="info-block__dislike-btn__img info-block__btn-img" src="/static/img/dislike.svg" loading="lazy">';
         const isLikedIcon =
-            ' <img class="info-block__like-btn__img info-block__btn-img" src="/static/img/is-liked.svg">';
+            // eslint-disable-next-line max-len
+            ' <img class="info-block__like-btn__img info-block__btn-img" src="/static/img/is-liked.svg" loading="lazy">';
         const isDislikedIcon =
-            '<img class="info-block__dislike-btn__img info-block__btn-img" src="/static/img/is-disliked.svg">';
+            // eslint-disable-next-line max-len
+            '<img class="info-block__dislike-btn__img info-block__btn-img" src="/static/img/is-disliked.svg" loading="lazy">';
 
         if (this.context.is_liked === true) {
             this.context.like = isLikedIcon;

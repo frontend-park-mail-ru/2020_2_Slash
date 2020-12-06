@@ -89,10 +89,14 @@ class ContentPopup extends Component {
     }
 
     addLikeIcons() {
-        const likeIcon = '<img class="item-like-btn__img item__btn-img" src="/static/img/like.svg">';
-        const disLikeIcon = '<img class="item-dislike-btn__img item__btn-img" src="/static/img/dislike.svg">';
-        const isLikedIcon =' <img class="item-like-btn__img item__btn-img" src="/static/img/is-liked.svg">';
-        const isDislikedIcon = '<img class="slider-dislike-btn__img item__btn-img" src="/static/img/is-disliked.svg">';
+        const likeIcon =
+            '<img class="item-like-btn__img item__btn-img" src="/static/img/like.svg" loading="lazy">';
+        const disLikeIcon =
+            '<img class="item-dislike-btn__img item__btn-img" src="/static/img/dislike.svg" loading="lazy">';
+        const isLikedIcon =
+            '<img class="item-like-btn__img item__btn-img" src="/static/img/is-liked.svg" loading="lazy">';
+        const isDislikedIcon =
+            '<img class="slider-dislike-btn__img item__btn-img" src="/static/img/is-disliked.svg" loading="lazy">';
 
         if (this.context.is_liked === true) {
             this.context.like = isLikedIcon;
