@@ -63,7 +63,7 @@
 .play-btn {
     width: 10vw;
     height: 3vw;
-    background-color: var(--white);
+    background-color: var(--nearly-white);
 }
 
 .play-btn:hover {
@@ -171,6 +171,9 @@
 }
 
 @media (max-width: 440px) {
+    .preview__video-block {
+        top: var(--header-height-mobile);
+    }
     .preview__name {
         font-size: 4vw;
     }

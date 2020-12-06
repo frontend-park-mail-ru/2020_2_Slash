@@ -127,8 +127,14 @@ input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-s
     width: 100%;
     background-color: var(--black);
   }
+  .prompt-window__labels {
+    display: flex;
+    flex-direction: column;
+  }
 
-  .prompt-window__label {
-    font-size: 3vw;
+  .prompt-window__label:first-child, .prompt-window__label {
+    font-size: 4vw;
+    border-right: none;
+    padding: 2vw 0;
   }
 }

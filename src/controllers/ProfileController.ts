@@ -85,11 +85,11 @@ class ProfileController extends Controller {
      * @param {Object} data - Данные
      */
     onUploadAvatar() {
+        console.log(eventBus.getListeners().uploadAvatar);
         const fileUploader = document.getElementById('file-upload');
 
         fileUploader.addEventListener('change', function() {
             const input: any = this;
-
             if (input.files && input.files[0]) {
                 UserModel.uploadAvatar(input.files[0]).then((response) => {
                     if (response.error) {

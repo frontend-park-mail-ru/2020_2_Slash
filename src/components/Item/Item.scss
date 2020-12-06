@@ -18,11 +18,32 @@
     cursor: pointer;
 }
 
+.item__card__title {
+    color: var(--nearly-white);
+    filter: drop-shadow(0 0 5px var(--shadow));
+    display: none;
+    position: absolute;
+    width: 100%;
+    bottom: 20%;
+    font-size: 0.65vw;
+    text-transform: uppercase;
+
+    @media (max-width: 1024px) {
+        font-size: 1.65vw;
+    }
+}
+
 .content__item_hovered {
     position: absolute;
     display: none;
     width: 100%;
     bottom: -3.4vw;
+}
+
+.item__card:hover, .item__card:focus {
+    .item__card__title {
+        display: block;
+    }
 }
 
 .item__buttons {

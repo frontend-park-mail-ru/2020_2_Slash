@@ -23,6 +23,16 @@
     outline: none;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
+
+    @media (max-width: 1024px) {
+        width: 6vw;
+        height: 6vw;
+    }
+
+    @media (max-width: 440px) {
+        width: 12vw;
+        height: 12vw;
+    }
 }
 
 .watch__back-btn:hover {
@@ -32,6 +42,16 @@
 .watch__back-btn__img {
     width: 2.5vw;
     height: 2.5vw;
+
+    @media (max-width: 1024px) {
+        width: 4vw;
+        height: 4vw;
+    }
+
+    @media (max-width: 440px) {
+        width: 8vw;
+        height: 8vw;
+    }
 }
 
 .watch__wrapper {
