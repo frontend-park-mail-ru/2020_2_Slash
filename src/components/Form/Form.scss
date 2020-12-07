@@ -1,4 +1,8 @@
 .inputs-container {
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 380px) and (max-height: 570px) {
+        margin-bottom: 0;
+    }
 }

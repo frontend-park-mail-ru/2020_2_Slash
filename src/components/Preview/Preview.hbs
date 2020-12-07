@@ -14,7 +14,7 @@
             <div class="preview__play">
                     <a href="{{href}}" data-id="{{preview.id}}" data-{{preview.type}}-id="{{preview.id}}" style="text-decoration: none">
                         <button class="preview__btn play-btn">
-                            <img class="play-btn__img" src="/static/img/play.svg">
+                            <img class="play-btn__img" src="/static/img/play.svg" loading="lazy">
                             <p class="play-btn__text">Воспроизвести</p>
                         </button>
                     </a>
@@ -23,14 +23,14 @@
                 <a class="preview__btn info-btn" href="/content/{{{preview.id}}}" data-modalstatus="contentPage"
                    data-event="contentInfoRequested" data-contentType="{{{preview.type}}}"
                    data-id="{{preview.content_id}}" data-{{preview.type}}-id="{{preview.id}}">
-                    <img class="info-btn__img" src="/static/img/info.svg">
+                    <img class="info-btn__img" src="/static/img/info.svg" loading="lazy">
                     <p class="info-btn__text" class="btn__title">Подробнее</p>
                 </a>
             </div>
             <div class="preview__sound">
                 <button class="sound-btn">
-                    <img class="sound-btn__img" src="/static/img/mute.svg">
-                    <img class="sound-btn__img sound-btn_hidden" src="/static/img/sound-on.svg">
+                    <img class="sound-btn__img" src="/static/img/mute.svg" loading="lazy">
+                    <img class="sound-btn__img sound-btn_hidden" src="/static/img/sound-on.svg" loading="lazy">
                 </button>
             </div>
         </div>
