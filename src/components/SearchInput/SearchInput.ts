@@ -19,7 +19,7 @@ interface resultType {
  * Компонента фильма/сериала на главной странице
  */
 class SearchInput extends Component {
-    private input: any;
+    private input: HTMLInputElement;
     /**
      * Создает экземпляр SearchInput
      *
@@ -85,18 +85,15 @@ class SearchInput extends Component {
                     type: 'content',
                 }));
 
-                let items = '';
-                let max = 10;
-                if (found.length < max) {
-                    max = found.length;
-                }
+                const items: string[] = [];
+                const max = Math.max(found.length, 10);
 
                 found.slice(0, max).forEach((foundItem) => {
-                    items = items + `<a href="/${foundItem.type}/${foundItem.id}" 
-                            class="prompt-window__label">${foundItem.name}</a>`;
+                    items.push(`<a href="/${foundItem.type}/${foundItem.id}" 
+                            class="prompt-window__label">${foundItem.name}</a>`);
                 });
 
-                document.querySelector('.prompt-window__labels').innerHTML = items;
+                document.querySelector('.prompt-window__labels').innerHTML = items.join(' ');
             }
         }).catch((error: Error) => console.log(error));
 
@@ -110,7 +107,7 @@ class SearchInput extends Component {
             query: this.input.value,
         };
 
-        eventBus.emit(Events.PathChanged, {path: `${Routes.SearchPage}?query=${this.input.value}`, misc: misc});
+        eventBus.emit(Events.PathChanged, {path: `${Routes.SearchPage}?query=${this.input.value}`, misc});
         this.remove();
     }
 

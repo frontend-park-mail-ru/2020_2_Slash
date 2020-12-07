@@ -248,7 +248,7 @@ class ContentService {
                 ContentModel.getRating({id: data.id}),
             ]).then(([movies, rating]) => {
                 if (!movies.error || !rating.error) {
-                    const contentData: any = movies.body.movie;
+                    const contentData: any = movies.body.movie || {};
 
                     const infoPopupData: ContextData = {
                         contentId: data.id,

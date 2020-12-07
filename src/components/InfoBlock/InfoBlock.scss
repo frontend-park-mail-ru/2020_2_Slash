@@ -76,4 +76,9 @@
 
 .close-btn__img {
   background-size: auto 100%;
+
+  @media (max-width: 440px) {
+    width: 20px;
+    height: 20px;
+  }
 }

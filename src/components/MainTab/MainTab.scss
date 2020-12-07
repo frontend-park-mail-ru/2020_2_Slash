@@ -17,9 +17,11 @@
         height: 100%;
         width: 100%;
         backdrop-filter: brightness(0%);
+        -webkit-backdrop-filter: brightness(0%);
         font-size: 1vw;
         @media (max-width: 1024px) {
             backdrop-filter: blur(10px) brightness(70%);
+            -webkit-backdrop-filter: blur(10px) brightness(70%);
             font-size: 2vw;
         }
 

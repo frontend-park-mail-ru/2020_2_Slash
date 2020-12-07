@@ -19,19 +19,19 @@ abstract class View {
         this.context = context;
         this.baseTemplate = template;
         this.typeView = type;
-
-        this.header = new Header({
-            authorized: this.context.authorized,
-            avatar: this.context.avatar,
-        },
-        this.root,
-        );
-
-        this.footer = new Footer();
     }
 
     show(contentTemplate: any) {
         if (!document.querySelector('.header__logo') && this.typeView !== 'player') {
+            this.header = new Header({
+                authorized: this.context.authorized,
+                avatar: this.context.avatar,
+            },
+            this.root,
+            );
+
+            this.footer = new Footer();
+
             this.context.Header = this.header.render();
             this.context.Footer = this.footer.render();
             this.root.innerHTML = this.baseTemplate(this.context);
