@@ -10,14 +10,6 @@
             <p class="modal__origin-name">{{original_name}}</p>
         </div>
         <div class="modal__controller margin">
-            <div class="modal__play">
-                <a href="/watch/{{id}}" data-id="{{id}}" style="text-decoration: none">
-                    <button class="preview__btn play-btn">
-                        <img class="play-btn__img" src="/static/img/play.svg">
-                        <p class="play-btn__text">Воспроизвести</p>
-                    </button>
-                </a>
-            </div>
             <div class="modal__sound">
                 <button class="sound-btn">
                     <img class="sound-btn__img" src="/static/img/mute.svg">
@@ -29,6 +21,11 @@
     <div class="modal__description margin">
         <div class="modal__description-left">
             <div class="modal__buttons content__buttons">
+                <a href="/watch/{{id}}" data-event="pathChanged" data-id="{{id}}">
+                    <button class="modal__play-btn play-btn item__btn">
+                        <img class="item__play-btn__img item__btn-img" src="/static/img/play2.svg">
+                    </button>
+                </a>
                 <button class="modal__add-btn add-btn item__btn" data-event="AddToFavourites" data-id="{{id}}"
                         data-status="{{is_favourite}}">
                     {{#if is_favourite}}

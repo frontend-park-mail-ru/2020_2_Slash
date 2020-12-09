@@ -107,8 +107,13 @@ class PlayerService {
 
     onVolumeUpdate(event: any) {
         this.video.volume = event.target.value;
-        this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
-            '/static/img/player-sound.svg', 'mute');
+        if (this.video.volume === 0) {
+            this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
+                '/static/img/player-mute.svg', 'volumeOn');
+        } else {
+            this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
+                '/static/img/player-sound.svg', 'mute');
+        }
     }
 
     setVolumeValue(value: number) {

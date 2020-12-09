@@ -1,9 +1,9 @@
 <div class="sub-menu__list">
     {{#each genres}}
         <a href="/{{{this.contentType}}}?genre={{this.id}}">
-        <div class="sub-menu__item">
+        <span class="sub-menu__item">
             {{{this.name}}}
-        </div>
+        </span>
         </a>
     {{/each}}
 </div>

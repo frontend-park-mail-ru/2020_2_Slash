@@ -91,7 +91,7 @@
 
 .modal__name {
     margin: 0;
-    bottom: 20%;
+    bottom: 15%;
     position: absolute;
     color: var(--white);
     font-size: 2vw;
@@ -110,11 +110,15 @@
 }
 
 .modal__controller {
-    width: 90%;
+    right: 5%;
     bottom: 5%;
     position: absolute;
     display: flex;
     justify-content: space-between;
+}
+
+.modal__sound {
+    right: 0;
 }
 
 .misc-item {
@@ -171,14 +175,12 @@
 
 .modal__buttons {
     padding: 0;
-    width: 10vw;
+    width: 15vw;
     justify-content: space-between;
 }
 
-.misc-item_year,
-.misc-item_season,
-.misc-item_rating {
-    padding: 0 1vw 0 0;
+.misc-item {
+    padding: 0 2vw 0 0;
     margin: 0;
 }
 
@@ -208,17 +210,6 @@
     position: absolute;
     right: 1vw;
     top: 1vw;
-}
-
-.close-btn {
-    padding: 0;
-    width: 1.5vw;
-    height: 1.5vw;
-    background-position: center center;
-    background-color: var(--crystal-clear);
-    outline: none;
-    border: none;
-    border-radius: 25px;
 }
 
 .genre-item__value {
@@ -263,7 +254,7 @@
     color: var(--white);
     margin-right: 15px;
 
-    @media (max-width: 850px) {
+    @media (max-width: 1024px) {
         font-size: 2.5vw;
     }
     @media (max-width: 440px) {
@@ -283,7 +274,7 @@
     background-color: var(--highly-transparent-white);
     font-family: "Inter", Arial, sans-serif;
 
-    @media (max-width: 850px) {
+    @media (max-width: 1024px) {
         width: 4vw;
         height: 4vw;
     }
@@ -298,7 +289,7 @@
     transform: scale(1.05);
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
     .content-popup {
         width: 96%;
         left: 2%;
@@ -321,12 +312,15 @@
     }
 
     .modal__name {
-        bottom: 20%;
         font-size: 4vw;
     }
 
+    .modal__origin-name {
+        font-size: 1.5vw;
+    }
+
     .modal__buttons {
-        width: 30vw;
+        width: 35vw;
     }
 
     .modal__close-btn {
@@ -343,13 +337,48 @@
     .modal__description,
     .modal__extra-description {
         font-size: 3vw;
+        flex-direction: column;
+    }
+
+    .modal__description-right, .modal__description-left,
+    .modal__extra-description-right, .modal__extra-description-left {
+        width: 100%;
+    }
+
+    .modal__country,
+    .modal__genre,
+    .modal__cast,
+    .modal__director {
+        margin: 1vw 0;
     }
 
     .modal__name {
         font-size: 5vw;
     }
 
+    .modal__origin-name {
+        font-size: 2.5vw;
+    }
+
+    .modal__controller {
+        margin-top: 20px;
+    }
+
     .modal__close-btn {
         right: 4.5vw;
+    }
+
+    .modal__buttons {
+        width: 40vw;
+    }
+
+    .modal__buttons .item__btn {
+        width: 7.5vw;
+        height: 7.5vw;
+    }
+
+    .modal__buttons .item__btn-img {
+        width: 7.5vw;
+        height: 7.5vw;
     }
 }

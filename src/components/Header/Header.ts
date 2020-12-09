@@ -48,22 +48,28 @@ class Header extends Component {
             eventBus.on(Events.ShowNavMenu, this.onOpenBurger);
         }
 
-        this.flag = false;
+        this.flag = true;
     }
 
     onOpenBurger = () => {
-        this.context.Menu = new HeaderMenu(this.context, document.querySelector('.header__control-bars')).render();
+        this.context.Menu = new HeaderMenu(this.context, document.querySelector('.application')).render();
     }
 
     onSearchClick() {
         if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
             this.SearchInput.render();
-        }
-        if (!this.flag) {
+
             this.SearchInput.addRemove();
             this.SearchInput.addPromptWindow();
             this.SearchInput.addCallbackResult();
-            this.flag = true;
+        }
+
+        if (this.flag) {
+            this.SearchInput.addRemove();
+            this.SearchInput.addPromptWindow();
+            this.SearchInput.addCallbackResult();
+
+            this.flag = false;
         }
         const searchLine = document.querySelector('.search-line');
         searchLine.classList.remove('hidden');

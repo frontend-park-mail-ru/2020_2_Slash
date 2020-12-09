@@ -17,8 +17,10 @@
     width: 100%;
     height: 100%;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
+    overflow: scroll;
 }
 
 .user-meta__avatar {
@@ -29,6 +31,7 @@
 .user-meta__labels {
     align-self: flex-start;
     margin-top: 4vw;
+    height: 100%;
 }
 
 .user-meta__nickname,
@@ -77,32 +80,53 @@
     background-color: var(--crystal-clear);
 }
 
-.profile-view__menu-bar {
-    padding-left: 0;
-    margin: 2vw 0;
-}
+@media (max-width: 1024px) {
+    .profile-view__user {
+        width: 80vw;
+        height: 25vw;
+    }
 
-@media (max-width: 850px) {
+    .user-meta__avatar {
+        width: 30%;
+    }
+
+    .user-meta__labels {
+        margin-top: 5vw;
+    }
+
     .user-meta__nickname,
     .user-meta__email {
-        font-size: 1.7vw;
+        font-size: 1.5vw;
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 440px) {
+    .profile-view__user {
+        width: 90%;
+        height: 40vw;
+    }
+
+    .user-meta__avatar {
+        width: 40%;
+    }
+
+    .user-meta__labels {
+        margin-top: 10vw;
+    }
+
+    .user-meta__nickname,
+    .user-meta__email {
+        font-size: 5vw;
+    }
+
     .user-meta__edit-btn {
-        width: 5vw;
-        height: 5vw;
+        width: 8vw;
+        height: 8vw;
     }
 
     .user-meta__edit-btn-img {
         left: 0;
-        width: 4vw;
-        height: 4vw;
-    }
-
-    .user-meta__nickname,
-    .user-meta__email {
-        font-size: 1.7vw;
+        width: 8vw;
+        height: 8vw;
     }
 }

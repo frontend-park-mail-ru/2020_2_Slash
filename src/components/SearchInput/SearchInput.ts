@@ -19,7 +19,7 @@ interface resultType {
  * Компонента фильма/сериала на главной странице
  */
 class SearchInput extends Component {
-    private input: any;
+    private input: HTMLInputElement;
     /**
      * Создает экземпляр SearchInput
      *
@@ -35,6 +35,12 @@ class SearchInput extends Component {
 
     onClick = (event: any) => {
         const {target} = event;
+
+        if (target.classList.contains('search-line__img')) {
+            this.search();
+            this.remove();
+            return;
+        }
         if (!target.classList.contains('search-line__input') && !target.classList.contains('header__search-img')) {
             this.remove();
         }
@@ -79,29 +85,30 @@ class SearchInput extends Component {
                     type: 'content',
                 }));
 
-                let items = '';
-                let max = 10;
-                if (found.length < max) {
-                    max = found.length;
-                }
+                const items: string[] = [];
+                const max = Math.max(found.length, 10);
 
                 found.slice(0, max).forEach((foundItem) => {
-                    items = items + `<a href="/${foundItem.type}/${foundItem.id}" 
-                            class="prompt-window__label">${foundItem.name}</a>`;
+                    items.push(`<a href="/${foundItem.type}/${foundItem.id}" 
+                            class="prompt-window__label">${foundItem.name}</a>`);
                 });
 
-                document.querySelector('.prompt-window__labels').innerHTML = items;
+                document.querySelector('.prompt-window__labels').innerHTML = items.join(' ');
             }
         }).catch((error: Error) => console.log(error));
 
         if (event.keyCode === 13) {
-            const misc = {
-                query: this.input.value,
-            };
-
-            eventBus.emit(Events.PathChanged, {path: `${Routes.SearchPage}?query=${this.input.value}`, misc: misc});
-            this.remove();
+            this.search();
         }
+    }
+
+    search() {
+        const misc = {
+            query: this.input.value,
+        };
+
+        eventBus.emit(Events.PathChanged, {path: `${Routes.SearchPage}?query=${this.input.value}`, misc});
+        this.remove();
     }
 
     remove() {
@@ -118,10 +125,6 @@ class SearchInput extends Component {
             searchLine.classList.add('hidden');
         }
         document.querySelector('.header__search-img').classList.remove('hidden');
-
-        this.parent.removeEventListener('click', this.onClick);
-        this.input.removeEventListener('keydown', this.onSearching);
-        this.input.removeEventListener('keydown', this.onEnter);
     }
 
     render() {

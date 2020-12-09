@@ -1,6 +1,6 @@
 .movies__banner {
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     top: 70px;
     left: 0;
     display: flex;
@@ -10,7 +10,7 @@
 }
 
 .movies-view-content {
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 .movies-view-content .content__grid {
@@ -55,6 +55,12 @@
     background-color: var(--filter-btn-hover);
 }
 
+.genres-btn:focus {
+    .genres-btn__arrow {
+        transform: rotate(180deg);
+    }
+}
+
 .genres-btn__label {
     font-size: 1vw;
     color: var(--white);
@@ -65,7 +71,7 @@
     height: 1vw;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
     .movies__banner {
         width: 50%;
     }
@@ -101,7 +107,7 @@
 
 @media (max-width: 440px) {
     .movies__banner {
-        width: 60%;
+        width: calc(100% - 2 * 20px);
     }
 
     .movies-title, .genre__label {
@@ -124,7 +130,9 @@
     }
 
     .sub-menu__item {
-        font-size: 3em;
-        flex-basis: 20%;
+        text-align: center;
+        padding: 5px;
+        font-size: 3.5vw;
+        margin: 0;
     }
 }

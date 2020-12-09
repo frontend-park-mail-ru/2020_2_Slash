@@ -1,5 +1,4 @@
 .content__slider-item {
-    z-index: 1000;
     top: 2.8vw;
     width: var(--one-sixth-of-screen);
     cursor: pointer;
@@ -22,7 +21,6 @@
 }
 
 .slider-item_selected_hover-off {
-    z-index: 1000;
     top: 2.8vw;
     width: var(--one-sixth-of-screen);
     cursor: pointer;
@@ -85,7 +83,7 @@
     transform: translateY(-10%);
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
     .content__slider-item {
         width: var(--one-third-of-screen);
         top: 8vw;

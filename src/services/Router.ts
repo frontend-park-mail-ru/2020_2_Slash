@@ -6,7 +6,6 @@ import eventBus from './EventBus';
 import Events from '../consts/events';
 import {CustomObject} from '../tools/type';
 import Controller from '../controllers/Controller';
-import {ParseUrlParam} from '../tools/helper';
 
 interface RoutObjectType {
     reg: RegExp,
@@ -122,33 +121,25 @@ class Router {
     }
 
     getParam(path: string) {
-        const reg = new RegExp('^(/\\w+)(/(\\w+))?\\??((\\w+=[а-яА-ЯёЁa-zA-Z0-9%]+&)*\\w+=[а-яА-ЯёЁa-zA-Z0-9]+)?$');
+        const reg = new RegExp('^/\\w+/(\\w+)?$');
         const result = path.match(reg);
-        // result[0] - все совпадение
-        // result[1] - путь (/movies) - без path-параметров
-        // result[3] - path-параметр(один)
-        // result[4] - query-парамтры
 
-        let getParams = null;
+        const parsedURL = new URL(window.location.origin + path);
+
+        const getParams = parsedURL.searchParams;
         let pathParams = null;
-        let resultPath = '/';
+        let resultPath = parsedURL.pathname;
 
+        // result[1] - path-параметр (один)
         if (result) {
-            resultPath = `${result[1]}`;
-
-            if (result[3]) {
-                pathParams = result[3];
-                resultPath = `${result[1]}/${pathParams}`;
+            if (result[1]) {
+                pathParams = result[1];
             }
+        }
 
-            if (result[4]) {
-                getParams = ParseUrlParam(result[4]);
-            }
-
-            if (getParams && getParams.has('cid')) {
-                resultPath = `/content/${getParams.get('cid')}`;
-                pathParams = getParams.get('cid');
-            }
+        if (getParams && getParams.has('cid')) {
+            resultPath = `/content/${getParams.get('cid')}`;
+            pathParams = getParams.get('cid');
         }
 
         return {

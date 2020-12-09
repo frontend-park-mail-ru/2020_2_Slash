@@ -17,9 +17,11 @@
         height: 100%;
         width: 100%;
         backdrop-filter: brightness(0%);
+        -webkit-backdrop-filter: brightness(0%);
         font-size: 1vw;
-        @media (max-width: 850px) {
+        @media (max-width: 1024px) {
             backdrop-filter: blur(10px) brightness(70%);
+            -webkit-backdrop-filter: blur(10px) brightness(70%);
             font-size: 2vw;
         }
 
@@ -38,27 +40,37 @@
         z-index: 1;
         width: 40%;
         height: 90%;
-        @media (max-width: 1000px) {
+        @media (max-width: 1024px) {
             height: 80%;
             width: 80%;
         }
     }
 
     &__title-text {
-        @media (max-width: 1000px){
-            font-size: 30px;
+        @media (max-width: 1024px){
+            font-size: 20px;
+        }
+    }
+
+    &__title-main {
+        @media (max-width: 440px) {
+            margin-top: 25%;
+        }
+        @media (max-width: 375px) {
+            margin-top: 50%;
         }
     }
 
     &__buttons {
         width: 15vw;
         justify-content: space-between;
-        @media (max-width: 1000px) {
+        @media (max-width: 1024px) {
             width: 35vw;
             padding-top: 4vw;
         }
-        @media (max-width: 850px) {
-            width: 55vw;
+
+        @media (max-width: 440px) {
+            width: 50vw;
             padding-top: 4vw;
         }
     }
@@ -68,7 +80,7 @@
         right: 0;
         bottom: 0;
         top: 0;
-        @media (max-width: 1000px) {
+        @media (max-width: 1024px) {
             left: 0;
         }
     }
@@ -77,10 +89,10 @@
         height: 100%;
         img {
             height: 100%;
-            @media (max-width: 1000px) {
+            @media (max-width: 1024px) {
                 width: 100%;
             }
-            @media (max-width: 850px) {
+            @media (max-width: 1024px) {
                 height: 60vw;
             }
         }
@@ -102,6 +114,10 @@
             left: 0;
             bottom: 0;
         }
+
+        @media (max-width: 360px) {
+            height: 40%;
+        }
     }
 
     &__buttons {
@@ -114,7 +130,6 @@
         @media (max-width: 440px) {
             display: block;
             font-size: 4vw;
-            margin-top: 50%;
             margin-bottom: 10px;
         }
     }
@@ -132,25 +147,25 @@
             background-color: var(--medium-transparent-white);
             cursor: pointer;
         }
-        @media (max-width: 1000px) {
+        @media (max-width: 1024px) {
             border-radius: 35px;
-            width: var(--button-size-1000);
-            height: var(--button-size-1000);
+            width: var(--button-size-1024);
+            height: var(--button-size-1024);
         }
         @media (max-width: 850px) {
             width: var(--button-size-850);
             height: var(--button-size-850);
             border-radius: 50px;
         }
-        @media (max-width: 375px) {
-            width: var(--button-size-375);
-            height: var(--button-size-375);
+        @media (max-width: 440px) {
+            width: var(--button-size-440);
+            height: var(--button-size-440);
             border-radius: 70px;
         }
     }
 
     &__video_shade {
-        @media (max-width: 850px) {
+        @media (max-width: 1024px) {
             display: none;
         }
         @media (max-width: 375px) {
@@ -170,22 +185,22 @@
     &__img {
         width: var(--button-size-normal);
         height: var(--button-size-normal);
-        @media (max-width: 1000px) {
-            width: var(--button-size-1000);
-            height: var(--button-size-1000);
+        @media (max-width: 1024px) {
+            width: var(--button-size-1024);
+            height: var(--button-size-1024);
         }
         @media (max-width: 850px) {
             width: var(--button-size-850);
             height: var(--button-size-850);
         }
-        @media (max-width: 375px) {
-            width: var(--button-size-375);
-            height: var(--button-size-375);
+        @media (max-width: 440px) {
+            width: var(--button-size-440);
+            height: var(--button-size-440);
         }
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
     .tabs__list-item-text { //TODO: этот стиль надо будет вынести в компоненту TabBar
         font-size: 1rem;
         padding: 0 1vw 0 1vw;

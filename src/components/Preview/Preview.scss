@@ -63,7 +63,7 @@
 .play-btn {
     width: 10vw;
     height: 3vw;
-    background-color: var(--white);
+    background-color: var(--nearly-white);
 }
 
 .play-btn:hover {
@@ -145,7 +145,7 @@
     flex-grow: 2;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
     .info-btn,
     .play-btn {
         width: 20vw;
@@ -170,15 +170,48 @@
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 440px) {
+    .preview__video-block {
+        top: var(--header-height-mobile);
+    }
     .preview__name {
-        font-size: 4.5vw;
+        font-size: 4vw;
     }
 
     .preview__origin-name {
         font-size: 3vw;
+        margin: 1vw 0;
     }
 
+    .info-btn,
+    .play-btn {
+        width: 20vw;
+        height: 6vw;
+    }
+
+    .info-btn__img,
+    .play-btn__img {
+        width: 3.5vw;
+        height: 3.5vw;
+    }
+
+    .play-btn__text,
+    .info-btn__text {
+        font-size: 2vw;
+    }
+
+    .sound-btn,
+    .sound-btn__img {
+        width: 5vw;
+        height: 5vw;
+    }
+
+    .preview__panel {
+        top: 50vw;
+    }
+}
+
+@media (max-width: 375px) {
     .info-btn,
     .play-btn {
         width: 30vw;
@@ -200,9 +233,5 @@
     .sound-btn__img {
         width: 8vw;
         height: 8vw;
-    }
-
-    .preview__panel {
-        top: 50vw;
     }
 }
