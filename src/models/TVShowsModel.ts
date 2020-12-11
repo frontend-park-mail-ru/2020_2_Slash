@@ -16,6 +16,18 @@ class TVShowsModel {
         }).then((response: Response) => response.json());
     }
 
+    getTopTVShows(count: number, from = 0) {
+        return http.fetchGet({
+            route: `${ApiMethods.TopTVShows}?count=${count}&from=${from}`,
+        }).then((response: Response) => response.json());
+    }
+
+    getLatestTVShows(count: number, from = 0) {
+        return http.fetchGet({
+            route: `${ApiMethods.LatestTVShows}?count=${count}&from=${from}`,
+        }).then((response: Response) => response.json());
+    }
+
     getSeasons(id: number) {
         return http.fetchGet({
             route: `${ApiMethods.TVShows}/${id}/episodes`,

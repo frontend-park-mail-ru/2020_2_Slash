@@ -18,7 +18,7 @@
       "pre-commit": "npm run eslint-check"
     }
   },
-"repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/frontend-park-mail-ru/2020_2_Slash.git"
   },

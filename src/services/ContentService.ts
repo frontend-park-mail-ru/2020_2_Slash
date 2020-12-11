@@ -122,10 +122,11 @@ class ContentService {
                     const contentData: any = tvshows.body.tvshow;
 
                     const infoPopupData: ContextData = {
-                        contentId: data.id,
+                        contentId: data.tvshowId,
                         contentData: contentData,
                         tvshow: seasons.body.tvshow,
                     };
+
 
                     infoPopupData.contentData.rating = rating.body.match;
 

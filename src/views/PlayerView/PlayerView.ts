@@ -5,17 +5,19 @@ import Player from '../../components/Player/Player';
 import {SERVER_HOST} from '../../consts/settings';
 
 class PlayerView extends View {
+    private parent: HTMLElement;
+
     constructor(title = 'Flicks box', context = {}) {
         super(title, context, 'player');
         this.template = template;
+        this.parent = document.querySelector('.application');
     }
 
     show() {
-        const {title} = this.context;
-        const PlayerBar = new Player({title}, this);
+        const playerBar = new Player(this.context, this.parent);
 
         const data: Context = {
-            PlayerBar: PlayerBar.render(),
+            PlayerBar: playerBar.render(),
         };
 
         this.context = {...this.context, data};

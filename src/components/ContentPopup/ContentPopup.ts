@@ -72,10 +72,12 @@ class ContentPopup extends Component {
         this.parent.removeEventListener('click', this.onClick);
 
         const path = document.location.href;
+
         window.history.pushState(null, null, path);
 
         const reg = new RegExp('^/content/\\d+?$'); //eslint-disable-line
         const result = window.location.pathname.match(reg);
+
         if (result) {
             window.history.replaceState(history.state, null, '/browse');
         } else {
@@ -132,12 +134,13 @@ class ContentPopup extends Component {
 
         let seasonsGrid: string;
         let serialsSeasons = '';
-
+        this.context.href = `/watch/${this.context.contentData.id}`;
         if (this.context.tvshow) {
             this.context.tvshow.seasons[0].column = 3;
             this.context.tvshow.seasons[0].gap = '2vw';
             seasonsGrid = new Grid(this.context.tvshow.seasons[0]).render();
             serialsSeasons = this.context.tvshow.seasons;
+            this.context.href = `/watch/${this.context.tvshow.id}?season=1&episode=1`;
         }
 
 
@@ -152,6 +155,7 @@ class ContentPopup extends Component {
             moreLikeThis: grid.render(),
             episodes: seasonsGrid,
             serialsSeasons: serialsSeasons,
+            href: this.context.href,
         };
 
         if (this.context.actors && this.context.actors.length > 3) {

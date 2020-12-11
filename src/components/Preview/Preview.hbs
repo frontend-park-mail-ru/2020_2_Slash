@@ -12,12 +12,12 @@
         </div>
         <div class="preview__controller pad-both">
             <div class="preview__play">
-                <a href="/watch/{{{preview.id}}}" data-id="{{preview.id}}" style="text-decoration: none">
-                    <button class="preview__btn play-btn">
-                        <img class="play-btn__img" src="/static/img/play.svg">
-                        <p class="play-btn__text">Воспроизвести</p>
-                    </button>
-                </a>
+                    <a href="{{href}}" data-id="{{preview.id}}" data-{{preview.type}}-id="{{preview.id}}" style="text-decoration: none">
+                        <button class="preview__btn play-btn">
+                            <img class="play-btn__img" src="/static/img/play.svg">
+                            <p class="play-btn__text">Воспроизвести</p>
+                        </button>
+                    </a>
             </div>
             <div class="preview__info">
                 <a class="preview__btn info-btn" href="/content/{{{preview.id}}}" data-modalstatus="contentPage"

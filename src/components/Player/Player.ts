@@ -15,6 +15,7 @@ class Player extends Component {
      * @param context
      * @param parent
      */
+
     constructor(context: Context, parent?: any) {
         super(context, parent);
         this.template = template;

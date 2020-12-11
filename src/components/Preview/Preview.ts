@@ -19,6 +19,14 @@ class Preview extends Component {
     constructor(context: Context, parent?: any) {
         super(context, parent);
         this.template = template;
+
+        const content = this.context.preview;
+
+        if (content.type === 'movie') {
+            this.context.href = `/watch/${content.id}`;
+        } else if (content.type === 'tvshow') {
+            this.context.href = `/watch/${content.id}?season=1&episode=1`;
+        }
         this.context.host = SERVER_HOST;
     }
 }

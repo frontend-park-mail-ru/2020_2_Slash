@@ -4,6 +4,7 @@ import ModalService from '../services/ModalService';
 import MovieModel from '../models/MovieModel';
 import {Error} from '../consts/errors';
 import selectRandomMovie from '../tools/selectRandom';
+import TVShowsModel from '../models/TVShowsModel';
 
 interface ContextData {
     preview: { [key: string]: string },
@@ -175,8 +176,11 @@ class MainController extends Controller {
         Promise.all([
             MovieModel.getTopMovies(15),
             MovieModel.getLatestMovies(15),
-        ]).then(([topResponse, latestResponse]) => {
-            if (topResponse.error || latestResponse.error) {
+            TVShowsModel.getTopTVShows(15),
+            TVShowsModel.getLatestTVShows(15),
+        ]).then(([topResponseMovies, latestResponseMovies, topResponseTVShows, latestResponseTVShows]) => {
+            if (topResponseMovies.error || latestResponseMovies.error ||
+                topResponseTVShows.error || latestResponseTVShows.error) {
                 this.view.insertIntoContext(fakeContentData);
                 this.view.show();
                 this.onSwitchOn(data);
@@ -184,8 +188,10 @@ class MainController extends Controller {
             }
 
             const randomMovie = selectRandomMovie([
-                topResponse.body.movies || [],
-                latestResponse.body.movies || [],
+                topResponseMovies.body.movies || [],
+                latestResponseMovies.body.movies || [],
+                topResponseTVShows.body.tvshows || [],
+                latestResponseTVShows.body.tvshows || [],
             ],
             );
 
@@ -193,12 +199,20 @@ class MainController extends Controller {
                 preview: randomMovie,
                 blocks: [
                     {
-                        title: 'Топ',
-                        content: topResponse.body.movies || [],
+                        title: 'Топ фильмов',
+                        content: topResponseMovies.body.movies || [],
                     },
                     {
-                        title: 'Последнее',
-                        content: latestResponse.body.movies || [],
+                        title: 'Последние фильмы',
+                        content: latestResponseMovies.body.movies || [],
+                    },
+                    {
+                        title: 'Топ сериалов',
+                        content: topResponseTVShows.body.tvshows || [],
+                    },
+                    {
+                        title: 'Последние сериалы',
+                        content: latestResponseTVShows.body.tvshows || [],
                     },
                 ],
             };

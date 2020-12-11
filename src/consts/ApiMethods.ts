@@ -12,7 +12,9 @@ enum ApiMethods {
     Genres = '/genres',
     Actors = '/actors',
     TVShows = '/tvshows',
-    Search = '/search'
+    Search = '/search',
+    TopTVShows = '/tvshows/top',
+    LatestTVShows = '/tvshows/latest',
 }
 
 export default ApiMethods;

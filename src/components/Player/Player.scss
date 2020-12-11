@@ -29,7 +29,7 @@
     margin-right: 10px;
 }
 
-.player-bar__title {
+.player-bar__title, .player-bar__episode-title, .player-bar__episode-number  {
     color: var(--white);
     font-size: 16px;
 }
@@ -95,6 +95,12 @@
 .player__timeline:hover > .timeline__time-text {
     filter: drop-shadow(0 0 1px var(--white));
     opacity: 1;
+}
+
+.player-bar__prev-content-btn .player-btn__img{
+    transform: rotate(180deg);
+    padding-top: 0;
+    padding-bottom: 0.2vw;
 }
 
 .player__timeline:hover > .timeline__back,
