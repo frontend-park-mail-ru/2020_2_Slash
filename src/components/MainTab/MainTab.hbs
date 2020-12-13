@@ -50,22 +50,22 @@
                 {{#if seasons}}
                     <a href="/watch/{{id}}?season=1&episode=1" data-id="{{content_id}}" data-{{type}}-id="{{id}}">
                         <button class="item__play-btn item__btn">
-                            <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg">
+                            <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg" loading="lazy">
                         </button>
                     </a>
                 {{else}}
                     <a href="/watch/{{id}}" data-id="{{content_id}}" data-{{type}}-id="{{id}}">
                         <button class="item__play-btn item__btn">
-                            <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg">
+                            <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg" loading="lazy">
                         </button>
                     </a>
                 {{/if}}
                 <button class="info-block__add-btn add-btn" data-event="AddToFavourites" data-id="{{id}}"
                         data-status="{{is_favourite}}">
                     {{#if is_favourite}}
-                        <img class="info-block__add-btn__img info-block__btn-img" src="/static/img/is-added.svg">
+                        <img class="info-block__add-btn__img info-block__btn-img" src="/static/img/is-added.svg" loading="lazy">
                     {{else}}
-                        <img class="info-block__add-btn__img info-block__btn-img" src="/static/img/add.svg">
+                        <img class="info-block__add-btn__img info-block__btn-img" src="/static/img/add.svg" loading="lazy">
                     {{/if}}
                 </button>
 
@@ -82,7 +82,7 @@
         </div>
         <div class="info-block__video-holder">
             <div class="info-block__video">
-                <img src="{{host}}{{images}}/large.png">
+                <img src="{{host}}{{images}}/large.png" loading="lazy">
                 <div class="info-block__video-shade"></div>
             </div>
         </div>

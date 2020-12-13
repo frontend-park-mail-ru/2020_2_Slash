@@ -32,8 +32,8 @@ class UserInfoBlock extends Component {
         const nicknameLabel = document.querySelector('.user-meta__nickname');
         const emailLabel = document.querySelector('.user-meta__email');
 
-        nicknameLabel.innerHTML = data.nickname;
-        emailLabel.innerHTML = data.email;
+        nicknameLabel.textContent = data.nickname;
+        emailLabel.textContent = data.email;
     }
 
     onUploadAvatar = (data: any = {}) => {

@@ -1,5 +1,9 @@
 .button-block {
     padding: 10px 50px;
+
+    @media (max-width: 380px) and (max-height: 570px) {
+        padding: 5px 40px;
+    }
 }
 
 .button-block__button {
@@ -16,4 +20,8 @@
     font-weight: normal;
     font-size: 17px;
     cursor: pointer;
+
+    @media (max-width: 380px) and (max-height: 570px) {
+        margin-top: 10px;
+    }
 }
