@@ -51,19 +51,12 @@ class SearchInput extends Component {
         this.input = document.querySelector('.search-line__input');
     }
 
-    addPromptWindow() {
-        this.input.addEventListener('keydown', this.onSearching.bind(this));
-    }
-
-    onSearching = () => {
-        document.querySelector('.prompt-window').classList.remove('hidden');
-    }
-
     addCallbackResult() {
-        this.input.addEventListener('input', this.onEnter.bind(this));
+        this.input.addEventListener('input', this.onSearch.bind(this));
+        this.input.addEventListener('keydown', this.onEnter.bind(this));
     }
 
-    onEnter = (event: any) => {
+    onSearch = () => {
         ContentModel.search(this.input.value, 5).then((response) => {
             if (!response.error) {
                 const {result} = response.body;
@@ -97,13 +90,17 @@ class SearchInput extends Component {
                     document.querySelector('.prompt-window').setAttribute('style',
                         'opacity:1;');
                     document.querySelector('.prompt-window__labels').innerHTML = items.join(' ');
-                } else {
+                }
+                if (!this.input.value || (result.actors.length + result.movies.length + result.tv_shows.length === 0)) {
                     document.querySelector('.prompt-window').setAttribute('style',
                         'opacity:0;');
                 }
             }
         }).catch((error: Error) => console.log(error));
+    }
 
+    onEnter = (event: any) => {
+        document.querySelector('.prompt-window').classList.remove('hidden');
         if (event.keyCode === 13) {
             this.search();
         }

@@ -60,13 +60,11 @@ class Header extends Component {
             this.SearchInput.render();
 
             this.SearchInput.addRemove();
-            this.SearchInput.addPromptWindow();
             this.SearchInput.addCallbackResult();
         }
 
         if (this.flag) {
             this.SearchInput.addRemove();
-            this.SearchInput.addPromptWindow();
             this.SearchInput.addCallbackResult();
 
             this.flag = false;
