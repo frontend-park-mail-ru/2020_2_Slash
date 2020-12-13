@@ -142,10 +142,9 @@ class ContentService {
                         infoPopupData.content = content.length > 0 ? content : null;
 
                         const path = document.location.href;
-                        window.history.pushState(null, null, path);
                         window.history.replaceState(history.state, null, path.includes('?') ?
-                            path + `&cid=${data.id}` :
-                            path + `?cid=${data.id}`);
+                            path + `&sid=${data.tvshowId}` :
+                            path + `?sid=${data.tvshowId}`);
 
                         const oldContentPopup = document.querySelector('.content-popup');
                         if (oldContentPopup) {
@@ -185,10 +184,9 @@ class ContentService {
                         infoPopupData.content = content.length > 0 ? content : null;
 
                         const path = document.location.href;
-                        window.history.pushState(null, null, path);
                         window.history.replaceState(history.state, null, path.includes('?') ?
-                            path + `&cid=${data.id}` :
-                            path + `?cid=${data.id}`);
+                            path + `&mid=${data.movieId}` :
+                            path + `?mid=${data.movieId}`);
 
                         const oldContentPopup = document.querySelector('.content-popup');
                         if (oldContentPopup) {
@@ -205,11 +203,11 @@ class ContentService {
     }
 
     onContentByExternalReference(data: any) {
-        if (data.contenttype == Types.TVShow) {
+        if (data.type === Types.TVShow) {
             Promise.all([
-                TVShowsModel.getTVShow(data.tvshowId),
+                TVShowsModel.getTVShow(data.id),
                 ContentModel.getRating({id: data.id}),
-                TVShowsModel.getSeasons(data.tvshowId),
+                TVShowsModel.getSeasons(data.id),
             ]).then(([tvshows, rating, seasons]) => {
                 if (!tvshows.error || !rating.error || !seasons.error) {
                     const contentData: any = tvshows.body.tvshow;
@@ -224,18 +222,30 @@ class ContentService {
 
                     const genre = contentData.genres ? contentData.genres[0].id : 1;
 
-                    MovieModel.getMoviesByGenre(genre, 10).then((response: ResponseType) => {
+                    TVShowsModel.getTVShowsByGenre(genre, 10).then((response: ResponseType) => {
                         if (response.error) {
                             return;
                         }
 
-                        const {movies} = response.body;
-                        const content = movies.filter((movie: any) => movie.id !== contentData.id);
+                        const {tvshows} = response.body;
+                        const content = tvshows.filter((tvshow: any) => tvshow.id !== contentData.id);
                         infoPopupData.content = content.length > 0 ? content : null;
 
-                        const path = document.location.href;
-                        window.history.pushState(null, null, path);
-                        window.history.replaceState(history.state, null, `/content/${data.id}`);
+                        if (window.location.search.search('=') > 0 &&
+                            !(window.location.search.search('sid') > 0)) {
+                            window.history.replaceState(history.state, null, window.location.pathname +
+                                window.location.search + `&sid=${data.id}`);
+                        }
+
+                        if (window.location.search.search('=') < 0) {
+                            window.history.replaceState(history.state, null, window.location.pathname +
+                                window.location.search + `?sid=${data.id}`);
+                        }
+
+                        if (window.location.search.indexOf(`?sid=${data.id}`) == 0) {
+                            window.history.replaceState(history.state, null, window.location.pathname +
+                                `?sid=${data.id}`);
+                        }
 
                         const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
 
@@ -269,9 +279,20 @@ class ContentService {
                         const content = movies.filter((movie: any) => movie.id !== contentData.id);
                         infoPopupData.content = content.length > 0 ? content : null;
 
-                        const path = document.location.href;
-                        window.history.pushState(null, null, path);
-                        window.history.replaceState(history.state, null, `/content/${data.id}`);
+                        if (window.location.search.search('=') > 0 && !(window.location.search.search('mid') > 0)) {
+                            window.history.replaceState(history.state, null, window.location.pathname +
+                                window.location.search + `&mid=${data.id}`);
+                        }
+
+                        if (window.location.search.search('=') < 0) {
+                            window.history.replaceState(history.state, null, window.location.pathname +
+                                window.location.search + `?mid=${data.id}`);
+                        }
+
+                        if (window.location.search.indexOf(`?mid=${data.id}`) == 0) {
+                            window.history.replaceState(history.state, null, window.location.pathname +
+                                `?mid=${data.id}`);
+                        }
 
                         const contentPopup = new ContentPopup(infoPopupData, document.querySelector('.application'));
 

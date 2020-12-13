@@ -137,9 +137,14 @@ class Router {
             }
         }
 
-        if (getParams && getParams.has('cid')) {
-            resultPath = `/content/${getParams.get('cid')}`;
-            pathParams = getParams.get('cid');
+        if (getParams && getParams.has('mid')) {
+            resultPath = `/movie/${getParams.get('mid')}`;
+            pathParams = getParams.get('mid');
+        }
+
+        if (getParams && getParams.has('sid')) {
+            resultPath = `/serial/${getParams.get('sid')}`;
+            pathParams = getParams.get('sid');
         }
 
         return {
