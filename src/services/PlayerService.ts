@@ -57,14 +57,18 @@ class PlayerService {
         volumeBar.addEventListener('pointerout', this.showProgressBar.bind(this));
 
         const nextContentButton = document.querySelector('.player-bar__next-content-btn');
-        nextContentButton.addEventListener('pointermove', this.handleNextEpisodePointerMove);
-        nextContentButton.addEventListener('pointerout', this.hoverOffContentModal);
-        nextContentButton.addEventListener('click', this.handleNextEpisodeClick);
+        if (nextContentButton) {
+            nextContentButton.addEventListener('pointermove', this.handleNextEpisodePointerMove);
+            nextContentButton.addEventListener('pointerout', this.hoverOffContentModal);
+            nextContentButton.addEventListener('click', this.handleNextEpisodeClick);
+        }
 
         const prevContentButton = document.querySelector('.player-bar__prev-content-btn');
-        prevContentButton.addEventListener('pointermove', this.handlePrevEpisodePointerMove);
-        prevContentButton.addEventListener('pointerout', this.hoverOffContentModal);
-        prevContentButton.addEventListener('click', this.handlePrevEpisodeClick);
+        if (prevContentButton) {
+            prevContentButton.addEventListener('pointermove', this.handlePrevEpisodePointerMove);
+            prevContentButton.addEventListener('pointerout', this.hoverOffContentModal);
+            prevContentButton.addEventListener('click', this.handlePrevEpisodeClick);
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             const button = document.querySelector('.player-bar__play-btn');
@@ -74,19 +78,22 @@ class PlayerService {
             button.setAttribute('data-event', 'videoPlay');
         });
 
-        const indexCurrentEpisode = {
-            season: this._context.currentEpisode.indexSeason,
-            episode: this._context.currentEpisode.indexEpisode,
-        };
+        if (this._context) {
+            const indexCurrentEpisode = {
+                season: this._context.currentEpisode.indexSeason,
+                episode: this._context.currentEpisode.indexEpisode,
+            };
 
-        if (tvShowQueue.isLastEpisode(indexCurrentEpisode.episode, indexCurrentEpisode.season, this._context.queue)) {
-            const nextContentButton: any = document.querySelector('.player-bar__next-content-btn');
-            nextContentButton.hidden = true;
-        }
+            if (tvShowQueue.isLastEpisode(indexCurrentEpisode.episode, indexCurrentEpisode.season,
+                this._context.queue)) {
+                const nextContentButton: any = document.querySelector('.player-bar__next-content-btn');
+                nextContentButton.hidden = true;
+            }
 
-        if (tvShowQueue.isFirstEpisode(indexCurrentEpisode.episode, indexCurrentEpisode.season)) {
-            const prevContentButton: any = document.querySelector('.player-bar__prev-content-btn');
-            prevContentButton.hidden = true;
+            if (tvShowQueue.isFirstEpisode(indexCurrentEpisode.episode, indexCurrentEpisode.season)) {
+                const prevContentButton: any = document.querySelector('.player-bar__prev-content-btn');
+                prevContentButton.hidden = true;
+            }
         }
     }
 

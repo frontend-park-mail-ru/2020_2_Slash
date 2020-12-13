@@ -47,13 +47,9 @@
 
 .close-btn {
   padding: 0;
-  width: 1.5vw;
-  height: 1.5vw;
-  background-position: center center;
   background-color: var(--crystal-clear);
   outline: none;
   border: none;
-  border-radius: 25px;
   cursor: pointer;
 
   &:hover {
@@ -72,13 +68,4 @@
   letter-spacing: 0.08em;
   color: var(--white);
   padding-left: 0.5vw;
-}
-
-.close-btn__img {
-  background-size: auto 100%;
-
-  @media (max-width: 440px) {
-    width: 20px;
-    height: 20px;
-  }
 }

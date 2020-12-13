@@ -30,8 +30,8 @@ class ContentPopup extends Component {
         if (EventBus.getListeners().seasonChanged) {
             EventBus.getListeners().seasonChanged = [];
         }
+
         EventBus.on(Events.SeasonChanged, this.onSeasonChanged);
-        EventBus.on(Events.PathChanged, this.remove);
     }
 
     onClick = (event: any) => {
@@ -43,7 +43,10 @@ class ContentPopup extends Component {
     }
 
     onPopstate = () => {
-        this.remove();
+        this.parent.removeEventListener('click', this.onClick);
+        EventBus.off(Events.SeasonChanged, this.onSeasonChanged);
+        window.removeEventListener('keydown', this.onKeydownEscape);
+        window.removeEventListener('popstate', this.onPopstate);
     }
 
     onKeydownEscape = (event: KeyboardEvent) => {
@@ -68,24 +71,23 @@ class ContentPopup extends Component {
      * Коллбэк на удаление элемента Popup со страницы
      */
     onDestroy() {
-        window.removeEventListener('popstate', this.onPopstate);
+        EventBus.off(Events.PathChanged, this.remove);
+
         this.parent.removeEventListener('click', this.onClick);
 
-        const path = document.location.href;
+        let pathWithoutCid = '';
 
-        window.history.pushState(null, null, path);
-
-        const reg = new RegExp('^/content/\\d+?$'); //eslint-disable-line
-        const result = window.location.pathname.match(reg);
-
-        if (result) {
-            window.history.replaceState(history.state, null, '/browse');
-        } else {
-            const cidIndex = window.location.search.search('cid');
-            const pathWithoutCid = window.location.search.slice(0, cidIndex - 1);
-
-            window.history.replaceState(history.state, null, window.location.pathname + pathWithoutCid);
+        const sidIndex = window.location.search.indexOf('sid');
+        if (sidIndex > 0) {
+            pathWithoutCid = window.location.search.slice(0, sidIndex - 1);
         }
+
+        const midIndex = window.location.search.indexOf('mid');
+        if (midIndex > 0) {
+            pathWithoutCid = window.location.search.slice(0, midIndex - 1);
+        }
+
+        window.history.replaceState(history.state, null, window.location.pathname + pathWithoutCid);
     }
 
     addLikeIcons() {
