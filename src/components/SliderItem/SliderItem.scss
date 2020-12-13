@@ -52,6 +52,7 @@
 .content__slider-container .content__slider-item:focus,
 .content__slider-container .content__slider-item:hover {
     transform: scale(1.2) translateY(-5%);
+    z-index: 1000;
 }
 
 .container:focus-within .slider-item_selected {
