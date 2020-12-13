@@ -1,6 +1,9 @@
 .content__slider-container {
     display: flex;
     flex-direction: column;
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .content__title {
