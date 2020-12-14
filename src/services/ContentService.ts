@@ -24,6 +24,7 @@ interface ContextData {
  */
 class ContentService {
     private static instance: ContentService;
+    private infoBlock: InfoBlock;
 
     /**
      * Создает экземпляр ContentService
@@ -63,7 +64,10 @@ class ContentService {
      */
 
     async onOpenInfoBlock(data: any) {
-        const infoBlock = new InfoBlock({targetButton: window.event.target});
+        if (!this.infoBlock) {
+            this.infoBlock = new InfoBlock({});
+        }
+        this.infoBlock.addTargetButton(window.event.target);
 
         if (data.contenttype == Types.TVShow) {
             const promise = Promise.all([
@@ -81,10 +85,11 @@ class ContentService {
                         tvshow: seasons.body.tvshow,
                     };
 
-                    infoBlock.addToContext(infoBlockData);
-                    return infoBlock;
+                    this.infoBlock.addToContext(infoBlockData);
+                    return this.infoBlock;
                 }
             });
+
             const resultInfoBlock = await promise;
             resultInfoBlock.render();
         } else {
@@ -101,13 +106,15 @@ class ContentService {
                         contentData: contentData,
                     };
 
-                    infoBlock.addToContext(infoBlockData);
-                    return infoBlock;
+                    this.infoBlock.addToContext(infoBlockData);
+                    return this.infoBlock;
                 }
             });
             const resultInfoBlock = await promise;
             resultInfoBlock.render();
-            document.querySelector('[data-tab="seasonsTab"]').classList.add('hidden');
+
+            const seasonTab = document.querySelector('[data-tab="seasonsTab"]');
+            if (seasonTab) seasonTab.classList.add('hidden');
         }
     }
 
@@ -126,7 +133,6 @@ class ContentService {
                         contentData: contentData,
                         tvshow: seasons.body.tvshow,
                     };
-
 
                     infoPopupData.contentData.rating = rating.body.match;
 

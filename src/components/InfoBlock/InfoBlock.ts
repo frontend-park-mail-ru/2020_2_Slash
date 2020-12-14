@@ -18,6 +18,7 @@ class InfoBlock extends Component {
     private MainTab: MainTab;
     private SeasonsTab: SeasonsTab;
     private DetailsTab: DetailsTab;
+    private btnSliderItem: HTMLElement;
     /**
      * Создает экземпляр InfoBlock
      *
@@ -95,11 +96,31 @@ class InfoBlock extends Component {
         if (openedInfoBlock) {
             const closestSlider = openedInfoBlock.closest('.content__slider-container');
             closestSlider.removeChild(openedInfoBlock);
-            const closestSliderItem = closestSlider.querySelector('.slider-item_selected');
-            closestSliderItem.querySelector('.slider-item__arrow').classList.add('hidden');
-            closestSliderItem.classList.remove('slider-item_selected');
-            closestSliderItem.classList.add('content__slider-item');
-            closestSliderItem.classList.remove('slider-item_selected_hover-off');
+        }
+    }
+
+    addTargetButton(targetButton: any) {
+        this.context.targetButton = targetButton;
+    }
+
+    selectSliderItem(currentSliderItem: HTMLElement) {
+        if (currentSliderItem) {
+            currentSliderItem.classList.add('slider-item_selected');
+            currentSliderItem.classList.remove('content__slider-item');
+            currentSliderItem.classList.add('slider-item_selected_hover-off');
+            currentSliderItem.querySelector('.slider-item__arrow').classList.remove('hidden');
+            currentSliderItem.querySelector('.item__card').setAttribute('data-event', ' ');
+        }
+    }
+
+    unselectSliderItem(currentSliderItem: HTMLElement) {
+        if (currentSliderItem) {
+            currentSliderItem.querySelector('.slider-item__arrow').classList.add('hidden');
+            currentSliderItem.classList.remove('slider-item_selected');
+            currentSliderItem.classList.add('content__slider-item');
+            currentSliderItem.classList.remove('slider-item_selected_hover-off');
+            currentSliderItem.querySelector('.item__card').setAttribute('data-event',
+                'openInfoBlock');
         }
     }
 
@@ -122,17 +143,22 @@ class InfoBlock extends Component {
         this.context.CurrentTab = this.MainTab.render();
         this.context.TabBar = this.tabBar.render();
 
-        this.deleteOpenedInfoBlock();
+        const openedInfoBlock = document.querySelector('.content__info-block-wrapper');
+        const currentClosestSlider = this.context.targetButton.closest('.content__slider-container');
 
-        const currentSliderItem = this.context.targetButton.closest('.content__slider-item');
-        currentSliderItem.classList.add('slider-item_selected');
-        currentSliderItem.classList.remove('content__slider-item');
-        currentSliderItem.classList.add('slider-item_selected_hover-off');
-        currentSliderItem.querySelector('.slider-item__arrow').classList.remove('hidden');
+        if (openedInfoBlock) {
+            const prevClosestSlider = openedInfoBlock.closest('.content__slider-container');
+            this.unselectSliderItem(prevClosestSlider.querySelector('.slider-item_selected'));
+            this.selectSliderItem(this.context.targetButton.closest('.content__slider-item'));
+            if (prevClosestSlider === currentClosestSlider) {
+                this.onTabChanged({tab: 'mainTab'});
+                return;
+            }
+            this.deleteOpenedInfoBlock();
+        }
 
-        const closestSlider = this.context.targetButton.closest('.content__slider-container');
-
-        closestSlider.innerHTML += this.template(this.context);
+        this.selectSliderItem(this.context.targetButton.closest('.content__slider-item'));
+        if (currentClosestSlider) currentClosestSlider.innerHTML += this.template(this.context);
     }
 }
 
