@@ -29,15 +29,9 @@
 }
 
 .sub-menu__close-btn {
-  padding: 0;
   width: 1.5vw;
   height: 1.5vw;
-  background-position: center center;
-  background-color: var(--crystal-clear);
-  outline: none;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
+  position: relative;
 }
 
 @media (max-width: 1024px) {
@@ -52,7 +46,7 @@
     top: 9vw;
     width: 90%;
     left: 0;
-    background-color: var(--blackout-for-popup);
+    background-color: var(--blackout-for-header);
     height: 40vw;
     overflow: scroll;
     padding: 5%;

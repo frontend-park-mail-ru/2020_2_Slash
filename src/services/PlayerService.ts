@@ -70,13 +70,7 @@ class PlayerService {
             prevContentButton.addEventListener('click', this.handlePrevEpisodeClick);
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const button = document.querySelector('.player-bar__play-btn');
-            const buttonImg = document.querySelector('.player-play-btn__img');
-            buttonImg.setAttribute('src', '/static/img/player-play.svg');
-            button.removeAttribute('data-event');
-            button.setAttribute('data-event', 'videoPlay');
-        });
+        document.addEventListener('DOMContentLoaded', this.onDOMContentLoaded);
 
         if (this._context) {
             const indexCurrentEpisode = {
@@ -95,6 +89,14 @@ class PlayerService {
                 prevContentButton.hidden = true;
             }
         }
+    }
+
+    onDOMContentLoaded() {
+        const button = document.querySelector('.player-bar__play-btn');
+        const buttonImg = document.querySelector('.player-play-btn__img');
+        buttonImg.setAttribute('src', '/static/img/player-play.svg');
+        button.removeAttribute('data-event');
+        button.setAttribute('data-event', 'videoPlay');
     }
 
     onVideoPlay() {

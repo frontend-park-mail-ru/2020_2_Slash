@@ -18,6 +18,7 @@
 .slider-item_selected {
     border: 0.3vw solid var(--white);
     border-radius: 3px;
+    z-index: 1000;
 }
 
 .slider-item_selected_hover-off {

@@ -20,6 +20,9 @@ interface resultType {
  */
 class SearchInput extends Component {
     private input: HTMLInputElement;
+    private _onSearch: any;
+    private _onEnter: any;
+    private _onClick: any;
     /**
      * Создает экземпляр SearchInput
      *
@@ -31,79 +34,91 @@ class SearchInput extends Component {
     constructor(context: Context, parent?: any) {
         super(context, parent);
         this.template = template;
+
+        this._onSearch = function() {
+            ContentModel.search(this.input.value, 5).then((response) => {
+                if (!response.error) {
+                    const {result} = response.body;
+
+                    const found: resultType[] = [];
+                    result.actors.forEach((actor: any) => found.push({
+                        name: actor.name,
+                        id: actor.id,
+                        type: 'actor',
+                    }));
+                    result.movies.forEach((movie: any) => found.push({
+                        name: movie.name, id:
+                        movie.id,
+                        type: 'movie',
+                    }));
+                    result.tv_shows.forEach((tvShow: any) => found.push({
+                        name: tvShow.name,
+                        id: tvShow.id,
+                        type: 'serial',
+                    }));
+
+                    if (this.input.value) {
+                        const items: string[] = [];
+                        const max = Math.max(found.length, 10);
+
+                        found.slice(0, max).forEach((foundItem) => {
+                            if (foundItem.type === 'actor') {
+                                items.push(`<a href="/${foundItem.type}/${foundItem.id}" 
+                            class="prompt-window__label">${foundItem.name}</a>`);
+                            } else if (foundItem.type === 'movie') {
+                                items.push(`<a href="${window.location.pathname}?mid=${foundItem.id}" 
+                            class="prompt-window__label">${foundItem.name}</a>`);
+                            } else {
+                                items.push(`<a href="${window.location.pathname}?sid=${foundItem.id}" 
+                            class="prompt-window__label">${foundItem.name}</a>`);
+                            }
+                        });
+
+                        document.querySelector('.prompt-window').setAttribute('style',
+                            'opacity:1;');
+                        document.querySelector('.prompt-window__labels').innerHTML = items.join(' ');
+                    }
+                    if (!this.input.value || (result.actors.length + result.movies.length +
+                        result.tv_shows.length === 0)) {
+                        document.querySelector('.prompt-window').setAttribute('style',
+                            'opacity:0;');
+                    }
+                }
+            }).catch((error: Error) => console.log(error));
+        }.bind(this);
+
+        this._onEnter = function(event: any) {
+            document.querySelector('.prompt-window').classList.remove('hidden');
+            if (event.keyCode === 13) {
+                this.search();
+            }
+        }.bind(this);
+
+        this._onClick = function(event: any) {
+            const {target} = event;
+
+            if (document.querySelector('.search-line_visible')) {
+                if (target.classList.contains('search-line__img')) {
+                    this.search();
+                    this.remove();
+                    return;
+                }
+                if (!target.classList.contains('search-line__input') &&
+                    !target.classList.contains('header__search-img')) {
+                    this.remove();
+                }
+            }
+        }.bind(this);
     }
 
-    onClick = (event: any) => {
-        const {target} = event;
-
-        if (target.classList.contains('search-line__img')) {
-            this.search();
-            this.remove();
-            return;
-        }
-        if (!target.classList.contains('search-line__input') && !target.classList.contains('header__search-img')) {
-            this.remove();
-        }
-    };
-
     addRemove() {
-        this.parent.addEventListener('click', this.onClick);
+        this.parent.addEventListener('click', this._onClick);
         this.input = document.querySelector('.search-line__input');
     }
 
     addCallbackResult() {
-        this.input.addEventListener('input', this.onSearch.bind(this));
-        this.input.addEventListener('keydown', this.onEnter.bind(this));
-    }
-
-    onSearch = () => {
-        ContentModel.search(this.input.value, 5).then((response) => {
-            if (!response.error) {
-                const {result} = response.body;
-
-                const found: resultType[] = [];
-                result.actors.forEach((actor: any) => found.push({
-                    name: actor.name,
-                    id: actor.id,
-                    type: 'actor',
-                }));
-                result.movies.forEach((movie: any) => found.push({
-                    name: movie.name, id:
-                    movie.content_id,
-                    type: 'content',
-                }));
-                result.tv_shows.forEach((tvShow: any) => found.push({
-                    name: tvShow.name,
-                    id: tvShow.content_id,
-                    type: 'content',
-                }));
-
-                if (this.input.value) {
-                    const items: string[] = [];
-                    const max = Math.max(found.length, 10);
-
-                    found.slice(0, max).forEach((foundItem) => {
-                        items.push(`<a href="/${foundItem.type}/${foundItem.id}" 
-                            class="prompt-window__label">${foundItem.name}</a>`);
-                    });
-
-                    document.querySelector('.prompt-window').setAttribute('style',
-                        'opacity:1;');
-                    document.querySelector('.prompt-window__labels').innerHTML = items.join(' ');
-                }
-                if (!this.input.value || (result.actors.length + result.movies.length + result.tv_shows.length === 0)) {
-                    document.querySelector('.prompt-window').setAttribute('style',
-                        'opacity:0;');
-                }
-            }
-        }).catch((error: Error) => console.log(error));
-    }
-
-    onEnter = (event: any) => {
-        document.querySelector('.prompt-window').classList.remove('hidden');
-        if (event.keyCode === 13) {
-            this.search();
-        }
+        this.input.addEventListener('input', this._onSearch);
+        this.input.addEventListener('keydown', this._onEnter);
     }
 
     search() {
@@ -116,6 +131,9 @@ class SearchInput extends Component {
     }
 
     remove() {
+        this.parent.removeEventListener('click', this._onClick);
+        this.input.removeEventListener('input', this._onSearch);
+        this.input.removeEventListener('keydown', this._onEnter);
         if (window.innerWidth < 440) {
             document.querySelector('.blocker').classList.add('hidden');
 
@@ -126,6 +144,7 @@ class SearchInput extends Component {
         }
         const searchLine = document.querySelector('.search-line');
         if (searchLine) {
+            searchLine.classList.remove('search-line_visible');
             searchLine.classList.add('hidden');
         }
         if (document.querySelector('.header__search-img')) {
