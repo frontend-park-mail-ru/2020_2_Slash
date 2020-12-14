@@ -45,7 +45,7 @@ abstract class Controller {
             }
 
             eventBus.emit(Events.UpdateHeader, sessionData);
-        }).catch((error: Error) => console.log(error));
+        }).catch((error: Error) => console.log());
     }
 }
 

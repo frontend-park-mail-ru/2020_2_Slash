@@ -49,14 +49,14 @@
             <div class="info-block__buttons content__buttons">
                 {{#if seasons}}
                     <a href="/watch/{{id}}?season=1&episode=1" data-id="{{content_id}}" data-{{type}}-id="{{id}}">
-                        <button class="item__play-btn item__btn">
-                            <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg" loading="lazy">
+                        <button class="info-block__play-btn item__play-btn item__btn">
+                            <img class="info-block__play-btn__img item__play-btn-img item__btn-img" src="/static/img/play2.svg" loading="lazy">
                         </button>
                     </a>
                 {{else}}
                     <a href="/watch/{{id}}" data-id="{{content_id}}" data-{{type}}-id="{{id}}">
-                        <button class="item__play-btn item__btn">
-                            <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg" loading="lazy">
+                        <button class="info-block__play-btn item__play-btn item__btn">
+                            <img class="info-block__play-btn__img item__play-btn-img item__btn-img" src="/static/img/play2.svg" loading="lazy">
                         </button>
                     </a>
                 {{/if}}

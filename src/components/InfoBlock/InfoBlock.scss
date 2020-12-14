@@ -33,7 +33,7 @@
     }
     @media (max-width: 440px) {
       top: 3vw;
-      right: 7vw;
+      right: 4vw;
     }
   }
 }
@@ -58,6 +58,8 @@
     filter: drop-shadow(0px 0px 1px var(--white));
     background-color: var(--crystal-clear);
   }
+
+
 }
 
 .misc-item__rating {

@@ -11,6 +11,8 @@ import Events from '../../consts/events';
  * Компонента попапа
  */
 class ContentPopup extends Component {
+    private _onClick: any;
+    private _onKeydownEscape: any;
     /**
      * Создает экземпляр ContentPopup
      *
@@ -23,36 +25,27 @@ class ContentPopup extends Component {
         super(context, parent);
         this.template = template;
 
-        window.addEventListener('keydown', this.onKeydownEscape);
-        window.addEventListener('popstate', this.onPopstate);
-        this.parent.addEventListener('click', this.onClick);
-
         if (EventBus.getListeners().seasonChanged) {
             EventBus.getListeners().seasonChanged = [];
         }
 
+        this._onClick = function(event: any) {
+            const closingTarget = event.target.classList.contains('blocker') ||
+                event.target.closest('.close-btn');
+            if (closingTarget) {
+                this.remove();
+            }
+        }.bind(this);
+
+        this._onKeydownEscape = function(event: any) {
+            if (event.key === 'Escape') {
+                this.remove();
+            }
+        }.bind(this);
+
+        this.parent.addEventListener('click', this._onClick);
+        window.addEventListener('keydown', this._onKeydownEscape);
         EventBus.on(Events.SeasonChanged, this.onSeasonChanged);
-    }
-
-    onClick = (event: any) => {
-        const closingTarget = event.target.classList.contains('blocker') ||
-            event.target.closest('.close-btn');
-        if (closingTarget) {
-            this.remove();
-        }
-    }
-
-    onPopstate = () => {
-        this.parent.removeEventListener('click', this.onClick);
-        EventBus.off(Events.SeasonChanged, this.onSeasonChanged);
-        window.removeEventListener('keydown', this.onKeydownEscape);
-        window.removeEventListener('popstate', this.onPopstate);
-    }
-
-    onKeydownEscape = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
-            this.remove();
-        }
     }
 
     /**
@@ -73,8 +66,6 @@ class ContentPopup extends Component {
     onDestroy() {
         EventBus.off(Events.PathChanged, this.remove);
 
-        this.parent.removeEventListener('click', this.onClick);
-
         let pathWithoutCid = '';
 
         const sidIndex = window.location.search.indexOf('sid');
@@ -88,6 +79,9 @@ class ContentPopup extends Component {
         }
 
         window.history.replaceState(history.state, null, window.location.pathname + pathWithoutCid);
+
+        this.parent.removeEventListener('click', this._onClick);
+        window.removeEventListener('keydown', this._onKeydownEscape);
     }
 
     addLikeIcons() {

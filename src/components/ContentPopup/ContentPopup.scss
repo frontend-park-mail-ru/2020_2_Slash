@@ -30,6 +30,9 @@
 }
 
 .content-popup-wrapper {
+    ::-webkit-scrollbar {
+        display: none;
+    }
     animation: appearing ease-in 0.4s;
 }
 
@@ -325,7 +328,7 @@
 
     .modal__close-btn {
         right: 3vw;
-        top: 1.5vw;
+        top: 2.5vw;
     }
 }
 
@@ -362,10 +365,6 @@
 
     .modal__controller {
         margin-top: 20px;
-    }
-
-    .modal__close-btn {
-        right: 4.5vw;
     }
 
     .modal__buttons {
