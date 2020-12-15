@@ -84,16 +84,17 @@ class InfoBlock extends Component {
      * Коллбэк на закрытие инфоблока по крестику
      */
     onInfoBlockClosed() {
-        this.deleteOpenedInfoBlock();
+        this.deleteOpenedInfoBlock(document.querySelector('.content__info-block-wrapper'));
     }
 
     /**
      * Удаляет текущий открытый на странице инфоблок с фильмом
      */
-    deleteOpenedInfoBlock() {
-        const openedInfoBlock = document.querySelector('.content__info-block-wrapper');
-
+    deleteOpenedInfoBlock(openedInfoBlock: Element) {
         if (openedInfoBlock) {
+            const prevClosestSlider = openedInfoBlock.closest('.content__slider-container');
+            this.unselectSliderItem(prevClosestSlider.querySelector('.slider-item_selected'));
+
             const closestSlider = openedInfoBlock.closest('.content__slider-container');
             closestSlider.removeChild(openedInfoBlock);
         }
@@ -154,7 +155,7 @@ class InfoBlock extends Component {
                 this.onTabChanged({tab: 'mainTab'});
                 return;
             }
-            this.deleteOpenedInfoBlock();
+            this.deleteOpenedInfoBlock(openedInfoBlock);
         }
 
         this.selectSliderItem(this.context.targetButton.closest('.content__slider-item'));
