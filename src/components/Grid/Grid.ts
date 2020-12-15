@@ -17,6 +17,7 @@ class Grid extends Component {
         const {episodes} = this.context;
         if (this.context.episodes) {
             episodes.forEach((episode: any) => {
+                episode.season_number = this.context.number;
                 episode.content_id = this.context.tv_show_id;
                 list.push(new EpisodeCard(episode).render());
             });
