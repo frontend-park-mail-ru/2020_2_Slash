@@ -9,6 +9,7 @@
     background-color: var(--hover-gray);
     height: 10vw;
     background-position: center center;
+    border-radius: 3px;
 }
 
 .item__img {
@@ -16,9 +17,11 @@
 }
 
 .slider-item_selected {
-    border: 0.3vw solid var(--white);
-    border-radius: 3px;
     z-index: 1000;
+
+    .item__card {
+        border: 2px solid var(--white);
+    }
 }
 
 .slider-item_selected_hover-off {
@@ -65,12 +68,21 @@
     justify-content: center;
     position: absolute;
     width: 100%;
-    bottom: -1.5vw;
+    bottom: -15px;
+
+    @media (max-width: 440px) {
+        bottom: -10px;
+    }
 }
 
 .slider-item__arrow-img {
-    width: 2vw;
-    height: 1.5vw;
+    width: 30px;
+    height: 15px;
+
+    @media (max-width: 440px) {
+        width: 20px;
+        height: 10px;
+    }
 }
 
 .content__slider-item:hover > .content__item_hovered {
