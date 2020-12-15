@@ -62,6 +62,7 @@
     }
 
     &__buttons {
+        display: flex;
         width: 15vw;
         justify-content: space-between;
         @media (max-width: 1024px) {
@@ -120,10 +121,6 @@
         }
     }
 
-    &__buttons {
-        display: flex;
-    }
-
     &__misc-main {
         display: flex;
 
@@ -162,6 +159,22 @@
             height: var(--button-size-440);
             border-radius: 70px;
         }
+        &__img {
+            width: var(--button-size-normal);
+            height: var(--button-size-normal);
+            @media (max-width: 1024px) {
+                width: var(--button-size-1024);
+                height: var(--button-size-1024);
+            }
+            @media (max-width: 850px) {
+                width: var(--button-size-850);
+                height: var(--button-size-850);
+            }
+            @media (max-width: 440px) {
+                width: var(--button-size-440);
+                height: var(--button-size-440);
+            }
+        }
     }
 
     &__video_shade {
@@ -178,25 +191,6 @@
     color: var(--white);
     &:hover {
         color: var(--low-transparent-white);
-    }
-}
-
-.info-block__add-btn, .info-block__like-btn, .info-block__dislike-btn, .info-block__play-btn {
-    &__img {
-        width: var(--button-size-normal);
-        height: var(--button-size-normal);
-        @media (max-width: 1024px) {
-            width: var(--button-size-1024);
-            height: var(--button-size-1024);
-        }
-        @media (max-width: 850px) {
-            width: var(--button-size-850);
-            height: var(--button-size-850);
-        }
-        @media (max-width: 440px) {
-            width: var(--button-size-440);
-            height: var(--button-size-440);
-        }
     }
 }
 

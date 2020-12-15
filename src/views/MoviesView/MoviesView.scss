@@ -55,6 +55,11 @@
     background-color: var(--filter-btn-hover);
 }
 
+.genres-btn__arrow {
+    width: 1vw;
+    height: 1vw;
+}
+
 .genres-btn:focus {
     .genres-btn__arrow {
         transform: rotate(180deg);
@@ -64,11 +69,6 @@
 .genres-btn__label {
     font-size: 1vw;
     color: var(--white);
-}
-
-.genres-btn__arrow {
-    width: 1vw;
-    height: 1vw;
 }
 
 @media (max-width: 1024px) {
