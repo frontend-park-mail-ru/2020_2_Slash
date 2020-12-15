@@ -134,7 +134,7 @@ class SearchInput extends Component {
         this.parent.removeEventListener('click', this._onClick);
         this.input.removeEventListener('input', this._onSearch);
         this.input.removeEventListener('keydown', this._onEnter);
-        if (window.innerWidth < 440) {
+        if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
             document.querySelector('.blocker').classList.add('hidden');
 
             const page = document.querySelector('.scroll-fixed');

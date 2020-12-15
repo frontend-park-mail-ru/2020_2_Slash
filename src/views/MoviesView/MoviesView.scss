@@ -95,13 +95,12 @@
         height: 2vw;
     }
 
-    .sub-menu__item {
-        font-size: 2.3em;
-        flex-basis: 20%;
-    }
-
     .movies-view-content .content__grid {
         padding: 0 20px;
+    }
+
+    .movies-view-content {
+        margin-top: 90px;
     }
 }
 
@@ -112,6 +111,10 @@
 
     .movies-title, .genre__label {
         font-size: 4em;
+    }
+
+    .movies-view-content {
+        margin-top: 60px;
     }
 
     .genres-btn {
@@ -127,12 +130,5 @@
 
     .genres-btn__label {
         font-size: 3vw;
-    }
-
-    .sub-menu__item {
-        text-align: center;
-        padding: 5px;
-        font-size: 3.5vw;
-        margin: 0;
     }
 }

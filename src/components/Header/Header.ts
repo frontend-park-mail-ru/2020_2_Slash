@@ -52,7 +52,9 @@ class Header extends Component {
     }
 
     onOpenBurger = () => {
-        this.context.Menu = new HeaderMenu(this.context, document.querySelector('.application')).render();
+        if (!document.querySelector('.header-sub-menu__wrapper')) {
+            this.context.Menu = new HeaderMenu(this.context, document.querySelector('.application')).render();
+        }
     }
 
     onSearchClick() {

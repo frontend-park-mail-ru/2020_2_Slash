@@ -1,7 +1,20 @@
+<div class="blocker hidden" style="background-color: rgba(0, 0, 0, 0.8);"></div>
 <div class="header-sub-menu__wrapper">
+    <div class="header-sub-menu__user">
+        <a class="header__user" data-event="showUserList">
+            <img class="header__avatar" src="{{avatar}}" loading="lazy">
+            <img class="header__arrow" src="/static/img/arrow.svg" loading="lazy">
+        </a>
+    </div>
+    <div class="header-submenu__close-btn">
+        <button class="close-btn" data-event="">
+            <img class="close-btn__img" src="/static/img/close.svg">
+        </button>
+    </div>
     <nav class="header-sub-menu__nav">
         <ul class="header-sub-menu__list">
-            <li class="header-sub-menu__list__item"><a href="/browse" class="list-item-text list-item-text-selected">Главная</a></li>
+            <li class="header-sub-menu__list__item"><a href="/browse" class="list-item-text list-item-text-selected">Главная</a>
+            </li>
             <li class="header-sub-menu__list__item"><a href="/serials " class="list-item-text">Сериалы</a></li>
             <li class="header-sub-menu__list__item"><a href="/movies " class="list-item-text">Фильмы</a></li>
             <li class="header-sub-menu__list__item"><a class="list-item-text" href="#">Последнее</a></li>

@@ -2,6 +2,7 @@ import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './SubMenuPopup.hbs';
 import {Genres} from '../../consts/genres';
+import {MOBILE_DEVICE_WIDTH} from '../../consts/other';
 
 /**
  * @class
@@ -26,6 +27,12 @@ class SubMenuPopup extends Component {
 
         this._onClick = function(event: any) {
             const {target} = event;
+            if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
+                if (target.classList.contains('close-btn__img') || target.classList.contains('sub-menu__item')) {
+                    this.remove();
+                }
+                return;
+            }
             if (!target.classList.contains('genres') ||
                 target.closest('.close-btn') ||
                 !target.classList.contains('genres-btn')) {
@@ -60,6 +67,15 @@ class SubMenuPopup extends Component {
      * @return {*|string}
      */
     render() {
+        if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
+            this.parent = document.querySelector('.application');
+            const page = document.createElement('div');
+            page.classList.add('scroll-fixed');
+            page.innerHTML = this.parent.innerHTML;
+            this.parent.innerHTML = '';
+            this.parent.appendChild(page);
+        }
+
         this.context.genres.forEach((genre: any) => {
             genre.contentType = this.context.contentType;
         });
@@ -68,6 +84,10 @@ class SubMenuPopup extends Component {
         modalDiv.innerHTML = this.template(this.context);
         modalDiv.classList.add('genres__sub-menu');
         this.parent.appendChild(modalDiv);
+
+        if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
+            document.querySelector('.blocker').classList.remove('hidden');
+        }
     }
 }
 
