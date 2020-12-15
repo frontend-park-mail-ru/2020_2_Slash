@@ -29,13 +29,6 @@
     padding-left: 2.5vw;
 }
 
-.content-popup-wrapper {
-    ::-webkit-scrollbar {
-        display: none;
-    }
-    animation: appearing ease-in 0.4s;
-}
-
 @keyframes appearing {
     from {filter: opacity(0) blur(10px)}
     50% {filter: opacity(0.5) blur(2px)}
@@ -61,6 +54,10 @@
     overflow-y: scroll;
     overflow-x: hidden;
     border-radius: 8px;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    animation: appearing ease-in 0.4s;
 }
 
 .modal__video-holder {
@@ -122,10 +119,6 @@
 
 .modal__sound {
     right: 0;
-}
-
-.misc-item {
-    margin: 0;
 }
 
 .modal__misc {

@@ -60,11 +60,14 @@
     .mini-modal {
         z-index: 2;
         width: 100%;
-        height: 2vw;
         right: 0;
         left: 0;
         top: var(--header-height-mobile);
+        height: 15vw;
+        font-size: 2.5vw;
+        text-align: center;
     }
+
     .mini-modal__wrapper {
         background-color: var(--blackout-for-header);
         border: none;
@@ -76,30 +79,19 @@
         margin-left: 0;
     }
 
-    .mini-modal {
-        width: 100%;
-        height: 15vw;
-        top: var(--header-height-mobile);
-        font-size: 2.5vw;
-        text-align: center;
-    }
-
     .mini-modal__arrow {
         display: none;
     }
 }
 
 @media (max-width: 440px) {
-    .mini-modal {
-        height: 4vw;
-    }
-
-    .mini-modal__wrapper {
-        padding-bottom: 40px;
-    }
 
     .mini-modal {
         height: 20vw;
         font-size: 4vw;
+    }
+
+    .mini-modal__wrapper {
+        padding-bottom: 40px;
     }
 }

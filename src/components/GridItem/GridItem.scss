@@ -10,6 +10,7 @@
 .content__grid-item:hover {
     transition: transform 0.5s ease-in-out;
     transform: scale(1.2);
+    z-index: 1;
     filter: drop-shadow(0 0 5px var(--shadow));
 }
 

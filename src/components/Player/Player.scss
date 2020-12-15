@@ -97,6 +97,12 @@
     opacity: 1;
 }
 
+.player-btn__img {
+    padding-top: 0.2vw;
+    width: 30px;
+    height: 30px;
+}
+
 .player-bar__prev-content-btn .player-btn__img{
     transform: rotate(180deg);
     padding-top: 0;
@@ -162,14 +168,7 @@
     transform: scale(1.1);
 }
 
-.player-btn__img {
-    padding-top: 0.2vw;
-    width: 30px;
-    height: 30px;
-}
-
-.player-bar__btn:hover
-.player-btn__img {
+.player-bar__btn:hover .player-btn__img {
     filter: drop-shadow(0 0 2px var(--white));
 }
 
