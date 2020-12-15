@@ -37,7 +37,7 @@ class Grid extends Component {
             this.context.gap = '0.2vw';
         }
 
-        if (window.innerWidth < TABLET_DEVICE_WIDTH) {
+        if (window.innerWidth <= TABLET_DEVICE_WIDTH) {
             this.context.column = 3;
         }
 

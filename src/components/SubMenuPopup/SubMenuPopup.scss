@@ -3,7 +3,6 @@
   position: absolute;
   display: flex;
   height: auto;
-  top: 2.5vw;
   padding: 1vw;
   background-color: var(--blackout-for-popup);
 }
@@ -29,34 +28,54 @@
 }
 
 .sub-menu__close-btn {
-  width: 1.5vw;
-  height: 1.5vw;
-  position: relative;
+  top: 20px;
+  right: 20px;
+  position: absolute;
 }
 
 @media (max-width: 1024px) {
   .sub-menu__item {
-    font-size: 2.3em;
     flex-basis: 20%;
+    text-align: center;
+    padding: 5px;
+    font-size: 2.5vw;
+    margin: 0;
   }
 }
 
 @media (max-width: 440px) {
   .genres__sub-menu {
-    top: 9vw;
     width: 90%;
     left: 0;
     background-color: var(--blackout-for-header);
-    height: 40vw;
+    height: 100%;
     overflow: scroll;
     padding: 5%;
+    animation: appearing-sub-men  ease-in 0.3s 0s;
+  }
+
+  @keyframes appearing-sub-men {
+    from {filter: opacity(0)}
+    50% {filter: opacity(0.5)}
+    to {filter: opacity(1)}
   }
 
   .sub-menu__list {
-    width: 95%;
+    z-index: 1001;
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
     align-content: space-around;
-    writing-mode: vertical-lr;
+    justify-content: space-between;
+    writing-mode: unset;
+    align-items: center;
+  }
+
+  .sub-menu__item {
+    text-align: center;
+    font-size: 5vw;
+  }
+
+  .sub-menu__close-btn {
+    z-index: 1001;
   }
 }
