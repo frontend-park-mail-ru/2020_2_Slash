@@ -43,18 +43,20 @@ class PlayerService {
             .on(Events.FullscreenModeOn, this._onFullScreenOn)
             .on(Events.FullscreenModeOff, this._onFullScreenOff);
 
-        this.video.addEventListener('timeupdate', this.onUpdateTime.bind(this));
+        this.video.addEventListener('timeupdate', this.onUpdateTime);
 
-        this.timeline.addEventListener('click', this.onTimelineUpdate.bind(this));
-        this.timeline.addEventListener('pointermove', this.onHoverTimeline.bind(this));
-        this.timeline.addEventListener('pointerout', this.onHoverOffTimeline.bind(this));
+        this.timeline.addEventListener('click', this.onTimelineUpdate);
+        this.timeline.addEventListener('pointermove', this.onHoverTimeline);
+        this.timeline.addEventListener('pointerout', this.onHoverOffTimeline);
+        document.querySelector('.watch__page').addEventListener('mouseover', this.showPlayerBar);
+        document.querySelector('.watch__page').addEventListener('mouseout', this.hidePlayerBar);
 
         const soundBar = document.querySelector('.player-bar__volume-bar');
-        soundBar.addEventListener('click', this.onVolumeUpdate.bind(this));
+        soundBar.addEventListener('click', this.onVolumeUpdate);
 
         const volumeBar = document.querySelector('.player-bar__volume');
-        volumeBar.addEventListener('pointermove', this.hideProgressBar.bind(this));
-        volumeBar.addEventListener('pointerout', this.showProgressBar.bind(this));
+        volumeBar.addEventListener('pointermove', this.hideProgressBar);
+        volumeBar.addEventListener('pointerout', this.showProgressBar);
 
         const nextContentButton = document.querySelector('.player-bar__next-content-btn');
         if (nextContentButton) {
@@ -91,6 +93,14 @@ class PlayerService {
         }
     }
 
+    showPlayerBar = () => {
+        document.querySelector('.player__container').setAttribute('style', 'opacity:1;');
+    }
+
+    hidePlayerBar = () => {
+        document.querySelector('.player__container').setAttribute('style', 'opacity:0;');
+    }
+
     onDOMContentLoaded() {
         const button = document.querySelector('.player-bar__play-btn');
         const buttonImg = document.querySelector('.player-play-btn__img');
@@ -99,21 +109,21 @@ class PlayerService {
         button.setAttribute('data-event', 'videoPlay');
     }
 
-    onVideoPlay() {
+    onVideoPlay = () => {
         this.video.play();
         this.video.setAttribute('data-event', 'videoPause');
         this.changeButton('.player-bar__play-btn', '.player-play-btn__img',
             '/static/img/player-pause.svg', 'videoPause');
     }
 
-    onVideoPause() {
+    onVideoPause = () => {
         this.video.pause();
         this.video.setAttribute('data-event', 'videoPlay');
         this.changeButton('.player-bar__play-btn', '.player-play-btn__img',
             '/static/img/player-play.svg', 'videoPlay');
     }
 
-    onTimelineUpdate(event: any) {
+    onTimelineUpdate = (event: any) => {
         const width = this.timeline.clientWidth;
         const currentPosition = event.clientX;
 
@@ -131,7 +141,7 @@ class PlayerService {
         }
     }
 
-    onHoverTimeline(event: any) {
+    onHoverTimeline = (event: any) => {
         const width = this.timeline.clientWidth;
         const currentPosition = event.clientX;
         const timelineMiddle: any = document.getElementsByClassName('timeline__middle')[0];
@@ -139,13 +149,13 @@ class PlayerService {
         timelineMiddle.style.width = `${100 * currentPosition / width}%`;
     }
 
-    onHoverOffTimeline() {
+    onHoverOffTimeline = () =>{
         const timelineMiddle: any = document.getElementsByClassName('timeline__middle')[0];
 
         timelineMiddle.style.width = '0%';
     }
 
-    onVolumeUpdate(event: any) {
+    onVolumeUpdate = (event: any) => {
         this.video.volume = event.target.value;
         if (this.video.volume === 0) {
             this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
@@ -163,21 +173,21 @@ class PlayerService {
         this.video.volume = value;
     }
 
-    onMuteVolume() {
+    onMuteVolume = () => {
         this.setVolumeValue(0);
 
         this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
             '/static/img/player-mute.svg', 'volumeOn');
     }
 
-    onVolumeOn() {
+    onVolumeOn = () => {
         this.setVolumeValue(0.5);
 
         this.changeButton('.player-bar__volume-btn', '.volume-btn__img',
             '/static/img/player-sound.svg', 'mute');
     }
 
-    onUpdateTime() {
+    onUpdateTime = () => {
         const currentTime = this.video.currentTime;
         const duration = this.video.duration ? this.video.duration : 1;
         this.timelineFront.style.width = `${(100 * currentTime / duration)}%`;
@@ -299,7 +309,7 @@ class PlayerService {
         this._onVideoPlay();
     }
 
-    onFullScreenOn() {
+    onFullScreenOn = () => {
         document.querySelector('.watch__page').requestFullscreen();
 
         const btnBack: HTMLButtonElement = document.querySelector('.watch__back-btn');
@@ -309,7 +319,7 @@ class PlayerService {
             '/static/img/player-fullscreen-out.svg', 'fullscreenModeOff');
     }
 
-    onFullScreenOff() {
+    onFullScreenOff = () => {
         document.exitFullscreen();
 
         const btnBack: any = document.querySelector('.watch__back-btn');
@@ -319,11 +329,11 @@ class PlayerService {
             '/static/img/player-fullscreen.svg', 'fullscreenModeOn');
     }
 
-    hideProgressBar() {
+    hideProgressBar = () => {
         this.timeline.setAttribute('style', 'opacity:0;');
     }
 
-    showProgressBar() {
+    showProgressBar = () => {
         this.timeline.setAttribute('style', 'opacity:1;');
     }
 

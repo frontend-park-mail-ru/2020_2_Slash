@@ -6,7 +6,7 @@ import Events from '../../consts/events';
 import UserHeader from '../UserHeader/UserHeader';
 import SearchInput from '../SearchInput/SearchInput';
 import {CreateDomElement} from '../../tools/helper';
-import {MOBILE_DEVICE_WIDTH} from '../../consts/other';
+import {MOBILE_DEVICE_SIZE} from '../../consts/other';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
 
 /**
@@ -58,7 +58,7 @@ class Header extends Component {
     }
 
     onSearchClick() {
-        if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
+        if (window.innerWidth <= MOBILE_DEVICE_SIZE) {
             this.SearchInput.render();
         }
 
@@ -73,6 +73,9 @@ class Header extends Component {
         if (promptWindow) {
             promptWindow.classList.add('hidden');
         }
+        document.getElementsByClassName('search-line__input')[0].focus();
+
+        this.SearchInput.addResizeCallbacks();
     }
 
     onUpdate(data: any = {}) {
@@ -90,9 +93,9 @@ class Header extends Component {
         const myListButton = document.querySelector('.my-list');
 
         if (authorized && !myListButton) {
-            const li = document.createElement('li');
+            const li = CreateDomElement('li', {'class': 'li__visible list__li'});
             const a = CreateDomElement('a', {
-                'class': 'my-list list-item-text list-item-text-selected',
+                'class': 'my-list list-item-text',
                 'href': '/mylist',
             });
             a.innerText = 'Мой список';

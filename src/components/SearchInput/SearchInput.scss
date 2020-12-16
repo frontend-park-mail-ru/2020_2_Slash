@@ -1,6 +1,5 @@
 .search-line {
   height: 30px;
-  width: 500px;
   position: relative;
 }
 
@@ -10,15 +9,15 @@
 
 .prompt-window {
   position: absolute;
-  box-sizing: border-box;
+  height: border-box;
   color: var(--white);
   background-color: var(--low-transparent-gray);
-  width: 500px;
   border: 1px solid var(--white);
+  padding: 7px;
 }
 
 .prompt-window__labels {
-  padding: 0.5vw;
+  padding: 0 0.5vw 0 0;
 }
 
 .prompt-window__label {
@@ -26,7 +25,7 @@
   text-decoration: none;
   font-size: 0.8vw;
   border-right: 1px solid grey;
-  padding: 0 .5em;
+  padding: 0 0.5vw 0 0;
 }
 
 .prompt-window__label:first-child {
@@ -60,11 +59,12 @@
 .search-line__input {
   background-color: var(--low-transparent-gray);
   height: 30px;
-  width: 500px;
+  width: 30vw;
   outline: none;
   color: var(--white);
   border-radius: 3px;
   border: 1px solid var(--white);
+  padding: 1px 8px;
 }
 
 .search-line__input:focus{
@@ -75,7 +75,7 @@ input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-s
   opacity: 0;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1100px) {
   .search-line {
     height: 30px;
     width: 300px;
@@ -101,7 +101,7 @@ input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-s
   }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 812px) {
   .search-line {
     height: 30px;
     width: 80%;
@@ -118,7 +118,7 @@ input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-s
   }
 
   .prompt-window {
-    width: 100%;
+    width: calc(100% - 2 * 8px);
     font-size: 5vw;
   }
 
@@ -133,7 +133,7 @@ input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-s
   }
 
   .prompt-window__label, .prompt-window__label:first-child {
-    font-size: 4vw;
+    font-size: 16px;
     border-right: none;
     padding: 2vw 0;
   }

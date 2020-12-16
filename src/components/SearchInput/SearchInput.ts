@@ -4,7 +4,7 @@ import template from './SearchInput.hbs';
 import eventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 import Routes from '../../consts/routes';
-import {MOBILE_DEVICE_WIDTH} from '../../consts/other';
+import {MOBILE_DEVICE_SIZE, TABLET_DEVICE_WIDTH} from '../../consts/other';
 import ContentModel from '../../models/ContentModel';
 import {Error} from '../../consts/errors';
 
@@ -20,9 +20,13 @@ interface resultType {
  */
 class SearchInput extends Component {
     private input: HTMLInputElement;
-    private _onSearch: any;
-    private _onEnter: any;
-    private _onClick: any;
+    private _onSearch: EventListenerOrEventListenerObject;
+    private _onEnter: EventListenerOrEventListenerObject;
+    private _onClick: EventListenerOrEventListenerObject;
+    private _HeaderMenuHeightUpdate: EventListenerOrEventListenerObject;
+    private minWidth: number;
+    private baseItems: HTMLCollectionOf<Element>;
+
     /**
      * Создает экземпляр SearchInput
      *
@@ -87,6 +91,11 @@ class SearchInput extends Component {
             }).catch((error: Error) => console.log(error));
         }.bind(this);
 
+        this.minWidth = 850;
+        this.baseItems = document.getElementsByClassName('list__li');
+
+        this._HeaderMenuHeightUpdate = this.fixHeaderMenu;
+
         this._onEnter = function(event: any) {
             document.querySelector('.prompt-window').classList.remove('hidden');
             if (event.keyCode === 13) {
@@ -111,14 +120,53 @@ class SearchInput extends Component {
         }.bind(this);
     }
 
+    fixHeaderMenu() {
+        const padding = 70;
+
+        if (window.innerWidth > TABLET_DEVICE_WIDTH) {
+            const items = document.getElementsByClassName('li__visible');
+
+            const sum = Array.from(items).reduce((accumulator, {clientWidth}) => accumulator + clientWidth, 0);
+
+            const currentHeaderMenuW = document.querySelector('.header__menu').clientWidth;
+            if (sum + padding >= currentHeaderMenuW) {
+                this.minWidth = currentHeaderMenuW;
+                const itemToHide = items.item(items.length - 1);
+                if (itemToHide) {
+                    itemToHide.setAttribute('style', 'display: none');
+                    itemToHide.classList.remove('li__visible');
+                }
+            }
+
+            if (this.minWidth <= currentHeaderMenuW - padding) {
+                const itemToShow = this.baseItems.item(items.length);
+                if (itemToShow) {
+                    itemToShow.setAttribute('style', 'display: block');
+                    itemToShow.classList.add('li__visible');
+                }
+            }
+        }
+    }
+
     addRemove() {
         this.parent.addEventListener('click', this._onClick);
         this.input = document.querySelector('.search-line__input');
     }
 
     addCallbackResult() {
+        if (!this.input) {
+            window.history.go(0);
+        }
         this.input.addEventListener('input', this._onSearch);
         this.input.addEventListener('keydown', this._onEnter);
+    }
+
+    addResizeCallbacks() {
+        // может быть, что нужно скрыть <= 2 пункта меню при открытии инпута поиска
+        // костыль, чтобы не придумывать цикл или делать рекурсию
+        this.fixHeaderMenu();
+        this.fixHeaderMenu();
+        window.addEventListener('resize', this._HeaderMenuHeightUpdate);
     }
 
     search() {
@@ -131,29 +179,43 @@ class SearchInput extends Component {
     }
 
     remove() {
+        window.removeEventListener('resize', this._HeaderMenuHeightUpdate);
         this.parent.removeEventListener('click', this._onClick);
         this.input.removeEventListener('input', this._onSearch);
         this.input.removeEventListener('keydown', this._onEnter);
-        if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
-            document.querySelector('.blocker').classList.add('hidden');
+
+        const blocker = document.querySelector('.blocker');
+
+        if (window.innerWidth <= MOBILE_DEVICE_SIZE || blocker) {
+            if (blocker) {
+                blocker.classList.add('hidden');
+            }
 
             const page = document.querySelector('.scroll-fixed');
             if (page) {
                 this.parent.innerHTML = page.innerHTML;
             }
         }
+
         const searchLine = document.querySelector('.search-line');
         if (searchLine) {
             searchLine.classList.remove('search-line_visible');
             searchLine.classList.add('hidden');
         }
-        if (document.querySelector('.header__search-img')) {
-            document.querySelector('.header__search-img').classList.remove('hidden');
+
+        const icon = document.querySelector('.header__search-img');
+        if (icon) {
+            icon.classList.remove('hidden');
         }
+
+        // может быть, что нужно отобразить <= 2 пункта меню при закрытии инпута поиска
+        // костыль, чтобы не придумывать цикл или делать рекурсию
+        this.fixHeaderMenu();
+        this.fixHeaderMenu();
     }
 
     render() {
-        if (window.innerWidth > MOBILE_DEVICE_WIDTH) {
+        if (window.innerWidth > MOBILE_DEVICE_SIZE) {
             return super.render();
         } else {
             const page = document.createElement('div');
