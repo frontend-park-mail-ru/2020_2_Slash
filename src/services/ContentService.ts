@@ -10,6 +10,7 @@ import Modals from '../consts/modals';
 import TVShowsModel from '../models/TVShowsModel';
 import Types from '../consts/contentType';
 import ContentModel from '../models/ContentModel';
+import {MOBILE_DEVICE_WIDTH, TABLET_DEVICE_WIDTH} from '../consts/other';
 
 interface ContextData {
     contentId?: number,
@@ -25,6 +26,7 @@ interface ContextData {
 class ContentService {
     private static instance: ContentService;
     private infoBlock: InfoBlock;
+    private _GridUpdate: EventListenerOrEventListenerObject;
 
     /**
      * Создает экземпляр ContentService
@@ -40,6 +42,10 @@ class ContentService {
             .on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this))
             .on(Events.ContentByExternalReference, this.onContentByExternalReference.bind(this))
             .on(Events.UpdateRating, this.onUpdateRating.bind(this));
+
+        this._GridUpdate = this.fixGrid.bind(this);
+
+        window.addEventListener('resize', this._GridUpdate);
     }
 
     /**
@@ -54,6 +60,39 @@ class ContentService {
         }
 
         return ContentService.instance;
+    }
+
+    fixGrid = () => {
+        let grid = document.querySelector('.content__grid');
+
+        if (grid) {
+            grid.classList.add('hidden');
+            const width = window.innerWidth;
+            grid.classList.remove('hidden');
+
+            if (width <= TABLET_DEVICE_WIDTH) {
+                grid.setAttribute('style', 'grid-template-columns: repeat(3, 1fr); ' +
+                    'grid-column-gap: 0.2vw;');
+            }
+
+            if (width < MOBILE_DEVICE_WIDTH) {
+                grid.setAttribute('style', 'grid-template-columns: repeat(2, 1fr); ' +
+                    'grid-column-gap: 0.2vw');
+            }
+
+            if (width >=TABLET_DEVICE_WIDTH) {
+                grid.setAttribute('style', 'grid-template-columns: repeat(6, 1fr); ' +
+                    'grid-column-gap: 3px');
+            }
+
+            grid = document.querySelector('.seasons-wrapper__grid .content__grid');
+            if (grid) {
+                if (width > TABLET_DEVICE_WIDTH) {
+                    grid.setAttribute('style', 'grid-template-columns: repeat(5, 1fr); ' +
+                        'grid-column-gap: 3px');
+                }
+            }
+        }
     }
 
     /**

@@ -3,6 +3,9 @@
     width: 60vw;
     height: 20vw;
     margin: 2vw auto 0 auto;
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .profile-view__user-info {
@@ -20,7 +23,7 @@
     -webkit-backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .user-meta__avatar {
@@ -107,16 +110,18 @@
     }
 
     .user-meta__avatar {
-        width: 40%;
+        width: 30%;
     }
 
     .user-meta__labels {
-        margin-top: 10vw;
+        margin-top: 30px;
     }
 
     .user-meta__nickname,
     .user-meta__email {
-        font-size: 5vw;
+        font-size: 4vw;
+        width: 210px;
+        overflow-wrap: break-word;
     }
 
     .user-meta__edit-btn {

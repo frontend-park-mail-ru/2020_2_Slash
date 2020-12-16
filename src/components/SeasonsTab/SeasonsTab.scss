@@ -69,8 +69,8 @@
     cursor: pointer;
     color: var(--white);
     margin-top: 15px;
-    width: 2vw;
-    height: 2vw;
+    width: 35px;
+    height: 35px;
     border-radius: 10px;
     border: none;
     outline: none;
@@ -78,13 +78,13 @@
     font-family: "Inter", Arial, sans-serif;
 
     @media (max-width: 1024px) {
-      width: 4vw;
-      height: 4vw;
+      width: 30px;
+      height: 30px;
     }
 
     @media (max-width: 440px) {
-      width: 7vw;
-      height: 7vw;
+      width: 25px;
+      height: 25px;
       margin-top: 0;
       margin-left: 15px;
     }
@@ -105,7 +105,7 @@
   }
 
   &__grid {
-    padding: 9vh 20px 0 20px;
+    padding: 9vh 20px 0 0;
 
     @media (max-width: 440px) {
       padding: 4vh 20px 4vh 20px;

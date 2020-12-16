@@ -24,7 +24,7 @@
         background: var(--popup-input-color);
         border-radius: 5px;
         border-width: 0;
-        padding: 1px;
+        padding: 1px 8px;
 
         @media (max-width: 380px) and (max-height: 570px) {
             margin-top: 10px;
