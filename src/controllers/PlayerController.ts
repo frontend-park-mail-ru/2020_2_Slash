@@ -50,6 +50,7 @@ class PlayerController extends Controller {
                 const indexEpisode = data.query.get('episode') - 1;
 
                 const {tvshow} = response.body;
+                tvshow.seasons.sort((a: any, b: any) => a.number > b.number ? 1 : -1);
 
                 const season = tvshow.seasons[indexSeason];
                 const episode = tvshow.seasons[indexSeason].episodes[indexEpisode];

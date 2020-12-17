@@ -117,6 +117,8 @@ class ContentService {
                 if (!tvshow.error || !rating.error || !seasons.error) {
                     const contentData: Context = tvshow.body.tvshow;
 
+                    seasons.body.tvshow.seasons.sort((a: any, b: any) => a.number > b.number ? 1 : -1);
+
                     contentData.rating = rating.body.match;
 
                     const infoBlockData: ContextData = {
@@ -167,6 +169,7 @@ class ContentService {
                 if (!tvshows.error || !rating.error || !seasons.error) {
                     const contentData: any = tvshows.body.tvshow;
 
+                    seasons.body.tvshow.seasons.sort((a: any, b: any) => a.number > b.number ? 1 : -1);
                     const infoPopupData: ContextData = {
                         contentId: data.tvshowId,
                         contentData: contentData,
@@ -257,6 +260,7 @@ class ContentService {
                 if (!tvshows.error || !rating.error || !seasons.error) {
                     const contentData: any = tvshows.body.tvshow;
 
+                    seasons.body.tvshow.seasons.sort((a: any, b: any) => a.number > b.number ? 1 : -1);
                     const infoPopupData: ContextData = {
                         contentId: data.id,
                         contentData: contentData,
