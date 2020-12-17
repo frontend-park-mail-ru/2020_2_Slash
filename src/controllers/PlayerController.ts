@@ -4,6 +4,7 @@ import PlayerService from '../services/PlayerService';
 import MovieModel from '../models/MovieModel';
 import TVShowsModel from '../models/TVShowsModel';
 import {SERVER_HOST} from '../consts/settings';
+import compareByField from '../tools/comparator';
 
 /**
  * @class
@@ -50,6 +51,7 @@ class PlayerController extends Controller {
                 const indexEpisode = data.query.get('episode') - 1;
 
                 const {tvshow} = response.body;
+                tvshow.seasons.sort(compareByField('number'));
 
                 const season = tvshow.seasons[indexSeason];
                 const episode = tvshow.seasons[indexSeason].episodes[indexEpisode];

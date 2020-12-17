@@ -11,6 +11,7 @@ import TVShowsModel from '../models/TVShowsModel';
 import Types from '../consts/contentType';
 import ContentModel from '../models/ContentModel';
 import {MOBILE_DEVICE_WIDTH, TABLET_DEVICE_WIDTH} from '../consts/other';
+import compareByField from '../tools/comparator';
 
 interface ContextData {
     contentId?: number,
@@ -117,6 +118,8 @@ class ContentService {
                 if (!tvshow.error || !rating.error || !seasons.error) {
                     const contentData: Context = tvshow.body.tvshow;
 
+                    seasons.body.tvshow.seasons.sort(compareByField('number'));
+
                     contentData.rating = rating.body.match;
 
                     const infoBlockData: ContextData = {
@@ -167,6 +170,7 @@ class ContentService {
                 if (!tvshows.error || !rating.error || !seasons.error) {
                     const contentData: any = tvshows.body.tvshow;
 
+                    seasons.body.tvshow.seasons.sort(compareByField('number'));
                     const infoPopupData: ContextData = {
                         contentId: data.tvshowId,
                         contentData: contentData,
@@ -257,6 +261,7 @@ class ContentService {
                 if (!tvshows.error || !rating.error || !seasons.error) {
                     const contentData: any = tvshows.body.tvshow;
 
+                    seasons.body.tvshow.seasons.sort(compareByField('number'));
                     const infoPopupData: ContextData = {
                         contentId: data.id,
                         contentData: contentData,
