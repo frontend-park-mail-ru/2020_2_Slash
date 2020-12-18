@@ -1,0 +1,67 @@
+<div class="free-view">
+    <div class="free__title pad-both">Бесплатное</div>
+    <div class="free__wrapper pad-both">
+
+        <button class="genres-btn filter-btn">
+            <div class="genres-btn__label filter-btn__label">Фильтры</div>
+            <img class="filter-btn__arrow" src="/static/img/arrow.svg" loading="lazy">
+        </button>
+
+        <div class="free__filters hidden">
+            <div class="free__genres">
+                <div class="free__label free__genre-label">Жанры</div>
+                <img class="free__arrow" src="/static/img/arrow2.svg">
+                <div class="free__items free__genre-items">
+                    {{#each Genres}}
+                        <div class="free__item free__genre-item" data-genre-id="{{this.id}}">
+                            {{{this.name}}}
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="free__delete-btn free__delete-genres">
+                    <img class="free__delete" src="/static/img/trash.svg">
+                </div>
+            </div>
+
+            <div class="free__years">
+                <div class="free__label free__years-label">Годы</div>
+                <img class="free__arrow" src="/static/img/arrow2.svg">
+                <div class="free__items free__years-items" data-year="{{this}}">
+                    {{#each Years}}
+                        <div class="free__item free__year-item" data-year="{{this}}">
+                            {{{this}}}
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="free__delete-btn free__delete-years">
+                    <img class="free__delete" src="/static/img/trash.svg">
+                </div>
+            </div>
+
+            <div class="free__countries">
+                <div class="free__label free__countries-label">Страны</div>
+                <img class="free__arrow" src="/static/img/arrow2.svg">
+                <div class="free__items free__countries-items">
+                    {{#each Countries}}
+                        <div class="free__item free__country-item" data-country-id="{{this.id}}">
+                            {{{this.name}}}
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="free__delete-btn free__delete-countries">
+                    <img class="free__delete" src="/static/img/trash.svg">
+                </div>
+            </div>
+
+            <div class="free__close-btn">
+                <button class="close-btn" data-event="">
+                    <img class="close-btn__img" src="/static/img/arrow.svg">
+                </button>
+            </div>
+        </div>
+
+        <div class="free__content-wrapper">
+            {{{Content}}}
+        </div>
+    </div>
+</div>

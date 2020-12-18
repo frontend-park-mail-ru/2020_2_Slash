@@ -10,11 +10,13 @@ enum ApiMethods {
     FavouritesMovies = '/favourites',
     Rating = '/rating',
     Genres = '/genres',
+    Countries = '/countries',
     Actors = '/actors',
     TVShows = '/tvshows',
     Search = '/search',
     TopTVShows = '/tvshows/top',
     LatestTVShows = '/tvshows/latest',
+    Content = '/content',
 }
 
 export default ApiMethods;

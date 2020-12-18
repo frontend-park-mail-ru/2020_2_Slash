@@ -8,7 +8,7 @@
 }
 
 .content__grid-item:hover {
-    transition: transform 0.5s ease-in-out;
+    transition: all 0.5s 0.2s ease-in-out;
     transform: scale(1.2);
     z-index: 1;
     filter: drop-shadow(0 0 5px var(--shadow));
@@ -18,6 +18,15 @@
     color: var(--white);
     font-size: 0.5vw;
     display: flex;
+    opacity: 1;
+    transition: opacity 0.5s 0.2s ease-in-out;
+    animation: appearing-item ease-in 0.3s 0.2s;
+}
+
+@keyframes appearing-item {
+    from {filter: opacity(0)}
+    50% {filter: opacity(0.5)}
+    to {filter: opacity(1)}
 }
 
 @media (max-width: 1024px) {
@@ -29,7 +38,7 @@
 
     .content__grid-item {
         height: 15vw;
-        width: 25vw;
+        width: 23vw;
         box-shadow: none;
     }
 

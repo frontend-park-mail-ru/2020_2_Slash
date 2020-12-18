@@ -1,13 +1,13 @@
 import Component from '../Component';
 import Context from '../../tools/Context';
 import template from './Header.hbs';
-import eventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 import UserHeader from '../UserHeader/UserHeader';
 import SearchInput from '../SearchInput/SearchInput';
 import {CreateDomElement} from '../../tools/helper';
-import {MOBILE_DEVICE_SIZE} from '../../consts/other';
+import {MOBILE_DEVICE_SIZE, TABLET_DEVICE_WIDTH} from '../../consts/other';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
+import EventBus from '../../services/EventBus';
 
 /**
  * @class
@@ -17,6 +17,10 @@ class Header extends Component {
     public UserBlock: UserHeader;
     public SearchInput: SearchInput;
     private flag: boolean;
+    private minWidth: number;
+    private padding = 100;
+    private baseItems: HTMLCollectionOf<Element>;
+
     /**
      * Создает экземпляр Header
      *
@@ -35,20 +39,91 @@ class Header extends Component {
         this.SearchInput = new SearchInput(this.context, document.querySelector('.application'));
         this.context.SearchInput = this.SearchInput.render();
 
-        if (!eventBus.getListeners().updateHeader) {
-            eventBus.on(Events.UpdateHeader, this.onUpdate.bind(this));
-            eventBus.on(Events.UpdateHeader, this.onUpdateHeaderNav.bind(this));
+        if (!EventBus.getListeners().updateHeader) {
+            EventBus.on(Events.UpdateHeader, this.onUpdate.bind(this));
+            EventBus.on(Events.UpdateHeader, this.onUpdateHeaderNav.bind(this));
         }
 
-        if (!eventBus.getListeners().showSearchLine) {
-            eventBus.on(Events.ShowSearchLine, this.onSearchClick.bind(this));
+        if (!EventBus.getListeners().showSearchLine) {
+            EventBus.on(Events.ShowSearchLine, this.onSearchClick.bind(this));
         }
 
-        if (!eventBus.getListeners().showNavMenu) {
-            eventBus.on(Events.ShowNavMenu, this.onOpenBurger);
+        if (!EventBus.getListeners().showNavMenu) {
+            EventBus.on(Events.ShowNavMenu, this.onOpenBurger);
         }
 
         this.flag = true;
+
+        this.minWidth = 850;
+        this.baseItems = document.getElementsByClassName('list__li');
+
+        window.addEventListener('resize', () => {
+            this.fixHeaderMenu(this.padding);
+        });
+        EventBus.on(Events.FixHeader, () => {
+            // может быть, что нужно отобразить <= 3 пункта меню
+            // костыль, чтобы не придумывать цикл или делать рекурсию
+            this.fixHeaderMenu(this.padding);
+            this.fixHeaderMenu(this.padding);
+            this.fixHeaderMenu(this.padding);
+        });
+    }
+
+    checkSum = (items: HTMLCollectionOf<Element>) => {
+        return Array.from(items).reduce((accumulator, {clientWidth}) => accumulator + clientWidth, 0);
+    }
+
+    fixHeaderMenu = (padding: number) => {
+        let sum;
+
+        if (window.innerWidth > TABLET_DEVICE_WIDTH) {
+            const items = document.getElementsByClassName('li__visible');
+            sum = this.checkSum(items);
+
+            const currentHeaderMenuW = document.querySelector('.header__menu').clientWidth;
+
+            if (sum + padding >= currentHeaderMenuW) {
+                this.minWidth = currentHeaderMenuW;
+                const itemToHide = items.item(items.length - 1);
+                if (itemToHide) {
+                    itemToHide.setAttribute('style', 'display: none');
+                    itemToHide.classList.remove('li__visible');
+                }
+
+                const hiddenMenu = document.querySelector('.hidden__header-menu');
+                if (hiddenMenu) {
+                    hiddenMenu.classList.remove('hidden');
+                    const hiddenItem = this.baseItems.item(items.length);
+                    const HiddenA = hiddenItem.getElementsByTagName('a')[0];
+
+                    const li = CreateDomElement('li', {'class': 'list__li'});
+                    const a = CreateDomElement('a', {
+                        'class': 'list-item-text',
+                        'href': `${HiddenA.pathname}`,
+                    });
+                    a.innerText = `${HiddenA.innerText}`;
+
+                    li.appendChild(a);
+
+                    hiddenMenu.querySelector('.hidden__header-menu__wrapper').appendChild(li);
+                }
+            }
+
+            if (this.minWidth <= currentHeaderMenuW - padding) {
+                const hiddenMenu = document.querySelector('.hidden__header-menu .hidden__header-menu__wrapper');
+                const hiddenItems = hiddenMenu.children;
+                if (hiddenItems.length > 0) {
+                    hiddenMenu.removeChild(hiddenItems[hiddenItems.length - 1]);
+                }
+                document.querySelector('.hidden__header-menu').classList.add('hidden');
+
+                const itemToShow = this.baseItems.item(items.length);
+                if (itemToShow) {
+                    itemToShow.setAttribute('style', 'display: block');
+                    itemToShow.classList.add('li__visible');
+                }
+            }
+        }
     }
 
     onOpenBurger = () => {
@@ -75,7 +150,11 @@ class Header extends Component {
         }
         document.getElementsByClassName('search-line__input')[0].focus();
 
-        this.SearchInput.addResizeCallbacks();
+        // может быть, что нужно скрыть <= 3 пункта меню при открытии инпута поиска
+        // костыль, чтобы не придумывать цикл или делать рекурсию
+        this.fixHeaderMenu(this.padding);
+        this.fixHeaderMenu(this.padding);
+        this.fixHeaderMenu(this.padding);
     }
 
     onUpdate(data: any = {}) {
@@ -104,6 +183,7 @@ class Header extends Component {
             if (navBar) {
                 document.querySelector('.nav__list').appendChild(li).appendChild(a);
             }
+            EventBus.emit(Events.FixHeader);
             return;
         }
 

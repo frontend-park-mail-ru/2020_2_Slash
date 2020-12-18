@@ -59,7 +59,7 @@
 .search-line__input {
   background-color: var(--low-transparent-gray);
   height: 30px;
-  width: 30vw;
+  width: 25vw;
   outline: none;
   color: var(--white);
   border-radius: 3px;
@@ -75,7 +75,7 @@ input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-s
   opacity: 0;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   .search-line {
     height: 30px;
     width: 300px;
