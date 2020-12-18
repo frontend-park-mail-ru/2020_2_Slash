@@ -5,9 +5,30 @@ class ContentModel {
     constructor() {
     }
 
+    getContent(
+        {
+            count = 10,
+            isFree = true,
+            genreId = 0,
+            year = '',
+            country = 0,
+            from = 0,
+        }) {
+        return http.fetchGet({
+            route: `${ApiMethods.Content}?count=${count}&from=${from}&isFree=${isFree}
+            &year=${year}&genre=${genreId}&country=${country}`,
+        }).then((response: Response) => response.json());
+    }
+
     getGenres() {
         return http.fetchGet({
             route: `${ApiMethods.Genres}`,
+        }).then((response: Response) => response.json());
+    }
+
+    getCountries() {
+        return http.fetchGet({
+            route: `${ApiMethods.Countries}`,
         }).then((response: Response) => response.json());
     }
 

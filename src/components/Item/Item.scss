@@ -35,7 +35,7 @@
 
 .content__item_hovered {
     position: absolute;
-    display: none;
+    opacity: 0;
     width: 100%;
     bottom: -3.4vw;
 }
@@ -109,8 +109,8 @@
     .item__btn-img,
     .item__play-btn-img {
         background-position: center center;
-        width: 6.5vw;
-        height: 6.5vw;
+        width: 5vw;
+        height: 5vw;
     }
 
     .content__slider-item:hover > .item__img {

@@ -39,7 +39,7 @@ class Grid extends Component {
         }
 
         if (window.innerWidth <= TABLET_DEVICE_WIDTH) {
-            this.context.column = 3;
+            this.context.column = 4;
         }
 
         if (window.innerWidth < MOBILE_DEVICE_WIDTH) {

@@ -30,7 +30,7 @@
     cursor: pointer;
     display: inline-block;
     position: relative;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.2s ease-in-out;
     transform: translateX(-10%);
     background-color: var(--hover-gray);
     height: 10vw;
@@ -91,6 +91,7 @@
     display: flex;
     flex-direction: column;
     padding-bottom: 1vw;
+    opacity: 1;
 }
 
 .content__slider-item:hover > .item__img {

@@ -33,6 +33,7 @@ enum Events {
     SeasonChanged = 'seasonChanged',
     ShowNavMenu = 'showNavMenu',
     UpdateRating = 'updateRating',
+    FixHeader = 'fixHeader',
     PlayNextContent = 'playNextContent',
 }
 

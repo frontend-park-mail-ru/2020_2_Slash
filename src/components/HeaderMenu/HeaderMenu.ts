@@ -111,14 +111,6 @@ class HeaderMenu extends Component {
      * @return {*|string}
      */
     render() {
-        if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
-            const page = document.createElement('div');
-            page.classList.add('scroll-fixed');
-            page.innerHTML = this.parent.innerHTML;
-            this.parent.innerHTML = '';
-            this.parent.appendChild(page);
-        }
-
         this.context.authorized = localStorage.getItem('authorized');
         const modalDiv = document.createElement('div');
         modalDiv.innerHTML = this.template(this.context);
@@ -127,10 +119,6 @@ class HeaderMenu extends Component {
 
         if (this.context.authorized === 'true') {
             this.onUpdateHeaderNav(true);
-        }
-
-        if (window.innerWidth < MOBILE_DEVICE_WIDTH) {
-            document.querySelector('.blocker').classList.remove('hidden');
         }
     }
 }

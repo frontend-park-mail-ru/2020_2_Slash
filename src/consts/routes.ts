@@ -11,6 +11,7 @@ enum Routes {
     Person = '/actor/:id',
     SearchPage = '/search',
     Serials = '/serials',
+    FreeContent = '/free',
     Admin = '/admin',
 }
 

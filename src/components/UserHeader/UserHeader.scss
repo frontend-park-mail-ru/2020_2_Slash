@@ -28,14 +28,9 @@
         width: 24px;
         height: 24px;
     }
-
-    .header__arrow {
-        width: 2vw;
-        height: 4vw;
-    }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 440px) {
     .header__arrow {
         width: 4vw;
         height: 8vw;

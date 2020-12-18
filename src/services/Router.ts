@@ -2,7 +2,7 @@
 
 import ContentService from './ContentService';
 import Routes from '../consts/routes';
-import eventBus from './EventBus';
+import EventBus from './EventBus';
 import Events from '../consts/events';
 import {CustomObject} from '../tools/type';
 import Controller from '../controllers/Controller';
@@ -42,8 +42,8 @@ class Router {
 
         this.contentService = ContentService.getInstance();
 
-        eventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
-        eventBus.on(Events.RedirectBack, this.back.bind(this));
+        EventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
+        EventBus.on(Events.RedirectBack, this.back.bind(this));
 
         this.application.addEventListener('click', (e: Event) => {
             const target = <HTMLInputElement>e.target;
@@ -58,17 +58,17 @@ class Router {
                 data.path = closestLink.getAttribute('href');
 
                 if (!data.event) {
-                    eventBus.emit(Events.PathChanged, data);
+                    EventBus.emit(Events.PathChanged, data);
                 } else {
-                    eventBus.emit(data.event, data);
+                    EventBus.emit(data.event, data);
                 }
             } else if (closestButton instanceof HTMLButtonElement) {
                 e.preventDefault();
 
                 const data = {...closestButton.dataset};
-                eventBus.emit(data.event, data);
+                EventBus.emit(data.event, data);
             } else if (target instanceof HTMLMediaElement) {
-                eventBus.emit(target.dataset.event);
+                EventBus.emit(target.dataset.event);
             }
         });
     }

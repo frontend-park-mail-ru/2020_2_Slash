@@ -12,6 +12,7 @@ import MyListController from './controllers/MyListController';
 import PersonController from './controllers/PersonController';
 import SearchController from './controllers/SearchController';
 import SerialController from './controllers/SerialController';
+import FreeContentController from './controllers/FreeContentController';
 
 if (navigator.serviceWorker) {
     navigator.serviceWorker.register('/sw.js').then();
@@ -31,4 +32,5 @@ const app: HTMLElement = document.querySelector('.application');
     .register(Routes.Person, new PersonController)
     .register(Routes.SearchPage, new SearchController())
     .register(Routes.Serials, new SerialController)
+    .register(Routes.FreeContent, new FreeContentController)
     .start();

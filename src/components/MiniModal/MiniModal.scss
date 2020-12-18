@@ -4,7 +4,7 @@
     height: 4vw;
     right: 55px;
     top: var(--header-height);
-    font-size: 1vw;
+    font-size: 16px;
     animation: appearing-mini-modal  ease-in 0.3s 0s;
 }
 
@@ -15,9 +15,10 @@
 }
 
 .mini-modal__wrapper {
-    background-color: var(--medium-transparent-white);
-    border: 2px solid var(--white);
-    border-radius: 3px;
+    background-color: var(--hover-gray);
+    border-top: 1px solid var(--white);
+    border-radius: 5px;
+    padding: 5px;
     width: 100%;
     height: 100%;
     position: relative;
