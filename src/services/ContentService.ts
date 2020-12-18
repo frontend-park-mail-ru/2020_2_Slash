@@ -12,6 +12,8 @@ import Types from '../consts/contentType';
 import ContentModel from '../models/ContentModel';
 import {MOBILE_DEVICE_WIDTH, TABLET_DEVICE_WIDTH} from '../consts/other';
 import compareByField from '../tools/comparator';
+import Routes from '../consts/routes';
+
 
 interface ContextData {
     contentId?: number,
@@ -42,7 +44,8 @@ class ContentService {
             .on(Events.ContentIsDisliked, this.onContentIsDisliked.bind(this))
             .on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this))
             .on(Events.ContentByExternalReference, this.onContentByExternalReference.bind(this))
-            .on(Events.UpdateRating, this.onUpdateRating.bind(this));
+            .on(Events.UpdateRating, this.onUpdateRating.bind(this))
+            .on(Events.PlayContent, this.onPlayContent.bind(this));
 
         this._GridUpdate = this.fixGrid.bind(this);
 
@@ -357,6 +360,31 @@ class ContentService {
         currentButton.setAttribute('src', icon);
         currentButton.parentElement.dataset.status = status;
         if (anotherButton) anotherButton.dataset.status = status;
+    }
+
+    onPlayContent(data: any) {
+        // TODO: покачто симулирую подписку так, после того как вмерджится тикет с бэка это надо выпилить
+        localStorage.setItem('subscribe', 'false');
+
+        const authStatus = localStorage.getItem('authorized');
+
+        const subscribeStatus = localStorage.getItem('subscribe');
+        if (subscribeStatus == 'false' && data.pay == 'false') {
+            if (authStatus == 'false') {
+                EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
+                return;
+            }
+            EventBus.emit(Events.PathChanged, {path: Routes.ProfilePage});
+            return;
+        }
+
+        let contentUrl;
+        if (data.movieId) {
+            contentUrl = `/watch/${data.id}`;
+        } else {
+            contentUrl = `/watch/${data.id}?season=1&episode=1`;
+        }
+        EventBus.emit(Events.PathChanged, {path: contentUrl});
     }
 
     onAddToFavourites(data: { event: string, id: string, status: boolean }) {

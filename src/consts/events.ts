@@ -35,6 +35,7 @@ enum Events {
     UpdateRating = 'updateRating',
     FixHeader = 'fixHeader',
     UpdateSubscription = 'updateSubscription',
+    PlayContent = 'playContent',
 }
 
 export default Events;

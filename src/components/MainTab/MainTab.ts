@@ -52,7 +52,6 @@ class MainTab extends Component {
      */
     render() {
         this.context.host = SERVER_HOST;
-
         this.addLikeIcons();
 
         if (this.context.actors && this.context.actors.length > 3) {

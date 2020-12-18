@@ -101,7 +101,9 @@ class PlayerController extends Controller {
     }
 
     onSwitchOff() {
-        this.playerService.stop();
+        if (this.playerService) {
+            this.playerService.stop();
+        }
     }
 }
 
