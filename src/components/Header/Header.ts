@@ -8,6 +8,7 @@ import {CreateDomElement} from '../../tools/helper';
 import {MOBILE_DEVICE_SIZE, TABLET_DEVICE_WIDTH} from '../../consts/other';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
 import EventBus from '../../services/EventBus';
+import routes from '../../consts/routes';
 
 /**
  * @class
@@ -81,6 +82,8 @@ class Header extends Component {
             sum = this.checkSum(items);
 
             const currentHeaderMenuW = document.querySelector('.header__menu').clientWidth;
+            const hiddenMenu = document.querySelector('.hidden__header-menu');
+            const hiddenMenuWrapper = document.querySelector('.hidden__header-menu__wrapper');
 
             if (sum + padding >= currentHeaderMenuW) {
                 this.minWidth = currentHeaderMenuW;
@@ -89,14 +92,16 @@ class Header extends Component {
                     itemToHide.setAttribute('style', 'display: none');
                     itemToHide.classList.remove('li__visible');
                 }
-
-                const hiddenMenu = document.querySelector('.hidden__header-menu');
                 if (hiddenMenu) {
                     hiddenMenu.classList.remove('hidden');
-                    const hiddenItem = this.baseItems.item(items.length);
-                    const HiddenA = hiddenItem.getElementsByTagName('a')[0];
+                    const HiddenA = itemToHide.getElementsByTagName('a')[0];
 
-                    const li = CreateDomElement('li', {'class': 'list__li'});
+                    let myListClass = '';
+                    if (HiddenA && HiddenA.pathname === routes.MyList) {
+                        myListClass = 'my-list';
+                    }
+
+                    const li = CreateDomElement('li', {'class': `list__li ${myListClass}`});
                     const a = CreateDomElement('a', {
                         'class': 'list-item-text',
                         'href': `${HiddenA.pathname}`,
@@ -105,7 +110,7 @@ class Header extends Component {
 
                     li.appendChild(a);
 
-                    hiddenMenu.querySelector('.hidden__header-menu__wrapper').appendChild(li);
+                    hiddenMenuWrapper.appendChild(li);
                 }
             }
 
@@ -172,9 +177,9 @@ class Header extends Component {
         const myListButton = document.querySelector('.my-list');
 
         if (authorized && !myListButton) {
-            const li = CreateDomElement('li', {'class': 'li__visible list__li'});
+            const li = CreateDomElement('li', {'class': 'my-list li__visible list__li'});
             const a = CreateDomElement('a', {
-                'class': 'my-list list-item-text',
+                'class': 'list-item-text',
                 'href': '/mylist',
             });
             a.innerText = 'Мой список';
@@ -187,8 +192,13 @@ class Header extends Component {
             return;
         }
 
+        const myListButtons = document.querySelectorAll('.my-list');
         if (!authorized && myListButton) {
-            myListButton.remove();
+            myListButtons.forEach((item) => item.remove());
+        }
+
+        if (!document.querySelector('.hidden__header-menu__wrapper .list__li')) {
+            document.querySelector('.hidden__header-menu').classList.add('hidden');
         }
     }
 

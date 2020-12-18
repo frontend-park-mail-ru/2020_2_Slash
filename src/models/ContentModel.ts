@@ -15,8 +15,8 @@ class ContentModel {
             from = 0,
         }) {
         return http.fetchGet({
-            route: `${ApiMethods.Content}?count=${count}&from=${from}&isFree=${isFree}
-            &year=${year}&genre=${genreId}&country=${country}`,
+            route: `${ApiMethods.Content}?count=${count}&from=${from}&is_free=${isFree}&year=${year}&genre=${
+                genreId}&country=${country}`,
         }).then((response: Response) => response.json());
     }
 
