@@ -31,9 +31,18 @@ class ContentPopup extends Component {
 
         this._onClick = function(event: any) {
             const closingTarget = event.target.classList.contains('blocker') ||
-                event.target.closest('.close-btn') || event.target.closest('.modal__play-btn');
+                event.target.closest('.close-btn');
             if (closingTarget) {
                 this.remove();
+            }
+            const playTarget = event.target.closest('.modal__play-btn');
+            if (playTarget) {
+                const popup = document.querySelector('.content-popup');
+                if (popup) {
+                    popup.remove();
+                }
+
+                this.onDestroy();
             }
         }.bind(this);
 

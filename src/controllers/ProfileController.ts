@@ -32,7 +32,7 @@ class ProfileController extends Controller {
         EventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
-    switchOn() {
+    switchOn(data?: any) {
         UserModel.getProfile().then((response: ResponseType) => {
             let sessionData: any = {
                 authorized: false,
@@ -58,7 +58,7 @@ class ProfileController extends Controller {
                         sessionData.subDate = this.subDate;
                         this.view.insertIntoContext(sessionData);
                         this.view.show();
-                        this.onSwitchOn();
+                        this.onSwitchOn(data);
                     }
                 }).catch((error: Error) => console.log(error));
                 return;
@@ -69,6 +69,9 @@ class ProfileController extends Controller {
     }
 
     onSwitchOn(data?: any) {
+        if (data.info === 'SubscribeTab') {
+            eventBus.emit(Events.ProfileTabChanged, data);
+        }
         super.onSwitchOn(data);
         const subscribeBtn = document.querySelector('.create-sub__btn');
         if (subscribeBtn) {

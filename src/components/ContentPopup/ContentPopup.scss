@@ -186,7 +186,20 @@
     background-position: center center;
     outline: none;
     border: none;
-    transform: scale(0.70);
+
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.modal__pay-img:hover:after {
+    content: attr(data-title);
+    position: absolute;
+    z-index: 1;
+    font-size: 11px;
+    letter-spacing: 2px;
 }
 
 .misc-item {
@@ -199,6 +212,11 @@
 .modal__cast,
 .modal__director {
     margin-bottom: 2vw;
+}
+
+.modal__title {
+    display: flex;
+    flex-direction: row;
 }
 
 .modal__title-text {

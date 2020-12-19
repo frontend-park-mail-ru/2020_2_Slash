@@ -5,7 +5,9 @@
             <div class="info-block__title info-block__title-main">
                 <h3 class="info-block__title-text">{{name}}</h3>
                 {{#unless is_free}}
-                        <img class="info-block__pay__img" src="/static/img/dollar.svg" loading="lazy">
+                    <div class="info-block__pay-img" data-title="Платный контент">
+                        <img src="/static/img/dollar.svg" loading="lazy">
+                    </div>
                 {{/unless}}
             </div>
             <div class="info-block__misc info-block__misc-main">

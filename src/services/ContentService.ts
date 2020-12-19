@@ -12,7 +12,7 @@ import Types from '../consts/contentType';
 import ContentModel from '../models/ContentModel';
 import {MOBILE_DEVICE_WIDTH, TABLET_DEVICE_WIDTH} from '../consts/other';
 import compareByField from '../tools/comparator';
-import Routes from '../consts/routes';
+import SubscribePopup from '../components/SubscribePopup/SubscribePopup';
 
 
 interface ContextData {
@@ -374,7 +374,10 @@ class ContentService {
                 EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
                 return;
             }
-            EventBus.emit(Events.PathChanged, {path: Routes.ProfilePage});
+
+            const parent = document.querySelector('.application');
+            const subscribePopup = new SubscribePopup({}, parent);
+            subscribePopup.render();
             return;
         }
 
