@@ -6,15 +6,9 @@
     </button>
     <div class="content__item_hovered">
         <div class="item__buttons content__buttons">
-            {{#if seasons}}
-                    <button class="item__play-btn item__btn" data-id="{{content_id}}" data-{{type}}-id="{{id}}" data-even data-pay="{{is_free}}">
-                        <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg">
-                    </button>
-            {{else}}
-                    <button class="item__play-btn item__btn" data-id="{{content_id}}" data-{{type}}-id="{{id}}" data-event="playContent" data-pay="{{is_free}}">
-                        <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg">
-                    </button>
-            {{/if}}
+            <button class="item__play-btn item__btn" data-id="{{id}}" data-{{type}}-id="{{id}}" data-event="playContent" data-pay="{{is_free}}">
+                   <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg">
+            </button>
             <button class="item__add-btn add-btn item__btn" data-event="AddToFavourites" data-id="{{content_id}}"
                     data-status="{{is_favourite}}">
                 {{#if is_favourite}}

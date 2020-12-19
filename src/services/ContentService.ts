@@ -363,7 +363,7 @@ class ContentService {
     }
 
     onPlayContent(data: any) {
-        // TODO: покачто симулирую подписку так, после того как вмерджится тикет с бэка это надо выпилить
+        // TODO: симуляция работы подписки, после того как вмерджится тикет с бэка это надо выпилить
         localStorage.setItem('subscribe', 'false');
 
         const authStatus = localStorage.getItem('authorized');

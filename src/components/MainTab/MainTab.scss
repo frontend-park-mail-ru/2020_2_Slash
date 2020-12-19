@@ -136,19 +136,15 @@
         }
     }
 
-    &__pay {
+    &__pay__img {
         margin-left: 2vw;
         width: var(--button-size-normal);
         height: var(--button-size-normal);
         background-color: var(--crystal-clear);
         background-position: center center;
         outline: none;
-        cursor: pointer;
         border: none;
-
-        &__img {
-            transform: scale(0.70);
-        }
+        transform: scale(0.70);
     }
 
     &__add-btn, &__like-btn, &__dislike-btn, &__play-btn {

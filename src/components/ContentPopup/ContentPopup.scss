@@ -179,6 +179,16 @@
     justify-content: space-between;
 }
 
+.modal__pay-img {
+    width: var(--button-size-normal);
+    height: var(--button-size-normal);
+    background-color: var(--crystal-clear);
+    background-position: center center;
+    outline: none;
+    border: none;
+    transform: scale(0.70);
+}
+
 .misc-item {
     padding: 0 2vw 0 0;
     margin: 0;

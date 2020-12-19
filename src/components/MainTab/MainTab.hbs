@@ -5,9 +5,7 @@
             <div class="info-block__title info-block__title-main">
                 <h3 class="info-block__title-text">{{name}}</h3>
                 {{#unless is_free}}
-                    <a href="/profile" class="info-block__pay">
                         <img class="info-block__pay__img" src="/static/img/dollar.svg" loading="lazy">
-                    </a>
                 {{/unless}}
             </div>
             <div class="info-block__misc info-block__misc-main">
@@ -53,11 +51,11 @@
             </div>
             <div class="info-block__buttons content__buttons">
                 {{#if seasons}}
-                        <button class="info-block__play-btn item__play-btn item__btn" data-id="{{content_id}}" data-{{type}}-id="{{id}}" data-event="playContent" data-pay="{{is_free}}">
+                        <button class="info-block__play-btn item__play-btn item__btn" data-id="{{id}}" data-{{type}}-id="{{id}}" data-event="playContent" data-pay="{{is_free}}">
                             <img class="info-block__play-btn__img item__play-btn-img item__btn-img" src="/static/img/play2.svg" loading="lazy">
                         </button>
                 {{else}}
-                        <button class="info-block__play-btn item__play-btn item__btn" data-id="{{content_id}}" data-{{type}}-id="{{id}}" data-event="playContent" data-pay="{{is_free}}">
+                        <button class="info-block__play-btn item__play-btn item__btn" data-id="{{id}}" data-{{type}}-id="{{id}}" data-event="playContent" data-pay="{{is_free}}">
                             <img class="info-block__play-btn__img item__play-btn-img item__btn-img" src="/static/img/play2.svg" loading="lazy">
                         </button>
                 {{/if}}
