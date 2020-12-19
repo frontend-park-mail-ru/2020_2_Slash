@@ -1,7 +1,8 @@
+import SubscriptionModel from '../models/SubscriptionModel';
 import {SERVER_HOST} from '../consts/settings';
 import ResponseType from '../tools/ResponseType';
 import UserModel from '../models/UserModel';
-import eventBus from '../services/EventBus';
+import EventBus from '../services/EventBus';
 import {Error} from '../consts/errors';
 import Events from '../consts/events';
 import View from '../views/View';
@@ -13,19 +14,20 @@ abstract class Controller {
     protected constructor(view: View) {
         this.view = view;
 
-        if (!eventBus.getListeners().checkSession) {
-            eventBus.on(Events.CheckSession, this.onCheckSession);
+        if (!EventBus.getListeners().checkSession) {
+            EventBus.on(Events.CheckSession, this.onCheckSession);
         }
     }
 
-    switchOn(data: any = {}) {} // eslint-disable-line
+    switchOn(data: any = {}) {
+    } // eslint-disable-line
 
     onSwitchOn(data?: any) {
-        eventBus.emit(Events.CheckSession, data);
+        EventBus.emit(Events.CheckSession, data);
     } // eslint-disable-line
 
     switchOff() {
-        eventBus.off(Events.CheckSession, this._onCheckSession);
+        EventBus.off(Events.CheckSession, this._onCheckSession);
     }
 
     onCheckSession = () => {
@@ -41,10 +43,17 @@ abstract class Controller {
                 const avatar = body.user.avatar ? `${SERVER_HOST}${body.user.avatar}` : '/static/img/default.svg';
                 sessionData.authorized = true;
                 localStorage.setItem('authorized', 'true');
+                localStorage.setItem('userId', body.user.id);
                 sessionData.avatar = avatar;
+
+                SubscriptionModel.checkSubscription().then((response: ResponseType) => {
+                    if (!response.body.subscription) {
+                        localStorage.setItem('subscription', 'false');
+                    }
+                }).catch((error: Error) => console.log(error));
             }
 
-            eventBus.emit(Events.UpdateHeader, sessionData);
+            EventBus.emit(Events.UpdateHeader, sessionData);
         }).catch((error: Error) => console.log(error));
     }
 }

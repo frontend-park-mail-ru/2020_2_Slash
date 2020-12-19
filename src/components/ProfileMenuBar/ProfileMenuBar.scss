@@ -113,6 +113,44 @@
     margin-top: 1vw;
 }
 
+.subscription__wrapper, .payment-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.subscription__label {
+    color: var(--white);
+    font-size: 16px;
+    margin: 20px;
+}
+
+.subscription__btn {
+    cursor: pointer;
+    margin: 1vw 0;
+    border: none;
+    outline: none;
+    padding: 15px;
+    border-radius: 0.3vw;
+    background-color: var(--orangered);
+    color: var(--white);
+    font-size: 16px;
+    position: center;
+}
+
+.subscription__btn:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 3px var(--white));
+}
+
+.subscription__btn:active, .subscription__btn:active {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1);
+    filter: none;
+}
+
 @media (max-width: 1024px) {
     .form__input-btn {
         height: 4vw;

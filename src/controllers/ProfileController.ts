@@ -1,9 +1,11 @@
 import {SERVER_HOST} from '../consts/settings';
 import ResponseType from '../tools/ResponseType';
 import ProfileView from '../views/ProfileView/ProfileView';
-import Controller from './Controller';
+import PaymentForm from '../components/PaymentForm/PaymentForm';
 import UserModel from '../models/UserModel';
-import eventBus from '../services/EventBus';
+import Controller from './Controller';
+import EventBus from '../services/EventBus';
+import {Error} from '../consts/errors';
 import Events from '../consts/events';
 import Routes from '../consts/routes';
 
@@ -17,8 +19,8 @@ class ProfileController extends Controller {
     constructor() {
         super(new ProfileView());
 
-        eventBus.on(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this));
-        eventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
+        EventBus.on(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this));
+        EventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
     switchOn() {
@@ -40,18 +42,19 @@ class ProfileController extends Controller {
                 return;
             }
 
-            eventBus.emit(Events.PathChanged, {path: Routes.MainPage});
+            EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
         });
     }
 
     onSwitchOn(data?: any) {
         super.onSwitchOn(data);
+        document.querySelector('.subscription__btn').addEventListener('click', this.onBtnCreateSubscription);
     }
 
     switchOff() {
         super.switchOff();
         this.view.hide();
-        eventBus.off(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this))
+        EventBus.off(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this))
             .off(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
@@ -68,7 +71,7 @@ class ProfileController extends Controller {
             email: email,
         }).then((response: ResponseType) => {
             if (!response.error) {
-                eventBus.emit(Events.UpdateUserProfile, {
+                EventBus.emit(Events.UpdateUserProfile, {
                     nickname: nickname,
                     email: email,
                 });
@@ -97,12 +100,19 @@ class ProfileController extends Controller {
                     const data = {
                         avatar: `${SERVER_HOST}/avatars/${response.body.avatar}`,
                     };
-                    eventBus.emit(Events.UpdateProfileAvatar, data);
+                    EventBus.emit(Events.UpdateProfileAvatar, data);
                 }).catch((error: Error) => console.log(error));
             }
         });
 
         fileUploader.click();
+    }
+
+    onBtnCreateSubscription = () => {
+        document.querySelector('.subscription__prev-btn').classList.add('hidden');
+        document.querySelector('.subscription__prev-label').classList.add('hidden');
+
+        document.querySelector('.subscription__wrapper').innerHTML = new PaymentForm({}).render();
     }
 }
 

@@ -2,9 +2,9 @@ import Component from '../Component';
 import Context from '../../tools/Context';
 import Events from '../../consts/events';
 import Modals from '../../consts/modals';
-import eventBus from '../../services/EventBus';
 import ValidationService from '../../services/ValidationService';
 import template from './ProfileMenuBar.hbs';
+import EventBus from '../../services/EventBus';
 
 /**
  * @class
@@ -28,8 +28,9 @@ class ProfileMenuBar extends Component {
 
         ProfileMenuBar.prototype.onSubmit = this.onSubmit.bind(this);
 
-        eventBus.on(Events.SubmitProfileForm, this.onSubmit);
-        eventBus.on(Events.ProfileTabChanged, this.onTabChanged);
+        EventBus.on(Events.SubmitProfileForm, this.onSubmit);
+        EventBus.on(Events.ProfileTabChanged, this.onTabChanged);
+        EventBus.emit(Events.UpdateSubscription, this.onUpdateSubscribe);
     }
 
     /**
@@ -78,13 +79,17 @@ class ProfileMenuBar extends Component {
             const targetEvent = data.formtype === Modals.profileInfo ? Events.UpdateProfileInfo : null;
 
             if (targetEvent) {
-                eventBus.emit(targetEvent, {
+                EventBus.emit(targetEvent, {
                     params: validationData.data,
                     formType: data.formtype,
                     form: this,
                 });
             }
         }
+    }
+
+    onUpdateSubscribe = () => {
+        this.context.subscription = localStorage.getItem('subscription');
     }
 
     onError(error: string, formType: string) {
