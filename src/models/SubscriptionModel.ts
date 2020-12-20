@@ -18,6 +18,14 @@ class SubscriptionModel {
         });
     }
 
+    refreshSubscription() {
+        return http.fetchPut({
+            route: ApiMethods.Subscription,
+        }).then((response: Response) => {
+            return response.json();
+        });
+    }
+
     addSubscription(data: any) {
         return http.fetchDelete({
             route: ApiMethods.Subscription,

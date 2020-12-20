@@ -47,7 +47,9 @@ abstract class Controller {
                 sessionData.avatar = avatar;
 
                 SubscriptionModel.checkSubscription().then((response: ResponseType) => {
-                    if (!response.body.subscription) {
+                    if (!response.error && response.body.subscription) {
+                        localStorage.setItem('subscription', 'true');
+                    } else {
                         localStorage.setItem('subscription', 'false');
                     }
                 }).catch((error: Error) => console.log(error));

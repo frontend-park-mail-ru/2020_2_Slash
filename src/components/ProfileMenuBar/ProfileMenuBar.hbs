@@ -13,21 +13,18 @@
 </div>
 <div class="profile-view__content">
     <div class="profile-view__security hidden profile-view__form" name="SecurityTabForm">
+        <div class="sec-form__wrapper">
         {{{SecurityForm}}}
+        </div>
     </div>
     <div class="profile-view__sub hidden profile-view__form" name="SubscribeTabForm">
         <div class="subscription__wrapper">
-            {{#if subscription}}
-
-            {{else}}
-                <div class="subscription__prev-label subscription__label">
-                    У вас не оформлена подписка
-                </div>
-                <button class="subscription__prev-btn subscription__btn">Оформить подписку</button>
-            {{/if}}
+            {{{SubscriptionForm}}}
         </div>
     </div>
     <div class="profile-view__info active-form profile-view__form" name="InfoTabForm">
+        <div class="info-form__wrapper">
         {{{InfoForm}}}
+    </div>
     </div>
 </div>

@@ -1,0 +1,26 @@
+{{#if subscription}}
+    {{# if isActive}}
+        {{#if isPaid}}
+            <div class="subscription__prev-label subscription__label">
+                Ваша подписка оплачена и действует до {{{date}}}
+            </div>
+            <button class="subscription__btn cancel-sub__btn">Отписаться</button>
+        {{else}}
+            <div class="subscription__prev-label subscription__label">
+                Ваша подписка закончилась {{{date}}}
+            </div>
+            <button class="create-sub__btn subscription__btn">Оплатить еще месяц подписки</button>
+            <button class="subscription__btn cancel-sub__btn">Отписаться</button>
+        {{/if}}
+    {{else}}
+        <button class="subscription__btn refresh-sub__btn">Восстановить</button>
+    {{/if}}
+{{else}}
+    <div class="subscription__prev-label subscription__label">
+        У вас не оформлена подписка
+    </div>
+    <div class="subscription__prev-label subscription__label">
+        Наша подписка стоит 299.99 руб.
+    </div>
+    <button class="create-sub__btn subscription__btn">Оформить подписку</button>
+{{/if}}

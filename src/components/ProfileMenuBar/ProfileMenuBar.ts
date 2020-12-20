@@ -5,6 +5,7 @@ import Modals from '../../consts/modals';
 import ValidationService from '../../services/ValidationService';
 import template from './ProfileMenuBar.hbs';
 import EventBus from '../../services/EventBus';
+import SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
 
 /**
  * @class
@@ -30,7 +31,7 @@ class ProfileMenuBar extends Component {
 
         EventBus.on(Events.SubmitProfileForm, this.onSubmit);
         EventBus.on(Events.ProfileTabChanged, this.onTabChanged);
-        EventBus.emit(Events.UpdateSubscription, this.onUpdateSubscribe);
+        EventBus.on(Events.UpdateSubscription, this.onUpdateSubscription.bind(this));
     }
 
     /**
@@ -88,10 +89,6 @@ class ProfileMenuBar extends Component {
         }
     }
 
-    onUpdateSubscribe = () => {
-        this.context.subscription = localStorage.getItem('subscription');
-    }
-
     onError(error: string, formType: string) {
         const form = document.querySelector('.active-form').getElementsByTagName('form')[0];
 
@@ -102,6 +99,14 @@ class ProfileMenuBar extends Component {
         if (formType === Modals.profileSecurity) {
             this.validator.ValidateProfileSecurityForm(form, error);
         }
+    }
+
+    onUpdateSubscription = () => {
+    }
+
+    render(): any {
+        this.context.SubscriptionForm = new SubscriptionForm(this.context.SubDate).render();
+        return super.render();
     }
 }
 
