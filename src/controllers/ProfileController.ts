@@ -174,6 +174,7 @@ class ProfileController extends Controller {
 
     onBtnRefreshSubscription = () => {
         SubscriptionModel.refreshSubscription().then().catch((error: Error) => console.log(error));
+        this.subDate.isActive = true;
 
         this.subWrapper.innerHTML = new SubscriptionForm(this.subDate).render();
         const subscribeBtn = document.querySelector('.create-sub__btn');
