@@ -70,7 +70,7 @@ class ProfileController extends Controller {
 
     onSwitchOn(data?: any) {
         if (data.info === 'SubscribeTab') {
-            eventBus.emit(Events.ProfileTabChanged, data);
+            EventBus.emit(Events.ProfileTabChanged, data);
         }
         super.onSwitchOn(data);
         const subscribeBtn = document.querySelector('.create-sub__btn');

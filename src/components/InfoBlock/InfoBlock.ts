@@ -8,6 +8,8 @@ import template from './InfoBlock.hbs';
 import SeasonsTab from '../SeasonsTab/SeasonsTab';
 import EventBus from '../../services/EventBus';
 import contentType from '../../consts/contentType';
+import Modals from '../../consts/modals';
+import Routes from '../../consts/routes';
 
 /**
  * @class
@@ -54,6 +56,8 @@ class InfoBlock extends Component {
         if (!EventBus.getListeners().infoBlockClosed) {
             EventBus.on(Events.InfoBlockClosed, this.onInfoBlockClosed.bind(this));
         }
+
+        document.addEventListener('click', this.onClick);
     }
 
     public addToContext(obj: Context) {
@@ -161,6 +165,18 @@ class InfoBlock extends Component {
 
         this.selectSliderItem(this.context.targetButton.closest('.content__slider-item'));
         if (currentClosestSlider) currentClosestSlider.innerHTML += this.template(this.context);
+    }
+
+    onClick = (event: any) => {
+        const redirectTarget = event.target.classList.contains('misc-item__subscribe');
+        if (redirectTarget) {
+            const authStatus = localStorage.getItem('authorized');
+            if (authStatus == 'false') {
+                EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
+            } else {
+                EventBus.emit(Events.PathChanged, {path: Routes.ProfilePage, info: 'SubscribeTab'});
+            }
+        }
     }
 }
 

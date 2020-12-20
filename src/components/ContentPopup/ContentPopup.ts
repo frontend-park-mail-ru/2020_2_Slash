@@ -5,6 +5,8 @@ import Grid from '../Grid/Grid';
 import {SERVER_HOST} from '../../consts/settings';
 import EventBus from '../../services/EventBus';
 import Events from '../../consts/events';
+import Modals from '../../consts/modals';
+import Routes from '../../consts/routes';
 
 /**
  * @class
@@ -31,19 +33,19 @@ class ContentPopup extends Component {
 
         this._onClick = function(event: any) {
             const closingTarget = event.target.classList.contains('blocker') ||
-                event.target.closest('.close-btn');
+                event.target.closest('.close-btn') || event.target.classList.contains('modal__subscribe');
             if (closingTarget) {
                 this.remove();
             }
-            // const playTarget = event.target.closest('.modal__play-btn');
-            // if (playTarget) {
-            //     const popup = document.querySelector('.content-popup');
-            //     if (popup) {
-            //         popup.remove();
-            //     }
-            //
-            //     this.onDestroy();
-            // }
+            const subscribeTarget = event.target.classList.contains('modal__subscribe');
+            if (subscribeTarget) {
+                const authStatus = localStorage.getItem('authorized');
+                if (authStatus == 'false') {
+                    EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
+                } else {
+                    EventBus.emit(Events.PathChanged, {path: Routes.ProfilePage, info: 'SubscribeTab'});
+                }
+            }
         }.bind(this);
 
         this._onKeydownEscape = function(event: any) {

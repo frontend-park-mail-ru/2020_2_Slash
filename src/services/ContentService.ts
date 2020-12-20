@@ -365,7 +365,7 @@ class ContentService {
     onPlayContent(data: any) {
         const authStatus = localStorage.getItem('authorized');
 
-        const subscribeStatus = localStorage.getItem('subscribe');
+        const subscribeStatus = localStorage.getItem('subscription');
         if (subscribeStatus == 'false' && data.pay == 'false') {
             if (authStatus == 'false') {
                 EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});

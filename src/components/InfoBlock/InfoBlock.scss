@@ -65,7 +65,16 @@
 }
 
 .misc-item__subscribe {
-  color: var(--rating-green);
+  color: var(--orangered);
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+
+  &:hover {
+    filter: drop-shadow(0 0 0.4px var(--white));
+  }
 }
 
 .item-value {

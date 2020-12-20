@@ -250,10 +250,15 @@
 }
 
 .modal__subscribe {
-    color: var(--rating-green);
-    font-size: 0.8vw;
+    color: var(--orangered);
+    font-size: 1vw;
     letter-spacing: 0.25em;
-    padding-top: 18px;
+    padding-top: 20px;
+    cursor: pointer;
+
+    &:hover {
+        filter: drop-shadow(0 0 0.4px var(--white));
+    }
 }
 
 .modal__grid {

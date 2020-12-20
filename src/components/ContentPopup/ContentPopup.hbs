@@ -2,14 +2,14 @@
 <div class="content-popup-wrapper">
     <div class="modal__video-holder">
         <div class="modal__video-wrapper">
-            <img class="modal__video" src="{{host}}{{images}}/large.png" loading="lazy">
+            <img class="modal__video" src="{{host}}{{images}}/1920" loading="lazy">
             <div class="modal__video-shade"></div>
         </div>
         <div class="modal__name margin">
             <p>{{name}}</p>
             <p class="modal__origin-name">{{original_name}}</p>
             {{#unless is_free}}
-                <p class="modal__subscribe">Подписка</p>
+                <span><a class="modal__subscribe">Требуется подписка</a></span>
             {{/unless}}
         </div>
         <div class="modal__controller margin">
