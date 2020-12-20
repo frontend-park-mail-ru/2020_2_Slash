@@ -381,12 +381,7 @@ class ContentService {
             return;
         }
 
-        let contentUrl;
-        if (data.movieId) {
-            contentUrl = `/watch/${data.id}`;
-        } else {
-            contentUrl = `/watch/${data.id}?season=1&episode=1`;
-        }
+        const contentUrl = data.movieId ? `/watch/${data.id}` : `/watch/${data.id}?season=1&episode=1`;
         EventBus.emit(Events.PathChanged, {path: contentUrl});
     }
 
