@@ -3,13 +3,11 @@
     min-height: calc(100vh - 2 * var(--header-height));
 }
 
-.profile-view__form {
+.sec-form__wrapper, .info-form__wrapper {
     width: 25vw;
-
     @media (max-width: 1024px) {
         width: 45vw;
     }
-
     @media (max-width: 440px) {
         width: 100%;
     }

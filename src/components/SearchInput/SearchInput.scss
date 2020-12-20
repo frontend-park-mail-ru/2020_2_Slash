@@ -14,6 +14,7 @@
   background-color: var(--low-transparent-gray);
   border: 1px solid var(--white);
   padding: 7px;
+  width: calc(25vw - 7px * 2);
 }
 
 .prompt-window__labels {
@@ -82,7 +83,7 @@ input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-s
   }
 
   .prompt-window {
-    width: 300px;
+    width: calc(300px - 7px * 2);
   }
 
   .search-line__img {

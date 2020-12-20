@@ -2,8 +2,7 @@ import {http} from '../services/Http';
 import ApiMethods from '../consts/ApiMethods';
 
 class ContentModel {
-    constructor() {
-    }
+    constructor() {}
 
     getContent(
         {

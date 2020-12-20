@@ -2,9 +2,10 @@ import Component from '../Component';
 import Context from '../../tools/Context';
 import Events from '../../consts/events';
 import Modals from '../../consts/modals';
-import eventBus from '../../services/EventBus';
 import ValidationService from '../../services/ValidationService';
 import template from './ProfileMenuBar.hbs';
+import EventBus from '../../services/EventBus';
+import SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
 
 /**
  * @class
@@ -28,8 +29,9 @@ class ProfileMenuBar extends Component {
 
         ProfileMenuBar.prototype.onSubmit = this.onSubmit.bind(this);
 
-        eventBus.on(Events.SubmitProfileForm, this.onSubmit);
-        eventBus.on(Events.ProfileTabChanged, this.onTabChanged);
+        EventBus.on(Events.SubmitProfileForm, this.onSubmit);
+        EventBus.on(Events.ProfileTabChanged, this.onTabChanged);
+        EventBus.on(Events.UpdateSubscription, this.onUpdateSubscription.bind(this));
     }
 
     /**
@@ -78,7 +80,7 @@ class ProfileMenuBar extends Component {
             const targetEvent = data.formtype === Modals.profileInfo ? Events.UpdateProfileInfo : null;
 
             if (targetEvent) {
-                eventBus.emit(targetEvent, {
+                EventBus.emit(targetEvent, {
                     params: validationData.data,
                     formType: data.formtype,
                     form: this,
@@ -97,6 +99,14 @@ class ProfileMenuBar extends Component {
         if (formType === Modals.profileSecurity) {
             this.validator.ValidateProfileSecurityForm(form, error);
         }
+    }
+
+    onUpdateSubscription = () => {
+    }
+
+    render(): any {
+        this.context.SubscriptionForm = new SubscriptionForm(this.context.SubDate).render();
+        return super.render();
     }
 }
 

@@ -13,13 +13,18 @@
 </div>
 <div class="profile-view__content">
     <div class="profile-view__security hidden profile-view__form" name="SecurityTabForm">
+        <div class="sec-form__wrapper">
         {{{SecurityForm}}}
+        </div>
     </div>
     <div class="profile-view__sub hidden profile-view__form" name="SubscribeTabForm">
-        <form class="profile-view__sub-form">
-        </form>
+        <div class="subscription__wrapper">
+            {{{SubscriptionForm}}}
+        </div>
     </div>
     <div class="profile-view__info active-form profile-view__form" name="InfoTabForm">
+        <div class="info-form__wrapper">
         {{{InfoForm}}}
+    </div>
     </div>
 </div>

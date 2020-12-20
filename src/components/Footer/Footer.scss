@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0));
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0));
     height: 70px;
 }
 
@@ -13,11 +13,9 @@
 }
 
 .footer__btn {
-    padding: 0;
-    font-size: 1.1em;
+    padding: 5px;
+    font-size: 14px;
     margin-left: 10px;
-    width: 5.5vw;
-    height: 2.5vw;
     background-color: var(--low-transparent-gray);
     color: var(--white);
     border: 1px solid var(--low-transparent-white);

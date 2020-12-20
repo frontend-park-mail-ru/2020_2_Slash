@@ -5,8 +5,8 @@ import ProfileMenuBar from '../../components/ProfileMenuBar/ProfileMenuBar';
 import PInfoFormBuilder from '../../tools/builders/PInfoFormBuilder';
 import PSecurityFormBuilder from '../../tools/builders/PSecurityFormBuilder';
 import template from './ProfileView.hbs';
-import eventBus from '../../services/EventBus';
 import Events from '../../consts/events';
+import EventBus from '../../services/EventBus';
 
 class ProfileView extends View {
     usrInfoBlock: UserInfoBlock;
@@ -37,7 +37,9 @@ class ProfileView extends View {
                     value: email,
                 }]).getForm().render(),
             SecurityForm: PSecurityFormBuilder.getForm().render(),
+            SubDate: this.context.subDate,
         });
+        EventBus.emit(Events.UpdateSubscription);
 
         const data: Context = {
             UserInfoBlock: this.usrInfoBlock.render(),
@@ -50,7 +52,7 @@ class ProfileView extends View {
     }
 
     hide() {
-        eventBus.off(Events.ProfileTabChanged, this.menuBar.onTabChanged)
+        EventBus.off(Events.ProfileTabChanged, this.menuBar.onTabChanged)
             .off(Events.SubmitProfileForm, this.menuBar.onSubmit)
             .off(Events.UpdateUserProfile, this.usrInfoBlock.onUpdateProfile)
             .off(Events.UpdateProfileAvatar, this.usrInfoBlock.onUploadAvatar);

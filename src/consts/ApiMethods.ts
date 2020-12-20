@@ -17,6 +17,7 @@ enum ApiMethods {
     TopTVShows = '/tvshows/top',
     LatestTVShows = '/tvshows/latest',
     Content = '/content',
+    Subscription = '/subscription',
 }
 
 export default ApiMethods;

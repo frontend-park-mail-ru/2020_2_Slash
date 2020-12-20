@@ -34,7 +34,7 @@ enum Events {
     ShowNavMenu = 'showNavMenu',
     UpdateRating = 'updateRating',
     FixHeader = 'fixHeader',
-    PlayNextContent = 'playNextContent',
+    UpdateSubscription = 'updateSubscription',
 }
 
 export default Events;

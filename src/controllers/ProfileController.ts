@@ -1,11 +1,16 @@
 import {SERVER_HOST} from '../consts/settings';
 import ResponseType from '../tools/ResponseType';
 import ProfileView from '../views/ProfileView/ProfileView';
-import Controller from './Controller';
+import PaymentForm from '../components/PaymentForm/PaymentForm';
 import UserModel from '../models/UserModel';
-import eventBus from '../services/EventBus';
+import Controller from './Controller';
+import EventBus from '../services/EventBus';
+import {Error} from '../consts/errors';
 import Events from '../consts/events';
 import Routes from '../consts/routes';
+import SubscriptionModel from '../models/SubscriptionModel';
+import SubscriptionForm from '../components/SubscriptionForm/SubscriptionForm';
+import {CreateDomElement} from '../tools/helper';
 
 /**
  * @class
@@ -13,12 +18,18 @@ import Routes from '../consts/routes';
  */
 class ProfileController extends Controller {
     view: ProfileView;
+    subDate: {subscription: boolean, isActive?: boolean, isPaid?: boolean, date?: string};
+    subWrapper: Element;
 
     constructor() {
         super(new ProfileView());
 
-        eventBus.on(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this));
-        eventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
+        this.subDate  = {
+            subscription: false,
+        };
+
+        EventBus.on(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this));
+        EventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
     switchOn() {
@@ -33,25 +44,54 @@ class ProfileController extends Controller {
                 const avatar = user.avatar ? `${SERVER_HOST}${user.avatar}` : '/static/img/default.svg';
                 const {nickname, email} = user;
                 sessionData = {...sessionData, avatar, nickname, email};
+                SubscriptionModel.checkSubscription().then((response: ResponseType) => {
+                    if (!response.error) {
+                        if (response.body.subscription) {
+                            this.subDate.subscription = true;
+                            this.subDate.isActive = !response.body.subscription.is_canceled;
+                            this.subDate.isPaid = response.body.subscription.is_paid;
+                            this.subDate.date = new Date(response.body.subscription.expires).toLocaleString('en-GB');
+                        } else {
+                            this.subDate.subscription = false;
+                        }
 
-                this.view.insertIntoContext(sessionData);
-                this.view.show();
-                this.onSwitchOn();
+                        sessionData.subDate = this.subDate;
+                        this.view.insertIntoContext(sessionData);
+                        this.view.show();
+                        this.onSwitchOn();
+                    }
+                }).catch((error: Error) => console.log(error));
                 return;
             }
 
-            eventBus.emit(Events.PathChanged, {path: Routes.MainPage});
+            EventBus.emit(Events.PathChanged, {path: Routes.MainPage});
         });
     }
 
     onSwitchOn(data?: any) {
         super.onSwitchOn(data);
+        const subscribeBtn = document.querySelector('.create-sub__btn');
+        if (subscribeBtn) {
+            subscribeBtn.addEventListener('click', this.onBtnCreateSubscription);
+        }
+
+        const cancelSubBtn = document.querySelector('.cancel-sub__btn');
+        if (cancelSubBtn) {
+            cancelSubBtn.addEventListener('click', this.onBtnCancelSubscription);
+        }
+
+        const refreshSubBtn = document.querySelector('.refresh-sub__btn');
+        if (refreshSubBtn) {
+            refreshSubBtn.addEventListener('click', this.onBtnRefreshSubscription);
+        }
+
+        this.subWrapper = document.querySelector('.subscription__wrapper');
     }
 
     switchOff() {
         super.switchOff();
         this.view.hide();
-        eventBus.off(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this))
+        EventBus.off(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this))
             .off(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
@@ -68,7 +108,7 @@ class ProfileController extends Controller {
             email: email,
         }).then((response: ResponseType) => {
             if (!response.error) {
-                eventBus.emit(Events.UpdateUserProfile, {
+                EventBus.emit(Events.UpdateUserProfile, {
                     nickname: nickname,
                     email: email,
                 });
@@ -97,12 +137,55 @@ class ProfileController extends Controller {
                     const data = {
                         avatar: `${SERVER_HOST}/avatars/${response.body.avatar}`,
                     };
-                    eventBus.emit(Events.UpdateProfileAvatar, data);
+                    EventBus.emit(Events.UpdateProfileAvatar, data);
                 }).catch((error: Error) => console.log(error));
             }
         });
 
         fileUploader.click();
+    }
+
+    onBtnCreateSubscription = () => {
+        document.querySelector('.create-sub__btn').classList.add('hidden');
+        document.querySelector('.subscription__prev-label').classList.add('hidden');
+
+        this.subWrapper.innerHTML = new PaymentForm({}).render();
+    }
+
+    onBtnCancelSubscription = () => {
+        SubscriptionModel.deleteSubscription().then().catch((error: Error) => console.log(error));
+
+        const refreshSubBtn = CreateDomElement('button', {'class': 'refresh-sub__btn subscription__btn'});
+        refreshSubBtn.innerText = 'Восстановить подписку';
+
+        if (this.subDate.isPaid) {
+            this.subWrapper.innerHTML = '';
+            this.subWrapper.appendChild(refreshSubBtn);
+            refreshSubBtn.addEventListener('click', this.onBtnRefreshSubscription);
+        } else {
+            this.subDate.subscription = false;
+            this.subWrapper.innerHTML = new SubscriptionForm(this.subDate).render();
+            const subscribeBtn = document.querySelector('.create-sub__btn');
+            if (subscribeBtn) {
+                subscribeBtn.addEventListener('click', this.onBtnCreateSubscription);
+            }
+        }
+    }
+
+    onBtnRefreshSubscription = () => {
+        SubscriptionModel.refreshSubscription().then().catch((error: Error) => console.log(error));
+        this.subDate.isActive = true;
+
+        this.subWrapper.innerHTML = new SubscriptionForm(this.subDate).render();
+        const subscribeBtn = document.querySelector('.create-sub__btn');
+        if (subscribeBtn) {
+            subscribeBtn.addEventListener('click', this.onBtnCreateSubscription);
+        }
+
+        const cancelSubBtn = document.querySelector('.cancel-sub__btn');
+        if (cancelSubBtn) {
+            cancelSubBtn.addEventListener('click', this.onBtnCancelSubscription);
+        }
     }
 }
 

@@ -153,6 +153,7 @@ class Header extends Component {
         if (promptWindow) {
             promptWindow.classList.add('hidden');
         }
+
         document.getElementsByClassName('search-line__input')[0].focus();
 
         // может быть, что нужно скрыть <= 3 пункта меню при открытии инпута поиска
