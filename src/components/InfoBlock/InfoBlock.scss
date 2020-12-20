@@ -58,16 +58,18 @@
     filter: drop-shadow(0px 0px 1px var(--white));
     background-color: var(--crystal-clear);
   }
-
-
 }
 
 .misc-item__rating {
   color: var(--rating-green);
 }
 
+.misc-item__subscribe {
+  color: var(--rating-green);
+}
+
 .item-value {
   letter-spacing: 0.08em;
   color: var(--white);
-  //padding-left: 0.5vw;
+  padding-left: 0.5vw;
 }

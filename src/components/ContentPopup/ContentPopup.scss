@@ -214,19 +214,6 @@
     margin-bottom: 2vw;
 }
 
-.modal__title {
-    display: flex;
-    flex-direction: row;
-}
-
-.modal__title-text {
-    letter-spacing: 0.2em;
-    color: var(--white);
-    padding: 0;
-    margin: 0;
-    font-size: 35px;
-}
-
 .modal__about,
 .item-title {
     color: var(--heading-grey);
@@ -260,6 +247,13 @@
     margin: 2vw 0 0 0;
     color: var(--white);
     font-size: 1.8vw;
+}
+
+.modal__subscribe {
+    color: var(--rating-green);
+    font-size: 0.8vw;
+    letter-spacing: 0.25em;
+    padding-top: 18px;
 }
 
 .modal__grid {
@@ -347,6 +341,10 @@
         font-size: 1.5vw;
     }
 
+    .modal__subscribe {
+        font-size: 1.5vw;
+    }
+
     .modal__buttons {
         width: 35vw;
     }
@@ -385,6 +383,10 @@
     }
 
     .modal__origin-name {
+        font-size: 2.5vw;
+    }
+
+    .modal__subscribe {
         font-size: 2.5vw;
     }
 

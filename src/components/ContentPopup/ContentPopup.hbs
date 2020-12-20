@@ -6,15 +6,11 @@
             <div class="modal__video-shade"></div>
         </div>
         <div class="modal__name margin">
-            <div class="modal__title">
-                <p>{{name}}</p>
-                {{#unless is_free}}
-                    <div class="modal__pay-img" data-title="Платный контент">
-                        <img src="/static/img/dollar.svg" loading="lazy">
-                    </div>
-                {{/unless}}
-            </div>
+            <p>{{name}}</p>
             <p class="modal__origin-name">{{original_name}}</p>
+            {{#unless is_free}}
+                <p class="modal__subscribe">Подписка</p>
+            {{/unless}}
         </div>
         <div class="modal__controller margin">
             <div class="modal__sound">

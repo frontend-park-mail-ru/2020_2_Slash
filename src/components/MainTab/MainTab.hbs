@@ -4,11 +4,6 @@
         <div class="info-block__description">
             <div class="info-block__title info-block__title-main">
                 <h3 class="info-block__title-text">{{name}}</h3>
-                {{#unless is_free}}
-                    <div class="info-block__pay-img" data-title="Платный контент">
-                        <img src="/static/img/dollar.svg" loading="lazy">
-                    </div>
-                {{/unless}}
             </div>
             <div class="info-block__misc info-block__misc-main">
                 <p class="misc-item__rating misc-item" data-misc="rating" data-id="{{id}}">{{rating}}% оценили положительно</p>
@@ -16,6 +11,9 @@
                 {{#if seasons}}
                     <p class="misc-item__season misc-item item-value">Сезоны: {{seasons}}</p>
                 {{/if}}
+                {{#unless is_free}}
+                    <p class="misc-item__subscribe misc-item">Подписка</p>
+                {{/unless}}
             </div>
             <div class="info-block__about">
                 <span>{{short_description}}</span>
