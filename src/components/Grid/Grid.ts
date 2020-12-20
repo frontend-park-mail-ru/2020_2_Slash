@@ -19,6 +19,7 @@ class Grid extends Component {
             episodes.forEach((episode: any) => {
                 episode.season_number = this.context.number;
                 episode.content_id = this.context.tv_show_id;
+                episode.is_free = this.context.is_free;
                 list.push(new EpisodeCard(episode).render());
             });
         } else {

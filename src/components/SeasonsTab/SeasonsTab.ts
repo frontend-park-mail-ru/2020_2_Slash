@@ -32,6 +32,7 @@ class SeasonsTab extends Component {
     onSeasonChanged = (data: any) => {
         this.context.seasons[data.currentseason - 1].column = 5;
         this.context.seasons[data.currentseason - 1].gap = '2vw';
+        this.context.seasons[data.currentseason - 1].is_free = this.context.is_free;
         this.context.Grid = new Grid(this.context.seasons[data.currentseason - 1]).render();
         const grid = document.querySelector('.seasons-wrapper__grid');
         grid.innerHTML = this.context.Grid;
@@ -41,6 +42,7 @@ class SeasonsTab extends Component {
         if (this.context.seasons.length > 0) {
             this.context.seasons[0].column = 5;
             this.context.seasons[0].gap = '2vw';
+            this.context.seasons[0].is_free = this.context.is_free;
             this.context.Grid = new Grid(this.context.seasons[0]).render();
         }
         return super.render();

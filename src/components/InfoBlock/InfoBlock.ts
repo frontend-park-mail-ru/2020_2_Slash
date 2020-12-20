@@ -138,6 +138,7 @@ class InfoBlock extends Component {
         this.DetailsTab = new DetailsTab(this.context.contentData);
         if (this.context.contentData.type === contentType.TVShow) {
             this.context.tvshow.images = this.context.contentData.images;
+            this.context.tvshow.is_free = this.context.contentData.is_free;
             this.SeasonsTab = new SeasonsTab(this.context.tvshow);
         }
 
