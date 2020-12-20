@@ -131,15 +131,19 @@
 
 .subscription__btn {
     cursor: pointer;
-    margin: 1vw 0;
+    margin: 20px 0;
     border: none;
     outline: none;
     padding: 15px;
-    border-radius: 0.3vw;
+    border-radius: 5px;
     background-color: var(--orangered);
     color: var(--white);
     font-size: 16px;
     position: center;
+
+    @media (max-width: 1024px) {
+
+    }
 }
 
 .subscription__btn:hover {
