@@ -65,8 +65,11 @@
 }
 
 .misc-item__subscribe {
-  color: var(--orangered);
-  font-size: 20px;
+  color: var(--white);
+  background-color: var(--orangered-tr);
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 5px;
   text-transform: uppercase;
   font-weight: normal;
   letter-spacing: 0.1em;
@@ -75,6 +78,17 @@
   &:hover {
     filter: drop-shadow(0 0 0.4px var(--white));
   }
+}
+
+.misc-item__subscribe-free {
+  color: var(--white);
+  background-color: var(--green-tr);
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 5px;
+  text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 0.1em;
 }
 
 .item-value {

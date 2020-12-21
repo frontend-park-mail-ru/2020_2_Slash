@@ -10,6 +10,8 @@
             <p class="modal__origin-name">{{original_name}}</p>
             {{#unless is_free}}
                 <span><a class="modal__subscribe">Требуется подписка</a></span>
+            {{else}}
+                <span><a class="modal__subscribe-free">Бесплатный просмотр</a></span>
             {{/unless}}
         </div>
         <div class="modal__controller margin">

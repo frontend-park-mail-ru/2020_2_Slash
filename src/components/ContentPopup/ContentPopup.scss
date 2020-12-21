@@ -250,15 +250,28 @@
 }
 
 .modal__subscribe {
-    color: var(--orangered);
-    font-size: 1vw;
+    color: var(--white);
+    background-color: var(--orangered-tr);
+    border-radius: 5px;
+    font-size: 0.9vw;
     letter-spacing: 0.25em;
-    padding-top: 20px;
+    padding: 5px;
+    margin-top: 30px;
     cursor: pointer;
 
     &:hover {
         filter: drop-shadow(0 0 0.4px var(--white));
     }
+}
+
+.modal__subscribe-free {
+    color: var(--white);
+    background-color: var(--green-tr);
+    border-radius: 5px;
+    font-size: 0.9vw;
+    letter-spacing: 0.25em;
+    padding: 5px;
+    margin-top: 30px;
 }
 
 .modal__grid {
@@ -346,7 +359,7 @@
         font-size: 1.5vw;
     }
 
-    .modal__subscribe {
+    .modal__subscribe, .modal__subscribe-free {
         font-size: 1.5vw;
     }
 
@@ -391,7 +404,7 @@
         font-size: 2.5vw;
     }
 
-    .modal__subscribe {
+    .modal__subscribe, .modal__subscribe-free {
         font-size: 2.5vw;
     }
 
