@@ -30,6 +30,12 @@ class SeasonsTab extends Component {
     }
 
     onSeasonChanged = (data: any) => {
+        const buttons = document.querySelectorAll('.seasons-wrapper__button');
+        buttons.forEach((btn) => btn.setAttribute('style',
+            'background-color: var(--highly-transparent-white);'));
+
+        document.querySelector(`[data-currentSeason="${data.currentseason}"]`).setAttribute('style',
+            'background-color: var(--orangered-tr);');
         this.context.seasons[data.currentseason - 1].column = 5;
         this.context.seasons[data.currentseason - 1].gap = '2vw';
         this.context.seasons[data.currentseason - 1].is_free = this.context.is_free;
