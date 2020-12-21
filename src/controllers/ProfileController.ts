@@ -161,8 +161,13 @@ class ProfileController extends Controller {
         const refreshSubBtn = CreateDomElement('button', {'class': 'refresh-sub__btn subscription__btn'});
         refreshSubBtn.innerText = 'Восстановить подписку';
 
+        const refreshSubLabel = CreateDomElement('button', {
+            'class': 'subscription__prev-label subscription__label'});
+        refreshSubBtn.innerText = 'В данный момент ваша подписка неактивна. Восстановить?';
+
         if (this.subDate.isPaid) {
             this.subWrapper.innerHTML = '';
+            this.subWrapper.appendChild(refreshSubLabel);
             this.subWrapper.appendChild(refreshSubBtn);
             refreshSubBtn.addEventListener('click', this.onBtnRefreshSubscription);
         } else {
