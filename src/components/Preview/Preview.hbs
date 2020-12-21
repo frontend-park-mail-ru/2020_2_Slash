@@ -1,7 +1,7 @@
 <div class="preview">
     <div class="preview__video-block">
         <div class="preview__video">
-            <div><img src="{{host}}{{preview.images}}/large.png" loading="lazy"></div>
+            <div><img src="{{host}}{{preview.images}}/1920" loading="lazy"></div>
             <div class="preview__shade"></div>
         </div>
     </div>
@@ -12,12 +12,10 @@
         </div>
         <div class="preview__controller pad-both">
             <div class="preview__play">
-                    <a href="{{href}}" data-id="{{preview.id}}" data-{{preview.type}}-id="{{preview.id}}" style="text-decoration: none">
-                        <button class="preview__btn play-btn">
-                            <img class="play-btn__img" src="/static/img/play.svg" loading="lazy">
-                            <p class="play-btn__text">Воспроизвести</p>
-                        </button>
-                    </a>
+                <button class="preview__btn play-btn" data-id="{{preview.id}}" data-{{preview.type}}-id="{{preview.id}}" data-pay="{{preview.is_free}}" data-event="playContent">
+                    <img class="play-btn__img" src="/static/img/play.svg" loading="lazy">
+                    <p class="play-btn__text">Воспроизвести</p>
+                </button>
             </div>
             <div class="preview__info">
                 <a class="preview__btn info-btn" href="/content/{{{preview.id}}}" data-modalstatus="contentPage"

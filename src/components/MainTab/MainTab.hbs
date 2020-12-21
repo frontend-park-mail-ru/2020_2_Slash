@@ -5,6 +5,9 @@
             <div class="info-block__title info-block__title-main">
                 <h3 class="info-block__title-text">{{name}}</h3>
             </div>
+            {{#unless is_free}}
+                <span><a class="misc-item__subscribe misc-item">Требуется подписка</a></span>
+            {{/unless}}
             <div class="info-block__misc info-block__misc-main">
                 <p class="misc-item__rating misc-item" data-misc="rating" data-id="{{id}}">{{rating}}% оценили положительно</p>
                 <p class="misc-item__year misc-item item-value">{{year}}</p>
@@ -48,17 +51,13 @@
             </div>
             <div class="info-block__buttons content__buttons">
                 {{#if seasons}}
-                    <a href="/watch/{{id}}?season=1&episode=1" data-id="{{content_id}}" data-{{type}}-id="{{id}}">
-                        <button class="info-block__play-btn item__play-btn item__btn">
+                        <button class="info-block__play-btn item__play-btn item__btn" data-id="{{id}}" data-{{type}}-id="{{id}}" data-event="playContent" data-pay="{{is_free}}">
                             <img class="info-block__play-btn__img item__play-btn-img item__btn-img" src="/static/img/play2.svg" loading="lazy">
                         </button>
-                    </a>
                 {{else}}
-                    <a href="/watch/{{id}}" data-id="{{content_id}}" data-{{type}}-id="{{id}}">
-                        <button class="info-block__play-btn item__play-btn item__btn">
+                        <button class="info-block__play-btn item__play-btn item__btn" data-id="{{id}}" data-{{type}}-id="{{id}}" data-event="playContent" data-pay="{{is_free}}">
                             <img class="info-block__play-btn__img item__play-btn-img item__btn-img" src="/static/img/play2.svg" loading="lazy">
                         </button>
-                    </a>
                 {{/if}}
                 <button class="info-block__add-btn add-btn" data-event="AddToFavourites" data-id="{{id}}"
                         data-status="{{is_favourite}}">
@@ -82,7 +81,7 @@
         </div>
         <div class="info-block__video-holder">
             <div class="info-block__video">
-                <img src="{{host}}{{images}}/large.png" loading="lazy">
+                <img src="{{host}}{{images}}/1920" loading="lazy">
                 <div class="info-block__video-shade"></div>
             </div>
         </div>

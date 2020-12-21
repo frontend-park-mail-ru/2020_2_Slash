@@ -12,6 +12,8 @@ import Types from '../consts/contentType';
 import ContentModel from '../models/ContentModel';
 import {MOBILE_DEVICE_WIDTH, TABLET_DEVICE_WIDTH} from '../consts/other';
 import compareByField from '../tools/comparator';
+import SubscribePopup from '../components/SubscribePopup/SubscribePopup';
+
 
 interface ContextData {
     contentId?: number,
@@ -42,7 +44,8 @@ class ContentService {
             .on(Events.ContentIsDisliked, this.onContentIsDisliked.bind(this))
             .on(Events.ContentInfoRequested, this.onContentInfoRequested.bind(this))
             .on(Events.ContentByExternalReference, this.onContentByExternalReference.bind(this))
-            .on(Events.UpdateRating, this.onUpdateRating.bind(this));
+            .on(Events.UpdateRating, this.onUpdateRating.bind(this))
+            .on(Events.PlayContent, this.onPlayContent.bind(this));
 
         this._GridUpdate = this.fixGrid.bind(this);
 
@@ -357,6 +360,26 @@ class ContentService {
         currentButton.setAttribute('src', icon);
         currentButton.parentElement.dataset.status = status;
         if (anotherButton) anotherButton.dataset.status = status;
+    }
+
+    onPlayContent(data: any) {
+        const authStatus = localStorage.getItem('authorized');
+
+        const subscribeStatus = localStorage.getItem('subscription');
+        if (subscribeStatus == 'false' && data.pay == 'false') {
+            if (authStatus == 'false') {
+                EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
+                return;
+            }
+
+            const parent = document.querySelector('.application');
+            const subscribePopup = new SubscribePopup({}, parent);
+            subscribePopup.render();
+            return;
+        }
+
+        const contentUrl = data.movieId ? `/watch/${data.id}` : `/watch/${data.id}?season=1&episode=1`;
+        EventBus.emit(Events.PathChanged, {path: contentUrl});
     }
 
     onAddToFavourites(data: { event: string, id: string, status: boolean }) {

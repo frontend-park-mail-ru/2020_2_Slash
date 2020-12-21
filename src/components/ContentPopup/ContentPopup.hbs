@@ -2,12 +2,15 @@
 <div class="content-popup-wrapper">
     <div class="modal__video-holder">
         <div class="modal__video-wrapper">
-            <img class="modal__video" src="{{host}}{{images}}/large.png" loading="lazy">
+            <img class="modal__video" src="{{host}}{{images}}/1920" loading="lazy">
             <div class="modal__video-shade"></div>
         </div>
         <div class="modal__name margin">
             <p>{{name}}</p>
             <p class="modal__origin-name">{{original_name}}</p>
+            {{#unless is_free}}
+                <span><a class="modal__subscribe">Требуется подписка</a></span>
+            {{/unless}}
         </div>
         <div class="modal__controller margin">
             <div class="modal__sound">
@@ -21,11 +24,9 @@
     <div class="modal__description margin">
         <div class="modal__description-left">
             <div class="modal__buttons content__buttons">
-                <a href="{{href}}" data-event="pathChanged" data-id="{{id}}">
-                    <button class="modal__play-btn play-btn item__btn">
-                        <img class="item__play-btn__img item__btn-img" src="/static/img/play2.svg" loading="lazy">
-                    </button>
-                </a>
+                <button class="modal__play-btn play-btn item__btn" data-event="playContent" data-id="{{id}}" data-{{type}}-id="{{id}}" data-event="playContent" data-pay="{{is_free}}">
+                    <img class="item__play-btn__img item__btn-img" src="/static/img/play2.svg" loading="lazy">
+                </button>
                 <button class="modal__add-btn add-btn item__btn" data-event="AddToFavourites" data-id="{{id}}"
                         data-status="{{is_favourite}}">
                     {{#if is_favourite}}

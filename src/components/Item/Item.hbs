@@ -2,23 +2,13 @@
     <button class="item__card" data-event="{{{infoEvent}}}" data-id="{{content_id}}" data-{{type}}-id="{{id}}"
             data-modalstatus="contentPage" data-contentType="{{{type}}}">
         <span class="item__card__title">{{name}}</span>
-        <img class="item__img" src="{{host}}{{images}}/small.png" loading="lazy">
+        <img class="item__img" src="{{host}}{{images}}/640" loading="lazy">
     </button>
     <div class="content__item_hovered">
         <div class="item__buttons content__buttons">
-            {{#if seasons}}
-                <a href="/watch/{{id}}?season=1&episode=1" data-id="{{content_id}}" data-{{type}}-id="{{id}}">
-                    <button class="item__play-btn item__btn">
-                        <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg">
-                    </button>
-                </a>
-            {{else}}
-                <a href="/watch/{{id}}" data-id="{{content_id}}" data-{{type}}-id="{{id}}">
-                    <button class="item__play-btn item__btn">
-                        <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg">
-                    </button>
-                </a>
-            {{/if}}
+            <button class="item__play-btn item__btn" data-id="{{id}}" data-{{type}}-id="{{id}}" data-event="playContent" data-pay="{{is_free}}">
+                   <img class="item__play-btn-img item__btn-img" src="/static/img/play2.svg">
+            </button>
             <button class="item__add-btn add-btn item__btn" data-event="AddToFavourites" data-id="{{content_id}}"
                     data-status="{{is_favourite}}">
                 {{#if is_favourite}}

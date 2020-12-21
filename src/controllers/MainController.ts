@@ -36,38 +36,38 @@ class MainController extends Controller {
                     content: [
                         {
                             id: 1,
-                            poster: '/static/img/witcher.webp',
+                            poster: '/static/img/witcher.png',
                             isAdded: true,
                         },
                         {
                             id: 2,
-                            poster: '/static/img/witcher.webp',
+                            poster: '/static/img/witcher.png',
                             isAdded: true,
                             isLike: false,
                         },
                         {
                             id: 3,
-                            poster: '/static/img/witcher.webp',
+                            poster: '/static/img/witcher.png',
                             isAdded: false,
                             isLike: true,
                         },
                         {
                             id: 58746,
-                            poster: '/static/img/witcher.webp',
+                            poster: '/static/img/witcher.png',
                             isAdded: false,
                             isLike: true,
                         },
                         {
                             id: 4,
-                            poster: '/static/img/witcher.webp',
+                            poster: '/static/img/witcher.png',
                         },
                         {
                             id: 5,
-                            poster: '/static/img/witcher.webp',
+                            poster: '/static/img/witcher.png',
                         },
                         {
                             id: 6,
-                            poster: '/static/img/witcher.webp',
+                            poster: '/static/img/witcher.png',
                         },
                     ],
                 },
@@ -76,31 +76,31 @@ class MainController extends Controller {
                     content: [
                         {
                             id: 7,
-                            poster: '/static/img/fword.webp',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 8,
-                            poster: '/static/img/fword.webp',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 9,
-                            poster: '/static/img/fword.webp',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 10,
-                            poster: '/static/img/fword.webp',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 11,
-                            poster: '/static/img/fword.webp',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 12,
-                            poster: '/static/img/fword.webp',
+                            poster: '/static/img/fword.png',
                         },
                         {
                             id: 13,
-                            poster: '/static/img/fword.webp',
+                            poster: '/static/img/fword.png',
                         },
                     ],
                 },
@@ -109,31 +109,31 @@ class MainController extends Controller {
                     content: [
                         {
                             id: 14,
-                            poster: '/static/img/woman.webp',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 15,
-                            poster: '/static/img/woman.webp',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 16,
-                            poster: '/static/img/woman.webp',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 17,
-                            poster: '/static/img/woman.webp',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 18,
-                            poster: '/static/img/woman.webp',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 19,
-                            poster: '/static/img/woman.webp',
+                            poster: '/static/img/woman.png',
                         },
                         {
                             id: 100,
-                            poster: '/static/img/woman.webp',
+                            poster: '/static/img/woman.png',
                         },
                     ],
                 },
@@ -142,31 +142,31 @@ class MainController extends Controller {
                     content: [
                         {
                             id: 111,
-                            poster: '/static/img/cat.webp',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 122,
-                            poster: '/static/img/cat.webp',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 133,
-                            poster: '/static/img/cat.webp',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 144,
-                            poster: '/static/img/cat.webp',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 155,
-                            poster: '/static/img/cat.webp',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 166,
-                            poster: '/static/img/cat.webp',
+                            poster: '/static/img/cat.png',
                         },
                         {
                             id: 177,
-                            poster: '/static/img/cat.webp',
+                            poster: '/static/img/cat.png',
                         },
                     ],
                 },

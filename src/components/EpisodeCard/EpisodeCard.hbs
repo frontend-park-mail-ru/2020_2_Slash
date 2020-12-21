@@ -1,9 +1,7 @@
 <div class="episode-card__item">
-    <a href="/watch/{{content_id}}?season={{season_number}}&episode={{number}}" data-id="{{content_id}}"">
-        <button class="item__card" data-event="play" data-id="{{content_id}}" data-{{type}}-id="{{id}}"
-                data-modalstatus="contentPage" data-contentType="{{{type}}}">
-            <img class="item__img" src="{{host}}{{poster}}" loading="lazy">
-        </button>
-    </a>
+    <button class="item__card" data-event="playContent" data-id="{{content_id}}" data-{{type}}-id="{{id}}" data-pay="{{is_free}}"
+            data-modalstatus="contentPage" data-contentType="{{{type}}}">
+        <img class="item__img" src="{{host}}{{poster}}" loading="lazy">
+    </button>
     <div class="episode-card__label">{{{name}}}</div>
 </div>

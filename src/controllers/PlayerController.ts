@@ -33,7 +33,7 @@ class PlayerController extends Controller {
                 this.view.setContext({});
                 this.view.insertIntoContext({
                     title: movie.name,
-                    images: `${SERVER_HOST}${movie.images}/large.png`,
+                    images: `${SERVER_HOST}${movie.images}/1920`,
                     video: `${SERVER_HOST}${movie.video}`,
                 });
 
@@ -101,7 +101,9 @@ class PlayerController extends Controller {
     }
 
     onSwitchOff() {
-        this.playerService.stop();
+        if (this.playerService) {
+            this.playerService.stop();
+        }
     }
 }
 

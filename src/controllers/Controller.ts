@@ -47,12 +47,14 @@ abstract class Controller {
                 sessionData.avatar = avatar;
 
                 SubscriptionModel.checkSubscription().then((response: ResponseType) => {
-                    if (!response.error && response.body.subscription) {
+                    if (!response.error && response.body.subscription && !response.body.subscription.is_canceled) {
                         localStorage.setItem('subscription', 'true');
                     } else {
                         localStorage.setItem('subscription', 'false');
                     }
                 }).catch((error: Error) => console.log(error));
+            } else {
+                localStorage.setItem('subscription', 'false');
             }
 
             EventBus.emit(Events.UpdateHeader, sessionData);

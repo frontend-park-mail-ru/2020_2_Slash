@@ -5,6 +5,8 @@ import Grid from '../Grid/Grid';
 import {SERVER_HOST} from '../../consts/settings';
 import EventBus from '../../services/EventBus';
 import Events from '../../consts/events';
+import Modals from '../../consts/modals';
+import Routes from '../../consts/routes';
 
 /**
  * @class
@@ -31,9 +33,18 @@ class ContentPopup extends Component {
 
         this._onClick = function(event: any) {
             const closingTarget = event.target.classList.contains('blocker') ||
-                event.target.closest('.close-btn');
+                event.target.closest('.close-btn') || event.target.classList.contains('modal__subscribe');
             if (closingTarget) {
                 this.remove();
+            }
+            const subscribeTarget = event.target.classList.contains('modal__subscribe');
+            if (subscribeTarget) {
+                const authStatus = localStorage.getItem('authorized');
+                if (authStatus == 'false') {
+                    EventBus.emit(Events.RevealPopup, {modalstatus: Modals.signin});
+                } else {
+                    EventBus.emit(Events.PathChanged, {path: Routes.ProfilePage, info: 'SubscribeTab'});
+                }
             }
         }.bind(this);
 
@@ -107,8 +118,10 @@ class ContentPopup extends Component {
     }
 
     onSeasonChanged = (data: any) => {
+        console.log(this.context);
         this.context.serialsSeasons[data.currentseason - 1].column = 3;
         this.context.serialsSeasons[data.currentseason - 1].gap = '2vw';
+        this.context.serialsSeasons[data.currentseason - 1].is_free = this.context.is_free;
         this.context.Grid = new Grid(this.context.serialsSeasons[data.currentseason - 1]).render();
         const grid = document.querySelector('.modal__season-grid');
         grid.innerHTML = this.context.Grid;
@@ -138,6 +151,7 @@ class ContentPopup extends Component {
         if (this.context.tvshow) {
             this.context.tvshow.seasons[0].column = 3;
             this.context.tvshow.seasons[0].gap = '2vw';
+            this.context.tvshow.seasons[0].is_free = this.context.contentData.is_free;
             seasonsGrid = new Grid(this.context.tvshow.seasons[0]).render();
             serialsSeasons = this.context.tvshow.seasons;
             this.context.href = `/watch/${this.context.tvshow.id}?season=1&episode=1`;
