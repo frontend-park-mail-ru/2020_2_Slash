@@ -8,6 +8,7 @@ import {Error} from '../consts/errors';
 import Context from '../tools/Context';
 import ActorModel from '../models/ActorModel';
 import PersonView from '../views/PersonView/PersonView';
+import TVShowsModel from '../models/TVShowsModel';
 
 class PersonController extends Controller {
     view: PersonView;
@@ -19,15 +20,19 @@ class PersonController extends Controller {
     switchOn(data: any = {}) {
         Promise.all([
             MovieModel.getMoviesByActor(data.path.resourceId, 15),
+            TVShowsModel.getTVShowsByActor(data.path.resourceId, 15),
             ActorModel.getActor({id: data.path.resourceId}),
-        ]).then(([moviesResponse, actorResponse]) => {
+        ]).then(([moviesResponse, tvShowsResponse, actorResponse]) => {
             if (moviesResponse.error || actorResponse.error) {
                 return;
             }
             eventBus.emit(Events.CheckSession, {});
 
+            const {tvshows} = tvShowsResponse.body;
+            const {movies} = moviesResponse.body;
+
             const contentData: Context = {
-                content: moviesResponse.body.movies || [],
+                content: movies.concat(tvshows),
                 actor: actorResponse.body.actor.name,
             };
 

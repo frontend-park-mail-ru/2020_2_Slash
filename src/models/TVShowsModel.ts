@@ -16,6 +16,12 @@ class TVShowsModel {
         }).then((response: Response) => response.json());
     }
 
+    getTVShowsByActor(id: number, count: number, from = 0) {
+        return http.fetchGet({
+            route: `${ApiMethods.TVShows}?actor=${id}&count=${count}&from=${from}`,
+        }).then((response: Response) => response.json());
+    }
+
     getTopTVShows(count: number, from = 0) {
         return http.fetchGet({
             route: `${ApiMethods.TopTVShows}?count=${count}&from=${from}`,
