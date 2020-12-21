@@ -81,51 +81,53 @@ class Header extends Component {
             const items = document.getElementsByClassName('li__visible');
             sum = this.checkSum(items);
 
-            const currentHeaderMenuW = document.querySelector('.header__menu').clientWidth;
-            const hiddenMenu = document.querySelector('.hidden__header-menu');
-            const hiddenMenuWrapper = document.querySelector('.hidden__header-menu__wrapper');
+            if (document.querySelector('.header__menu')) {
+                const currentHeaderMenuW = document.querySelector('.header__menu').clientWidth || 0;
+                const hiddenMenu = document.querySelector('.hidden__header-menu');
+                const hiddenMenuWrapper = document.querySelector('.hidden__header-menu__wrapper');
 
-            if (sum + padding >= currentHeaderMenuW) {
-                this.minWidth = currentHeaderMenuW;
-                const itemToHide = items.item(items.length - 1);
-                if (itemToHide) {
-                    itemToHide.setAttribute('style', 'display: none');
-                    itemToHide.classList.remove('li__visible');
-                }
-                if (hiddenMenu) {
-                    hiddenMenu.classList.remove('hidden');
-                    const HiddenA = itemToHide.getElementsByTagName('a')[0];
-
-                    let myListClass = '';
-                    if (HiddenA && HiddenA.pathname === routes.MyList) {
-                        myListClass = 'my-list';
+                if (sum + padding >= currentHeaderMenuW) {
+                    this.minWidth = currentHeaderMenuW;
+                    const itemToHide = items.item(items.length - 1);
+                    if (itemToHide) {
+                        itemToHide.setAttribute('style', 'display: none');
+                        itemToHide.classList.remove('li__visible');
                     }
+                    if (hiddenMenu) {
+                        hiddenMenu.classList.remove('hidden');
+                        const HiddenA = itemToHide.getElementsByTagName('a')[0];
 
-                    const li = CreateDomElement('li', {'class': `list__li ${myListClass}`});
-                    const a = CreateDomElement('a', {
-                        'class': 'list-item-text',
-                        'href': `${HiddenA.pathname}`,
-                    });
-                    a.innerText = `${HiddenA.innerText}`;
+                        let myListClass = '';
+                        if (HiddenA && HiddenA.pathname === routes.MyList) {
+                            myListClass = 'my-list';
+                        }
 
-                    li.appendChild(a);
+                        const li = CreateDomElement('li', {'class': `list__li ${myListClass}`});
+                        const a = CreateDomElement('a', {
+                            'class': 'list-item-text',
+                            'href': `${HiddenA.pathname}`,
+                        });
+                        a.innerText = `${HiddenA.innerText}`;
 
-                    hiddenMenuWrapper.appendChild(li);
+                        li.appendChild(a);
+
+                        hiddenMenuWrapper.appendChild(li);
+                    }
                 }
-            }
 
-            if (this.minWidth <= currentHeaderMenuW - padding) {
-                const hiddenMenu = document.querySelector('.hidden__header-menu .hidden__header-menu__wrapper');
-                const hiddenItems = hiddenMenu.children;
-                if (hiddenItems.length > 0) {
-                    hiddenMenu.removeChild(hiddenItems[hiddenItems.length - 1]);
-                }
-                document.querySelector('.hidden__header-menu').classList.add('hidden');
+                if (this.minWidth <= currentHeaderMenuW - padding) {
+                    const hiddenMenu = document.querySelector('.hidden__header-menu .hidden__header-menu__wrapper');
+                    const hiddenItems = hiddenMenu.children;
+                    if (hiddenItems.length > 0) {
+                        hiddenMenu.removeChild(hiddenItems[hiddenItems.length - 1]);
+                    }
+                    document.querySelector('.hidden__header-menu').classList.add('hidden');
 
-                const itemToShow = this.baseItems.item(items.length);
-                if (itemToShow) {
-                    itemToShow.setAttribute('style', 'display: block');
-                    itemToShow.classList.add('li__visible');
+                    const itemToShow = this.baseItems.item(items.length);
+                    if (itemToShow) {
+                        itemToShow.setAttribute('style', 'display: block');
+                        itemToShow.classList.add('li__visible');
+                    }
                 }
             }
         }
