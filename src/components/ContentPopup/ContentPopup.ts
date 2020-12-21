@@ -118,7 +118,6 @@ class ContentPopup extends Component {
     }
 
     onSeasonChanged = (data: any) => {
-        console.log(this.context);
         this.context.serialsSeasons[data.currentseason - 1].column = 3;
         this.context.serialsSeasons[data.currentseason - 1].gap = '2vw';
         this.context.serialsSeasons[data.currentseason - 1].is_free = this.context.is_free;

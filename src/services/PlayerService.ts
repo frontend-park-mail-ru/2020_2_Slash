@@ -18,6 +18,7 @@ class PlayerService {
     private _onFullScreenOn: any;
     private _onFullScreenOff: any;
     private _context: any;
+    private watchPage: any;
 
     constructor(context?: any) {
         this._context = context;
@@ -44,10 +45,12 @@ class PlayerService {
             .on(Events.FullscreenModeOff, this._onFullScreenOff);
 
         this.video.addEventListener('timeupdate', this.onUpdateTime);
+        window.addEventListener('keydown', this.onKeydownEscape);
 
         this.timeline.addEventListener('click', this.onTimelineUpdate);
         this.timeline.addEventListener('pointermove', this.onHoverTimeline);
         this.timeline.addEventListener('pointerout', this.onHoverOffTimeline);
+        document.querySelector('.player__container').addEventListener('mouseover', this.showPlayerBar);
         document.querySelector('.watch__page').addEventListener('mouseover', this.showPlayerBar);
         document.querySelector('.watch__page').addEventListener('mouseout', this.hidePlayerBar);
 
@@ -90,6 +93,14 @@ class PlayerService {
                 const prevContentButton: any = document.querySelector('.player-bar__prev-content-btn');
                 prevContentButton.hidden = true;
             }
+        }
+
+        this.watchPage = document.querySelector('.watch__page');
+    }
+
+    onKeydownEscape = (event: any) => {
+        if (event.key === 'Escape') {
+            this.onFullScreenOff();
         }
     }
 
@@ -310,7 +321,9 @@ class PlayerService {
     }
 
     onFullScreenOn = () => {
-        document.querySelector('.watch__page').requestFullscreen();
+        this.watchPage.removeEventListener('mouseover', this.showPlayerBar);
+        this.watchPage.addEventListener('mousemove', this.showCursor.bind(this));
+        this.watchPage.requestFullscreen();
 
         const btnBack: HTMLButtonElement = document.querySelector('.watch__back-btn');
         btnBack.style.display = 'none';
@@ -319,7 +332,18 @@ class PlayerService {
             '/static/img/player-fullscreen-out.svg', 'fullscreenModeOff');
     }
 
+    showCursor = () => {
+        const removeCursor = function() {
+            document.querySelector('.watch__page').setAttribute('style', 'cursor: none;');
+        };
+
+        this.watchPage.removeAttribute('style');
+        setTimeout(removeCursor, 3000);
+    }
+
     onFullScreenOff = () => {
+        this.watchPage.addEventListener('mouseover', this.showPlayerBar);
+        this.watchPage.removeEventListener('mousemove', this.showCursor.bind(this));
         document.exitFullscreen();
 
         const btnBack: any = document.querySelector('.watch__back-btn');
@@ -327,6 +351,8 @@ class PlayerService {
 
         this.changeButton('.player-bar__fullscreen-btn', '.fullscreen-btn__img',
             '/static/img/player-fullscreen.svg', 'fullscreenModeOn');
+
+        document.querySelector('.watch__page').setAttribute('style', 'cursor: pointer;');
     }
 
     hideProgressBar = () => {
@@ -345,6 +371,7 @@ class PlayerService {
     }
 
     stop() {
+        window.removeEventListener('keydown', this.onKeydownEscape);
         eventBus.off(Events.VideoPlay, this._onVideoPlay)
             .off(Events.VideoPause, this._onVideoPause)
             .off(Events.Mute, this._onMuteVolume)
