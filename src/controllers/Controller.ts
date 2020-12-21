@@ -19,6 +19,7 @@ abstract class Controller {
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     switchOn(data: any = {}) {
     } // eslint-disable-line
 
