@@ -140,10 +140,6 @@
     color: var(--white);
     font-size: 16px;
     position: center;
-
-    @media (max-width: 1024px) {
-
-    }
 }
 
 .subscription__btn:hover {
@@ -152,7 +148,7 @@
     filter: drop-shadow(0 0 3px var(--white));
 }
 
-.subscription__btn:active, .subscription__btn:active {
+.subscription__btn:active {
     transition: all 0.2s ease-in-out;
     transform: scale(1);
     filter: none;
