@@ -7,6 +7,7 @@ import PSecurityFormBuilder from '../../tools/builders/PSecurityFormBuilder';
 import template from './ProfileView.hbs';
 import Events from '../../consts/events';
 import EventBus from '../../services/EventBus';
+import SubscriptionForm from '../../components/SubscriptionForm/SubscriptionForm';
 
 class ProfileView extends View {
     usrInfoBlock: UserInfoBlock;
@@ -41,9 +42,12 @@ class ProfileView extends View {
         });
         EventBus.emit(Events.UpdateSubscription);
 
+        const subscriptionForm = new SubscriptionForm(this.context.subDate);
+
         const data: Context = {
             UserInfoBlock: this.usrInfoBlock.render(),
             ProfileMenuBar: this.menuBar.render(),
+            SubscriptionForm: subscriptionForm.render(),
         };
 
         this.insertIntoContext(data);
@@ -52,8 +56,7 @@ class ProfileView extends View {
     }
 
     hide() {
-        EventBus.off(Events.ProfileTabChanged, this.menuBar.onTabChanged)
-            .off(Events.SubmitProfileForm, this.menuBar.onSubmit)
+        EventBus.off(Events.SubmitProfileForm, this.menuBar.onSubmit)
             .off(Events.UpdateUserProfile, this.usrInfoBlock.onUpdateProfile)
             .off(Events.UpdateProfileAvatar, this.usrInfoBlock.onUploadAvatar);
         super.hide();

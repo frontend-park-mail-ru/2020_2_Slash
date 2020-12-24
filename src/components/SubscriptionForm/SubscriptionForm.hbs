@@ -1,5 +1,8 @@
+<div class="subscription__title-label">
+    Подписка
+</div>
 {{#if subscription}}
-    {{# if isActive}}
+    {{#if isActive}}
         {{#if isPaid}}
             <div class="subscription__prev-label subscription__label">
                 Ваша подписка оплачена и действует до {{{date}}}
@@ -20,11 +23,18 @@
         <button class="subscription__btn refresh-sub__btn">Восстановить подписку</button>
     {{/if}}
 {{else}}
-    <div class="subscription__prev-label subscription__label">
-        У вас не оформлена подписка
+    <div class="subscription__labels">
+        <div class="subscription__price">
+            <div class="subscription__price-label">
+                300 ₽
+            </div>
+            <div class="subscription__misc-label subscription__mth">
+                месяц
+            </div>
+        </div>
+        <div class="subscription__misc-label">
+            Наличие подписки дает доступ к коллекции из более N фильмов и сериалов в лучшем качестве
+        </div>
     </div>
-    <div class="subscription__prev-label subscription__label">
-        Наша подписка стоит 299.99 руб.
-    </div>
-    <button class="create-sub__btn subscription__btn">Оформить подписку</button>
+    {{{PaymentForm}}}
 {{/if}}

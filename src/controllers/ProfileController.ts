@@ -1,7 +1,6 @@
 import {SERVER_HOST} from '../consts/settings';
 import ResponseType from '../tools/ResponseType';
 import ProfileView from '../views/ProfileView/ProfileView';
-import PaymentForm from '../components/PaymentForm/PaymentForm';
 import UserModel from '../models/UserModel';
 import Controller from './Controller';
 import EventBus from '../services/EventBus';
@@ -73,10 +72,6 @@ class ProfileController extends Controller {
             EventBus.emit(Events.ProfileTabChanged, data);
         }
         super.onSwitchOn(data);
-        const subscribeBtn = document.querySelector('.create-sub__btn');
-        if (subscribeBtn) {
-            subscribeBtn.addEventListener('click', this.onBtnCreateSubscription);
-        }
 
         const cancelSubBtn = document.querySelector('.cancel-sub__btn');
         if (cancelSubBtn) {
@@ -89,6 +84,26 @@ class ProfileController extends Controller {
         }
 
         this.subWrapper = document.querySelector('.subscription__wrapper');
+
+        document.querySelectorAll('.button-block__button').forEach((btn) => {
+            btn.classList.add('profile-view__btn');
+        });
+
+        const btnSettings = document.querySelector('.user-meta__settings');
+        if (btnSettings) {
+            btnSettings.addEventListener('click', () => {
+                const profileWrapper = document.querySelector('.profile-view__profile-wrapper');
+                if (profileWrapper && profileWrapper.classList.contains('hidden')) {
+                    profileWrapper.classList.remove('hidden');
+
+                    profileWrapper.querySelector('.profile__close-btn').addEventListener('click', () => {
+                        profileWrapper.classList.add('hidden');
+                    });
+                } else {
+                    profileWrapper.classList.add('hidden');
+                }
+            });
+        }
     }
 
     switchOff() {
@@ -148,13 +163,6 @@ class ProfileController extends Controller {
         fileUploader.click();
     }
 
-    onBtnCreateSubscription = () => {
-        document.querySelector('.create-sub__btn').classList.add('hidden');
-        document.querySelector('.subscription__prev-label').classList.add('hidden');
-
-        this.subWrapper.innerHTML = new PaymentForm({}).render();
-    }
-
     onBtnCancelSubscription = () => {
         SubscriptionModel.deleteSubscription().then().catch((error: Error) => console.log(error));
 
@@ -173,10 +181,6 @@ class ProfileController extends Controller {
         } else {
             this.subDate.subscription = false;
             this.subWrapper.innerHTML = new SubscriptionForm(this.subDate).render();
-            const subscribeBtn = document.querySelector('.create-sub__btn');
-            if (subscribeBtn) {
-                subscribeBtn.addEventListener('click', this.onBtnCreateSubscription);
-            }
         }
     }
 
@@ -185,10 +189,6 @@ class ProfileController extends Controller {
         this.subDate.isActive = true;
 
         this.subWrapper.innerHTML = new SubscriptionForm(this.subDate).render();
-        const subscribeBtn = document.querySelector('.create-sub__btn');
-        if (subscribeBtn) {
-            subscribeBtn.addEventListener('click', this.onBtnCreateSubscription);
-        }
 
         const cancelSubBtn = document.querySelector('.cancel-sub__btn');
         if (cancelSubBtn) {

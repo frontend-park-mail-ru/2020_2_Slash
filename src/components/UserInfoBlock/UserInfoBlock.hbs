@@ -1,15 +1,16 @@
 <div class="profile-view__user">
-    <div class="profile-view__user-info" style="background-image: url('{{avatar}}');">
-        <div class="profile-view__user-meta">
-            <img class="user-meta__avatar" src="{{avatar}}" loading="lazy">
-            <input id="file-upload" type='file' name="avatar" accept="image/*" hidden/>
-            <button class="user-meta__edit-btn" data-event="uploadAvatar">
-                <img class="user-meta__edit-btn-img" src="/static/img/edit.svg">
-            </button>
-            <div class="user-meta__labels">
-                <h3 class="user-meta__nickname">{{nickname}}</h3>
-                <h4 class="user-meta__email">{{email}}</h4>
-            </div>
+    <div class="user-meta__avatar-wrapper">
+        <img class="user-meta__avatar" src="{{avatar}}" loading="lazy">
+        <input id="file-upload" type='file' name="avatar" accept="image/*" hidden/>
+        <button class="user-meta__edit-btn" data-event="uploadAvatar">
+            <img class="user-meta__edit-btn-img" src="/static/img/edit.svg">
+        </button>
+    </div>
+    <div class="user-meta__labels">
+        <div class="user-meta__nickname">{{nickname}}</div>
+        <div class="user-meta__email">{{email}}</div>
+        <div class="user-meta__settings">Настроить профиль
+            <img class="user-meta__settings-img" src="/static/img/settings.svg">
         </div>
     </div>
 </div>

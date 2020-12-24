@@ -1,0 +1,153 @@
+.subscription__wrapper {
+  background-color: var(--profile-popup);
+  border-radius: 20px;
+  padding: 30px;
+  display: block;
+
+  @media (max-width: 1024px) {
+    padding: 20px;
+  }
+}
+
+.subscription__wrapper, .payment-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.subscription__label {
+  color: var(--white);
+  font-size: 16px;
+  margin: 20px;
+  text-align: center;
+}
+
+.subscription__title-label {
+  font-size: 23px;
+  left: -10.8vw;
+  color: var(--white);
+  position: relative;
+
+  @media (max-width: 1450px) {
+    left: -12vw;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  @media (max-width: 440px) {
+    left: -29vw;
+  }
+}
+
+.subscription__labels {
+  display: flex;
+  margin: 20px 5px;
+
+  @media (max-width: 1024px) {
+    margin: 20px 0;
+  }
+}
+
+.subscription__price {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.subscription__price-label {
+  font-size: 20px;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.subscription__misc-label {
+  font-size: 14px;
+  color: var(--profile-misc);
+
+  @media (max-width: 1024px) {
+    margin-left: 20px;
+  }
+}
+
+.subscription__mth {
+  @media (max-width: 1024px) {
+    margin-left: 0;
+  }
+}
+
+.subscription__yandex-label {
+  width: 90%;
+  background-color: var(--purple);
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 20px;
+  cursor: pointer;
+  margin-bottom: 30px;
+
+  @media (max-width: 1024px) {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+.subscription__card-label {
+  width: 90%;
+  background-color: var(--orangered-tr);
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 20px;
+  cursor: pointer;
+
+  @media (max-width: 1024px) {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+.subscription__btn {
+  cursor: pointer;
+  margin: 20px 0;
+  border: none;
+  outline: none;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: var(--profile-btn);
+  color: var(--white);
+  font-size: 16px;
+  position: center;
+
+  @media (max-width: 1024px) {
+    padding: 10px;
+    margin: 0;
+  }
+}
+
+.subscription__btn:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 3px var(--white));
+}
+
+.subscription__btn:active {
+  transition: all 0.2s ease-in-out;
+  transform: scale(1);
+  filter: none;
+}
+
+.cancel-sub__btn {
+  background-color: var(--orangered-tr);
+}
+
+.create-sub__btn {
+  @media (max-width: 1024px) {
+    margin-bottom: 30px;
+  }
+}
+
+.refresh-sub__btn {
+  background-color: var(--purple);
+}

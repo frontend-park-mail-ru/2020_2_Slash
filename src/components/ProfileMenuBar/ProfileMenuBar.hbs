@@ -1,30 +1,26 @@
-<div class="profile-view__menu-bar">
+<div class="profile-view__profile-wrapper hidden">
+    <button class="close-btn profile__close-btn">
+        <img class="close-btn__img" src="/static/img/close.svg">
+    </button>
     <div class="menu-bar__wrapper">
         <ul class="menu-bar__list">
-            <li><a class="menu-bar__list-item-text list-item-text_selected" data-info="InfoTab" name="InfoTab"
+            <li><a class="menu-bar__list-item-text list-item-text_selected list-item__first-child" data-info="InfoTab"
+                   name="InfoTab"
                    data-event="profileTabChanged" href="#">Информация</a></li>
-            <li><a class="menu-bar__list-item-text" data-info="SecurityTab" name="SecurityTab"
+            <li><a class="menu-bar__list-item-text list-item__last-child" data-info="SecurityTab" name="SecurityTab"
                    data-event="profileTabChanged" href="#">Безопасность</a></li>
-            <li><a class="menu-bar__list-item-text" data-info="SubscribeTab" name="SubscribeTab"
-                   data-event="profileTabChanged" href="#">Подписка</a></li>
         </ul>
-        <hr class="menu-bar__horizontal-line"/>
     </div>
-</div>
-<div class="profile-view__content">
-    <div class="profile-view__security hidden profile-view__form" name="SecurityTabForm">
-        <div class="sec-form__wrapper">
-        {{{SecurityForm}}}
+    <div class="profile-view__content">
+        <div class="profile-view__security hidden profile-view__form" name="SecurityTabForm">
+            <div class="sec-form__wrapper">
+                {{{SecurityForm}}}
+            </div>
         </div>
-    </div>
-    <div class="profile-view__sub hidden profile-view__form" name="SubscribeTabForm">
-        <div class="subscription__wrapper">
-            {{{SubscriptionForm}}}
+        <div class="profile-view__info active-form profile-view__form" name="InfoTabForm">
+            <div class="info-form__wrapper">
+                {{{InfoForm}}}
+            </div>
         </div>
-    </div>
-    <div class="profile-view__info active-form profile-view__form" name="InfoTabForm">
-        <div class="info-form__wrapper">
-        {{{InfoForm}}}
-    </div>
     </div>
 </div>
