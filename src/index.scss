@@ -20,9 +20,11 @@
 @import "components/TabBar/TabBar.scss";
 @import "components/MainTab/MainTab.scss";
 @import "components/DetailsTab/DetailsTab.scss";
+@import "components/DropdownList/Dropdown.scss";
 @import "components/SeasonsTab/SeasonsTab.scss";
 @import "components/ContentBlock/ContentBlock.scss";
 @import "components/MiniModal/MiniModal.scss";
+@import "components/MovieForm/MovieForm.scss";
 @import "components/Player/Player.scss";
 @import "components/Grid/Grid.scss";
 @import "components/SubMenuPopup/SubMenuPopup.scss";
@@ -36,6 +38,7 @@
 @import "views/SerialView/SerialView.scss";
 @import "views/SearchView/SearchView.scss";
 @import "views/FreeContentView/FreeContentView.scss";
+@import "views/AdminView/AdminView.scss";
 
 body {
   position: relative;

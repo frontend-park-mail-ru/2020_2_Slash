@@ -1,0 +1,65 @@
+<div class="movie-form">
+    <label class="movie-from__label">Название
+        <input type="text" class="movie-form__input movie-form__name">
+    </label>
+    <label class="movie-from__label">Оригинальное название
+        <input type="text" class="movie-form__input movie-form__origin-name">
+    </label>
+
+    <label for="movie-form__desc" class="movie-from__label movie-from__area-label">Описание</label>
+    <textarea name="movie-form__desc" class="movie-form_textarea movie-form__desc">...</textarea>
+
+    <label for="movie-form__short-desc" class="movie-from__label movie-from__area-label">Краткое описание</label>
+    <textarea name="movie-form__short-desc" class="movie-form_textarea movie-form__short-desc">...</textarea>
+
+    <label class="movie-from__label">Год
+        <input type="text" class="movie-form__input movie-form__year">
+    </label>
+    <label class="movie-from__label">Платный
+        <input type="radio" class="movie-form__input movie-form__free">
+    </label>
+
+    <div class="movie-from__dir-wrapper">
+        <button class="movie-form__btn  movie-form__dir-btn">Режиссеры
+            <img class="movie-form__arrow" src="/static/img/arrow.svg" loading="lazy">
+        </button>
+        {{{DirDropdown}}}
+        <div class="movie-from__labels">
+            <label class="movie-from__label">Режиссеры</label>
+            <label class="movie-from__label selected-directors"></label>
+        </div>
+        <label class="movie-from__label">Введите режиссеров через запятую
+            <input type="text" class="movie-form__input movie-form__dir-input">
+        </label>
+    </div>
+
+    <div class="movie-from__actors-wrapper">
+        <button class="movie-form__btn  movie-form__actors-btn">Актеры
+            <img class="movie-form__arrow" src="/static/img/arrow.svg" loading="lazy">
+        </button>
+        {{{ActDropdown}}}
+        <div class="movie-from__labels">
+            <label class="movie-from__label">Актеры</label>
+            <label class="movie-from__label selected-actors"></label>
+        </div>
+        <label class="movie-from__label">Введите актеров через запятую
+            <input type="text" class="movie-form__input movie-form__actors-input">
+        </label>
+    </div>
+
+    <div class="movie-from__count-wrapper">
+        <button class="movie-form__btn  movie-form__count-btn">Страны
+            <img class="movie-form__arrow" src="/static/img/arrow.svg" loading="lazy">
+        </button>
+        {{{CountDropdown}}}
+        <div class="movie-from__labels">
+            <label class="movie-from__label">Страны</label>
+            <label class="movie-from__label selected-countries"></label>
+        </div>
+        <label class="movie-from__label">Введите страны через запятую
+            <input type="text" class="movie-form__input movie-form__count-input">
+        </label>
+    </div>
+
+    <button class="admin-btn movie-btn__ok">Применить</button>
+</div>

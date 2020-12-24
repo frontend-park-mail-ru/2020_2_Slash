@@ -1,0 +1,81 @@
+.movie-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px 20px;
+  background-color: var(--highly-transparent-white);
+  border-radius: 8px;
+}
+
+.movie-from__label {
+  font-size: 16px;
+  padding: 5px 0;
+  color: var(--white);
+  margin-bottom: 30px;
+}
+
+.movie-from__area-label {
+  margin-bottom: 5px;
+}
+
+.movie-form__input {
+  background-color: var(--nearly-white);
+  padding: 0 5px;
+  outline: none;
+  color: var(--black);
+  border-radius: 3px;
+  width: 100%;
+  border: 1px solid var(--white);
+  margin-top: 5px;
+  overflow-y: auto;
+}
+
+.movie-form_textarea {
+  margin-bottom: 30px;
+}
+
+.movie-form__free {
+  width: 5%;
+}
+
+.movie-form__desc, .movie-form__short-desc {
+  height: 80px;
+  padding: 5px;
+  outline: none;
+}
+
+.movie-from__labels {
+  margin: 20px 0;
+}
+
+.movie-form__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 7vw;
+  height: 2vw;
+  border: 0.5px solid var(--white);
+  outline: none;
+  padding: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: var(--filter-btn);
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.movie-form__arrow {
+  width: 15px;
+}
+
+.movie-from__dir-wrapper , .movie-from__actors-wrapper, .movie-from__count-wrapper {
+  background-color: var(--medium-transparent-white);
+  padding: 10px 30px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.movie-btn__ok {
+  width: 7vw;
+  height: 2vw;
+  margin-top: 20px;
+}

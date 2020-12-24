@@ -1,0 +1,38 @@
+.admin-view {
+  min-height: calc(100vh - 2 * var(--header-height));
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.admin-wrapper {
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-evenly;
+}
+
+.admin-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+
+}
+
+.admin-btn {
+  height: 35px;
+  font-size: 17px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: rgba(120, 120, 120, 0.5);
+  color: var(--white);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  margin-right: 20px;
+}
+
+.admin-btn:hover {
+  filter: drop-shadow(0 0 1px var(--white));
+}
+
+.admin-form {
+  width: 60%;
+}

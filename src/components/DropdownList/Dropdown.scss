@@ -1,0 +1,29 @@
+.dropdown-menu__list {
+  display: flex;
+  overflow-x: scroll;
+  padding: 20px 0;
+}
+
+.dropdown-menu__item {
+  writing-mode: horizontal-tb;
+  font-size: 1em;
+  color: var(--white);
+  background-color: rgb(100, 100, 100);
+  flex-basis: 20%;
+  margin-right: 30px;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.selected-li {
+  color: var(--medium-transparent-white);
+  background-color: rgb(50, 50, 50);
+}
+
+.dropdown-menu__item:hover {
+  transition: all 0.1s ease-in-out;
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 0.5px var(--white));
+}
