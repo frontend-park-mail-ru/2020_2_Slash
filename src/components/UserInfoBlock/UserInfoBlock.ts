@@ -38,8 +38,6 @@ class UserInfoBlock extends Component {
 
     onUploadAvatar = (data: any = {}) => {
         this.context.avatar = data.avatar;
-        const avatarBackground = document.querySelector('.profile-view__user-info');
-        avatarBackground.setAttribute('style', `background-image: url('${data.avatar}');`);
         const avatar = document.querySelector('.user-meta__avatar');
         avatar.setAttribute('src', `${data.avatar}`);
 
