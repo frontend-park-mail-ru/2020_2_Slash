@@ -18,27 +18,51 @@ class PersonController extends Controller {
     }
 
     switchOn(data: any = {}) {
-        Promise.all([
-            MovieModel.getMoviesByActor(data.path.resourceId, 15),
-            TVShowsModel.getTVShowsByActor(data.path.resourceId, 15),
-            ActorModel.getActor({id: data.path.resourceId}),
-        ]).then(([moviesResponse, tvShowsResponse, actorResponse]) => {
-            if (moviesResponse.error || actorResponse.error) {
-                return;
-            }
-            eventBus.emit(Events.CheckSession, {});
+        if (data.path.path.includes('actor')) {
+            Promise.all([
+                MovieModel.getMoviesByActor(data.path.resourceId, 15),
+                TVShowsModel.getTVShowsByActor(data.path.resourceId, 15),
+                ActorModel.getActor({id: data.path.resourceId}),
+            ]).then(([moviesResponse, tvShowsResponse, actorResponse]) => {
+                if (moviesResponse.error || actorResponse.error) {
+                    return;
+                }
+                eventBus.emit(Events.CheckSession, {});
 
-            const {tvshows} = tvShowsResponse.body;
-            const {movies} = moviesResponse.body;
+                const {tvshows} = tvShowsResponse.body;
+                const {movies} = moviesResponse.body;
 
-            const contentData: Context = {
-                content: movies.concat(tvshows),
-                actor: actorResponse.body.actor.name,
-            };
+                const contentData: Context = {
+                    content: movies.concat(tvshows),
+                    actor: actorResponse.body.actor.name,
+                };
 
-            this.view.insertIntoContext(contentData);
-            this.view.show();
-        }).catch((error: Error) => console.log(error));
+                this.view.insertIntoContext(contentData);
+                this.view.show();
+            }).catch((error: Error) => console.log(error));
+        } else if (data.path.path.includes('director')) {
+            Promise.all([
+                MovieModel.getMoviesByDirector(data.path.resourceId, 15),
+                TVShowsModel.getTVShowsByDirector(data.path.resourceId, 15),
+                ActorModel.getDirector({id: data.path.resourceId}),
+            ]).then(([moviesResponse, tvShowsResponse, directorResponse]) => {
+                if (moviesResponse.error || directorResponse.error) {
+                    return;
+                }
+                eventBus.emit(Events.CheckSession, {});
+
+                const {tvshows} = tvShowsResponse.body;
+                const {movies} = moviesResponse.body;
+
+                const contentData: Context = {
+                    content: movies.concat(tvshows),
+                    director: directorResponse.body.director.name,
+                };
+
+                this.view.insertIntoContext(contentData);
+                this.view.show();
+            }).catch((error: Error) => console.log(error));
+        }
     }
 
     onSwitchOn(data: any = {}) {

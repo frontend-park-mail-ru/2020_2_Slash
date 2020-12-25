@@ -71,10 +71,11 @@
                 <span class="genre-item__title item-title">Жанр:</span>
                 <span class="genre-item__value item-value">
                     {{#each genres}}
-                        <a href="/{{type}}?genre={{this.id}}" class="genre-item__value">
-                        {{{this.name}}}{{#unless @last}},
+                        <a href="/{{type}}?genre={{this.id}}" class="genre-item__value item-link">
+                        {{{this.name}}}
                         </a>
-                    {{/unless}}
+                        {{#unless @last}},
+                        {{/unless}}
                     {{/each}}
                 </span>
             </div>
@@ -83,9 +84,10 @@
                 <span class="cast-item__value item-value">
                     {{#each slicedCast}}
                         <a href="/actor/{{this.id}}" class="cast-item__link item-link">
-                            {{{this.name}}}{{#unless @last}},
-                        {{/unless}}
+                            {{{this.name}}}
                         </a>
+                    {{#unless @last}},
+                    {{/unless}}
                     {{/each}}
                 </span>
             </div>
@@ -109,7 +111,10 @@
                 <span class="director-item__title item-title">Режиссеры:</span>
                 <span class="director-item__value item-value">
                     {{#each directors}}
-                        {{{this.name}}}{{#unless @last}},
+                    <a href="/director/{{this.id}}" class="director-item__value item-link">
+                        {{{this.name}}}
+                    </a>
+                    {{#unless @last}},
                     {{/unless}}
                     {{/each}}
                 </span>

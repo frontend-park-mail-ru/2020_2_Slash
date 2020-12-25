@@ -20,9 +20,10 @@ class PersonView extends View {
         const grid = new Grid({
             content: this.context.content,
         });
+        const person = this.context.actor || this.context.director;
         const data = {
             Content: grid.render(),
-            person: this.context.actor,
+            person: person,
         };
         this.insertIntoContext(data);
         super.show(this.template(data));

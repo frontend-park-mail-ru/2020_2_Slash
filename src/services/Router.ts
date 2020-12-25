@@ -114,6 +114,7 @@ class Router {
         return {
             controller: targetController,
             path: {
+                path: result.path,
                 resourceId: +result.pathParams,
             },
             query: result.getParams,
