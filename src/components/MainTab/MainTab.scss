@@ -221,6 +221,7 @@
 .item-link {
     color: var(--white);
     &:hover {
+        cursor: pointer;
         color: var(--low-transparent-white);
     }
 }

@@ -53,10 +53,6 @@
     border-bottom-right-radius: 5px;
 }
 
-.list-item-text_selected {
-    background-color: var(--orangered-tr);
-}
-
 .menu-bar__list-item-text:hover {
     transition: all 0.02s ease-in;
     cursor: pointer;

@@ -9,6 +9,12 @@ class ActorModel {
             route: `${ApiMethods.Actors}/${data.id}`,
         }).then((response: Response) => response.json());
     }
+
+    getDirector(data: any) {
+        return http.fetchGet({
+            route: `${ApiMethods.Directors}/${data.id}`,
+        }).then((response: Response) => response.json());
+    }
 }
 
 export default new ActorModel();

@@ -12,6 +12,7 @@ enum ApiMethods {
     Genres = '/genres',
     Countries = '/countries',
     Actors = '/actors',
+    Directors = '/directors',
     TVShows = '/tvshows',
     Search = '/search',
     TopTVShows = '/tvshows/top',

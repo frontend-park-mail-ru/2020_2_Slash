@@ -22,6 +22,12 @@ class TVShowsModel {
         }).then((response: Response) => response.json());
     }
 
+    getTVShowsByDirector(id: number, count: number, from = 0) {
+        return http.fetchGet({
+            route: `${ApiMethods.TVShows}?director=${id}&count=${count}&from=${from}`,
+        }).then((response: Response) => response.json());
+    }
+
     getTopTVShows(count: number, from = 0) {
         return http.fetchGet({
             route: `${ApiMethods.TopTVShows}?count=${count}&from=${from}`,

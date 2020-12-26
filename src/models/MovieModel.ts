@@ -33,6 +33,12 @@ class MovieModel {
             route: `${ApiMethods.Movies}?actor=${id}&count=${count}&from=${from}`,
         }).then((response: Response) => response.json());
     }
+
+    getMoviesByDirector(id: number, count: number, from = 0) {
+        return http.fetchGet({
+            route: `${ApiMethods.Movies}?director=${id}&count=${count}&from=${from}`,
+        }).then((response: Response) => response.json());
+    }
 }
 
 export default new MovieModel();
