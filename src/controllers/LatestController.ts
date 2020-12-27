@@ -1,5 +1,5 @@
 import Controller from './Controller';
-import FreeContentView from '../views/FreeContentView/FreeContentView';
+import LatestView from '../views/LatestView/LatestView';
 import ModalService from '../services/ModalService';
 import ContentModel from '../models/ContentModel';
 import {Error} from '../consts/errors';
@@ -18,16 +18,20 @@ interface ContextData {
  * @class
  * Контроллер для главной страницы
  */
-class FreeContentController extends Controller {
+class LatestController extends Controller {
     genres: number[];
     countries: number[];
     year: string;
-    view: FreeContentView;
+    view: LatestView;
 
     constructor() {
-        super(new FreeContentView());
+        super(new LatestView());
         this.genres = [];
         this.countries = [];
+    }
+
+    byField(field: string) {
+        return (a: any, b: any) => a[field] < b[field] ? 1 : -1;
     }
 
     switchOn() {
@@ -42,6 +46,8 @@ class FreeContentController extends Controller {
                 let years: number[] = [];
                 content.forEach((cont: any) => years.push(cont.year));
                 years = years.filter((item, index) => years.indexOf(item) === index);
+
+                content.sort(this.byField('year'));
 
                 const {countries} = countriesResponse.body;
 
@@ -158,8 +164,12 @@ class FreeContentController extends Controller {
             if (!response.error) {
                 const {movies, tvshows} = response.body;
 
+                const content = movies.concat(tvshows);
+
+                content.sort(this.byField('year'));
+
                 const contentData: ContextData = {
-                    content: movies.concat(tvshows),
+                    content: content,
                     currentCountries: this.countries,
                     currentGenres: this.genres,
                     currentYear: this.year,
@@ -172,4 +182,4 @@ class FreeContentController extends Controller {
     }
 }
 
-export default FreeContentController;
+export default LatestController;

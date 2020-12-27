@@ -1,11 +1,11 @@
 import View from '../View';
 import Context from '../../tools/Context';
-import template from './FreeContentView.hbs';
+import template from './LatestView.hbs';
 import Grid from '../../components/Grid/Grid';
 import {Genres} from '../../consts/genres';
 import FiltersBlock from '../../components/FiltersBlock/FiltersBlock';
 
-class FreeContentView extends View {
+class LatestView extends View {
     private parent: any;
 
     constructor(title = 'Flicks box', context = {}) {
@@ -74,8 +74,8 @@ class FreeContentView extends View {
             content: this.context.content,
         });
 
-        document.querySelector('.free__content-wrapper').innerHTML = grid.render();
+        document.querySelector('.latest__content-wrapper').innerHTML = grid.render();
     }
 }
 
-export default FreeContentView;
+export default LatestView;

@@ -14,7 +14,7 @@ enum Routes {
     SearchPage = '/search',
     Serials = '/serials',
     FreeContent = '/free',
-    Admin = '/admin',
+    Latest = '/latest'
 }
 
 export default Routes;
