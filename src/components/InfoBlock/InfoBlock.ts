@@ -141,7 +141,11 @@ class InfoBlock extends Component {
      */
     render() {
         this.context.contentData.genres.forEach((genre: any) => {
-            genre.type = this.context.contentData.type + 's';
+            if (this.context.contentData.type === contentType.TVShow) {
+                genre.type = 'serials';
+            } else {
+                genre.type = 'movies';
+            }
         });
 
         this.MainTab = new MainTab(this.context.contentData);

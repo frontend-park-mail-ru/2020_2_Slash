@@ -96,6 +96,34 @@ class PlayerService {
         }
 
         this.watchPage = document.querySelector('.watch__page');
+
+        document.querySelector('.player-bar__share-btn').addEventListener('click', this.share);
+    }
+
+    share = () => {
+        if (navigator.share) {
+            navigator.share({
+                title: 'FlicksBox',
+                text: window.location.href,
+                url: window.location.href,
+            }).then().catch();
+        } else {
+            const sharePopup = document.querySelector('.player-bar__share-popup');
+            if (sharePopup) {
+                sharePopup.classList.remove('hidden');
+
+                const input = document.querySelector('.player-bar__share-input');
+                input.value = window.location.href;
+
+                window.addEventListener('click', (event: any) => {
+                    if (!event.target.classList.contains('share-btn__img') &&
+                        !event.target.classList.contains('player-bar__share-input') &&
+                        !event.target.classList.contains('player-bar__share-popup')) {
+                        sharePopup.classList.add('hidden');
+                    }
+                });
+            }
+        }
     }
 
     onKeydownSpace = (event: any) => {
@@ -109,11 +137,17 @@ class PlayerService {
     }
 
     showPlayerBar = () => {
-        document.querySelector('.player__container').setAttribute('style', 'opacity:1;');
+        const playerContainer = document.querySelector('.player__container');
+        if (playerContainer) {
+            playerContainer.setAttribute('style', 'opacity:1;');
+        }
     }
 
     hidePlayerBar = () => {
-        document.querySelector('.player__container').setAttribute('style', 'opacity:0;');
+        const playerContainer = document.querySelector('.player__container');
+        if (playerContainer) {
+            playerContainer.setAttribute('style', 'opacity:0;');
+        }
     }
 
     onDOMContentLoaded() {

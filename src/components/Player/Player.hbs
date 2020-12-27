@@ -32,6 +32,15 @@
                     <img class="next-content-btn__img player-btn__img" src="/static/img/player-next-content.svg">
                 </button>
             {{/if}}
+            <button class="player-bar__share-btn player-bar__btn">
+                <img class="share-btn__img player-btn__img" src="/static/img/share.svg" loading="lazy">
+                <div class="player-bar__share-popup hidden">
+                        <img class="close-btn__img share__close-btn" src="/static/img/close.svg">
+                    <label class="player-bar__share-label">Поделиться ссылкой
+                        <input type="text" class="player-bar__share-input">
+                    </label>
+                </div>
+            </button>
             <button class="player-bar__fullscreen-btn player-bar__btn" data-event="fullscreenModeOn">
                 <img class="fullscreen-btn__img player-btn__img" src="/static/img/player-fullscreen.svg" loading="lazy">
             </button>

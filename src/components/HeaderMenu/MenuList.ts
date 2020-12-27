@@ -2,7 +2,7 @@ export const Items =
     '<li class="header-sub-menu__list__item"><a href="/browse" class="list-item-text">Главная</a></li>\n' +
     '<li class="header-sub-menu__list__item"><a href="/serials " class="list-item-text">Сериалы</a></li>\n' +
     '<li class="header-sub-menu__list__item"><a href="/movies " class="list-item-text">Фильмы</a></li>\n' +
-    '<li class="header-sub-menu__list__item"><a class="list-item-text" href="#">Последнее</a>' +
+    '<li class="header-sub-menu__list__item"><a class="list-item-text" href="/latest">Последнее</a>' +
     '</li><li class="header-sub-menu__list__item"><a href="/free" class="list-item-text">Бесплатное</a></li>';
 
 export const ItemsWithUserMenu =
@@ -12,7 +12,7 @@ export const ItemsWithUserMenu =
     '<li class="header-sub-menu__list__item"><a href="/browse" class="list-item-text">Главная</a></li>\n' +
     '<li class="header-sub-menu__list__item"><a href="/serials " class="list-item-text">Сериалы</a></li>\n' +
     '<li class="header-sub-menu__list__item"><a href="/movies " class="list-item-text">Фильмы</a></li>\n' +
-    '<li class="header-sub-menu__list__item"><a class="list-item-text" href="#">Последнее</a></li>' +
+    '<li class="header-sub-menu__list__item"><a class="list-item-text" href="/latest">Последнее</a></li>' +
     '<li class="header-sub-menu__list__item"><a href="/free" class="list-item-text">Бесплатное</a></li>';
 
 export const ItemsWithGuestMenu =
@@ -23,5 +23,5 @@ export const ItemsWithGuestMenu =
     '<li class="header-sub-menu__list__item"><a href="/browse" class="list-item-text">Главная</a></li>\n' +
     '<li class="header-sub-menu__list__item"><a href="/serials " class="list-item-text">Сериалы</a></li>\n' +
     '<li class="header-sub-menu__list__item"><a href="/movies " class="list-item-text">Фильмы</a></li>\n' +
-    '<li class="header-sub-menu__list__item"><a class="list-item-text" href="#">Последнее</a></li>' +
+    '<li class="header-sub-menu__list__item"><a class="list-item-text" href="/latest">Последнее</a></li>' +
     '<li class="header-sub-menu__list__item"><a href="/free" class="list-item-text">Бесплатное</a></li>';
