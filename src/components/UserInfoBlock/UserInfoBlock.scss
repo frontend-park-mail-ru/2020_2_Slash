@@ -18,6 +18,7 @@
 
     @media (max-width: 440px) {
         width: auto;
+        height: 125px;
         padding: 23px;
     }
 }
@@ -69,7 +70,6 @@
     margin: 0;
     font-size: 18px;
     font-weight: normal;
-    letter-spacing: 0.1em;
 }
 
 .user-meta__email {

@@ -20,7 +20,6 @@ class InfoBlock extends Component {
     private MainTab: MainTab;
     private SeasonsTab: SeasonsTab;
     private DetailsTab: DetailsTab;
-    private btnSliderItem: HTMLElement;
     /**
      * Создает экземпляр InfoBlock
      *
@@ -82,6 +81,10 @@ class InfoBlock extends Component {
         currentInfoBlock.innerHTML = this.context.CurrentTab;
 
         this.tabBar.onTabChanged(data);
+
+        if (data.tab === 'seasonsTab') {
+            this.SeasonsTab.onSeasonChanged({currentseason: 1});
+        }
     }
 
     /**
@@ -114,7 +117,8 @@ class InfoBlock extends Component {
             currentSliderItem.classList.remove('content__slider-item');
             currentSliderItem.classList.add('slider-item_selected_hover-off');
             currentSliderItem.querySelector('.slider-item__arrow').classList.remove('hidden');
-            currentSliderItem.querySelector('.item__card').setAttribute('data-event', ' ');
+            currentSliderItem.querySelector('.item__card').setAttribute('data-event',
+                'infoBlockClosed');
         }
     }
 

@@ -8,14 +8,23 @@ class ContentModel {
         {
             count = 10,
             isFree = true,
-            genreId = 0,
+            genresIds = [0],
             year = '',
-            country = 0,
+            countriesIds = [0],
             from = 0,
         }) {
+        let genres = '';
+        genresIds.forEach((genreId) => {
+            genres += `&genre=${genreId}`;
+        });
+
+        let countries = '';
+        countriesIds.forEach((countryId) => {
+            countries += `&country=${countryId}`;
+        });
         return http.fetchGet({
-            route: `${ApiMethods.Content}?count=${count}&from=${from}&is_free=${isFree}&year=${year}&genre=${
-                genreId}&country=${country}`,
+            route:
+                `${ApiMethods.Content}?count=${count}&from=${from}&is_free=${isFree}&year=${year}${countries}${genres}`,
         }).then((response: Response) => response.json());
     }
 

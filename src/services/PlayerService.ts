@@ -45,7 +45,7 @@ class PlayerService {
             .on(Events.FullscreenModeOff, this._onFullScreenOff);
 
         this.video.addEventListener('timeupdate', this.onUpdateTime);
-        window.addEventListener('keydown', this.onKeydownEscape);
+        window.addEventListener('keydown', this.onKeydownSpace);
 
         this.timeline.addEventListener('click', this.onTimelineUpdate);
         this.timeline.addEventListener('pointermove', this.onHoverTimeline);
@@ -99,8 +99,18 @@ class PlayerService {
     }
 
     onKeydownEscape = (event: any) => {
-        if (event.key === 'Escape') {
+        if (event.keyCode == 27) {
             this.onFullScreenOff();
+        }
+    }
+
+    onKeydownSpace = (event: any) => {
+        if (event.keyCode == 32) {
+            if (this.video.paused) {
+                this.onVideoPlay();
+            } else {
+                this.onVideoPause();
+            }
         }
     }
 
@@ -330,6 +340,8 @@ class PlayerService {
 
         this.changeButton('.player-bar__fullscreen-btn', '.fullscreen-btn__img',
             '/static/img/player-fullscreen-out.svg', 'fullscreenModeOff');
+
+        window.addEventListener('keydown', this.onKeydownEscape);
     }
 
     showCursor = () => {

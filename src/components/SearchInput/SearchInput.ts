@@ -37,55 +37,7 @@ class SearchInput extends Component {
         this.template = template;
 
         this._onSearch = function() {
-            ContentModel.search(this.input.value, 5).then((response) => {
-                if (!response.error) {
-                    const {result} = response.body;
-
-                    const found: resultType[] = [];
-                    result.actors.forEach((actor: any) => found.push({
-                        name: actor.name,
-                        id: actor.id,
-                        type: 'actor',
-                    }));
-                    result.movies.forEach((movie: any) => found.push({
-                        name: movie.name, id:
-                        movie.id,
-                        type: 'movie',
-                    }));
-                    result.tv_shows.forEach((tvShow: any) => found.push({
-                        name: tvShow.name,
-                        id: tvShow.id,
-                        type: 'serial',
-                    }));
-
-                    if (this.input.value) {
-                        const items: string[] = [];
-                        const max = Math.max(found.length, 10);
-
-                        found.slice(0, max).forEach((foundItem) => {
-                            if (foundItem.type === 'actor') {
-                                items.push(`<a href="/${foundItem.type}/${foundItem.id}" 
-                            class="prompt-window__label">${foundItem.name}</a>`);
-                            } else if (foundItem.type === 'movie') {
-                                items.push(`<a href="${window.location.pathname}?mid=${foundItem.id}" 
-                            class="prompt-window__label">${foundItem.name}</a>`);
-                            } else {
-                                items.push(`<a href="${window.location.pathname}?sid=${foundItem.id}" 
-                            class="prompt-window__label">${foundItem.name}</a>`);
-                            }
-                        });
-
-                        document.querySelector('.prompt-window').setAttribute('style',
-                            'opacity:1;');
-                        document.querySelector('.prompt-window__labels').innerHTML = items.join(' ');
-                    }
-                    if (!this.input.value || (result.actors.length + result.movies.length +
-                        result.tv_shows.length === 0)) {
-                        document.querySelector('.prompt-window').setAttribute('style',
-                            'opacity:0;');
-                    }
-                }
-            }).catch((error: Error) => console.log(error));
+            this.onInputVal();
         }.bind(this);
 
         this._onEnter = function(event: any) {
@@ -105,6 +57,7 @@ class SearchInput extends Component {
                     return;
                 }
                 if (!target.classList.contains('search-line__input') &&
+                    !target.classList.contains('search-line__img') &&
                     !target.classList.contains('header__search-img')) {
                     this.remove();
                 }
@@ -130,7 +83,10 @@ class SearchInput extends Component {
             query: this.input.value,
         };
 
-        EventBus.emit(Events.PathChanged, {path: `${Routes.SearchPage}?query=${this.input.value}`, misc});
+        if (this.input.value !== '') {
+            EventBus.emit(Events.PathChanged, {path: `${Routes.SearchPage}?query=${this.input.value}`, misc});
+        }
+
         this.remove();
     }
 
@@ -166,6 +122,66 @@ class SearchInput extends Component {
         EventBus.emit(Events.FixHeader);
         EventBus.emit(Events.FixHeader);
         EventBus.emit(Events.FixHeader);
+    }
+
+    onRender = () => {
+        if (this.input.value !== '') {
+            document.querySelector('.prompt-window').classList.remove('hidden');
+            this.onInputVal();
+            return;
+        }
+    }
+
+    onInputVal = () => {
+        ContentModel.search(this.input.value, 5).then((response) => {
+            if (!response.error) {
+                const {result} = response.body;
+
+                const found: resultType[] = [];
+                result.actors.forEach((actor: any) => found.push({
+                    name: actor.name,
+                    id: actor.id,
+                    type: 'actor',
+                }));
+                result.movies.forEach((movie: any) => found.push({
+                    name: movie.name, id:
+                    movie.id,
+                    type: 'movie',
+                }));
+                result.tv_shows.forEach((tvShow: any) => found.push({
+                    name: tvShow.name,
+                    id: tvShow.id,
+                    type: 'serial',
+                }));
+
+                if (this.input.value) {
+                    const items: string[] = [];
+                    const max = Math.max(found.length, 10);
+
+                    found.slice(0, max).forEach((foundItem) => {
+                        if (foundItem.type === 'actor') {
+                            items.push(`<a href="/${foundItem.type}/${foundItem.id}" 
+                            class="prompt-window__label">${foundItem.name}</a>`);
+                        } else if (foundItem.type === 'movie') {
+                            items.push(`<a href="${window.location.pathname}?mid=${foundItem.id}" 
+                            class="prompt-window__label">${foundItem.name}</a>`);
+                        } else {
+                            items.push(`<a href="${window.location.pathname}?sid=${foundItem.id}" 
+                            class="prompt-window__label">${foundItem.name}</a>`);
+                        }
+                    });
+
+                    document.querySelector('.prompt-window').setAttribute('style',
+                        'opacity:1;');
+                    document.querySelector('.prompt-window__labels').innerHTML = items.join(' ');
+                }
+                if (!this.input.value || (result.actors.length + result.movies.length +
+                    result.tv_shows.length === 0)) {
+                    document.querySelector('.prompt-window').setAttribute('style',
+                        'opacity:0;');
+                }
+            }
+        }).catch((error: Error) => console.log(error));
     }
 
     render() {

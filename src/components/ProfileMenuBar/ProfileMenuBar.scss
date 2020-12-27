@@ -34,7 +34,6 @@
     cursor: pointer;
     color: var(--white);
     text-decoration: none;
-    letter-spacing: 0.1em;
     background-color: var(--medium-transparent-white);
     padding: 5px;
 
@@ -89,7 +88,6 @@
 }
 
 .form__label {
-    letter-spacing: 0.1em;
     align-self: flex-start;
     margin-top: 1vw;
 }

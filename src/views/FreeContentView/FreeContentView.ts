@@ -38,12 +38,11 @@ class FreeContentView extends View {
                 'color: var(--white); background-color: var(--highly-transparent-white);'));
         }
 
-        const currentCountry = document.querySelector(
-            `.free__items [data-country-id="${this.context.currentCountry}"]`);
-        if (currentCountry) {
+        this.context.currentCountries.forEach((country: any) => {
+            const currentCountry = document.querySelector(`.free__items [data-country-id="${country}"]`);
             currentCountry.setAttribute('style',
                 'color: var(--shadow); background-color: var(--low-transparent-white);');
-        }
+        });
 
         const genreItems = document.querySelectorAll('.free__genre-item');
         if (genreItems) {
@@ -51,12 +50,11 @@ class FreeContentView extends View {
                 'color: var(--white); background-color: var(--highly-transparent-white);'));
         }
 
-        const currentGenre = document.querySelector(
-            `.free__items [data-genre-id="${this.context.currentGenre}"]`);
-        if (currentGenre) {
+        this.context.currentGenres.forEach((genre: any) => {
+            const currentGenre = document.querySelector(`.free__items [data-genre-id="${genre}"]`);
             currentGenre.setAttribute('style',
                 'color: var(--shadow); background-color: var(--low-transparent-white);');
-        }
+        });
 
         const yearsItems = document.querySelectorAll('.free__year-item');
         if (yearsItems) {

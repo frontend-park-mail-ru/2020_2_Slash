@@ -9,8 +9,8 @@ interface ContextData {
     content: { [key: string]: string }[],
     years?: number[],
     countries?: string[],
-    currentCountry?: number,
-    currentGenre?: number,
+    currentCountries?: number[],
+    currentGenres?: number[],
     currentYear?: string,
 }
 
@@ -19,13 +19,15 @@ interface ContextData {
  * Контроллер для главной страницы
  */
 class FreeContentController extends Controller {
-    genre: number;
-    country: number;
+    genres: number[];
+    countries: number[];
     year: string;
     view: FreeContentView;
 
     constructor() {
         super(new FreeContentView());
+        this.genres = [];
+        this.countries = [];
     }
 
     switchOn() {
@@ -65,14 +67,11 @@ class FreeContentController extends Controller {
 
         document.querySelector('.filter-btn').addEventListener('click', this.onClickFilters);
 
-
         document.querySelector('.free__genre-items').addEventListener('click', this.onClickGenre);
         document.querySelector('.free__years-items').addEventListener('click', this.onClickYear);
         document.querySelector('.free__countries-items').addEventListener('click', this.onClickCountry);
 
-        document.querySelector('.free__delete-genres').addEventListener('click', this.removeGenreFilters);
-        document.querySelector('.free__delete-years').addEventListener('click', this.removeYearsFilters);
-        document.querySelector('.free__delete-countries').addEventListener('click', this.removeCountriesFilters);
+        document.querySelector('.free__delete-btn').addEventListener('click', this.removeFilters);
 
         document.querySelector('.free__close-btn').addEventListener('click', this.onClickFilters);
     }
@@ -96,14 +95,29 @@ class FreeContentController extends Controller {
     onClickGenre = () => {
         const target = <HTMLInputElement>event.target;
 
-        if (target.dataset.genreId) {
-            this.genre = +target.dataset.genreId;
+        const {genreId} = target.dataset;
+
+        const index = this.genres.indexOf(+genreId);
+        if (index > -1) {
+            this.genres.splice(index, 1);
+            this.doQuery();
+            return;
+        }
+
+        if (genreId) {
+            this.genres.push(+genreId);
             this.doQuery();
         }
     }
 
     onClickYear = () => {
         const target = <HTMLInputElement>event.target;
+
+        if (this.year === target.dataset.year) {
+            this.year = '';
+            this.doQuery();
+            return;
+        }
 
         if (target.classList.contains('free__year-item')) {
             this.year = target.dataset.year;
@@ -114,44 +128,47 @@ class FreeContentController extends Controller {
     onClickCountry = () => {
         const target = <HTMLInputElement>event.target;
 
-        if (target.dataset.countryId) {
-            this.country = +target.dataset.countryId;
+        const {countryId} = target.dataset;
+
+        const index = this.countries.indexOf(+countryId);
+        if (index > -1) {
+            this.countries.splice(index, 1);
+            this.doQuery();
+            return;
+        }
+
+        if (countryId) {
+            this.countries.push(+countryId);
             this.doQuery();
         }
     }
 
-    removeGenreFilters = () => {
-        this.genre = 0;
-        this.doQuery();
-    }
-
-    removeYearsFilters = () => {
+    removeFilters = () => {
+        this.genres = [];
+        this.countries = [];
         this.year = '';
         this.doQuery();
     }
 
-    removeCountriesFilters = () => {
-        this.country = 0;
-        this.doQuery();
-    }
-
     doQuery = () => {
-        ContentModel.getContent({count: 100, isFree: true, genreId: this.genre, country: this.country, year: this.year})
-            .then((response: ResponseType) => {
-                if (!response.error) {
-                    const {movies, tvshows} = response.body;
+        ContentModel.getContent({
+            count: 100, isFree: true, genresIds: this.genres,
+            countriesIds: this.countries, year: this.year,
+        }).then((response: ResponseType) => {
+            if (!response.error) {
+                const {movies, tvshows} = response.body;
 
-                    const contentData: ContextData = {
-                        content: movies.concat(tvshows),
-                        currentCountry: this.country,
-                        currentGenre: this.genre,
-                        currentYear: this.year,
-                    };
+                const contentData: ContextData = {
+                    content: movies.concat(tvshows),
+                    currentCountries: this.countries,
+                    currentGenres: this.genres,
+                    currentYear: this.year,
+                };
 
-                    this.view.insertIntoContext(contentData);
-                    this.view.updateContent();
-                }
-            }).catch((error: Error) => console.log(error));
+                this.view.insertIntoContext(contentData);
+                this.view.updateContent();
+            }
+        }).catch((error: Error) => console.log(error));
     }
 }
 

@@ -24,7 +24,6 @@
 
 .preview__label {
     color: var(--white);
-    letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 2vw 0;
     text-shadow: 0 0 5px var(--black);
@@ -32,6 +31,7 @@
 
 .preview__name {
     font-size: 3vw;
+    font-weight: bold;
     padding: 0;
     margin: 0;
 }

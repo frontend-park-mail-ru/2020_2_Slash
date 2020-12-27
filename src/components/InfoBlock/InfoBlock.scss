@@ -18,7 +18,6 @@
 
 .info-block{
   &__title-text {
-    letter-spacing: 0.2em;
     color: var(--white);
     padding: 0;
     margin: 0;
@@ -41,7 +40,6 @@
 .info-block__about,
 .item-title {
   color: var(--heading-grey);
-  letter-spacing: 0.08em;
   font-weight: normal;
 }
 
@@ -72,7 +70,6 @@
   padding: 5px;
   text-transform: uppercase;
   font-weight: normal;
-  letter-spacing: 0.1em;
   cursor: pointer;
 
   &:hover {
@@ -88,11 +85,9 @@
   padding: 5px;
   text-transform: uppercase;
   font-weight: normal;
-  letter-spacing: 0.1em;
 }
 
 .item-value {
-  letter-spacing: 0.08em;
   color: var(--white);
   padding-left: 0.5vw;
 }

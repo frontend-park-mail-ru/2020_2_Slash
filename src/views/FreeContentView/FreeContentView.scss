@@ -170,9 +170,7 @@
   background-position: center center;
   height: 1.5vw;
   width: 2%;
-  margin-left: 20px;
-  margin-top: 7px;
-  right: 2px;
+  margin-left: 97%;
 
   @media (max-width: 1024px) {
     height: 2.5vw;
@@ -181,8 +179,8 @@
 
   @media (max-width: 440px) {
     width: 5%;
-    height: 4.5vw;
-    margin: 5px;
+    height: 5vw;
+    margin-left: 90%
   }
 }
 
