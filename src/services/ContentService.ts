@@ -390,7 +390,8 @@ class ContentService {
             return;
         }
 
-        const contentUrl = data.movieId ? `/watch/${data.id}` : `/watch/${data.id}?season=1&episode=1`;
+        const contentUrl = data.movieId ? `/watch/${data.id}` :
+            `/watch/${data.id}?season=${data.season}&episode=${data.episode}`;
         EventBus.emit(Events.PathChanged, {path: contentUrl});
     }
 
