@@ -64,6 +64,7 @@ module.exports = {
             hash: true,
             template: path.resolve(__dirname, 'public/index.html'),
             filename: 'index.html',
+            favicon: path.join(__dirname, '/favicon.ico'),
         }),
         new MiniCssExtractPlugin({
             filename: 'style-[contenthash].css',
