@@ -15,16 +15,20 @@ class ContentModel {
         }) {
         let genres = '';
         genresIds.forEach((genreId) => {
-            genres += `&genre=${genreId}`;
+            if (genreId != 0) genres += `&genre=${genreId}`;
         });
 
         let countries = '';
         countriesIds.forEach((countryId) => {
-            countries += `&country=${countryId}`;
+            if (countryId != 0) countries += `&country=${countryId}`;
         });
+
+        let y = '';
+        if (year != '') {
+            y = `&year=${year}`;
+        }
         return http.fetchGet({
-            route:
-                `${ApiMethods.Content}?count=${count}&from=${from}&is_free=${isFree}&year=${year}${countries}${genres}`,
+            route: `${ApiMethods.Content}?count=${count}&from=${from}&is_free=${isFree}${y}${countries}${genres}`,
         }).then((response: Response) => response.json());
     }
 

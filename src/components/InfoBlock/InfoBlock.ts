@@ -10,6 +10,7 @@ import EventBus from '../../services/EventBus';
 import contentType from '../../consts/contentType';
 import Modals from '../../consts/modals';
 import Routes from '../../consts/routes';
+import ContentService from '../../services/ContentService';
 
 /**
  * @class
@@ -84,6 +85,7 @@ class InfoBlock extends Component {
 
         if (data.tab === 'seasonsTab') {
             this.SeasonsTab.onSeasonChanged({currentseason: 1});
+            ContentService.getInstance().fixGrid();
         }
     }
 

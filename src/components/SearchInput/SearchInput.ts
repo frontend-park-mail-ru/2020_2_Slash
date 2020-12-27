@@ -133,55 +133,57 @@ class SearchInput extends Component {
     }
 
     onInputVal = () => {
-        ContentModel.search(this.input.value, 5).then((response) => {
-            if (!response.error) {
-                const {result} = response.body;
+        if (this.input.value !== '') {
+            ContentModel.search(this.input.value, 5).then((response) => {
+                if (!response.error) {
+                    const {result} = response.body;
 
-                const found: resultType[] = [];
-                result.actors.forEach((actor: any) => found.push({
-                    name: actor.name,
-                    id: actor.id,
-                    type: 'actor',
-                }));
-                result.movies.forEach((movie: any) => found.push({
-                    name: movie.name, id:
-                    movie.id,
-                    type: 'movie',
-                }));
-                result.tv_shows.forEach((tvShow: any) => found.push({
-                    name: tvShow.name,
-                    id: tvShow.id,
-                    type: 'serial',
-                }));
+                    const found: resultType[] = [];
+                    result.actors.forEach((actor: any) => found.push({
+                        name: actor.name,
+                        id: actor.id,
+                        type: 'actor',
+                    }));
+                    result.movies.forEach((movie: any) => found.push({
+                        name: movie.name, id:
+                        movie.id,
+                        type: 'movie',
+                    }));
+                    result.tv_shows.forEach((tvShow: any) => found.push({
+                        name: tvShow.name,
+                        id: tvShow.id,
+                        type: 'serial',
+                    }));
 
-                if (this.input.value) {
-                    const items: string[] = [];
-                    const max = Math.max(found.length, 10);
+                    if (this.input.value) {
+                        const items: string[] = [];
+                        const max = Math.max(found.length, 10);
 
-                    found.slice(0, max).forEach((foundItem) => {
-                        if (foundItem.type === 'actor') {
-                            items.push(`<a href="/${foundItem.type}/${foundItem.id}" 
+                        found.slice(0, max).forEach((foundItem) => {
+                            if (foundItem.type === 'actor') {
+                                items.push(`<a href="/${foundItem.type}/${foundItem.id}" 
                             class="prompt-window__label">${foundItem.name}</a>`);
-                        } else if (foundItem.type === 'movie') {
-                            items.push(`<a href="${window.location.pathname}?mid=${foundItem.id}" 
+                            } else if (foundItem.type === 'movie') {
+                                items.push(`<a href="${window.location.pathname}?mid=${foundItem.id}" 
                             class="prompt-window__label">${foundItem.name}</a>`);
-                        } else {
-                            items.push(`<a href="${window.location.pathname}?sid=${foundItem.id}" 
+                            } else {
+                                items.push(`<a href="${window.location.pathname}?sid=${foundItem.id}" 
                             class="prompt-window__label">${foundItem.name}</a>`);
-                        }
-                    });
+                            }
+                        });
 
-                    document.querySelector('.prompt-window').setAttribute('style',
-                        'opacity:1;');
-                    document.querySelector('.prompt-window__labels').innerHTML = items.join(' ');
+                        document.querySelector('.prompt-window').setAttribute('style',
+                            'opacity:1;');
+                        document.querySelector('.prompt-window__labels').innerHTML = items.join(' ');
+                    }
+                    if (!this.input.value || (result.actors.length + result.movies.length +
+                        result.tv_shows.length === 0)) {
+                        document.querySelector('.prompt-window').setAttribute('style',
+                            'opacity:0;');
+                    }
                 }
-                if (!this.input.value || (result.actors.length + result.movies.length +
-                    result.tv_shows.length === 0)) {
-                    document.querySelector('.prompt-window').setAttribute('style',
-                        'opacity:0;');
-                }
-            }
-        }).catch((error: Error) => console.log(error));
+            }).catch((error: Error) => console.log(error));
+        }
     }
 
     render() {
