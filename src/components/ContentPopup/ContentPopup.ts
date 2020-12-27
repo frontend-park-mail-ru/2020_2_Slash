@@ -8,6 +8,7 @@ import Events from '../../consts/events';
 import Modals from '../../consts/modals';
 import Routes from '../../consts/routes';
 import Types from '../../consts/contentType';
+import ContentService from '../../services/ContentService';
 
 /**
  * @class
@@ -143,12 +144,6 @@ class ContentPopup extends Component {
      * @return {*|string}
      */
     render() {
-        // const page = document.createElement('div');
-        // page.classList.add('scroll-fixed');
-        // page.innerHTML = this.parent.innerHTML;
-        // this.parent.innerHTML = '';
-        // this.parent.appendChild(page);
-
         const popupDiv = document.createElement('div');
         popupDiv.classList.add('content-popup');
 
@@ -200,6 +195,13 @@ class ContentPopup extends Component {
 
         if (this.context.type === Types.TVShow) {
             this.onSeasonChanged({currentseason: 1});
+
+            const grid = document.querySelector('.modal__season-grid .content__grid');
+            if (grid) {
+                grid.classList.add('episodes__grid');
+
+                ContentService.getInstance().fixGrid();
+            }
         }
     }
 }

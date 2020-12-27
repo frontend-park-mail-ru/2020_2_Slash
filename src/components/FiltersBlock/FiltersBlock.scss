@@ -40,6 +40,7 @@
 
   @media (max-width: 440px) {
     font-size: 14px;
+    padding: 0;
   }
 }
 
@@ -113,6 +114,11 @@
 .filter-btn__arrow {
   width: 15px;
   margin: 0 10px;
+
+  @media (max-width: 440px) {
+    width: 10px;
+    margin: 0;
+  }
 }
 
 .filters__arrow {

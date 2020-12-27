@@ -84,7 +84,7 @@ class ContentService {
                     'grid-column-gap: 0.2vw');
             }
 
-            if (width >=TABLET_DEVICE_WIDTH) {
+            if (width >= TABLET_DEVICE_WIDTH) {
                 grid.setAttribute('style', 'grid-template-columns: repeat(6, 1fr); ' +
                     'grid-column-gap: 3px');
             }
@@ -93,6 +93,18 @@ class ContentService {
             if (grid) {
                 if (width > TABLET_DEVICE_WIDTH) {
                     grid.setAttribute('style', 'grid-template-columns: repeat(5, 1fr); ' +
+                        'grid-column-gap: 3px');
+                }
+            }
+
+            if (grid.classList.contains('episodes__grid')) {
+                if (width <= TABLET_DEVICE_WIDTH) {
+                    grid.setAttribute('style', 'grid-template-columns: repeat(3, 1fr); ' +
+                        'grid-column-gap: 0.2vw;');
+                }
+
+                if (width >= TABLET_DEVICE_WIDTH) {
+                    grid.setAttribute('style', 'grid-template-columns: repeat(3, 1fr); ' +
                         'grid-column-gap: 3px');
                 }
             }

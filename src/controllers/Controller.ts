@@ -51,11 +51,11 @@ abstract class Controller {
                     if (!response.error && response.body.subscription && !response.body.subscription.is_canceled) {
                         localStorage.setItem('subscription', 'true');
                     } else {
-                        localStorage.setItem('subscription', 'true');
+                        localStorage.setItem('subscription', 'false');
                     }
                 }).catch((error: Error) => console.log(error));
             } else {
-                localStorage.setItem('subscription', 'true');
+                localStorage.setItem('subscription', 'false');
             }
 
             EventBus.emit(Events.UpdateHeader, sessionData);
