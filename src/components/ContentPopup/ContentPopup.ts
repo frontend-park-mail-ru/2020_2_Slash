@@ -7,6 +7,7 @@ import EventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 import Modals from '../../consts/modals';
 import Routes from '../../consts/routes';
+import Types from '../../consts/contentType';
 
 /**
  * @class
@@ -33,7 +34,8 @@ class ContentPopup extends Component {
 
         this._onClick = function(event: any) {
             const closingTarget = event.target.classList.contains('blocker') ||
-                event.target.closest('.close-btn') || event.target.classList.contains('modal__subscribe');
+                event.target.closest('.close-btn') || event.target.classList.contains('modal__subscribe') ||
+                event.target.classList.contains('genre-item__value');
             if (closingTarget) {
                 this.remove();
             }
@@ -57,18 +59,6 @@ class ContentPopup extends Component {
         this.parent.addEventListener('click', this._onClick);
         window.addEventListener('keydown', this._onKeydownEscape);
         EventBus.on(Events.SeasonChanged, this.onSeasonChanged);
-    }
-
-    /**
-     * Удаляет попап в document
-     */
-    remove = () => {
-        const page = document.querySelector('.scroll-fixed');
-        if (page) {
-            this.parent.innerHTML = page.innerHTML;
-        }
-
-        this.onDestroy();
     }
 
     /**
@@ -118,6 +108,14 @@ class ContentPopup extends Component {
     }
 
     onSeasonChanged = (data: any) => {
+        const buttons = document.querySelectorAll('.seasons-wrapper__button');
+        buttons.forEach((btn) => btn.setAttribute('style',
+            'background-color: var(--highly-transparent-white);'));
+
+        const currentSeason = document.querySelector(`[data-currentSeason="${data.currentseason}"]`);
+        if (currentSeason) {
+            currentSeason.setAttribute('style', 'background-color: var(--orangered-tr);');
+        }
         this.context.serialsSeasons[data.currentseason - 1].column = 3;
         this.context.serialsSeasons[data.currentseason - 1].gap = '2vw';
         this.context.serialsSeasons[data.currentseason - 1].is_free = this.context.is_free;
@@ -126,16 +124,30 @@ class ContentPopup extends Component {
         grid.innerHTML = this.context.Grid;
     }
 
+
+    /**
+     * Удаляет попап в document
+     */
+    remove = () => {
+        const popup = document.querySelector('.content-popup');
+        if (popup) {
+            this.parent.querySelector('.main').removeChild(popup);
+        }
+
+
+        this.onDestroy();
+    }
+
     /**
      * Возвращает отрисованный в HTML компонент
      * @return {*|string}
      */
     render() {
-        const page = document.createElement('div');
-        page.classList.add('scroll-fixed');
-        page.innerHTML = this.parent.innerHTML;
-        this.parent.innerHTML = '';
-        this.parent.appendChild(page);
+        // const page = document.createElement('div');
+        // page.classList.add('scroll-fixed');
+        // page.innerHTML = this.parent.innerHTML;
+        // this.parent.innerHTML = '';
+        // this.parent.appendChild(page);
 
         const popupDiv = document.createElement('div');
         popupDiv.classList.add('content-popup');
@@ -182,7 +194,13 @@ class ContentPopup extends Component {
         this.context.host = SERVER_HOST;
 
         popupDiv.innerHTML = this.template(this.context);
-        this.parent.appendChild(popupDiv);
+        this.parent.querySelector('.main').appendChild(popupDiv);
+
+        this.context.subscription = localStorage.getItem('subscription');
+
+        if (this.context.type === Types.TVShow) {
+            this.onSeasonChanged({currentseason: 1});
+        }
     }
 }
 

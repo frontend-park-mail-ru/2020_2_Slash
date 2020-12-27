@@ -163,6 +163,8 @@ class Header extends Component {
         this.fixHeaderMenu(this.padding);
         this.fixHeaderMenu(this.padding);
         this.fixHeaderMenu(this.padding);
+
+        this.SearchInput.onRender();
     }
 
     onUpdate(data: any = {}) {

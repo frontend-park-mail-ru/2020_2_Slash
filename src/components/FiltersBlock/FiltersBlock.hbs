@@ -1,0 +1,52 @@
+<button class="genres-btn filter-btn">
+    <div class="genres-btn__label filter-btn__label">Фильтры</div>
+    <img class="filter-btn__arrow" src="/static/img/arrow.svg" loading="lazy">
+</button>
+
+<div class="filters hidden">
+    <div class="filters__genres">
+        <div class="filters__label filters__genre-label">Жанры</div>
+        <img class="filters__arrow" src="/static/img/arrow2.svg">
+        <div class="filters__items filters__genre-items">
+            {{#each genres}}
+                <div class="filters__item filters__genre-item" data-genre-id="{{this.id}}">
+                    {{{this.name}}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="filters__years">
+        <div class="filters__label filters__years-label">Годы</div>
+        <img class="filters__arrow" src="/static/img/arrow2.svg">
+        <div class="filters__items filters__years-items" data-year="{{this}}">
+            {{#each years}}
+                <div class="filters__item filters__year-item" data-year="{{this}}">
+                    {{{this}}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="filters__countries">
+        <div class="filters__label filters__countries-label">Страны</div>
+        <img class="filters__arrow" src="/static/img/arrow2.svg">
+        <div class="filters__items filters__countries-items">
+            {{#each countries}}
+                <div class="filters__item filters__country-item" data-country-id="{{this.id}}">
+                    {{{this.name}}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="filters__delete-btn">
+        <img class="filters__delete" src="/static/img/trash.svg">
+    </div>
+
+    <div class="filters__close-btn">
+        <button class="close-btn" data-event="">
+            <img class="close-btn__img" src="/static/img/arrow.svg">
+        </button>
+    </div>
+</div>

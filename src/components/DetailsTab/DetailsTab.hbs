@@ -1,5 +1,5 @@
 <div class="info-block__page-details info-block_page"
-     style="background-image: url('{{host}}{{images}}/1920');background-size: cover;">
+     style="background-image: url('{{host}}{{images}}/ 1920');background-size: cover;">
     <img class="details-background" src="" alt="">
     <div class="info-block__details-wrapper">
         <div class="info-block__left">
@@ -38,9 +38,7 @@
                 <span class="genre-item__value item-value">
                     {{#each genres}}
                         <a href="/{{type}}?genre={{this.id}}" class="genre-item__link item-link">
-                            {{{this.name}}}
-                        </a>
-                        {{#unless @last}},
+                            {{{this.name}}}</a>{{#unless @last}},
                         {{/unless}}
                     {{/each}}
                 </span>
@@ -50,9 +48,7 @@
                 <span class="director-item__value item-value">
                     {{#each directors}}
                         <a href="/director/{{this.id}}" class="director-item__value item-link">
-                        {{{this.name}}}
-                        </a>
-                        {{#unless @last}},
+                        {{{this.name}}}</a>{{#unless @last}},
                         {{/unless}}
                     {{/each}}
                 </span>
@@ -61,10 +57,7 @@
                 <span class="cast-item__title item-title">Актеры:</span>
                 <span class="cast-item__value item-value">
                     {{#each actors}}
-                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">
-                        {{{this.name}}}
-                        </a>
-                    {{#unless @last}},
+                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">{{{this.name}}}</a>{{#unless @last}},
                     {{/unless}}
                     {{/each}}
                 </span>

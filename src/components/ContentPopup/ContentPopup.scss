@@ -42,8 +42,11 @@
     align-items: center;
     justify-content: center;
     left: 20%;
-    top: 10%;
+    top: 2%;
     z-index: 1001;
+    overflow-y: scroll;
+    height: 51vw;
+
 
     ::-webkit-scrollbar {
         display: none;
@@ -99,8 +102,8 @@
     position: absolute;
     color: var(--white);
     font-size: 2vw;
-    letter-spacing: 0.3em;
     text-transform: uppercase;
+    font-weight: bold;
     text-shadow: 0 0 5px var(--black);
 }
 
@@ -110,7 +113,6 @@
 
 .modal__origin-name {
     font-size: 0.8vw;
-    letter-spacing: 0.1em;
 }
 
 .modal__controller {
@@ -199,7 +201,6 @@
     position: absolute;
     z-index: 1;
     font-size: 11px;
-    letter-spacing: 2px;
 }
 
 .misc-item {
@@ -217,7 +218,6 @@
 .modal__about,
 .item-title {
     color: var(--heading-grey);
-    letter-spacing: 0.08em;
     font-weight: normal;
 }
 
@@ -254,7 +254,6 @@
     background-color: var(--orangered-tr);
     border-radius: 5px;
     font-size: 0.9vw;
-    letter-spacing: 0.25em;
     padding: 5px;
     margin-top: 30px;
     cursor: pointer;
@@ -269,7 +268,6 @@
     background-color: var(--green-tr);
     border-radius: 5px;
     font-size: 0.9vw;
-    letter-spacing: 0.25em;
     padding: 5px;
     margin-top: 30px;
 }

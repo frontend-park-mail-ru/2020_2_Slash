@@ -29,6 +29,7 @@
 @import "components/SubMenuPopup/SubMenuPopup.scss";
 @import "components/EpisodeModal/EpisodeModal.scss";
 @import "components/SubscribePopup/SubscribePopup.scss";
+@import "components/FiltersBlock/FiltersBlock.scss";
 @import "views/ProfileView/ProfileView.scss";
 @import "views/PlayerView/PlayerView.scss";
 @import "views/MoviesView/MoviesView.scss";
@@ -37,11 +38,12 @@
 @import "views/SerialView/SerialView.scss";
 @import "views/SearchView/SearchView.scss";
 @import "views/FreeContentView/FreeContentView.scss";
+@import "views/LatestView/LatestView.scss";
 
 body {
   position: relative;
   min-height: 100vh;
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Gilroy", "Inter", Arial, sans-serif;
   background-color: var(--main-color);
   padding: 0;
   margin: 0;
@@ -51,8 +53,18 @@ body {
 }
 
 @font-face {
+  font-family: "Gilroy";
+  src: url("../public/fonts/Gilroy-UltraLight.ttf");
+}
+
+@font-face {
   font-family: "Inter";
   src: url("../public/fonts/Inter.ttf");
+}
+
+@font-face {
+  font-family: "San-F";
+  src: url("../public/fonts/SFUIText-Light.ttf");
 }
 
 a {
