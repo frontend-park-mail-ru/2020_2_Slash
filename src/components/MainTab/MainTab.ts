@@ -54,7 +54,7 @@ class MainTab extends Component {
         this.context.host = SERVER_HOST;
         this.addLikeIcons();
 
-        this.context.subscription = localStorage.getItem('subscription');
+        this.context.subscription = localStorage.getItem('subscription') === 'true';
 
         if (this.context.actors && this.context.actors.length > 3) {
             this.context.slicedCast = this.context.actors.slice(0, 3);
