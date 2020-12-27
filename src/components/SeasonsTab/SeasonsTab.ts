@@ -5,6 +5,7 @@ import {SERVER_HOST} from '../../consts/settings';
 import EventBus from '../../services/EventBus';
 import Events from '../../consts/events';
 import Grid from '../Grid/Grid';
+import ContentService from '../../services/ContentService';
 /**
  * @class
  * Компонента страницы с подробной информацией о фильме/сериале
@@ -42,6 +43,7 @@ class SeasonsTab extends Component {
         this.context.Grid = new Grid(this.context.seasons[data.currentseason - 1]).render();
         const grid = document.querySelector('.seasons-wrapper__grid');
         grid.innerHTML = this.context.Grid;
+        ContentService.getInstance().fixGrid();
     }
 
     render(): any {
