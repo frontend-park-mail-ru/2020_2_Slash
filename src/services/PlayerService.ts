@@ -98,12 +98,6 @@ class PlayerService {
         this.watchPage = document.querySelector('.watch__page');
     }
 
-    onKeydownEscape = (event: any) => {
-        if (event.keyCode == 27) {
-            this.onFullScreenOff();
-        }
-    }
-
     onKeydownSpace = (event: any) => {
         if (event.keyCode == 32) {
             if (this.video.paused) {
@@ -341,12 +335,21 @@ class PlayerService {
         this.changeButton('.player-bar__fullscreen-btn', '.fullscreen-btn__img',
             '/static/img/player-fullscreen-out.svg', 'fullscreenModeOff');
 
-        window.addEventListener('keydown', this.onKeydownEscape);
+        window.addEventListener('fullscreenchange', this.onFullscreenChange);
+    }
+
+    onFullscreenChange = () => {
+        if (!document.fullscreenElement) {
+            this.onExitFullscreen();
+        }
     }
 
     showCursor = () => {
         const removeCursor = function() {
-            document.querySelector('.watch__page').setAttribute('style', 'cursor: none;');
+            const watchPage = document.querySelector('.watch__page');
+            if (watchPage) {
+                watchPage.setAttribute('style', 'cursor: none;');
+            }
         };
 
         this.watchPage.removeAttribute('style');
@@ -354,10 +357,13 @@ class PlayerService {
     }
 
     onFullScreenOff = () => {
+        document.exitFullscreen();
+        this.onExitFullscreen();
+    }
+
+    onExitFullscreen = () => {
         this.watchPage.addEventListener('mouseover', this.showPlayerBar);
         this.watchPage.removeEventListener('mousemove', this.showCursor.bind(this));
-        document.exitFullscreen();
-
         const btnBack: any = document.querySelector('.watch__back-btn');
         btnBack.style.display = 'block';
 
@@ -383,7 +389,9 @@ class PlayerService {
     }
 
     stop() {
-        window.removeEventListener('keydown', this.onKeydownEscape);
+        window.removeEventListener('fullscreenchange', this.onFullscreenChange);
+        window.removeEventListener('keydown', this.onKeydownSpace);
+
         eventBus.off(Events.VideoPlay, this._onVideoPlay)
             .off(Events.VideoPause, this._onVideoPause)
             .off(Events.Mute, this._onMuteVolume)

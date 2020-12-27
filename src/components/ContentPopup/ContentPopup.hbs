@@ -66,10 +66,7 @@
                 <span class="genre-item__title item-title">Жанр:</span>
                 <span class="genre-item__value item-value">
                     {{#each genres}}
-                        <a href="/{{type}}?genre={{this.id}}" class="genre-item__value item-link">
-                        {{{this.name}}}
-                        </a>
-                        {{#unless @last}},
+                        <a href="/{{type}}?genre={{this.id}}" class="genre-item__value item-link">{{{this.name}}}</a>{{#unless @last}},
                         {{/unless}}
                     {{/each}}
                 </span>
@@ -78,10 +75,7 @@
                 <span class="cast-item__title item-title">Актеры:</span>
                 <span class="cast-item__value item-value">
                     {{#each slicedCast}}
-                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">
-                            {{{this.name}}}
-                        </a>
-                    {{#unless @last}},
+                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">{{{this.name}}}</a>{{#unless @last}},
                     {{/unless}}
                     {{/each}}
                 </span>
@@ -107,9 +101,7 @@
                 <span class="director-item__value item-value">
                     {{#each directors}}
                     <a href="/director/{{this.id}}" class="director-item__value item-link">
-                        {{{this.name}}}
-                    </a>
-                    {{#unless @last}},
+                        {{{this.name}}}</a>{{#unless @last}},
                     {{/unless}}
                     {{/each}}
                 </span>
@@ -118,8 +110,7 @@
                 <span class="cast-item__title item-title">Актеры:</span>
                 <span class="cast-item__value item-value">
                     {{#each actors}}
-                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">
-                            {{{this.name}}}{{#unless @last}},
+                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">{{{this.name}}}{{#unless @last}},
                         {{/unless}}
                         </a>
                     {{/each}}

@@ -26,8 +26,7 @@
             <div class="info-block__country country-item hidden-item">
                 <span class="country-item__title item-title">Страны:</span>
                 <span class="country-item__value item-value">
-                    {{#each countries}}
-                        {{{this.name}}}{{#unless @last}},
+                    {{#each countries}}{{{this.name}}}{{#unless @last}},
                     {{/unless}}
                     {{/each}}
                 </span>
@@ -37,9 +36,7 @@
                 <span class="genre-item__value item-value">
                     {{#each genres}}
                         <a href="/{{type}}?genre={{this.id}}" class="genre-item__link item-link">
-                        {{{this.name}}}
-                        </a>
-                        {{#unless @last}},
+                        {{{this.name}}}</a>{{#unless @last}},
                         {{/unless}}
                     {{/each}}
                 </span>
@@ -48,10 +45,7 @@
                 <span class="cast-item__title item-title">Актеры:</span>
                 <span class="cast-item__value item-value">
                     {{#each slicedCast}}
-                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">
-                            {{{this.name}}}
-                        </a>
-                        {{#unless @last}},
+                        <a href="/actor/{{this.id}}" class="cast-item__link item-link">{{{this.name}}}</a>{{#unless @last}},
                         {{/unless}}
                     {{/each}}
                 </span>
