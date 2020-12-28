@@ -1,6 +1,7 @@
 enum ApiMethods {
     UserRegister = '/user/register',
     UserProfile = '/user/profile',
+    UserChangePassword = '/user/password',
     UserLogout = '/session',
     UserLogin = '/session',
     UserAvatar = '/user/avatar',

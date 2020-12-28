@@ -169,13 +169,7 @@ class ValidationService {
 
         let isValidForm = true;
 
-        let validationResult: ResultType = this.isTruePassword(oldPasswordInput.value, error);
-        if (!validationResult.isValid) {
-            isValidForm = false;
-            this.setError(form, oldPasswordInput, validationResult);
-        }
-
-        validationResult = this.isValidPassword(newPasswordInput.value, error);
+        let validationResult = this.isValidPassword(newPasswordInput.value, error);
         if (!validationResult.isValid) {
             isValidForm = false;
             this.setError(form, newPasswordInput, validationResult);
@@ -187,7 +181,14 @@ class ValidationService {
             this.setError(form, repeatedPasswordInput, validationResult);
         }
 
-        return isValidForm;
+        return {
+            isValid: isValidForm,
+            data: {
+                oldPassword: oldPasswordInput.value,
+                newPassword: newPasswordInput.value,
+                repeatPassword: repeatedPasswordInput.value,
+            },
+        };
     }
 
     /**

@@ -89,14 +89,6 @@ class ContentService {
                     'grid-column-gap: 3px');
             }
 
-            grid = document.querySelector('.seasons-wrapper__grid .content__grid');
-            if (grid) {
-                if (width > TABLET_DEVICE_WIDTH) {
-                    grid.setAttribute('style', 'grid-template-columns: repeat(5, 1fr); ' +
-                        'grid-column-gap: 3px');
-                }
-            }
-
             if (grid.classList.contains('episodes__grid')) {
                 if (width <= TABLET_DEVICE_WIDTH) {
                     grid.setAttribute('style', 'grid-template-columns: repeat(3, 1fr); ' +
@@ -105,6 +97,14 @@ class ContentService {
 
                 if (width >= TABLET_DEVICE_WIDTH) {
                     grid.setAttribute('style', 'grid-template-columns: repeat(3, 1fr); ' +
+                        'grid-column-gap: 3px');
+                }
+            }
+
+            grid = document.querySelector('.seasons-wrapper__grid .content__grid');
+            if (grid) {
+                if (width > TABLET_DEVICE_WIDTH) {
+                    grid.setAttribute('style', 'grid-template-columns: repeat(5, 1fr); ' +
                         'grid-column-gap: 3px');
                 }
             }

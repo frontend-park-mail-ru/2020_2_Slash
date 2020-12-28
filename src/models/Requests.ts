@@ -15,6 +15,15 @@ export interface UpdateProfileRequest {
     email: string,
 }
 
+export interface UpdateSecurityProfileRequest {
+    // eslint-disable-next-line camelcase
+    old_password: string,
+    // eslint-disable-next-line camelcase
+    new_password: string,
+    // eslint-disable-next-line camelcase
+    repeated_new_password: string,
+}
+
 export interface ContentRequest {
     content_id: number //eslint-disable-line
 }

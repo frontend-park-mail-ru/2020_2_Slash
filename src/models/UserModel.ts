@@ -1,6 +1,6 @@
 import {http} from '../services/Http';
 import ApiMethods from '../consts/ApiMethods';
-import {SignUpRequest, UpdateProfileRequest} from './Requests';
+import {SignUpRequest, UpdateProfileRequest, UpdateSecurityProfileRequest} from './Requests';
 import {SERVER_API_V1_PREFIX} from '../consts/settings';
 
 class UserModel {
@@ -26,6 +26,13 @@ class UserModel {
     updateProfile(data: UpdateProfileRequest) {
         return http.fetchPut({
             route: ApiMethods.UserProfile,
+            body: JSON.stringify({...data}),
+        }).then((response: Response) => response.json());
+    }
+
+    updateSecurtityProfile(data: UpdateSecurityProfileRequest) {
+        return http.fetchPut({
+            route: ApiMethods.UserChangePassword,
             body: JSON.stringify({...data}),
         }).then((response: Response) => response.json());
     }

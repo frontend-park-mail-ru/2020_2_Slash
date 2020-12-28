@@ -77,7 +77,8 @@ class ProfileMenuBar extends Component {
         }
 
         if (validationData.isValid) {
-            const targetEvent = data.formtype === Modals.profileInfo ? Events.UpdateProfileInfo : null;
+            const targetEvent = data.formtype === Modals.profileInfo ? Events.UpdateProfileInfo :
+                Events.UpdateSecurityProfile;
 
             if (targetEvent) {
                 EventBus.emit(targetEvent, {
