@@ -107,9 +107,11 @@
 
   &__grid {
     padding: 9vh 20px 0 0;
+    margin-left: 50px;
 
     @media (max-width: 440px) {
       padding: 4vh 20px 4vh 20px;
+      margin-left: 2px;
     }
   }
 }
