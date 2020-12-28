@@ -89,7 +89,7 @@ class ContentService {
                     'grid-column-gap: 3px');
             }
 
-            if (grid.classList.contains('episodes__grid')) {
+            if (grid.classList.contains('episodes__grid') || grid.classList.contains('similar__grid')) {
                 if (width <= TABLET_DEVICE_WIDTH) {
                     grid.setAttribute('style', 'grid-template-columns: repeat(3, 1fr); ' +
                         'grid-column-gap: 0.2vw;');

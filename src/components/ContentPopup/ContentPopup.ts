@@ -193,6 +193,12 @@ class ContentPopup extends Component {
 
         this.context.subscription = localStorage.getItem('subscription');
 
+        const gridSimilar = document.querySelector('.similar__grid');
+
+        if (gridSimilar) {
+            gridSimilar.querySelector('.content__grid').classList.add('similar__grid');
+        }
+
         if (this.context.type === Types.TVShow) {
             this.onSeasonChanged({currentseason: 1});
 
