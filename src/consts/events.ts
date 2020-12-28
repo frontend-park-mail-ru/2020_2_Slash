@@ -14,6 +14,7 @@ enum Events {
     LoginUser = 'loginUser',
     LogoutUser = 'logoutUser',
     UpdateProfileInfo = 'updateProfileInfo',
+    UpdateSecurityProfile = 'updateSecurityProfile',
     UpdateProfileAvatar = 'updateProfileAvatar',
     UpdateUserProfile = 'updateUserProfile',
     UploadAvatar = 'uploadAvatar',

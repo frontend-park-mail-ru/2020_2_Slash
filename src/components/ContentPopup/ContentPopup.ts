@@ -109,7 +109,7 @@ class ContentPopup extends Component {
     }
 
     onSeasonChanged = (data: any) => {
-        const buttons = document.querySelectorAll('.seasons-wrapper__button');
+        const buttons = document.querySelectorAll('.modal__season-button');
         buttons.forEach((btn) => btn.setAttribute('style',
             'background-color: var(--highly-transparent-white);'));
 

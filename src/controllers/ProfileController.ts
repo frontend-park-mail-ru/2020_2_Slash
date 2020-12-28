@@ -28,6 +28,7 @@ class ProfileController extends Controller {
         };
 
         EventBus.on(Events.UpdateProfileInfo, this.onUpdateProfile.bind(this));
+        EventBus.on(Events.UpdateSecurityProfile, this.onUpdateSecurityProfile.bind(this));
         EventBus.on(Events.UploadAvatar, this.onUploadAvatar.bind(this));
     }
 
@@ -133,6 +134,18 @@ class ProfileController extends Controller {
                 return;
             }
 
+            data.form.onError(response.error, data.formType);
+        }).catch((error: Error) => console.log(error));
+    }
+
+    onUpdateSecurityProfile(data: any = {}) {
+        const {oldPassword, newPassword, repeatPassword} = data.params;
+
+        UserModel.updateSecurtityProfile({
+            old_password: oldPassword,
+            new_password: newPassword,
+            repeated_new_password: repeatPassword,
+        }).then((response: ResponseType) => {
             data.form.onError(response.error, data.formType);
         }).catch((error: Error) => console.log(error));
     }
