@@ -72,6 +72,9 @@ a {
 }
 
 .main-view {
+  ::-webkit-scrollbar {
+    display: none;
+  }
   min-height: calc(100vh - 2 * var(--header-height));
 }
 
