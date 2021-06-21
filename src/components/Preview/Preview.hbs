@@ -1,7 +1,12 @@
 <div class="preview">
     <div class="preview__video-block">
         <div class="preview__video">
-            <div><img src="{{host}}{{preview.images}}/1920" loading="lazy"></div>
+            <div>
+                <video src="https://hay.github.io/test/dog.mp4" playsinline webkit-playsinline autoPlay
+                       muted
+                       loop >
+                </video>
+            </div>
             <div class="preview__shade"></div>
         </div>
     </div>
@@ -12,7 +17,8 @@
         </div>
         <div class="preview__controller pad-both">
             <div class="preview__play">
-                <button class="preview__btn play-btn" data-id="{{preview.id}}" data-{{preview.type}}-id="{{preview.id}}" data-pay="{{preview.is_free}}" data-season="1" data-episode="1" data-event="playContent">
+                <button class="preview__btn play-btn" data-id="{{preview.id}}" data-{{preview.type}}-id="{{preview.id}}"
+                        data-pay="{{preview.is_free}}" data-season="1" data-episode="1" data-event="playContent">
                     <img class="play-btn__img" src="/static/img/play.svg" loading="lazy">
                     <p class="play-btn__text">Воспроизвести</p>
                 </button>

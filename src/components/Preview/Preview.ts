@@ -22,6 +22,13 @@ class Preview extends Component {
 
         const content = this.context.preview;
 
+        if (navigator.userAgent.includes('Mozilla')) {
+            console.log('navigator');
+            window.addEventListener('fullscreenchange', () => {
+                document.exitFullscreen();
+            });
+        }
+
         if (content.type === 'movie') {
             this.context.href = `/watch/${content.id}`;
         } else if (content.type === 'tvshow') {
